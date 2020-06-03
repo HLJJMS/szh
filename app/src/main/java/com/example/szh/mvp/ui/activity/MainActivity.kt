@@ -2,17 +2,25 @@ package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-
-import com.jess.arms.base.BaseActivity
-import com.jess.arms.di.component.AppComponent
-import com.jess.arms.utils.ArmsUtils
-
+import androidx.fragment.app.Fragment
+import com.example.szh.R
+import com.example.szh.adapter.HomePageAdapter
+import com.example.szh.bean.TabEntity
 import com.example.szh.di.component.DaggerMainComponent
 import com.example.szh.di.module.MainModule
 import com.example.szh.mvp.contract.MainContract
 import com.example.szh.mvp.presenter.MainPresenter
-
-import com.example.szh.R
+import com.example.szh.mvp.ui.fragment.HomeFragment
+import com.example.szh.mvp.ui.fragment.MessageFragment
+import com.example.szh.mvp.ui.fragment.MyFragment
+import com.example.szh.mvp.ui.fragment.WalletFragment
+import com.flyco.tablayout.listener.CustomTabEntity
+import com.flyco.tablayout.listener.OnTabSelectListener
+import com.jess.arms.base.BaseActivity
+import com.jess.arms.di.component.AppComponent
+import com.jess.arms.utils.ArmsUtils
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 /**
@@ -41,7 +49,15 @@ import com.example.szh.R
  * }
  */
 class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
-
+    private val mTabEntities =
+        ArrayList<CustomTabEntity>()
+    private val mFragments = ArrayList<Fragment>()
+    val TAG_FRAGMENT = arrayOf("OneFragment", "TwoFragment", "ThreeFragment", "threeFragment")
+    private var myFragment = MyFragment
+    private val homeFragment = HomeFragment
+    private val walletFragment = WalletFragment
+    private val messageFragment = MessageFragment
+    private var homePageAdapter:HomePageAdapter?=null
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent //如找不到该类,请编译一下项目
             .builder()
@@ -58,6 +74,33 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
 
     override fun initData(savedInstanceState: Bundle?) {
+        mTabEntities.add(TabEntity("首页", R.mipmap.ic_home_home_on, R.mipmap.ic_home_home_off))
+        mTabEntities.add(TabEntity("消息", R.mipmap.ic_home_talk_on, R.mipmap.ic_home_talk_off))
+        mTabEntities.add(TabEntity("发帖", R.mipmap.ic_home_add, R.mipmap.ic_home_add))
+        mTabEntities.add(TabEntity("钱包", R.mipmap.ic_home_nike_on, R.mipmap.ic_home_nike_off))
+        mTabEntities.add(TabEntity("我的", R.mipmap.ic_home_my_on, R.mipmap.ic_home_my_off))
+        homePageAdapter = HomePageAdapter(supportFragmentManager,mFragments)
+        viewpager.adapter = homePageAdapter
+
+        tab.setOnTabSelectListener(object :OnTabSelectListener{
+            override fun onTabSelect(position: Int) {
+                viewpager.currentItem
+                if(position==2){
+
+                }else if(position==3){
+                    viewpager.currentItem = 2;
+                }else if(position==4){
+                    viewpager.setCurrentItem(3)
+                }else{
+                    viewpager.setCurrentItem(position)
+                }
+            }
+
+            override fun onTabReselect(position: Int) {
+
+            }
+
+        })
 
     }
 
@@ -82,3 +125,5 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
         finish()
     }
 }
+
+

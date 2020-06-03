@@ -1,8 +1,13 @@
 package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.example.szh.R
 import com.example.szh.adapter.HomePageAdapter
 import com.example.szh.bean.TabEntity
@@ -14,13 +19,14 @@ import com.example.szh.mvp.ui.fragment.HomeFragment
 import com.example.szh.mvp.ui.fragment.MessageFragment
 import com.example.szh.mvp.ui.fragment.MyFragment
 import com.example.szh.mvp.ui.fragment.WalletFragment
+import com.example.szh.tools.Colors
 import com.flyco.tablayout.listener.CustomTabEntity
-import com.flyco.tablayout.listener.OnTabSelectListener
+import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -52,12 +58,13 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     private val mTabEntities =
         ArrayList<CustomTabEntity>()
     private val mFragments = ArrayList<Fragment>()
-    val TAG_FRAGMENT = arrayOf("OneFragment", "TwoFragment", "ThreeFragment", "threeFragment")
-    private var myFragment = MyFragment
-    private val homeFragment = HomeFragment
-    private val walletFragment = WalletFragment
-    private val messageFragment = MessageFragment
-    private var homePageAdapter:HomePageAdapter?=null
+    private var myFragment = MyFragment()
+    private val homeFragment = HomeFragment()
+    private val walletFragment = WalletFragment()
+    private val messageFragment = MessageFragment()
+    private var homePageAdapter: HomePageAdapter? = null
+    private var buttonList = ArrayList<ImageView>()
+    private var textList = ArrayList<TextView>()
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent //如找不到该类,请编译一下项目
             .builder()
@@ -76,34 +83,74 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     override fun initData(savedInstanceState: Bundle?) {
         mTabEntities.add(TabEntity("首页", R.mipmap.ic_home_home_on, R.mipmap.ic_home_home_off))
         mTabEntities.add(TabEntity("消息", R.mipmap.ic_home_talk_on, R.mipmap.ic_home_talk_off))
-        mTabEntities.add(TabEntity("发帖", R.mipmap.ic_home_add, R.mipmap.ic_home_add))
         mTabEntities.add(TabEntity("钱包", R.mipmap.ic_home_nike_on, R.mipmap.ic_home_nike_off))
         mTabEntities.add(TabEntity("我的", R.mipmap.ic_home_my_on, R.mipmap.ic_home_my_off))
-        homePageAdapter = HomePageAdapter(supportFragmentManager,mFragments)
+        textList.add(tv_home)
+        textList.add(tv_message)
+        textList.add(tv_wallet)
+        textList.add(tv_my)
+        buttonList.add(iv_home)
+        buttonList.add(iv_message)
+        buttonList.add(iv_wallet)
+        buttonList.add(iv_my)
+        mFragments.add(homeFragment)
+        mFragments.add(messageFragment)
+        mFragments.add(walletFragment)
+        mFragments.add(myFragment)
+        homePageAdapter = HomePageAdapter(supportFragmentManager, mFragments)
         viewpager.adapter = homePageAdapter
+        iv_home.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                setButton(0)
+            }
+        iv_message.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            setButton(1)
+        }
+        iv_wallet.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            setButton(2)
+        }
+        iv_my.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            setButton(3)
+        }
+        iv_add.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
 
-        tab.setOnTabSelectListener(object :OnTabSelectListener{
-            override fun onTabSelect(position: Int) {
-                viewpager.currentItem
-                if(position==2){
+        }
+        viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
 
-                }else if(position==3){
-                    viewpager.currentItem = 2;
-                }else if(position==4){
-                    viewpager.setCurrentItem(3)
-                }else{
-                    viewpager.setCurrentItem(position)
-                }
             }
 
-            override fun onTabReselect(position: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
 
+            }
+
+            override fun onPageSelected(position: Int) {
+                setButton(position)
             }
 
         })
-
     }
 
+    fun setButton(i: Int) {
+        for (index in 0..3) {
+            if (i == index) {
+                buttonList.get(index).setImageResource(mTabEntities.get(index).tabSelectedIcon)
+                textList.get(index).setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
+                textList.get(index).text = mTabEntities.get(index).tabTitle
+            } else {
+                buttonList.get(index).setImageResource(mTabEntities.get(index).tabUnselectedIcon)
+                textList.get(index).setTextColor(ContextCompat.getColor(this, R.color.black))
+                textList.get(index).text = mTabEntities.get(index).tabTitle
+            }
+
+        }
+        viewpager.currentItem = i
+
+    }
 
     override fun showLoading() {
 

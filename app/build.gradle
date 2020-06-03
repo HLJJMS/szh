@@ -23,6 +23,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
 
@@ -40,4 +44,5 @@ dependencies {
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.qmuiteam:qmui:2.0.0-alpha08'
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2'
 }

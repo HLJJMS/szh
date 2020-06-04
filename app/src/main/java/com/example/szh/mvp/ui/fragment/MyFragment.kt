@@ -7,6 +7,7 @@ import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
@@ -18,6 +19,9 @@ import com.example.szh.mvp.contract.MyContract
 import com.example.szh.mvp.presenter.MyPresenter
 
 import com.example.szh.R
+import com.example.szh.adapter.MyFramgentAdapter
+import com.example.szh.bean.MyItemBean
+import kotlinx.android.synthetic.main.fragment_my.*
 
 
 /**
@@ -45,6 +49,9 @@ import com.example.szh.R
  * }
  * }
  */
+private var myFramgentAdapter: MyFramgentAdapter? = null
+private var list: ArrayList<MyItemBean>
+
 class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     companion object {
         fun newInstance(): MyFragment {
@@ -72,7 +79,19 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        list?.add(MyItemBean("帖子", R.mipmap.ic_my_tieba, "0"))
+        list?.add(MyItemBean("评论", R.mipmap.ic_my_message, "0"))
+        list?.add(MyItemBean("预测", R.mipmap.ic_my_clock, "0"))
+        list?.add(MyItemBean("屏蔽", R.mipmap.ic_pingbi, "0"))
+        list?.add(MyItemBean("处罚", R.mipmap.ic_chufa, "0"))
+        list?.add(MyItemBean("权限", R.mipmap.ic_quanxian, "0"))
+        list?.add(MyItemBean("推荐", R.mipmap.ic_my_heart, "0"))
+        list?.add(MyItemBean("收藏", R.mipmap.ic_start, "0"))
+        list?.add(MyItemBean("草稿箱", R.mipmap.ic_test, "0"))
+        myFramgentAdapter = MyFramgentAdapter(list)
+        recycler.layoutManager = LinearLayoutManager(context)
+        recycler.adapter = myFramgentAdapter
+        myFramgentAdapter?.setList(list)
     }
 
     /**

@@ -115,6 +115,22 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
         iv_add.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
 
         }
+        tv_home.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                setButton(0)
+            }
+        tv_message.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            setButton(1)
+        }
+        tv_wallet.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            setButton(2)
+        }
+        tv_my.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            setButton(3)
+        }
+        tv_add.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+
+        }
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 

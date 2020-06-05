@@ -49,10 +49,11 @@ import kotlinx.android.synthetic.main.fragment_my.*
  * }
  * }
  */
-private var myFramgentAdapter: MyFramgentAdapter? = null
-private var list: ArrayList<MyItemBean>
+
 
 class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
+    private var myFramgentAdapter: MyFramgentAdapter? = null
+    private var list: ArrayList<MyItemBean>?= ArrayList()
     companion object {
         fun newInstance(): MyFragment {
             val fragment = MyFragment()
@@ -79,6 +80,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        list?.clear()
         list?.add(MyItemBean("帖子", R.mipmap.ic_my_tieba, "0"))
         list?.add(MyItemBean("评论", R.mipmap.ic_my_message, "0"))
         list?.add(MyItemBean("预测", R.mipmap.ic_my_clock, "0"))

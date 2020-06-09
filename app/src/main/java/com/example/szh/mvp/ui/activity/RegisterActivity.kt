@@ -2,25 +2,25 @@ package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import com.example.szh.R
-import com.example.szh.di.component.DaggerLoginComponent
-import com.example.szh.di.module.LoginModule
-import com.example.szh.mvp.contract.LoginContract
-import com.example.szh.mvp.presenter.LoginPresenter
-import com.jakewharton.rxbinding3.view.clicks
+
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
-import kotlinx.android.synthetic.main.activity_login.*
-import java.util.concurrent.TimeUnit
+
+import com.example.szh.di.component.DaggerRegisterComponent
+import com.example.szh.di.module.RegisterModule
+import com.example.szh.mvp.contract.RegisterContract
+import com.example.szh.mvp.presenter.RegisterPresenter
+
+import com.example.szh.R
+import kotlinx.android.synthetic.main.activity_register.*
 
 
 /**
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 06/05/2020 15:45
+ * Created by MVPArmsTemplate on 06/09/2020 11:40
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -41,20 +41,20 @@ import java.util.concurrent.TimeUnit
  * }
  * }
  */
-class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
-    var isPsd = true;
+class RegisterActivity : BaseActivity<RegisterPresenter>(), RegisterContract.View {
+
     override fun setupActivityComponent(appComponent: AppComponent) {
-        DaggerLoginComponent //如找不到该类,请编译一下项目
+        DaggerRegisterComponent //如找不到该类,请编译一下项目
             .builder()
             .appComponent(appComponent)
-            .loginModule(LoginModule(this))
+            .registerModule(RegisterModule(this))
             .build()
             .inject(this)
     }
 
 
     override fun initView(savedInstanceState: Bundle?): Int {
-        return R.layout.activity_login //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+        return R.layout.activity_register //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
 
@@ -62,19 +62,6 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
         slider.setOnSlideCompleteListener {
             slider.setEnabled(false)
             slider.setText("验证完成")
-        }
-        iv_phone.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            if (isPsd) {
-                isPsd = false
-                iv_phone.setImageResource(R.mipmap.ic_password)
-                tv_phone.text = "密码登陆"
-                tv_get_code.visibility = View.GONE
-            } else {
-                isPsd = true
-                iv_phone.setImageResource(R.mipmap.ic_phone)
-                tv_phone.text = "手机号登陆"
-                tv_get_code.visibility = View.VISIBLE
-            }
         }
     }
 

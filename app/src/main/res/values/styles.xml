@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="MyTitleBar">
+        <attr name="star_txt" format="string" />
+        <attr name="center_txt" format="string" />
+    </declare-styleable>
 </resources>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="MissingConstraints">
+
+    <com.example.szh.tools.MyTitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:star_txt="设置" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_ziliao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="17.5dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="17.5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编辑资料"
+            android:textColor="#ff111111"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="17.5dp"
+            android:src="@mipmap/ic_go"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_xieyi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="17.5dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="17.5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户协议"
+            android:textColor="#ff111111"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="17.5dp"
+            android:src="@mipmap/ic_go"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_yinsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="17.5dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="17.5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="隐私政策"
+            android:textColor="#ff111111"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="17.5dp"
+            android:src="@mipmap/ic_go"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_guanyu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="17.5dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="17.5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关于数字海"
+            android:textColor="#ff111111"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="17.5dp"
+            android:src="@mipmap/ic_go"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_lianxi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="17.5dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="17.5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="联系我们"
+            android:textColor="#ff111111"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="17.5dp"
+            android:src="@mipmap/ic_go"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_fankui"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="17.5dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="17.5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="反馈与投诉"
+            android:textColor="#ff111111"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="17.5dp"
+            android:src="@mipmap/ic_go"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:padding="17.5dp"
+        android:text="退出登陆"
+        android:textColor="#ffeb090d"
+        android:textSize="15sp" />
+</LinearLayout>

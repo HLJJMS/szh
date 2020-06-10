@@ -338,7 +338,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="42dp"
             android:layout_marginTop="19dp"
-            android:text="创作等级："
+            android:text="预测等级："
             android:textColor="#ff979797"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@id/tv_test_level"

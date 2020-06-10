@@ -99,6 +99,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
         mFragments.add(myFragment)
         homePageAdapter = HomePageAdapter(supportFragmentManager, mFragments)
         viewpager.adapter = homePageAdapter
+        viewpager.setOffscreenPageLimit(4);
         iv_home.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 setButton(0)
@@ -165,7 +166,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
         }
         viewpager.currentItem = i
-
     }
 
     override fun showLoading() {

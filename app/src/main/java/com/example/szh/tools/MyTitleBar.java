@@ -14,7 +14,7 @@ import com.example.szh.R;
 
 public class MyTitleBar extends LinearLayout {
     ImageView iv_back;
-    TextView leftText, centerText;
+    TextView leftText, centerText ,endText;
 
     public MyTitleBar(Context context) {
         super(context);
@@ -27,9 +27,11 @@ public class MyTitleBar extends LinearLayout {
         iv_back = findViewById(R.id.iv_back);
         leftText = findViewById(R.id.tv_start_txt);
         centerText = findViewById(R.id.tv_center_txt);
+        endText = findViewById(R.id.tv_end_txt);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MyTitleBar);
         leftText.setText(typedArray.getString(R.styleable.MyTitleBar_star_txt));
         centerText.setText(typedArray.getString(R.styleable.MyTitleBar_center_txt));
+        endText.setText(typedArray.getString(R.styleable.MyTitleBar_end_txt));
         typedArray.recycle();
     }
 
@@ -45,6 +47,10 @@ public class MyTitleBar extends LinearLayout {
         iv_back.setOnClickListener(onClickListener);
     }
 
+    public void setEndTextClick(OnClickListener onClickListener){
+        endText.setOnClickListener(onClickListener);
+    }
+
     public void setLeftText(String txt) {
         leftText.setText(txt);
     }
@@ -52,5 +58,10 @@ public class MyTitleBar extends LinearLayout {
     public void setCenterText(String txt) {
         centerText.setText(txt);
     }
+
+    public void setEndText(String txt) {
+        endText.setText(txt);
+    }
+
 
 }

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_white"
+    android:orientation="vertical"
+    tools:ignore="MissingConstraints">
+
+    <com.example.szh.tools.MyTitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:center_txt="举报/反馈"
+        app:end_txt="提交" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="举报内容问题"
+        android:textColor="#ff444444"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*"
+        android:textColor="#FFFF4D4D"
+        app:layout_constraintStart_toEndOf="@id/tv_title"
+        app:layout_constraintTop_toTopOf="@id/tv_title" />
+
+    <RadioButton
+        android:id="@+id/rb_yaoyan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="23dp"
+        android:text="谣言"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <RadioButton
+        android:id="@+id/rb_sexy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="23dp"
+        android:text="低俗色情"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <RadioButton
+        android:id="@+id/rb_terror"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="23dp"
+        android:text="恐怖恶心"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rb_yaoyan" />
+
+    <RadioButton
+        android:id="@+id/rb_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="21dp"
+        android:text="广告"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rb_yaoyan" />
+
+    <RadioButton
+        android:id="@+id/rb_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="21dp"
+        android:text="文题不符"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rb_terror" />
+
+    <RadioButton
+        android:id="@+id/rb_outdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="21dp"
+        android:text="新闻过期"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rb_terror" />
+
+    <RadioButton
+        android:id="@+id/rb_break"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="21dp"
+        android:text="违法反动"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rb_error" />
+
+    <RadioButton
+        android:id="@+id/rb_slow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="21dp"
+        android:text="加载速度慢"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rb_error" />
+
+    <RadioButton
+        android:id="@+id/rb_other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="21dp"
+        android:text="其他"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rb_break" />
+
+    <RadioButton
+        android:id="@+id/rb_tort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="21dp"
+        android:text="侵权（侵犯名誉、肖\n像、隐私权等)"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rb_break" />
+
+    <TextView
+        android:id="@+id/tv_title_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="52dp"
+        android:text="上传问题截图"
+        android:textColor="#ff444444"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rb_other" />
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="13dp"
+        android:src="@mipmap/ic_add_img"
+        app:layout_constraintStart_toStartOf="@id/tv_title_img"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_img" />
+
+    <TextView
+        android:id="@+id/tv_title_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:text="更多问题及建议"
+        android:textColor="#ff444444"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/iv_img"
+        app:layout_constraintTop_toBottomOf="@id/iv_img" />
+
+    <EditText
+        android:id="@+id/et_txt"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/conner5_solid_white_stoken_gray"
+        android:gravity="top"
+        android:hint="请描述问题及建议，抄袭请附链接和截图"
+        android:maxLength="200"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_et" />
+
+    <TextView
+        android:id="@+id/tv_all_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-200字"
+        android:textColor="#ffa6a6a6"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/et_txt"
+        app:layout_constraintEnd_toEndOf="@id/et_txt" />
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#ffa6a6a6"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/et_txt"
+        app:layout_constraintEnd_toStartOf="@id/tv_all_number" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,9 @@ import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.RegisterContract
+import com.example.szh.network.bean.BaseBean
+import com.example.szh.network.service.LoginService
+import io.reactivex.Observable
 
 
 /**
@@ -36,5 +39,9 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+
+    override fun getCode(phone:String): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(LoginService::class.java).getCode(phone,"1")
     }
 }

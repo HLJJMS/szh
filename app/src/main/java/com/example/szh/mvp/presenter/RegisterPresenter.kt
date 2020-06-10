@@ -1,6 +1,7 @@
 package com.example.szh.mvp.presenter
 
 import android.app.Application
+import android.system.ErrnoException
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.ActivityScope
@@ -10,6 +11,9 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.RegisterContract
+import com.example.szh.network.RxUtils
+import com.example.szh.network.bean.BaseBean
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
 
 
 /**
@@ -44,5 +48,16 @@ constructor(model: RegisterContract.Model, rootView: RegisterContract.View) :
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+     fun getCode(phone:String){
+        mModel.getCode(phone).compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
+            ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler){
+            override fun onNext(t: BaseBean.BaseResponse<String>) {
+                    if(t.code.equals("200")){
+
+                    }
+            }
+
+        })
     }
 }

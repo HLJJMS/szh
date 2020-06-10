@@ -10,9 +10,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    <meta-data
-        android:name="me.jessyan.mvparms.demo.app.GlobalConfiguration"
-        android:value="ConfigModule" />
+
 
     <application
         android:name="com.jess.arms.base.BaseApplication"
@@ -31,15 +29,20 @@
         <activity android:name=".mvp.ui.activity.EditMyInformationActivity" />
         <activity android:name=".mvp.ui.activity.SettingActivity" />
         <activity android:name=".mvp.ui.activity.ResetPassWordActivity" />
-        <activity android:name=".mvp.ui.activity.RegisterActivity" />
-        <activity android:name=".mvp.ui.activity.LoginActivity" />
-        <activity android:name=".mvp.ui.activity.MainActivity">
+        <activity android:name=".mvp.ui.activity.RegisterActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".mvp.ui.activity.LoginActivity" />
+        <activity android:name=".mvp.ui.activity.MainActivity">
+
+        </activity>
+        <meta-data
+            android:name="com.example.szh.network.GlobalConfiguration"
+            android:value="ConfigModule" />
     </application>
 
 </manifest>

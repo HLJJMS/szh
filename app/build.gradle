@@ -47,4 +47,11 @@ dependencies {
     implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
     implementation 'com.github.MAXDeliveryNG:slideview:1.1.0'
+    implementation 'me.jessyan:arms-imageloader-glide:2.5.2'
+    // 框架包含三方
+    implementation rootProject.ext.dependencies["androideventbus"]
+    kapt rootProject.ext.dependencies["dagger2-compiler"]
+    implementation rootProject.ext.dependencies["progressmanager"]
+    implementation rootProject.ext.dependencies["retrofit-url-manager"]
+    implementation rootProject.ext.dependencies["lifecyclemodel"]
 }

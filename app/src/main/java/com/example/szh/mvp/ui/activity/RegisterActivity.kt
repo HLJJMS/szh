@@ -2,6 +2,8 @@ package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -13,7 +15,9 @@ import com.example.szh.mvp.contract.RegisterContract
 import com.example.szh.mvp.presenter.RegisterPresenter
 
 import com.example.szh.R
+import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.activity_register.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -63,6 +67,18 @@ class RegisterActivity : BaseActivity<RegisterPresenter>(), RegisterContract.Vie
             slider.setEnabled(false)
             slider.setText("验证完成")
         }
+        tv_get_code.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                if(et_phone.text.toString().length==11){
+                    mPresenter?.getCode(et_phone.text.toString())
+//                    tv_get_code.isClickable=false
+//                    tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_cecece))
+                }else{
+                    Toast.makeText(this,"请输入正确的手机号",Toast.LENGTH_LONG).show()
+                }
+
+            }
+
     }
 
 

@@ -2,6 +2,7 @@ package com.example.szh.tools;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -13,8 +14,8 @@ import androidx.annotation.Nullable;
 import com.example.szh.R;
 
 public class MyTitleBar extends LinearLayout {
-    ImageView iv_back;
-    TextView leftText, centerText ,endText;
+    ImageView iv_back, iv_end;
+    TextView leftText, centerText, endText;
 
     public MyTitleBar(Context context) {
         super(context);
@@ -28,10 +29,13 @@ public class MyTitleBar extends LinearLayout {
         leftText = findViewById(R.id.tv_start_txt);
         centerText = findViewById(R.id.tv_center_txt);
         endText = findViewById(R.id.tv_end_txt);
+        iv_end = findViewById(R.id.iv_end);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MyTitleBar);
         leftText.setText(typedArray.getString(R.styleable.MyTitleBar_star_txt));
         centerText.setText(typedArray.getString(R.styleable.MyTitleBar_center_txt));
         endText.setText(typedArray.getString(R.styleable.MyTitleBar_end_txt));
+        endText.setTextColor(typedArray.getColor(R.styleable.MyTitleBar_end_txt_color, Color.BLACK));
+        iv_end.setImageDrawable(typedArray.getDrawable(R.styleable.MyTitleBar_end_img));
         typedArray.recycle();
     }
 
@@ -47,7 +51,7 @@ public class MyTitleBar extends LinearLayout {
         iv_back.setOnClickListener(onClickListener);
     }
 
-    public void setEndTextClick(OnClickListener onClickListener){
+    public void setEndTextClick(OnClickListener onClickListener) {
         endText.setOnClickListener(onClickListener);
     }
 

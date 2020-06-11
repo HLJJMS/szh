@@ -10,6 +10,11 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.LoginContract
+import com.example.szh.network.Api
+import com.example.szh.network.RxUtils
+import com.example.szh.network.bean.BaseBean
+import com.example.szh.tools.MyToast
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
 
 
 /**
@@ -44,5 +49,37 @@ constructor(model: LoginContract.Model, rootView: LoginContract.View) :
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+
+    fun getCode(phone: String){
+        mModel.getCode(phone).compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
+            ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
+            override fun onNext(t: BaseBean.BaseResponse<String>) {
+                if (t.code.equals(Api.SUCCESS)) {
+                    mRootView.getCodeSuccess()
+                } else {
+                    mRootView.getCodeFail()
+                }
+                MyToast().makeToast(mApplication, t.message)
+            }
+
+        })
+    }
+
+    fun postData(  loginType: String,
+                   password: String,
+                   phone: String,
+                   verificaCode: String){
+        mModel.postData(loginType,password, phone, verificaCode).compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
+            ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler){
+            override fun onNext(t: BaseBean.BaseResponse<String>) {
+                if (t.code.equals(Api.SUCCESS)) {
+                    mRootView.loginSuccess()
+                } else {
+                    MyToast().makeToast(mApplication, t.message)
+                }
+            }
+
+        })
     }
 }

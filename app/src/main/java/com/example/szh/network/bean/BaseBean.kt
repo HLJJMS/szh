@@ -6,7 +6,7 @@ class BaseBean {
     data class BaseResponse<T>(
         var data: T? = null,
         var code: String = "",
-        var msg: String = "",
+        var message: String = "",
         var success: String = "",
         var timestamp: String = ""
     ) :
@@ -14,7 +14,7 @@ class BaseBean {
         override fun toString(): String {
             return "BaseResponse{" +
                     "code='" + code + '\''.toString() +
-                    ", msg='" + msg + '\''.toString() +
+                    ", message='" + message + '\''.toString() +
                     ",success='" + success + '\''.toString() +
                     ",timestamp='" + timestamp + '\''.toString() +
                     '}'.toString()

@@ -54,4 +54,6 @@ dependencies {
     implementation rootProject.ext.dependencies["progressmanager"]
     implementation rootProject.ext.dependencies["retrofit-url-manager"]
     implementation rootProject.ext.dependencies["lifecyclemodel"]
+
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 }

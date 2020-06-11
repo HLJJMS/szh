@@ -15,6 +15,7 @@ import com.example.szh.mvp.contract.RegisterContract
 import com.example.szh.mvp.presenter.RegisterPresenter
 
 import com.example.szh.R
+import com.example.szh.tools.MyToast
 import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.concurrent.TimeUnit
@@ -69,18 +70,56 @@ class RegisterActivity : BaseActivity<RegisterPresenter>(), RegisterContract.Vie
         }
         tv_get_code.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                if(et_phone.text.toString().length==11){
+                if (et_phone.text.toString().length == 11) {
                     mPresenter?.getCode(et_phone.text.toString())
-//                    tv_get_code.isClickable=false
-//                    tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_cecece))
-                }else{
-                    Toast.makeText(this,"请输入正确的手机号",Toast.LENGTH_LONG).show()
+                    tv_get_code.isClickable = false
+                    tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_cecece))
+                } else {
+                    Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_LONG).show()
                 }
 
             }
+        rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            postData()
+        }
 
     }
 
+    //获取验证码成功
+    override fun getCodeSuccess() {
+        tv_get_code.isClickable = false
+        tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_cecece))
+    }
+
+    //获取验证码失败
+    override fun getCodeFail() {
+        tv_get_code.isClickable = true
+        tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
+    }
+
+    //发送数据
+    fun postData() {
+        if (!slider.textView.text.toString().equals("验证完成")) {
+            MyToast().makeToast(this, "请完成滑动验证")
+        } else if (et_phone.text.toString().length != 11) {
+            MyToast().makeToast(this, "手机号有误")
+        } else if (et_psd.text.toString().equals("") || et_ok_psd.text.toString()
+                .equals("") || !et_psd.text.toString().equals(et_ok_psd.text.toString())
+        ) {
+            MyToast().makeToast(this, "密码有误")
+        } else if (et_number.text.toString().equals("")) {
+            MyToast().makeToast(this, "账号不能为空")
+        } else {
+            mPresenter?.postData(
+                et_number.text.toString(),
+                et_psd.text.toString(),
+                et_phone.text.toString(),
+                et_get_code.text.toString()
+            )
+        }
+
+
+    }
 
     override fun showLoading() {
 

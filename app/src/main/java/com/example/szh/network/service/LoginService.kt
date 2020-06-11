@@ -21,6 +21,15 @@ interface LoginService {
     @POST(Api.VERIFICATION)
     fun getCode(
         @Field("phone") phone: String,
-        @Field("verificationType ") verificationType : String
+        @Field("verificationType") verificationType : Int
+    ): Observable<BaseBean.BaseResponse<String>>
+
+    @FormUrlEncoded
+    @POST(Api.LOGIN)
+    fun login(
+        @Field("loginType ") loginType: String,//0手机1密码
+        @Field("password") password: String,
+        @Field("phone") phone: String,
+        @Field("verificaCode") verificaCode: String
     ): Observable<BaseBean.BaseResponse<String>>
 }

@@ -21,7 +21,7 @@ import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 public class GlobalConfiguration implements ConfigModule {
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlobalConfigModule.Builder builder) {
-        builder.printHttpLogLevel(RequestInterceptor.Level.NONE);
+//        builder.printHttpLogLevel(RequestInterceptor.Level.NONE);
         builder.baseurl(Api.BASE_URL)
                 //强烈建议自己自定义图片加载逻辑, 因为 arms-imageloader-glide 提供的 GlideImageLoaderStrategy 并不能满足复杂的需求
                 //请参考 https://github.com/JessYanCoding/MVPArms/wiki#3.4

@@ -8,6 +8,7 @@ import com.example.szh.di.component.DaggerLoginComponent
 import com.example.szh.di.module.LoginModule
 import com.example.szh.mvp.contract.LoginContract
 import com.example.szh.mvp.presenter.LoginPresenter
+import com.example.szh.tools.MyToast
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -76,6 +77,27 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
                 tv_get_code.visibility = View.VISIBLE
             }
         }
+        rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            postData()
+        }
+
+
+    }
+
+    override fun loginSuccess() {
+        TODO("Not yet implemented")
+    }
+
+    override fun loginFail() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCodeSuccess() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCodeFail() {
+        TODO("Not yet implemented")
     }
 
 
@@ -97,5 +119,32 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
 
     override fun killMyself() {
         finish()
+    }
+
+
+    fun postData() {
+        if (isPsd) {
+            if (et_phone.text.toString().equals("") || et_phone.text.toString().length != 11) {
+                MyToast().makeToast(this, "手机号格式错误")
+            } else if (et_psd.text.toString().equals("")) {
+                MyToast().makeToast(this, "密码不可为空")
+            } else if (!slider.textView.text.equals("验证完成")) {
+                MyToast().makeToast(this, "验证未完成")
+            } else {
+                mPresenter?.postData("1", et_psd.text.toString(), et_phone.text.toString(), "")
+            }
+        } else {
+            if (et_phone.text.toString().equals("") || et_phone.text.toString().length != 11) {
+                MyToast().makeToast(this, "手机号格式错误")
+            } else if (et_psd.text.toString().equals("")) {
+                MyToast().makeToast(this, "验证码不可为空")
+            } else if (!slider.textView.text.equals("验证完成")) {
+                MyToast().makeToast(this, "验证未完成")
+            } else {
+                mPresenter?.postData("1", et_phone.text.toString(), "", et_psd.text.toString())
+            }
+        }
+
+
     }
 }

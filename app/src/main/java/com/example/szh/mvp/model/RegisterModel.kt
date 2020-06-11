@@ -42,6 +42,15 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
     }
 
     override fun getCode(phone:String): Observable<BaseBean.BaseResponse<String>> {
-        return mRepositoryManager.obtainRetrofitService(LoginService::class.java).getCode(phone,"1")
+        return mRepositoryManager.obtainRetrofitService(LoginService::class.java).getCode(phone,1)
+    }
+
+    override fun postData(
+        name: String,
+        password: String,
+        phone: String,
+        verificaCode: String
+    ): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(LoginService::class.java).registered(name, password, phone, verificaCode)
     }
 }

@@ -27,7 +27,7 @@ interface LoginService {
     @FormUrlEncoded
     @POST(Api.LOGIN)
     fun login(
-        @Field("loginType ") loginType: String,//0手机1密码
+        @Field("loginType") loginType: String,//0手机1密码
         @Field("password") password: String,
         @Field("phone") phone: String,
         @Field("verificaCode") verificaCode: String

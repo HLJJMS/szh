@@ -14,7 +14,7 @@
         android:layout_width="11dp"
         android:layout_height="20dp"
         android:layout_marginStart="20dp"
-        android:src="@mipmap/ic_close_x"
+        android:src="@mipmap/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

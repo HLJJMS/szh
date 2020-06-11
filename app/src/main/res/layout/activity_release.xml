@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="MissingConstraints">
+
+    <com.example.szh.tools.MyTitleBar
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:center_txt="写帖子"
+        app:end_img="@mipmap/ic_send"
+        app:end_txt="存草稿"
+        app:end_txt_color="#017BD0" />
+
+    <TextView
+        android:id="@+id/tv_spnner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="21dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="选择发布目录"
+        android:textColor="#ff020202"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <ImageView
+        android:id="@+id/iv_send_fans"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="7dp"
+        android:src="@mipmap/ic_check_on"
+        app:layout_constraintBottom_toBottomOf="@id/tv_send_friend"
+        app:layout_constraintEnd_toStartOf="@id/tv_send_fans"
+        app:layout_constraintTop_toTopOf="@id/tv_send_friend" />
+
+
+    <TextView
+        android:id="@+id/tv_send_fans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="22dp"
+        android:paddingEnd="13dp"
+        android:text="发给粉丝"
+        android:textColor="#ff5b5b5b"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@id/iv_recall_no"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_send_friend" />
+
+
+    <ImageView
+        android:id="@+id/iv_send_friend"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="7dp"
+        android:src="@mipmap/ic_check_off"
+        app:layout_constraintBottom_toBottomOf="@id/tv_send_friend"
+        app:layout_constraintEnd_toStartOf="@id/tv_send_friend"
+        app:layout_constraintTop_toTopOf="@id/tv_send_friend" />
+
+    <TextView
+        android:id="@+id/tv_send_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:paddingEnd="13dp"
+        android:text="推给好友"
+        android:textColor="#ff5b5b5b"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@id/iv_recall_no"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:layout_width="11.5dp"
+        android:layout_height="5.5dp"
+        android:layout_marginEnd="25dp"
+        android:src="@mipmap/ic_spnner"
+        app:layout_constraintBottom_toBottomOf="@id/tv_spnner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_spnner" />
+
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:hint="请输入标题"
+        android:paddingStart="21dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="12.5dp"
+        android:textColor="#ff5b5b5b"
+        android:textSize="21sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_spnner" />
+
+    <ImageView
+        android:id="@+id/iv_b"
+        android:layout_width="12dp"
+        android:layout_height="16dp"
+        android:layout_marginBottom="15dp"
+        android:src="@mipmap/ic_b"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_i"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_i"
+        android:layout_width="13.5dp"
+        android:layout_height="16dp"
+        android:src="@mipmap/ic_i"
+        app:layout_constraintBottom_toBottomOf="@id/iv_b"
+        app:layout_constraintEnd_toStartOf="@id/iv_u"
+        app:layout_constraintStart_toEndOf="@id/iv_b" />
+
+    <ImageView
+        android:id="@+id/iv_u"
+        android:layout_width="13.5dp"
+        android:layout_height="16dp"
+        android:src="@mipmap/ic_u"
+        app:layout_constraintBottom_toBottomOf="@id/iv_b"
+        app:layout_constraintEnd_toStartOf="@id/iv_h"
+        app:layout_constraintStart_toEndOf="@id/iv_i" />
+
+    <ImageView
+        android:id="@+id/iv_h"
+        android:layout_width="19.5dp"
+        android:layout_height="16dp"
+        android:src="@mipmap/ic_h"
+        app:layout_constraintBottom_toBottomOf="@id/iv_b"
+        app:layout_constraintEnd_toStartOf="@id/iv_double"
+        app:layout_constraintStart_toEndOf="@id/iv_u" />
+
+    <ImageView
+        android:id="@+id/iv_double"
+        android:layout_width="17.5dp"
+        android:layout_height="14dp"
+        android:src="@mipmap/ic_double_yinhao"
+        app:layout_constraintBottom_toBottomOf="@id/iv_b"
+        app:layout_constraintEnd_toStartOf="@id/iv_img"
+        app:layout_constraintStart_toEndOf="@id/iv_h" />
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:src="@mipmap/ic_img"
+        app:layout_constraintBottom_toBottomOf="@id/iv_b"
+        app:layout_constraintEnd_toStartOf="@id/iv_recall"
+        app:layout_constraintStart_toEndOf="@id/iv_double" />
+
+    <ImageView
+        android:id="@+id/iv_recall"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:src="@mipmap/ic_recall"
+        app:layout_constraintBottom_toBottomOf="@id/iv_b"
+        app:layout_constraintEnd_toStartOf="@id/iv_recall_no"
+        app:layout_constraintStart_toEndOf="@id/iv_img" />
+
+    <ImageView
+        android:id="@+id/iv_recall_no"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:src="@mipmap/ic_recall_no"
+        app:layout_constraintBottom_toBottomOf="@id/iv_b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_recall" />
+</androidx.constraintlayout.widget.ConstraintLayout>

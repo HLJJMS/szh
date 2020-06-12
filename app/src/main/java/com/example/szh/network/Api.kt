@@ -19,4 +19,6 @@ object Api {
     //重置密码
     const val RESETPASSWORD = "system/resetPassword"
 
+    //钱包首页
+    const val WALLETINDEX = "wallet/index"
 }

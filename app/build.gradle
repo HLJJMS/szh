@@ -56,4 +56,6 @@ dependencies {
     implementation rootProject.ext.dependencies["lifecyclemodel"]
 
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    implementation 'org.greenrobot:eventbus:3.2.0'
 }

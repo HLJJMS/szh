@@ -6,6 +6,7 @@ import android.view.View
 import com.example.szh.R
 import com.example.szh.di.component.DaggerLoginComponent
 import com.example.szh.di.module.LoginModule
+import com.example.szh.eventbus.MainEvent
 import com.example.szh.mvp.contract.LoginContract
 import com.example.szh.mvp.presenter.LoginPresenter
 import com.example.szh.tools.MyToast
@@ -14,6 +15,7 @@ import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
 import kotlinx.android.synthetic.main.activity_login.*
+import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.TimeUnit
 
 
@@ -85,7 +87,8 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
     }
 
     override fun loginSuccess() {
-      startActivity(Intent(this,MainActivity::class.java))
+        EventBus.getDefault().post(MainEvent());
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
     override fun loginFail() {

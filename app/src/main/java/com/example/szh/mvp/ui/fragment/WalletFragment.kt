@@ -18,6 +18,7 @@ import com.example.szh.mvp.contract.WalletContract
 import com.example.szh.mvp.presenter.WalletPresenter
 
 import com.example.szh.R
+import com.example.szh.tools.SPToll
 
 
 /**
@@ -72,9 +73,14 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        getData()
     }
 
+    public fun getData(){
+        if(!SPToll(mContext).getId().equals("")){
+            getData()
+        }
+    }
     /**
      * 通过此方法可以使 Fragment 能够与外界做一些交互和通信, 比如说外部的 Activity 想让自己持有的某个 Fragment 对象执行一些方法,
      * 建议在有多个需要与外界交互的方法时, 统一传 {@link Message}, 通过 what 字段来区分不同的方法, 在 {@link #setData(Object)}
@@ -112,6 +118,10 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
      * @param data 当不需要参数时 {@code data} 可以为 {@code null}
      */
     override fun setData(data: Any?) {
+
+    }
+
+    override fun success() {
 
     }
 

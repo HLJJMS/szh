@@ -1,7 +1,6 @@
 package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,19 +12,22 @@ import com.example.szh.adapter.HomePageAdapter
 import com.example.szh.bean.TabEntity
 import com.example.szh.di.component.DaggerMainComponent
 import com.example.szh.di.module.MainModule
+import com.example.szh.eventbus.MainEvent
 import com.example.szh.mvp.contract.MainContract
 import com.example.szh.mvp.presenter.MainPresenter
 import com.example.szh.mvp.ui.fragment.HomeFragment
 import com.example.szh.mvp.ui.fragment.MessageFragment
 import com.example.szh.mvp.ui.fragment.MyFragment
 import com.example.szh.mvp.ui.fragment.WalletFragment
-import com.example.szh.tools.Colors
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.concurrent.TimeUnit
 
 
@@ -81,6 +83,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
 
     override fun initData(savedInstanceState: Bundle?) {
+        EventBus.getDefault().register(this);
         mTabEntities.add(TabEntity("首页", R.mipmap.ic_home_home_on, R.mipmap.ic_home_home_off))
         mTabEntities.add(TabEntity("消息", R.mipmap.ic_home_talk_on, R.mipmap.ic_home_talk_off))
         mTabEntities.add(TabEntity("钱包", R.mipmap.ic_home_nike_on, R.mipmap.ic_home_nike_off))
@@ -186,6 +189,16 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
     override fun killMyself() {
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: MainEvent?) { /* Do something */
+        walletFragment.getData()
     }
 }
 

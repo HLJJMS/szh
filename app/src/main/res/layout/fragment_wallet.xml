@@ -1,8 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:ignore="MissingConstraints">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="钱包"
+        android:textColor="#ff020202"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_au"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@color/qmui_config_color_white"
+        android:paddingLeft="53dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="18dp"
+        android:text="金币"
+        android:textColor="#ff020202"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <ImageView
+        android:id="@+id/iv_au"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/ic_au"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_au" />
+
+    <TextView
+        android:id="@+id/tv_number_au"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:text=" 0"
+        android:textColor="#ff020202"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_au"
+        app:layout_constraintStart_toEndOf="@id/iv_au"
+        app:layout_constraintTop_toTopOf="@id/iv_au" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/rb_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="21dp"
+        android:paddingStart="12dp"
+        android:paddingTop="9dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="9dp"
+        android:text="充值"
+        android:textColor="#ff137ed0"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_au"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_au"
+        app:qmui_backgroundColor="@color/qmui_config_color_white"
+        app:qmui_radius="4dp" />
+
+    <TextView
+        android:id="@+id/tv_ag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:paddingLeft="53dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="125dp"
+        android:text="银币"
+        android:textColor="#ff020202"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_au" />
+
+    <ImageView
+        android:id="@+id/iv_ag"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/ic_ag"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_ag" />
+
+
+    <TextView
+        android:id="@+id/tv_number_ag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:text=" 0"
+        android:textColor="#ff020202"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_ag"
+        app:layout_constraintStart_toEndOf="@id/iv_ag"
+        app:layout_constraintTop_toTopOf="@id/iv_ag" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/bg_one"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="17dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_ag"
+        app:qmui_backgroundColor="#83C6FB"
+        app:qmui_borderWidth="0dp"
+        app:qmui_radius="10dp" />
+
+    <TextView
+        android:id="@+id/today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="14dp"
+        android:text="今日获得"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/bg_one"
+        app:layout_constraintTop_toTopOf="@id/bg_one" />
+
+    <TextView
+        android:id="@+id/week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="本周获得"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/month"
+        app:layout_constraintStart_toEndOf="@id/today"
+        app:layout_constraintTop_toTopOf="@id/bg_one" />
+
+    <TextView
+
+        android:id="@+id/month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="20dp"
+        android:text="本月获得"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/bg_one"
+        app:layout_constraintTop_toTopOf="@id/bg_one" />
+
+
+    <TextView
+        android:id="@+id/tv_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:text="0"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/bg_one"
+        app:layout_constraintEnd_toEndOf="@id/today"
+        app:layout_constraintStart_toStartOf="@id/today" />
+
+    <TextView
+        android:id="@+id/tv_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:text="0"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/bg_one"
+        app:layout_constraintEnd_toEndOf="@id/week"
+        app:layout_constraintStart_toStartOf="@id/week" />
+
+    <TextView
+        android:id="@+id/tv_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:text="0"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/bg_one"
+        app:layout_constraintEnd_toEndOf="@id/month"
+        app:layout_constraintStart_toStartOf="@id/month" />
+
+    <TextView
+        android:id="@+id/tv_au_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/qmui_config_color_white"
+        android:paddingStart="21dp"
+        android:paddingTop="13.5dp"
+        android:paddingBottom="13.5dp"
+        android:text="金币交易记录"
+        android:textColor="#ff111111"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_ag" />
+
+    <TextView
+        android:id="@+id/tv_ag_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white"
+        android:paddingStart="21dp"
+        android:paddingTop="13.5dp"
+        android:paddingBottom="13.5dp"
+        android:text="银币交易记录"
+        android:textColor="#ff111111"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_au_record" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="10dp"
+        android:layout_height="17dp"
+        android:layout_marginEnd="25dp"
+        android:src="@mipmap/ic_go"
+        app:layout_constraintBottom_toBottomOf="@id/tv_ag_record"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_ag_record" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="10dp"
+        android:layout_height="17dp"
+        android:layout_marginEnd="25dp"
+        android:src="@mipmap/ic_go"
+        app:layout_constraintBottom_toBottomOf="@id/tv_au_record"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_au_record" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/g_login_on"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tv_au,iv_au,tv_number_au,rb_add,tv_ag,iv_ag,tv_number_ag,bg_one,imageView,week,tv_ag_record,tv_au_record,imageView2,tv_week,tv_day,tv_month,today,month" />
+
+    <ImageView
+        android:id="@+id/iv_no_login"
+        android:layout_width="154dp"
+        android:layout_height="114dp"
+        android:src="@mipmap/bg_no_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="47dp"
+        android:text="登录后可查看“钱包”页面"
+        android:textColor="#ff989898"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_no_login" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/QMUIRoundButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingStart="34dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="34dp"
+        android:paddingBottom="8dp"
+        android:text="登录"
+        android:textColor="#ff017bd0"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_login"
+        app:qmui_backgroundColor="@color/qmui_config_color_white"
+        app:qmui_borderColor="#ff017bd0"
+        app:qmui_radius="5dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/g_login_off"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:constraint_referenced_ids="iv_no_login,tv_login,QMUIRoundButton" />
+</androidx.constraintlayout.widget.ConstraintLayout>

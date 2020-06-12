@@ -4,7 +4,7 @@ import java.io.Serializable
 
 class BaseBean {
     data class BaseResponse<T>(
-        var data: T? = null,
+        var result: T? = null,
         var code: String = "",
         var message: String = "",
         var success: String = "",

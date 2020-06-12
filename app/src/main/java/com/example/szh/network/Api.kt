@@ -16,4 +16,7 @@ object Api {
     //获取验证码
     const val VERIFICATION = "verification/send"
 
+    //重置密码
+    const val RESETPASSWORD = "system/resetPassword"
+
 }

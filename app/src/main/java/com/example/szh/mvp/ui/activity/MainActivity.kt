@@ -114,7 +114,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             setButton(3)
         }
         iv_add.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
         tv_home.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {

@@ -9,6 +9,10 @@ import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.ResetPassWordContract
+import com.example.szh.network.bean.BaseBean
+import com.example.szh.network.bean.LoginBean
+import com.example.szh.network.service.LoginService
+import io.reactivex.Observable
 
 
 /**
@@ -33,6 +37,17 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     @Inject
     lateinit var mApplication: Application;
+    override fun postData(
+        password: String,
+        phone: String,
+        verificaCode: String
+    ): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(LoginService::class.java).resetPassword(password, phone, verificaCode)
+    }
+
+    override fun getCode(phone: String): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(LoginService::class.java).getCode(phone, 2)
+    }
 
     override fun onDestroy() {
         super.onDestroy();

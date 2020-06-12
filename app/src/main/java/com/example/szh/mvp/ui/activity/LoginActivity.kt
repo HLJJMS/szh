@@ -85,19 +85,21 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
     }
 
     override fun loginSuccess() {
-        TODO("Not yet implemented")
+      startActivity(Intent(this,MainActivity::class.java))
     }
 
     override fun loginFail() {
-        TODO("Not yet implemented")
+        slider.setEnabled(true)
+        slider.setText("右滑验证")
     }
 
     override fun getCodeSuccess() {
-        TODO("Not yet implemented")
+        slider.setEnabled(false)
+        slider.setText("验证完成")
     }
 
     override fun getCodeFail() {
-        TODO("Not yet implemented")
+
     }
 
 
@@ -131,7 +133,7 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
             } else if (!slider.textView.text.equals("验证完成")) {
                 MyToast().makeToast(this, "验证未完成")
             } else {
-                mPresenter?.postData("1", et_psd.text.toString(), et_phone.text.toString(), "")
+                mPresenter?.postData("0", et_psd.text.toString(), et_phone.text.toString(), "")
             }
         } else {
             if (et_phone.text.toString().equals("") || et_phone.text.toString().length != 11) {

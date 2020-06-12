@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 import com.example.szh.mvp.contract.LoginContract
 import com.example.szh.network.bean.BaseBean
+import com.example.szh.network.bean.LoginBean
 import com.example.szh.network.service.LoginService
 import io.reactivex.Observable
 
@@ -42,7 +43,7 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         password: String,
         phone: String,
         verificaCode: String
-    ): Observable<BaseBean.BaseResponse<String>> {
+    ): Observable<BaseBean.BaseResponse<LoginBean.Login>> {
         return mRepositoryManager.obtainRetrofitService(LoginService::class.java)
             .login(loginType, password, phone, verificaCode)
     }

@@ -2,18 +2,28 @@ package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-
-import com.jess.arms.base.BaseActivity
-import com.jess.arms.di.component.AppComponent
-import com.jess.arms.utils.ArmsUtils
-
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.example.szh.R
 import com.example.szh.di.component.DaggerResetPassWordComponent
 import com.example.szh.di.module.ResetPassWordModule
 import com.example.szh.mvp.contract.ResetPassWordContract
 import com.example.szh.mvp.presenter.ResetPassWordPresenter
-
-import com.example.szh.R
+import com.example.szh.tools.MyToast
+import com.jakewharton.rxbinding3.view.clicks
+import com.jess.arms.base.BaseActivity
+import com.jess.arms.di.component.AppComponent
+import com.jess.arms.utils.ArmsUtils
+import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_reset_pass_word.*
+import kotlinx.android.synthetic.main.activity_reset_pass_word.et_get_code
+import kotlinx.android.synthetic.main.activity_reset_pass_word.et_ok_psd
+import kotlinx.android.synthetic.main.activity_reset_pass_word.et_phone
+import kotlinx.android.synthetic.main.activity_reset_pass_word.et_psd
+import kotlinx.android.synthetic.main.activity_reset_pass_word.rb_ok
+import kotlinx.android.synthetic.main.activity_reset_pass_word.slider
+import kotlinx.android.synthetic.main.activity_reset_pass_word.tv_get_code
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -63,6 +73,38 @@ class ResetPassWordActivity : BaseActivity<ResetPassWordPresenter>(), ResetPassW
             slider.setEnabled(false)
             slider.setText("验证完成")
         }
+        tv_get_code.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            if (et_phone.text.toString().length == 11) {
+                mPresenter?.getCode(et_phone.text.toString())
+                tv_get_code.isClickable = false
+                tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_cecece))
+            } else {
+                Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            postData()
+        }
+
+    }
+
+    override fun resetSuccess() {
+        finish()
+    }
+
+    override fun resetFail() {
+
+    }
+
+    override fun getCodeSuccess() {
+        slider.setEnabled(false)
+        slider.setText("验证完成")
+    }
+
+    override fun getCodeFail() {
+        slider.setEnabled(true)
+        slider.setText("右滑验证")
     }
 
 
@@ -84,5 +126,27 @@ class ResetPassWordActivity : BaseActivity<ResetPassWordPresenter>(), ResetPassW
 
     override fun killMyself() {
         finish()
+    }
+
+
+    //发送数据
+    fun postData() {
+        if (!slider.textView.text.toString().equals("验证完成")) {
+            MyToast().makeToast(this, "请完成滑动验证")
+        } else if (et_phone.text.toString().length != 11) {
+            MyToast().makeToast(this, "手机号有误")
+        } else if (et_psd.text.toString().equals("") || et_ok_psd.text.toString()
+                .equals("") || !et_psd.text.toString().equals(et_ok_psd.text.toString())
+        ) {
+            MyToast().makeToast(this, "密码有误")
+        } else {
+            mPresenter?.postData(
+                et_psd.text.toString(),
+                et_phone.text.toString(),
+                et_get_code.text.toString()
+            )
+        }
+
+
     }
 }

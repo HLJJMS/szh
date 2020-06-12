@@ -13,7 +13,9 @@ import com.example.szh.mvp.contract.LoginContract
 import com.example.szh.network.Api
 import com.example.szh.network.RxUtils
 import com.example.szh.network.bean.BaseBean
+import com.example.szh.network.bean.LoginBean
 import com.example.szh.tools.MyToast
+import com.example.szh.tools.SPToll
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
 
 
@@ -51,7 +53,7 @@ constructor(model: LoginContract.Model, rootView: LoginContract.View) :
         super.onDestroy();
     }
 
-    fun getCode(phone: String){
+    fun getCode(phone: String) {
         mModel.getCode(phone).compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
             ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
             override fun onNext(t: BaseBean.BaseResponse<String>) {
@@ -66,15 +68,22 @@ constructor(model: LoginContract.Model, rootView: LoginContract.View) :
         })
     }
 
-    fun postData(  loginType: String,
-                   password: String,
-                   phone: String,
-                   verificaCode: String){
-        mModel.postData(loginType,password, phone, verificaCode).compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
-            ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler){
-            override fun onNext(t: BaseBean.BaseResponse<String>) {
+    fun postData(
+        loginType: String,
+        password: String,
+        phone: String,
+        verificaCode: String
+    ) {
+        mModel.postData(loginType, password, phone, verificaCode)
+            .compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
+            ErrorHandleSubscriber<BaseBean.BaseResponse<LoginBean.Login>>(mErrorHandler) {
+            override fun onNext(t: BaseBean.BaseResponse<LoginBean.Login>) {
                 if (t.code.equals(Api.SUCCESS)) {
+                    t.result?.id?.let { SPToll(mApplication).setId(it) }
+                    t.result?.phone?.let { SPToll(mApplication).setPhone(it) }
+                    SPToll(mApplication).setPassWord(password)
                     mRootView.loginSuccess()
+
                 } else {
                     MyToast().makeToast(mApplication, t.message)
                 }

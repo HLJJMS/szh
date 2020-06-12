@@ -1,6 +1,7 @@
 package com.example.szh.mvp.contract
 
 import com.example.szh.network.bean.BaseBean
+import com.example.szh.network.bean.LoginBean
 import com.jess.arms.mvp.IView
 import com.jess.arms.mvp.IModel
 import io.reactivex.Observable
@@ -34,7 +35,7 @@ interface LoginContract {
             password: String,
             phone: String,
             verificaCode: String
-        ): Observable<BaseBean.BaseResponse<String>>
+        ): Observable<BaseBean.BaseResponse<LoginBean.Login>>
 
         fun getCode(phone: String): Observable<BaseBean.BaseResponse<String>>
     }

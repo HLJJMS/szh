@@ -127,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:padding="16dp"
-        android:text="注册"
+        android:text="重置"
         android:textColor="@color/qmui_config_color_white"
         app:layout_constraintEnd_toEndOf="@id/et_phone"
         app:layout_constraintStart_toStartOf="@id/et_phone"

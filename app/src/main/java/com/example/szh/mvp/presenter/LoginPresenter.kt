@@ -76,6 +76,7 @@ constructor(model: LoginContract.Model, rootView: LoginContract.View) :
         phone: String,
         verificaCode: String
     ) {
+        mRootView.showLoading()
         mModel.postData(loginType, password, phone, verificaCode)
             .compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
             ErrorHandleSubscriber<BaseBean.BaseResponse<LoginBean.Login>>(mErrorHandler) {
@@ -89,6 +90,7 @@ constructor(model: LoginContract.Model, rootView: LoginContract.View) :
                 } else {
                     MyToast().makeToast(mApplication, t.message)
                 }
+                mRootView.hideLoading()
             }
 
         })

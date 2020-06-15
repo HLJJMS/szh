@@ -23,5 +23,8 @@ class Loadding {
                 loadView?.dismiss()
             }
         }
+        fun setLoadView(context: Context){
+            loadView = LoaddingView(context)
+        }
     }
 }

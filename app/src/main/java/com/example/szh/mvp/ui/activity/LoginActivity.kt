@@ -9,6 +9,7 @@ import com.example.szh.di.module.LoginModule
 import com.example.szh.eventbus.MainEvent
 import com.example.szh.mvp.contract.LoginContract
 import com.example.szh.mvp.presenter.LoginPresenter
+import com.example.szh.tools.Loadding
 import com.example.szh.tools.MyToast
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
@@ -107,11 +108,11 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
 
 
     override fun showLoading() {
-
+        Loadding.showLoadView(this)
     }
 
     override fun hideLoading() {
-
+        Loadding.hideLoadView(this)
     }
 
     override fun showMessage(message: String) {

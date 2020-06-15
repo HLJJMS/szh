@@ -30,13 +30,13 @@ class LoaddingView() : PopupWindow() {
     fun setPopupWindow() {
         this.width = LinearLayout.LayoutParams.WRAP_CONTENT // 设置弹出窗口的宽
         this.height = LinearLayout.LayoutParams.WRAP_CONTENT // 设置弹出窗口的高
-        view = LayoutInflater.from(context).inflate(R.layout.loading, this, true)
+        view = LayoutInflater.from(context).inflate(R.layout.loading, null)
         this.setContentView(view);
         //设置背景,这个没什么效果，不添加会报错
         setBackgroundDrawable(BitmapDrawable())
         // this.setBackgroundDrawable(new ColorDrawable(0x55000000));// 设置背景透明
         img = view.iv_loading
-        animation = RotateAnimation(0, 359)
+        animation = RotateAnimation(0f, 359f)
         animation.setDuration(500);
         animation.setRepeatCount(8);//动画的重复次数
         animation.setFillAfter(true);//设置为true，动画转化结束后被应用

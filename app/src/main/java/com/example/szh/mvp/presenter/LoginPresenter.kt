@@ -54,6 +54,7 @@ constructor(model: LoginContract.Model, rootView: LoginContract.View) :
     }
 
     fun getCode(phone: String) {
+        mRootView.showLoading()
         mModel.getCode(phone).compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
             ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
             override fun onNext(t: BaseBean.BaseResponse<String>) {
@@ -63,6 +64,7 @@ constructor(model: LoginContract.Model, rootView: LoginContract.View) :
                     mRootView.getCodeFail()
                 }
                 MyToast().makeToast(mApplication, t.message)
+                mRootView.hideLoading()
             }
 
         })

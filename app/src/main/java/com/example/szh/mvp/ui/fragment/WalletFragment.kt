@@ -2,23 +2,22 @@ package com.example.szh.mvp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Message
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.jess.arms.base.BaseFragment
-import com.jess.arms.di.component.AppComponent
-import com.jess.arms.utils.ArmsUtils
-
+import com.example.szh.R
 import com.example.szh.di.component.DaggerWalletComponent
 import com.example.szh.di.module.WalletModule
 import com.example.szh.mvp.contract.WalletContract
 import com.example.szh.mvp.presenter.WalletPresenter
-
-import com.example.szh.R
+import com.example.szh.mvp.ui.activity.LoginActivity
 import com.example.szh.tools.SPToll
+import com.jakewharton.rxbinding3.view.clicks
+import com.jess.arms.base.BaseFragment
+import com.jess.arms.di.component.AppComponent
+import com.jess.arms.utils.ArmsUtils
+import kotlinx.android.synthetic.main.fragment_wallet.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -73,14 +72,22 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        getData()
-    }
-
-    public fun getData(){
-        if(!SPToll(mContext).getId().equals("")){
-            getData()
+        if (!SPToll(mContext).getId().equals("")) {
+            g_login_off.visibility = View.GONE
+            g_login_on.visibility = View.VISIBLE
+        } else {
+            g_login_off.visibility = View.VISIBLE
+            g_login_on.visibility = View.GONE
+        }
+        rb_login.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context,LoginActivity::class.java))
         }
     }
+
+    fun getData() {
+
+    }
+
     /**
      * 通过此方法可以使 Fragment 能够与外界做一些交互和通信, 比如说外部的 Activity 想让自己持有的某个 Fragment 对象执行一些方法,
      * 建议在有多个需要与外界交互的方法时, 统一传 {@link Message}, 通过 what 字段来区分不同的方法, 在 {@link #setData(Object)}

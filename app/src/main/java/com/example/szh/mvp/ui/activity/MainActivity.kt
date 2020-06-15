@@ -83,7 +83,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
 
     override fun initData(savedInstanceState: Bundle?) {
-        EventBus.getDefault().register(this);
         mTabEntities.add(TabEntity("首页", R.mipmap.ic_home_home_on, R.mipmap.ic_home_home_off))
         mTabEntities.add(TabEntity("消息", R.mipmap.ic_home_talk_on, R.mipmap.ic_home_talk_off))
         mTabEntities.add(TabEntity("钱包", R.mipmap.ic_home_nike_on, R.mipmap.ic_home_nike_off))

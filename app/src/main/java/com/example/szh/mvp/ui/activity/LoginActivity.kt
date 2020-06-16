@@ -9,7 +9,7 @@ import com.example.szh.di.module.LoginModule
 import com.example.szh.eventbus.MainEvent
 import com.example.szh.mvp.contract.LoginContract
 import com.example.szh.mvp.presenter.LoginPresenter
-import com.example.szh.tools.Loadding
+import com.example.szh.tools.LoaddingView
 import com.example.szh.tools.MyToast
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
@@ -47,6 +47,7 @@ import java.util.concurrent.TimeUnit
  */
 class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
     var isPsd = true;
+    lateinit var loaddingView: LoaddingView
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerLoginComponent //如找不到该类,请编译一下项目
             .builder()
@@ -63,6 +64,7 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
 
 
     override fun initData(savedInstanceState: Bundle?) {
+        loaddingView = LoaddingView(this)
         slider.setOnSlideCompleteListener {
             slider.setEnabled(false)
             slider.setText("验证完成")
@@ -82,6 +84,9 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
         }
         rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             postData()
+        }
+        iv_close.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+           finish()
         }
 
 
@@ -108,11 +113,11 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
 
 
     override fun showLoading() {
-        Loadding.showLoadView(this)
+        loaddingView.show()
     }
 
     override fun hideLoading() {
-        Loadding.hideLoadView(this)
+        loaddingView.dismiss()
     }
 
     override fun showMessage(message: String) {

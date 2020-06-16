@@ -77,7 +77,7 @@ class ResetPassWordActivity : BaseActivity<ResetPassWordPresenter>(), ResetPassW
             if (et_phone.text.toString().length == 11) {
                 mPresenter?.getCode(et_phone.text.toString())
                 tv_get_code.isClickable = false
-                tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_cecece))
+                tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_CECECE))
             } else {
                 Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_LONG).show()
             }

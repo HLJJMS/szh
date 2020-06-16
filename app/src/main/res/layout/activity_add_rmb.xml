@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_white"
+    android:orientation="vertical"
+    tools:ignore="MissingConstraints">
+
+    <com.example.szh.tools.MyTitleBar
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:star_txt="充值" />
+
+    <TextView
+        android:id="@+id/surplus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:paddingStart="15dp"
+        android:text="账户余额"
+        android:textColor="#ff020202"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:id="@+id/tv_surplus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="28dp"
+        android:text="0金币"
+        android:textColor="#ffeb090d"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/surplus"
+        app:layout_constraintStart_toEndOf="@id/surplus"
+        app:layout_constraintTop_toTopOf="@id/surplus" />
+
+    <TextView
+        android:id="@+id/title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:paddingStart="15dp"
+        android:text="请选择充值金币"
+        android:textColor="#ff020202"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/surplus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="1元人民币=1金币"
+        android:textColor="#ff5b5b5b"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/title1"
+        app:layout_constraintTop_toTopOf="@id/title1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_botton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:paddingStart="23dp"
+        android:paddingEnd="23dp"
+        app:layout_constraintTop_toBottomOf="@id/title1" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/rb_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:text="立即充值"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/rv_botton"
+        app:qmui_backgroundColor="#FF017BD0"
+        app:qmui_borderWidth="0dp"
+        app:qmui_radius="3dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="15dp"
+        android:text="温馨提示：\n\n1、1元人民币=1金币\n2、金币为本平台向您提供的用于在本平台上进行相关消
+费的虚拟货币，充值成功后不支持兑换人民币、转让，不支持退款，充值前请谨慎选择。\n3、金币可用于推送服务。\n4、数字海平台不鼓励未成年人使用充值服务。"
+        android:textColor="#ff5b5b5b"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/rb_ok" />
+</androidx.constraintlayout.widget.ConstraintLayout>

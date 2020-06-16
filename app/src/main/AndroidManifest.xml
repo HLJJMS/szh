@@ -19,6 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/QMUI.NoActionBar">
+        <activity android:name=".mvp.ui.activity.AddRmbActivity" />
         <activity android:name=".mvp.ui.activity.ReleaseActivity" />
         <activity android:name=".mvp.ui.activity.PushTieActivity" />
         <activity android:name=".mvp.ui.activity.ReportActivity" />
@@ -40,6 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.example.szh.network.GlobalConfiguration"
             android:value="ConfigModule" />

@@ -17,6 +17,7 @@ import com.example.szh.mvp.presenter.RegisterPresenter
 import com.example.szh.R
 import com.example.szh.tools.MyToast
 import com.jakewharton.rxbinding3.view.clicks
+import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.concurrent.TimeUnit
 
@@ -73,7 +74,7 @@ class RegisterActivity : BaseActivity<RegisterPresenter>(), RegisterContract.Vie
                 if (et_phone.text.toString().length == 11) {
                     mPresenter?.getCode(et_phone.text.toString())
                     tv_get_code.isClickable = false
-                    tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_cecece))
+                    tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_CECECE))
                 } else {
                     Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_LONG).show()
                 }
@@ -88,7 +89,7 @@ class RegisterActivity : BaseActivity<RegisterPresenter>(), RegisterContract.Vie
     //获取验证码成功
     override fun getCodeSuccess() {
         tv_get_code.isClickable = false
-        tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_cecece))
+        tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_CECECE))
     }
 
     //获取验证码失败
@@ -122,6 +123,7 @@ class RegisterActivity : BaseActivity<RegisterPresenter>(), RegisterContract.Vie
     }
 
     override fun showLoading() {
+        var botton: QMUIRoundButton
 
     }
 

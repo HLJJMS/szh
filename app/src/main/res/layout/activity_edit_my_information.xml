@@ -103,11 +103,13 @@
             android:textColor="#ff111111"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/tv_number"
+
+        <EditText
+            android:id="@+id/et_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="19dp"
+            android:background="@color/qmui_config_color_white"
             android:text=""
             android:textColor="#ff111111"
             android:textSize="15sp"
@@ -208,11 +210,13 @@
             android:textColor="#ff111111"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/tv_address"
+
+        <EditText
+            android:id="@+id/et_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="19dp"
+            android:background="@color/qmui_config_color_white"
             android:text=""
             android:textColor="#ff111111"
             android:textSize="15sp"
@@ -247,7 +251,9 @@
             android:id="@+id/tv_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_marginEnd="19dp"
+            android:background="@color/qmui_config_color_white"
             android:text=""
             android:textColor="#ff111111"
             android:textSize="15sp"

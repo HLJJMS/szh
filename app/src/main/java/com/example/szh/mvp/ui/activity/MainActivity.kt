@@ -199,6 +199,10 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     fun onMessageEvent(event: MainEvent?) { /* Do something */
         walletFragment.getData()
     }
+
+    override fun onStart() {
+        super.onStart()
+    }
 }
 
 

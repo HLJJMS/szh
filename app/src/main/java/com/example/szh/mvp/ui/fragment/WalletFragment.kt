@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.szh.R
+import com.example.szh.bean.WellatIndexBean
 import com.example.szh.di.component.DaggerWalletComponent
 import com.example.szh.di.module.WalletModule
 import com.example.szh.mvp.contract.WalletContract
 import com.example.szh.mvp.presenter.WalletPresenter
 import com.example.szh.mvp.ui.activity.LoginActivity
+import com.example.szh.mvp.ui.activity.WalletRecordActivity
 import com.example.szh.tools.SPToll
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseFragment
@@ -75,17 +77,28 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
         if (!SPToll(mContext).getId().equals("")) {
             g_login_off.visibility = View.GONE
             g_login_on.visibility = View.VISIBLE
+            getData()
         } else {
             g_login_off.visibility = View.VISIBLE
             g_login_on.visibility = View.GONE
+
         }
-        rb_login.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            startActivity(Intent(context,LoginActivity::class.java))
+        //1:silver(银币) 2:gold(金币)
+        tv_au_record.setOnClickListener {
+            var intent = Intent(context, WalletRecordActivity::class.java)
+            intent.putExtra("type", "2")
+            startActivity(intent)
+        }
+
+        tv_ag_record.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            var intent = Intent(context, WalletRecordActivity::class.java)
+            intent.putExtra("type", "1")
+            startActivity(intent)
         }
     }
 
     fun getData() {
-
+        mPresenter?.getData()
     }
 
     /**
@@ -128,8 +141,16 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
 
     }
 
-    override fun success() {
+    override fun success(wellatIndexBean: WellatIndexBean) {
+        tv_number_au.text = wellatIndexBean.gold
+        tv_number_ag.text = wellatIndexBean.silver
+        tv_day.text = wellatIndexBean.rewarddaycount
+        tv_month.text = wellatIndexBean.rewardmonthcount
+        tv_week.text = wellatIndexBean.rewardweekcount
+        tv_au_record.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
 
+            }
     }
 
     override fun showLoading() {

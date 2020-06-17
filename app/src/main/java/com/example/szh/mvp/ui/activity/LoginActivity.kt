@@ -89,7 +89,6 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
            finish()
         }
 
-
     }
 
     override fun loginSuccess() {

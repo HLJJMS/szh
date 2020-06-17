@@ -21,7 +21,10 @@ import com.example.szh.mvp.presenter.MyPresenter
 import com.example.szh.R
 import com.example.szh.adapter.MyFramgentAdapter
 import com.example.szh.bean.MyItemBean
+import com.example.szh.mvp.ui.activity.SettingActivity
+import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.fragment_my.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -94,6 +97,9 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = myFramgentAdapter
         myFramgentAdapter?.setList(list)
+        iv_setting.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context,SettingActivity::class.java))
+        }
     }
 
     /**

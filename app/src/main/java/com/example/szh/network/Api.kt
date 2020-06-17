@@ -21,4 +21,10 @@ object Api {
 
     //钱包首页
     const val WALLETINDEX = "wallet/index"
+
+    //    交易记录
+    const val WALLET_TRADINGRECORD ="wallet/tradingRecord"
+
+    //查询用户
+    const val USER_INFO="setting/user/select"
 }

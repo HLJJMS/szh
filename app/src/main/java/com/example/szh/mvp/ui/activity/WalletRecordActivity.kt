@@ -2,27 +2,28 @@ package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
 
-import com.example.szh.di.component.DaggerSettingComponent
-import com.example.szh.di.module.SettingModule
-import com.example.szh.mvp.contract.SettingContract
-import com.example.szh.mvp.presenter.SettingPresenter
+import com.example.szh.di.component.DaggerWalletRecordComponent
+import com.example.szh.di.module.WalletRecordModule
+import com.example.szh.mvp.contract.WalletRecordContract
+import com.example.szh.mvp.presenter.WalletRecordPresenter
 
 import com.example.szh.R
-import com.jakewharton.rxbinding3.view.clicks
-import kotlinx.android.synthetic.main.activity_setting.*
-import java.util.concurrent.TimeUnit
+import com.example.szh.adapter.WalletRecordAdapter
+import com.example.szh.bean.WelltaRecordBean
+import kotlinx.android.synthetic.main.activity_wallet_record.*
 
 
 /**
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 06/09/2020 21:43
+ * Created by MVPArmsTemplate on 06/17/2020 11:36
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -43,27 +44,31 @@ import java.util.concurrent.TimeUnit
  * }
  * }
  */
-class SettingActivity : BaseActivity<SettingPresenter>(), SettingContract.View {
-
+class WalletRecordActivity : BaseActivity<WalletRecordPresenter>(), WalletRecordContract.View {
+     var adapter: WalletRecordAdapter = WalletRecordAdapter()
     override fun setupActivityComponent(appComponent: AppComponent) {
-        DaggerSettingComponent //如找不到该类,请编译一下项目
+        DaggerWalletRecordComponent //如找不到该类,请编译一下项目
             .builder()
             .appComponent(appComponent)
-            .settingModule(SettingModule(this))
+            .walletRecordModule(WalletRecordModule(this))
             .build()
             .inject(this)
     }
 
 
     override fun initView(savedInstanceState: Bundle?): Int {
-        return R.layout.activity_setting //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+        return R.layout.activity_wallet_record //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
 
     override fun initData(savedInstanceState: Bundle?) {
-        ll_ziliao.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            startActivity(Intent(this,EditMyInformationActivity::class.java))
-        }
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
+        mPresenter?.getList(intent.getStringExtra("type"))
+    }
+
+    override fun success(bean: MutableList<WelltaRecordBean.ResultBean>) {
+        adapter.setList(bean)
     }
 
 

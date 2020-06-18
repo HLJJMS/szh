@@ -20,8 +20,11 @@ import com.example.szh.mvp.presenter.MyPresenter
 
 import com.example.szh.R
 import com.example.szh.adapter.MyFramgentAdapter
+import com.example.szh.bean.MyInfoBean
 import com.example.szh.bean.MyItemBean
 import com.example.szh.mvp.ui.activity.SettingActivity
+import com.example.szh.tools.MyGlide
+import com.example.szh.tools.SPToll
 import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.fragment_my.*
 import java.util.concurrent.TimeUnit
@@ -83,22 +86,13 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        list?.clear()
-        list?.add(MyItemBean("帖子", R.mipmap.ic_my_tieba, "0"))
-        list?.add(MyItemBean("评论", R.mipmap.ic_my_message, "0"))
-        list?.add(MyItemBean("预测", R.mipmap.ic_my_clock, "0"))
-        list?.add(MyItemBean("屏蔽", R.mipmap.ic_pingbi, "0"))
-        list?.add(MyItemBean("处罚", R.mipmap.ic_chufa, "0"))
-        list?.add(MyItemBean("权限", R.mipmap.ic_quanxian, "0"))
-        list?.add(MyItemBean("推荐", R.mipmap.ic_my_heart, "0"))
-        list?.add(MyItemBean("收藏", R.mipmap.ic_start, "0"))
-        list?.add(MyItemBean("草稿箱", R.mipmap.ic_test, "0"))
-        myFramgentAdapter = MyFramgentAdapter(list)
-        recycler.layoutManager = LinearLayoutManager(context)
-        recycler.adapter = myFramgentAdapter
-        myFramgentAdapter?.setList(list)
+
         iv_setting.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context,SettingActivity::class.java))
+        }
+
+        if(!SPToll(mContext).getId().equals("")){
+            mPresenter?.getData()
         }
     }
 
@@ -140,6 +134,34 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
      */
     override fun setData(data: Any?) {
 
+    }
+
+    override fun success(bean: MyInfoBean) {
+        MyGlide.loadImageCircle(mContext,bean.user.avatarUrl,iv_head)
+        tv_name.text = bean.user.name
+        tv_fans.text=bean.user.fans
+        tv_focus.text=bean.user.focus
+        tv_id.text ="数字号 : " + bean.user.wxname
+        tv_friend.text = bean.user.friends
+        tv_day.text = bean.viewdaycount
+        tv_week.text = bean.viewweekcount
+        tv_month.text = bean.viewmonthcount
+        tv_create_level.text = bean.user.createlevel
+        tv_test_level.text = bean.user.predictlevel
+        list?.clear()
+        list?.add(MyItemBean("帖子", R.mipmap.ic_my_tieba, bean.tiezi))
+        list?.add(MyItemBean("评论", R.mipmap.ic_my_message, bean.pinlun))
+        list?.add(MyItemBean("预测", R.mipmap.ic_my_clock, bean.yuce))
+        list?.add(MyItemBean("屏蔽", R.mipmap.ic_pingbi, bean.pingbi))
+        list?.add(MyItemBean("处罚", R.mipmap.ic_chufa, bean.chufa))
+        list?.add(MyItemBean("权限", R.mipmap.ic_quanxian, bean.quanxian))
+        list?.add(MyItemBean("推荐", R.mipmap.ic_my_heart, bean.tuijian))
+        list?.add(MyItemBean("收藏", R.mipmap.ic_start, bean.shoucang))
+        list?.add(MyItemBean("草稿箱", R.mipmap.ic_test, bean.caogaoxiang))
+        myFramgentAdapter = MyFramgentAdapter(list)
+        recycler.layoutManager = LinearLayoutManager(context)
+        recycler.adapter = myFramgentAdapter
+        myFramgentAdapter?.setList(list)
     }
 
     override fun showLoading() {

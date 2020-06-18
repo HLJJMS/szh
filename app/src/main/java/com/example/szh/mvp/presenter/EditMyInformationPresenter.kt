@@ -18,6 +18,7 @@ import com.example.szh.network.bean.BaseBean
 import com.example.szh.tools.MyToast
 import com.example.szh.tools.SPToll
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
+import okhttp3.MultipartBody
 
 
 /**
@@ -56,6 +57,7 @@ constructor(model: EditMyInformationContract.Model, rootView: EditMyInformationC
     override fun onDestroy() {
         super.onDestroy();
     }
+
     fun getData() {
         mModel.getData(SPToll(mApplication).getId()).compose(RxUtils.applySchedulers(mRootView))
             .subscribe(object :
@@ -63,12 +65,20 @@ constructor(model: EditMyInformationContract.Model, rootView: EditMyInformationC
                 override fun onNext(t: BaseBean.BaseResponse<MyInfoBean>) {
                     if (t.code.equals(Api.SUCCESS)) {
                         t.result?.let { mRootView.success(it) }
-                    }else{
+                    } else {
                         MyToast().makeToast(mApplication, t.message)
                     }
-
                 }
+            })
+    }
 
+    fun postData(body: MultipartBody) {
+        mModel.postData(body).compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<String>) {
+                    MyToast().makeToast(mApplication, t.message)
+                }
             })
     }
 }

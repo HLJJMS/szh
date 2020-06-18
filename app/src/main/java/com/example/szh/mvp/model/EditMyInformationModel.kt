@@ -14,6 +14,7 @@ import com.example.szh.network.bean.BaseBean
 import com.example.szh.network.service.UserService
 import com.example.szh.network.service.WalletService
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 
 
 /**
@@ -40,6 +41,10 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
     lateinit var mApplication: Application;
     override fun getData(id: String): Observable<BaseBean.BaseResponse<MyInfoBean>> {
         return mRepositoryManager.obtainRetrofitService(UserService::class.java).getUserInfo(id)
+    }
+
+    override fun postData(body: MultipartBody): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java).postUserInfo(body)
     }
 
     override fun onDestroy() {

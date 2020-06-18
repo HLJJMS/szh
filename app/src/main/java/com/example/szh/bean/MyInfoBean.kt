@@ -1,6 +1,6 @@
 package com.example.szh.bean
 
-data class MyInfoBean(
+data class MyInfoUserBean(
     var id: String,
     var name: String,
     var phone: String,
@@ -28,4 +28,20 @@ data class MyInfoBean(
     var createlevel: String,
     var predictlevel: String,
     var verificaCode: String
+)
+
+data class MyInfoBean(
+    var pingbi: String,
+    var quanxian: String,
+    var yuce: String,
+    var tuijian: String,
+    var pinlun: String,
+    var shoucang: String,
+    var tiezi: String,
+    var chufa: String,
+    var viewweekcount: String,
+    var viewdaycount: String,
+    var viewmonthcount: String,
+    var caogaoxiang: String,
+    var user: MyInfoUserBean
 )

@@ -1,6 +1,7 @@
 package com.example.szh.mvp.model
 
 import android.app.Application
+import com.example.szh.bean.MyInfoBean
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
@@ -9,6 +10,9 @@ import com.jess.arms.di.scope.FragmentScope
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.MyContract
+import com.example.szh.network.bean.BaseBean
+import com.example.szh.network.service.UserService
+import io.reactivex.Observable
 
 
 /**
@@ -36,5 +40,9 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+
+    override fun getData(id: String): Observable<BaseBean.BaseResponse<MyInfoBean>> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java).getUserInfo(id)
     }
 }

@@ -4,16 +4,22 @@ import com.example.szh.bean.MyInfoBean
 import com.example.szh.network.Api
 import com.example.szh.network.bean.BaseBean
 import io.reactivex.Observable
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 interface UserService {
-    //钱包framgent
+    //用户信息
     @FormUrlEncoded
     @POST(Api.USER_INFO)
     fun getUserInfo(
         @Field("userid") id: String
     ): Observable<BaseBean.BaseResponse<MyInfoBean>>
+
+    //用户信息(编辑)
+    @FormUrlEncoded
+    @POST(Api.USER_EDIT)
+    fun postUserInfo(
+        @Body body: MultipartBody
+    ): Observable<BaseBean.BaseResponse<String>>
 
 }

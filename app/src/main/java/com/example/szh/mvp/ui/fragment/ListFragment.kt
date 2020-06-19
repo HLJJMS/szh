@@ -2,31 +2,29 @@ package com.example.szh.mvp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Message
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.szh.R
-import com.example.szh.bean.WellatIndexBean
-import com.example.szh.di.component.DaggerWalletComponent
-import com.example.szh.di.module.WalletModule
-import com.example.szh.mvp.contract.WalletContract
-import com.example.szh.mvp.presenter.WalletPresenter
-import com.example.szh.mvp.ui.activity.LoginActivity
-import com.example.szh.mvp.ui.activity.WalletRecordActivity
-import com.example.szh.tools.SPToll
-import com.jakewharton.rxbinding3.view.clicks
+
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
-import kotlinx.android.synthetic.main.fragment_wallet.*
-import java.util.concurrent.TimeUnit
+
+import com.example.szh.di.component.DaggerListComponent
+import com.example.szh.di.module.ListModule
+import com.example.szh.mvp.contract.ListContract
+import com.example.szh.mvp.presenter.ListPresenter
+
+import com.example.szh.R
 
 
 /**
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 06/03/2020 15:34
+ * Created by MVPArmsTemplate on 06/19/2020 16:15
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -47,20 +45,20 @@ import java.util.concurrent.TimeUnit
  * }
  * }
  */
-class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
+class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
     companion object {
-        fun newInstance(): WalletFragment {
-            val fragment = WalletFragment()
+        fun newInstance(): ListFragment {
+            val fragment = ListFragment()
             return fragment
         }
     }
 
 
     override fun setupFragmentComponent(appComponent: AppComponent) {
-        DaggerWalletComponent //如找不到该类,请编译一下项目
+        DaggerListComponent //如找不到该类,请编译一下项目
             .builder()
             .appComponent(appComponent)
-            .walletModule(WalletModule(this))
+            .listModule(ListModule(this))
             .build()
             .inject(this)
     }
@@ -70,37 +68,12 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_wallet, container, false);
+        return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        getData()
-        //1:silver(银币) 2:gold(金币)
-        tv_au_record.setOnClickListener {
-            var intent = Intent(context, WalletRecordActivity::class.java)
-            intent.putExtra("type", "2")
-            startActivity(intent)
-        }
 
-        tv_ag_record.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            var intent = Intent(context, WalletRecordActivity::class.java)
-            intent.putExtra("type", "1")
-            startActivity(intent)
-        }
     }
-
-    fun getData() {
-        if (!SPToll(mContext).getId().equals("")) {
-            g_login_off.visibility = View.GONE
-            g_login_on.visibility = View.VISIBLE
-            mPresenter?.getData()
-            getData()
-        } else {
-            g_login_off.visibility = View.VISIBLE
-            g_login_on.visibility = View.GONE
-        }
-    }
-
 
     /**
      * 通过此方法可以使 Fragment 能够与外界做一些交互和通信, 比如说外部的 Activity 想让自己持有的某个 Fragment 对象执行一些方法,
@@ -140,18 +113,6 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
      */
     override fun setData(data: Any?) {
 
-    }
-
-    override fun success(wellatIndexBean: WellatIndexBean) {
-        tv_number_au.text = wellatIndexBean.gold
-        tv_number_ag.text = wellatIndexBean.silver
-        tv_day.text = wellatIndexBean.rewarddaycount
-        tv_month.text = wellatIndexBean.rewardmonthcount
-        tv_week.text = wellatIndexBean.rewardweekcount
-        tv_au_record.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-
-            }
     }
 
     override fun showLoading() {

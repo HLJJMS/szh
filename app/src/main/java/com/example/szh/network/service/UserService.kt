@@ -5,6 +5,7 @@ import com.example.szh.network.Api
 import com.example.szh.network.bean.BaseBean
 import io.reactivex.Observable
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface UserService {
@@ -16,10 +17,10 @@ interface UserService {
     ): Observable<BaseBean.BaseResponse<MyInfoBean>>
 
     //用户信息(编辑)
-    @FormUrlEncoded
+
     @POST(Api.USER_EDIT)
     fun postUserInfo(
-        @Body body: MultipartBody
+        @Body body: RequestBody
     ): Observable<BaseBean.BaseResponse<String>>
 
 }

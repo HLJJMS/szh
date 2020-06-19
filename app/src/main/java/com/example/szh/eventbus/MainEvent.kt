@@ -1,5 +1,5 @@
 package com.example.szh.eventbus
 
-class MainEvent {
-    var name:String=""
+class MainEvent (isLogin:Boolean) {
+    var isLogin:Boolean = isLogin
 }

@@ -196,8 +196,14 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: MainEvent?) { /* Do something */
-        walletFragment.getData()
+    fun onMessageEvent(event: MainEvent?) {/* Do something */
+        if (event!!.isLogin){
+            walletFragment.getData()
+            myFragment.getData()
+        }else{
+            myFragment.clearData()
+        }
+
     }
 
     override fun onStart() {

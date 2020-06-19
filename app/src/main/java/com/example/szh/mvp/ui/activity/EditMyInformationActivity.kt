@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.view.View
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
 import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener
@@ -22,6 +23,7 @@ import com.example.szh.mvp.contract.EditMyInformationContract
 import com.example.szh.mvp.presenter.EditMyInformationPresenter
 import com.example.szh.tools.MyGlide
 import com.example.szh.tools.MyToast
+import com.example.szh.tools.SPToll
 import com.google.gson.Gson
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
@@ -124,6 +126,9 @@ class EditMyInformationActivity : BaseActivity<EditMyInformationPresenter>(),
         ll_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             saveData()
         }
+        titleBar.setBackClick(View.OnClickListener {
+            finish()
+        })
     }
 
     override fun success(bean: MyInfoBean) {
@@ -197,6 +202,7 @@ class EditMyInformationActivity : BaseActivity<EditMyInformationPresenter>(),
         if (requestCode == photoCode && resultCode == RESULT_OK) {
             for (i in Matisse.obtainPathResult(data).indices) {
                 //解析文件
+                changePhoto = true
                 file = File(Matisse.obtainPathResult(data)[i])
                 MyGlide.loadImageCircle(context, file, iv_head)
             }
@@ -341,6 +347,7 @@ class EditMyInformationActivity : BaseActivity<EditMyInformationPresenter>(),
 
     fun saveData() {
         val builder: MultipartBody.Builder = MultipartBody.Builder()
+        builder.addFormDataPart("userid ",SPToll(context).getId())
         builder.addFormDataPart("name",tv_name.text.toString())
         builder.addFormDataPart("gender",tv_sex.text.toString())
         builder.addFormDataPart("birthday",tv_birthday.text.toString())

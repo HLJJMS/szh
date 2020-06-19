@@ -59,7 +59,8 @@ import java.util.concurrent.TimeUnit
 
 class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     private var myFramgentAdapter: MyFramgentAdapter? = null
-    private var list: ArrayList<MyItemBean>?= ArrayList()
+    private var list: ArrayList<MyItemBean>? = ArrayList()
+
     companion object {
         fun newInstance(): MyFragment {
             val fragment = MyFragment()
@@ -88,10 +89,14 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     override fun initData(savedInstanceState: Bundle?) {
 
         iv_setting.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            startActivity(Intent(context,SettingActivity::class.java))
+            startActivity(Intent(context, SettingActivity::class.java))
         }
 
-        if(!SPToll(mContext).getId().equals("")){
+
+    }
+
+    fun getData() {
+        if (!SPToll(mContext).getId().equals("")) {
             mPresenter?.getData()
         }
     }
@@ -137,11 +142,12 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     }
 
     override fun success(bean: MyInfoBean) {
-        MyGlide.loadImageCircle(mContext,bean.user.avatarUrl,iv_head)
+        recycler.visibility = View.VISIBLE
+        MyGlide.loadImageCircle(mContext, bean.user.avatarUrl, iv_head)
         tv_name.text = bean.user.name
-        tv_fans.text=bean.user.fans
-        tv_focus.text=bean.user.focus
-        tv_id.text ="数字号 : " + bean.user.wxname
+        tv_fans.text = bean.user.fans
+        tv_focus.text = bean.user.focus
+        tv_id.text = "数字号 : " + bean.user.wxname
         tv_friend.text = bean.user.friends
         tv_day.text = bean.viewdaycount
         tv_week.text = bean.viewweekcount
@@ -182,5 +188,20 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
 
     override fun killMyself() {
 
+    }
+
+    fun clearData() {
+        recycler.visibility = View.GONE
+        MyGlide.loadImageCircle(mContext, "", iv_head)
+        tv_name.text = ""
+        tv_fans.text = ""
+        tv_focus.text = ""
+        tv_id.text = "数字号 : "
+        tv_friend.text = ""
+        tv_day.text = ""
+        tv_week.text = ""
+        tv_month.text = ""
+        tv_create_level.text = ""
+        tv_test_level.text = ""
     }
 }

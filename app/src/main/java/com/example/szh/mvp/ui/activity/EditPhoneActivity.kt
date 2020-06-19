@@ -2,6 +2,8 @@ package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.core.content.ContextCompat
 
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -13,6 +15,9 @@ import com.example.szh.mvp.contract.EditPhoneContract
 import com.example.szh.mvp.presenter.EditPhonePresenter
 
 import com.example.szh.R
+import com.jakewharton.rxbinding3.view.clicks
+import kotlinx.android.synthetic.main.activity_edit_phone.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -58,7 +63,33 @@ class EditPhoneActivity : BaseActivity<EditPhonePresenter>(), EditPhoneContract.
 
 
     override fun initData(savedInstanceState: Bundle?) {
+        tv_get_code.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
 
+        }
+        rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+
+        }
+        titleBar.setBackClick(View.OnClickListener {
+            finish()
+        })
+    }
+
+    override fun codeSuccess() {
+        tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_CECECE))
+        tv_get_code.isClickable = false
+    }
+
+    override fun codeFail() {
+        tv_get_code.setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
+        tv_get_code.isClickable = true
+    }
+
+    override fun editSuccess() {
+        TODO("Not yet implemented")
+    }
+
+    override fun editFail() {
+        TODO("Not yet implemented")
     }
 
 

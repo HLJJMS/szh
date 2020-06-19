@@ -165,11 +165,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/tv_exit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:padding="17.5dp"
+        android:background="@color/qmui_config_color_white"
         android:text="退出登陆"
         android:textColor="#ffeb090d"
         android:textSize="15sp" />

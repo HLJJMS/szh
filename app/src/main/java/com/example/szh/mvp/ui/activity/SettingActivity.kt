@@ -13,8 +13,11 @@ import com.example.szh.mvp.contract.SettingContract
 import com.example.szh.mvp.presenter.SettingPresenter
 
 import com.example.szh.R
+import com.example.szh.eventbus.MainEvent
+import com.example.szh.tools.SPToll
 import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.activity_setting.*
+import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.TimeUnit
 
 
@@ -62,7 +65,13 @@ class SettingActivity : BaseActivity<SettingPresenter>(), SettingContract.View {
 
     override fun initData(savedInstanceState: Bundle?) {
         ll_ziliao.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            startActivity(Intent(this,EditMyInformationActivity::class.java))
+            startActivity(Intent(this, EditMyInformationActivity::class.java))
+        }
+
+        tv_exit.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            SPToll(this).setId("")
+            EventBus.getDefault().post(MainEvent(false));
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 

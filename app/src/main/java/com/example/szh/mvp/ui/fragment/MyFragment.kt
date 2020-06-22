@@ -59,7 +59,7 @@ import java.util.concurrent.TimeUnit
 
 class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     private var myFramgentAdapter: MyFramgentAdapter? = null
-    private var list: ArrayList<MyItemBean>? = ArrayList()
+    private var list: ArrayList<MyItemBean> = ArrayList()
 
     companion object {
         fun newInstance(): MyFragment {
@@ -87,7 +87,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        getData()
         iv_setting.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, SettingActivity::class.java))
         }
@@ -98,6 +98,8 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     fun getData() {
         if (!SPToll(mContext).getId().equals("")) {
             mPresenter?.getData()
+        }else{
+            clearData()
         }
     }
 

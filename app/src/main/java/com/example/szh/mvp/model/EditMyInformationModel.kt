@@ -40,7 +40,7 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
     @Inject
     lateinit var mApplication: Application;
     override fun getData(id: String): Observable<BaseBean.BaseResponse<MyInfoBean>> {
-        return mRepositoryManager.obtainRetrofitService(UserService::class.java).getUserInfo(id)
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java).getUserInfo(id,id)
     }
 
     override fun postData(body: MultipartBody): Observable<BaseBean.BaseResponse<String>> {

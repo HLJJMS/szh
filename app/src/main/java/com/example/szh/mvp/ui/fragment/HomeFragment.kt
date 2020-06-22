@@ -7,6 +7,9 @@ import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
@@ -18,6 +21,12 @@ import com.example.szh.mvp.contract.HomeContract
 import com.example.szh.mvp.presenter.HomePresenter
 
 import com.example.szh.R
+import com.example.szh.adapter.HomePageAdapter
+import com.jakewharton.rxbinding3.view.clicks
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.viewpager
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -46,6 +55,12 @@ import com.example.szh.R
  * }
  */
 class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
+    private val mFragments = ArrayList<Fragment>()
+    private var lookFragment = LookFragment()
+    private val recommendFragment = RecommendFragment()
+    private val listFragment = ListFragment()
+    private var homePageAdapter: HomePageAdapter? = null
+
     companion object {
         fun newInstance(): HomeFragment {
             val fragment = HomeFragment()
@@ -72,7 +87,55 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        mFragments.add(recommendFragment)
+        mFragments.add(listFragment)
+        mFragments.add(lookFragment)
+        homePageAdapter = HomePageAdapter(childFragmentManager, mFragments)
+        viewpager.adapter = homePageAdapter
+        viewpager.setOffscreenPageLimit(2);
+        viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
 
+            }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                setButton(position)
+            }
+
+        })
+        tv_tuijian.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            viewpager.currentItem = 0
+        }
+        tv_bangdan.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            viewpager.currentItem = 1
+        }
+        tv_guanzhu.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            viewpager.currentItem = 2
+        }
+    }
+
+    fun setButton(number: Int) {
+        if (number == 0) {
+            tv_tuijian.setTextColor(ContextCompat.getColor(mContext, R.color.black))
+            tv_bangdan.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
+            tv_guanzhu.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
+        } else if (number == 1) {
+            tv_tuijian.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
+            tv_bangdan.setTextColor(ContextCompat.getColor(mContext, R.color.black))
+            tv_guanzhu.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
+        } else {
+            tv_tuijian.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
+            tv_bangdan.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
+            tv_guanzhu.setTextColor(ContextCompat.getColor(mContext, R.color.black))
+        }
     }
 
     /**

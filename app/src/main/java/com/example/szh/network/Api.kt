@@ -26,8 +26,13 @@ object Api {
     const val WALLET_TRADINGRECORD = "wallet/tradingRecord"
 
     //查询用户
-    const val USER_INFO = "setting/user/select"
+    const val USER_INFO = "setting/user/detail"
 
     //编辑信息
     const val USER_EDIT = "setting/user/edit"
+
+    //首页推荐
+    const val RECOMMENDED_LIST = "index/recommended/list"
+
+
 }

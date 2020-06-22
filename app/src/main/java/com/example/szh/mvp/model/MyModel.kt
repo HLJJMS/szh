@@ -43,6 +43,6 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
     }
 
     override fun getData(id: String): Observable<BaseBean.BaseResponse<MyInfoBean>> {
-        return mRepositoryManager.obtainRetrofitService(UserService::class.java).getUserInfo(id)
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java).getUserInfo(id,id)
     }
 }

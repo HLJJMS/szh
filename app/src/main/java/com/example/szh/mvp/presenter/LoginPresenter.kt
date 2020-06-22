@@ -81,6 +81,7 @@ constructor(model: LoginContract.Model, rootView: LoginContract.View) :
             .compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
             ErrorHandleSubscriber<BaseBean.BaseResponse<LoginBean.Login>>(mErrorHandler) {
             override fun onNext(t: BaseBean.BaseResponse<LoginBean.Login>) {
+                mRootView.hideLoading()
                 if (t.code.equals(Api.SUCCESS)) {
                     t.result?.id?.let { SPToll(mApplication).setId(it) }
                     t.result?.phone?.let { SPToll(mApplication).setPhone(it) }
@@ -90,7 +91,7 @@ constructor(model: LoginContract.Model, rootView: LoginContract.View) :
                 } else {
                     MyToast().makeToast(mApplication, t.message)
                 }
-                mRootView.hideLoading()
+
             }
 
         })

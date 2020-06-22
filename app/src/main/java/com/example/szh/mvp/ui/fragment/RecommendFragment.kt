@@ -2,8 +2,7 @@ package com.example.szh.mvp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Message
-import android.support.v4.app.Fragment
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +44,7 @@ import com.example.szh.R
  * }
  * }
  */
+//推荐
 class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.View {
     companion object {
         fun newInstance(): RecommendFragment {
@@ -72,6 +72,8 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+
+
 
     }
 

@@ -13,7 +13,7 @@ interface UserService {
     @FormUrlEncoded
     @POST(Api.USER_INFO)
     fun getUserInfo(
-        @Field("userid") id: String
+        @Field("myuserid") myuserid: String, @Field("userid") userid: String
     ): Observable<BaseBean.BaseResponse<MyInfoBean>>
 
     //用户信息(编辑)

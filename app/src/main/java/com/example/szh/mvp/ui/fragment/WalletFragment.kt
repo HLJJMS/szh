@@ -87,6 +87,10 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
             intent.putExtra("type", "1")
             startActivity(intent)
         }
+        rb_login.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            var intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun getData() {
@@ -94,7 +98,7 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
             g_login_off.visibility = View.GONE
             g_login_on.visibility = View.VISIBLE
             mPresenter?.getData()
-            getData()
+
         } else {
             g_login_off.visibility = View.VISIBLE
             g_login_on.visibility = View.GONE

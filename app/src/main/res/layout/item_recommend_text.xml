@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/qmui_config_color_white"
+    android:paddingStart="16dp"
+    android:paddingTop="22dp"
+    tools:ignore="MissingConstraints">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="31dp"
+        android:paddingBottom="16dp"
+        android:text=""
+        android:textColor="#ff020202"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/tv_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="因特网 "
+        android:textColor="#ff37adff"
+        android:textSize="13sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#ff989898"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/tv_source"
+        app:layout_constraintTop_toTopOf="@id/tv_source" />
+
+    <TextView
+        android:id="@+id/tv_pinglun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16.5dp"
+        android:text=""
+        android:textColor="#ff989898"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/tv_time"
+        app:layout_constraintTop_toTopOf="@id/tv_source" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/rb_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="35dp"
+        android:paddingTop="8.5dp"
+        android:paddingEnd="22dp"
+        android:paddingBottom="9dp"
+        android:textColor="#ff5b5b5b"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_source"
+        app:qmui_backgroundColor="#FFFAFAFA"
+        app:qmui_borderWidth="0dp"
+        app:qmui_radius="3dp" />
+
+    <ImageView
+        android:id="@+id/iv_zu"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@mipmap/ic_zu"
+        app:layout_constraintBottom_toBottomOf="@id/rb_detail"
+        app:layout_constraintStart_toStartOf="@id/rb_detail"
+        app:layout_constraintTop_toTopOf="@id/rb_detail" />
+
+    <ImageView
+        android:id="@+id/iv_go"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="4dp"
+        android:src="@mipmap/ic_fabu"
+        app:layout_constraintBottom_toBottomOf="@id/rb_detail"
+        app:layout_constraintEnd_toStartOf="@+id/tv_tui"
+        app:layout_constraintTop_toTopOf="@id/rb_detail" />
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="21dp"
+        android:layout_height="12dp"
+        android:layout_marginEnd="24.5dp"
+        android:background="#FFF2F2F2"
+        android:paddingStart="7dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="7dp"
+        android:paddingBottom="3dp"
+        android:src="@mipmap/ic_close_x"
+        app:layout_constraintBottom_toBottomOf="@id/rb_detail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rb_detail" />
+
+    <TextView
+        android:id="@+id/tv_tui"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:text="推"
+        android:textColor="#ff5b5b5b"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/rb_detail"
+        app:layout_constraintEnd_toStartOf="@+id/iv_close"
+        app:layout_constraintTop_toTopOf="@id/rb_detail" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/rb_detail" />
+</androidx.constraintlayout.widget.ConstraintLayout>

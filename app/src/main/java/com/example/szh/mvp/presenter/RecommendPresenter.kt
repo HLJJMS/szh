@@ -1,6 +1,7 @@
 package com.example.szh.mvp.presenter
 
 import android.app.Application
+import com.example.szh.bean.RecommendBean
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.FragmentScope
@@ -10,6 +11,11 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.RecommendContract
+import com.example.szh.network.Api
+import com.example.szh.network.RxUtils
+import com.example.szh.tools.MyToast
+import com.example.szh.tools.SPToll
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
 
 
 /**
@@ -44,5 +50,19 @@ constructor(model: RecommendContract.Model, rootView: RecommendContract.View) :
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+
+    fun getData(){
+        mModel.getData(SPToll(mApplication).getId()).compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<RecommendBean>(mErrorHandler) {
+                override fun onNext(t: RecommendBean) {
+                    if (t.code.equals(Api.SUCCESS)) {
+                        mRootView.success(t.result)
+                    } else {
+                        MyToast().makeToast(mApplication, t.message)
+                    }
+                }
+            })
     }
 }

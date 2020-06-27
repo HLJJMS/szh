@@ -1,27 +1,21 @@
 package com.example.szh.mvp.model
 
 import android.app.Application
-import com.example.szh.bean.MyInfoBean
-import com.example.szh.bean.RecommendBean
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
 
-import com.jess.arms.di.scope.FragmentScope
+import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
-import com.example.szh.mvp.contract.RecommendContract
-import com.example.szh.network.bean.BaseBean
-import com.example.szh.network.service.HomeService
-import com.example.szh.network.service.UserService
-import io.reactivex.Observable
+import com.example.szh.mvp.contract.ArticleDetailContract
 
 
 /**
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 06/19/2020 14:56
+ * Created by MVPArmsTemplate on 06/27/2020 14:28
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -29,11 +23,11 @@ import io.reactivex.Observable
  * <a href="https://github.com/JessYanCoding/MVPArmsTemplate">模版请保持更新</a>
  * ================================================
  */
-@FragmentScope
-class RecommendModel
+@ActivityScope
+class ArticleDetailModel
 @Inject
 constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager),
-    RecommendContract.Model {
+    ArticleDetailContract.Model {
     @Inject
     lateinit var mGson: Gson;
 
@@ -42,8 +36,5 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     override fun onDestroy() {
         super.onDestroy();
-    }
-    override fun getData(id: String): Observable<RecommendBean> {
-        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getHomeRecommended(id)
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
@@ -17,6 +18,9 @@ import com.example.szh.mvp.contract.RecommendContract
 import com.example.szh.mvp.presenter.RecommendPresenter
 
 import com.example.szh.R
+import com.example.szh.adapter.RecommendAdapter
+import com.example.szh.bean.RecommendBean
+import kotlinx.android.synthetic.main.fragment_recommend.*
 
 
 /**
@@ -46,12 +50,14 @@ import com.example.szh.R
  */
 //推荐
 class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.View {
+    var recommendAdapter:RecommendAdapter = RecommendAdapter()
     companion object {
         fun newInstance(): RecommendFragment {
             val fragment = RecommendFragment()
             return fragment
         }
     }
+
 
 
     override fun setupFragmentComponent(appComponent: AppComponent) {
@@ -72,9 +78,10 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        recycler.layoutManager = LinearLayoutManager(context)
+        recycler.adapter = recommendAdapter
 
-
-
+        mPresenter?.getData()
     }
 
     /**
@@ -115,6 +122,10 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
      */
     override fun setData(data: Any?) {
 
+    }
+
+    override fun success(list: MutableList<RecommendBean.ResultBean>) {
+        recommendAdapter.setList(list)
     }
 
     override fun showLoading() {

@@ -15,5 +15,5 @@ interface HomeService {
     @POST(Api.RECOMMENDED_LIST)
     fun getHomeRecommended(
         @Field("userid") id: String
-    ): Observable<BaseBean.BaseResponse<List<RecommendBean>>>
+    ): Observable<RecommendBean>
 }

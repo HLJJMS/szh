@@ -65,7 +65,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
     override fun getDataSuccess(bean: ArticleDetailBean.ResultBean) {
         titleBar.setCenterText(bean.articles.dirname)
-        iv_img.
+        tv_look.setText(bean.articles.view.toString() + "阅读")
     }
 
 

@@ -34,5 +34,14 @@ object Api {
     //首页推荐
     const val RECOMMENDED_LIST = "index/recommended/list"
 
+    //获取榜单列表
+    const val SELECT_DIRECTORY = "article/select/directory"
+
+    //文章详情
+    const val ARTICLE_DETAIL = "article/detail"
+
+    //获取榜单列表
+    const val EVERYDAY_AG= "index/everyDay/login"
+
 
 }

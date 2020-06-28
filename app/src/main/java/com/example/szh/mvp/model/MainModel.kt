@@ -9,6 +9,10 @@ import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.MainContract
+import com.example.szh.network.bean.BaseBean
+import com.example.szh.network.service.HomeService
+import com.example.szh.network.service.LoginService
+import io.reactivex.Observable
 
 
 /**
@@ -33,6 +37,9 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     @Inject
     lateinit var mApplication: Application;
+    override fun getEveryDayAg(id: String): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getEveryDayAg(id)
+    }
 
     override fun onDestroy() {
         super.onDestroy();

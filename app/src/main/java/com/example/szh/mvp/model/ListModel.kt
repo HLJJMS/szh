@@ -1,6 +1,7 @@
 package com.example.szh.mvp.model
 
 import android.app.Application
+import com.example.szh.bean.BangdanBean
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
@@ -9,6 +10,10 @@ import com.jess.arms.di.scope.FragmentScope
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.ListContract
+import com.example.szh.network.bean.BaseBean
+import com.example.szh.network.service.HomeService
+import com.example.szh.network.service.LoginService
+import io.reactivex.Observable
 
 
 /**
@@ -36,5 +41,8 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+    override fun getData(): Observable<BangdanBean> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getBangdan()
     }
 }

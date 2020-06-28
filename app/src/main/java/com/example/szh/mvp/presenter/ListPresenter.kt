@@ -1,6 +1,7 @@
 package com.example.szh.mvp.presenter
 
 import android.app.Application
+import com.example.szh.bean.BangdanBean
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.FragmentScope
@@ -10,6 +11,10 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.ListContract
+import com.example.szh.network.Api
+import com.example.szh.network.RxUtils
+import com.example.szh.tools.MyToast
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
 
 
 /**
@@ -44,5 +49,22 @@ constructor(model: ListContract.Model, rootView: ListContract.View) :
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+
+    fun getData() {
+        mRootView.showLoading()
+        mModel.getData().compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
+            ErrorHandleSubscriber<BangdanBean>(mErrorHandler) {
+            override fun onNext(t: BangdanBean) {
+                if (t.code.equals(Api.SUCCESS)) {
+                    mRootView.success(t.result)
+                } else {
+                    MyToast().makeToast(mApplication, t.message)
+                }
+
+                mRootView.hideLoading()
+            }
+
+        })
     }
 }

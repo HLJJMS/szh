@@ -2,11 +2,13 @@ package com.example.szh.mvp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Message
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
@@ -18,6 +20,12 @@ import com.example.szh.mvp.contract.ListContract
 import com.example.szh.mvp.presenter.ListPresenter
 
 import com.example.szh.R
+import com.example.szh.adapter.BangdanAdapter
+import com.example.szh.adapter.CaiJingAdapter
+import com.example.szh.bean.BangdanBean
+import com.jakewharton.rxbinding3.view.clicks
+import kotlinx.android.synthetic.main.fragment_list.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -46,6 +54,10 @@ import com.example.szh.R
  * }
  */
 class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
+    var bangdanAdapter: BangdanAdapter = BangdanAdapter()
+    var bean: MutableList<BangdanBean.ResultBean>? = null
+    var caiJingAdapter: CaiJingAdapter = CaiJingAdapter()
+
     companion object {
         fun newInstance(): ListFragment {
             val fragment = ListFragment()
@@ -72,7 +84,31 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        recycler_v.layoutManager = LinearLayoutManager(context)
+        recycler_g.layoutManager = GridLayoutManager(context, 5)
+        recycler_g.adapter = bangdanAdapter
+        recycler_v.adapter = caiJingAdapter
+        tv_zixun.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            tv_zixun.setTextColor(ContextCompat.getColor(mContext, R.color.color_020202))
+            tv_caijing.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
+            bangdanAdapter.setList(bean?.get(0)?.dirsList)
+            recycler_v.visibility = View.GONE
+        }
+        tv_caijing.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            tv_caijing.setTextColor(ContextCompat.getColor(mContext, R.color.color_020202))
+            tv_zixun.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
+            bangdanAdapter.setList(bean?.get(1)?.dirsList)
+            recycler_v.visibility = View.VISIBLE
+            caiJingAdapter.setList(bean?.get(1)?.dirsList?.get(0)?.dirsList)
+        }
+        bangdanAdapter.setOnItemClickListener { adapter, view, position ->
+            if(recycler_v.visibility == View.GONE){
 
+            }else{
+
+            }
+        }
+        mPresenter?.getData()
     }
 
     /**
@@ -113,6 +149,11 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
      */
     override fun setData(data: Any?) {
 
+    }
+
+    override fun success(bean: MutableList<BangdanBean.ResultBean>) {
+        this.bean = bean
+        bangdanAdapter.setList(bean.get(0).dirsList)
     }
 
     override fun showLoading() {

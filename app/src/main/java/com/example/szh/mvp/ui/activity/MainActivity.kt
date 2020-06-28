@@ -152,6 +152,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             }
 
         })
+        mPresenter?.getEveryAg()
     }
 
     fun setButton(i: Int) {
@@ -168,6 +169,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
         }
         viewpager.currentItem = i
+
     }
 
     override fun showLoading() {
@@ -197,10 +199,10 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: MainEvent?) {/* Do something */
-        if (event!!.isLogin){
+        if (event!!.isLogin) {
             walletFragment.getData()
             myFragment.getData()
-        }else{
+        } else {
             myFragment.clearData()
         }
 

@@ -13,6 +13,8 @@ import com.example.szh.mvp.contract.ArticleDetailContract
 import com.example.szh.mvp.presenter.ArticleDetailPresenter
 
 import com.example.szh.R
+import com.example.szh.bean.ArticleDetailBean
+import kotlinx.android.synthetic.main.activity_article_detail.*
 
 
 /**
@@ -59,6 +61,11 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
     override fun initData(savedInstanceState: Bundle?) {
 
+    }
+
+    override fun getDataSuccess(bean: ArticleDetailBean.ResultBean) {
+        titleBar.setCenterText(bean.articles.dirname)
+        iv_img.
     }
 
 

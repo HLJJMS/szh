@@ -5,12 +5,14 @@
     android:layout_height="wrap_content">
 
     <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/rb_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="15dp"
         android:paddingTop="11dp"
         android:paddingEnd="15dp"
         android:paddingBottom="11dp"
+        android:layout_marginBottom="15dp"
         android:text=""
         android:textColor="#ff5b5b5b"
         android:textSize="14sp"

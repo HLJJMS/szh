@@ -44,4 +44,5 @@ object Api {
     const val EVERYDAY_AG= "index/everyDay/login"
 
 
+    const val FOCUS_LIST ="index/focusList"
 }

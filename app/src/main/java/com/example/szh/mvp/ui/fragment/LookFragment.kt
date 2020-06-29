@@ -2,7 +2,6 @@ package com.example.szh.mvp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Message
 
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +17,7 @@ import com.example.szh.mvp.contract.LookContract
 import com.example.szh.mvp.presenter.LookPresenter
 
 import com.example.szh.R
+import com.example.szh.bean.FocusListBean
 
 
 /**
@@ -113,6 +113,10 @@ class LookFragment : BaseFragment<LookPresenter>(), LookContract.View {
      */
     override fun setData(data: Any?) {
 
+    }
+
+    override fun success(bean: MutableList<FocusListBean.ResultBean>) {
+        TODO("Not yet implemented")
     }
 
     override fun showLoading() {

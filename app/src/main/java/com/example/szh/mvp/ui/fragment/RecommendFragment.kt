@@ -50,14 +50,14 @@ import kotlinx.android.synthetic.main.fragment_recommend.*
  */
 //推荐
 class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.View {
-    var recommendAdapter:RecommendAdapter = RecommendAdapter()
+    var recommendAdapter: RecommendAdapter = RecommendAdapter()
+
     companion object {
         fun newInstance(): RecommendFragment {
             val fragment = RecommendFragment()
             return fragment
         }
     }
-
 
 
     override fun setupFragmentComponent(appComponent: AppComponent) {
@@ -80,8 +80,22 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
     override fun initData(savedInstanceState: Bundle?) {
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = recommendAdapter
-
         mPresenter?.getData()
+        recommendAdapter.setOnItemClickListener { adapter, view, position ->
+            var intent: Intent = Intent()
+            intent.putExtra("id", recommendAdapter.data.get(position).id)
+            if (null == recommendAdapter.data.get(position).pushid || "null".equals(
+                    recommendAdapter.data.get(
+                        position
+                    ).pushid
+                )
+            ) {
+                intent.putExtra("pushid", "")
+            } else {
+                intent.putExtra("pushid", recommendAdapter.data.get(position).pushid)
+            }
+            startActivity(intent)
+        }
     }
 
     /**

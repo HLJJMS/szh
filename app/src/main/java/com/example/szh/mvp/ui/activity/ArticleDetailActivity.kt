@@ -14,6 +14,7 @@ import com.example.szh.mvp.presenter.ArticleDetailPresenter
 
 import com.example.szh.R
 import com.example.szh.bean.ArticleDetailBean
+import com.example.szh.tools.MyGlide
 import kotlinx.android.synthetic.main.activity_article_detail.*
 
 
@@ -60,12 +61,14 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        mPresenter?.getData(intent.getStringExtra("id"),"")
     }
 
     override fun getDataSuccess(bean: ArticleDetailBean.ResultBean) {
         titleBar.setCenterText(bean.articles.dirname)
         tv_look.setText(bean.articles.view.toString() + "阅读")
+        tv_detail.text = bean.articles.contenttext.toString()
+        MyGlide.loadImage(this,bean.articles.pic.toString(),iv_img)
     }
 
 

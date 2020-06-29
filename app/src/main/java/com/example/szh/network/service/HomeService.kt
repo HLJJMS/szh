@@ -2,6 +2,7 @@ package com.example.szh.network.service
 
 import com.example.szh.bean.ArticleDetailBean
 import com.example.szh.bean.BangdanBean
+import com.example.szh.bean.FocusListBean
 import com.example.szh.bean.RecommendBean
 import com.example.szh.network.Api
 import com.example.szh.network.bean.BaseBean
@@ -13,9 +14,6 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface HomeService {
-
-
-
     //    首页推进
     @FormUrlEncoded
     @POST(Api.RECOMMENDED_LIST)
@@ -42,4 +40,12 @@ interface HomeService {
     fun getEveryDayAg(
         @Field("userid") id: String
     ): Observable<BaseBean.BaseResponse<String>>
+
+    //  每日取钱
+    @FormUrlEncoded
+    @POST(Api.FOCUS_LIST)
+    fun getFocusList(
+        @Field("userid") id: String
+    ): Observable<FocusListBean>
+
 }

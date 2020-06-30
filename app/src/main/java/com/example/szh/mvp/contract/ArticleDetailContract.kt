@@ -1,7 +1,6 @@
 package com.example.szh.mvp.contract
 
 import com.example.szh.bean.ArticleDetailBean
-import com.example.szh.bean.MyInfoBean
 import com.example.szh.network.bean.BaseBean
 import com.jess.arms.mvp.IView
 import com.jess.arms.mvp.IModel
@@ -31,6 +30,13 @@ interface ArticleDetailContract {
         fun getData(
             id: String, articleid: String, pushid: String
         ): Observable<ArticleDetailBean>
+        fun like(
+            id: String, articleid: String, like: String
+        ): Observable<BaseBean.BaseResponse<String>>
+
+        fun cllection(
+            id: String, articleid: String, cllection: String
+        ): Observable<BaseBean.BaseResponse<String>>
     }
 
 }

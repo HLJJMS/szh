@@ -20,6 +20,7 @@ import com.example.szh.mvp.presenter.RecommendPresenter
 import com.example.szh.R
 import com.example.szh.adapter.RecommendAdapter
 import com.example.szh.bean.RecommendBean
+import com.example.szh.mvp.ui.activity.ArticleDetailActivity
 import kotlinx.android.synthetic.main.fragment_recommend.*
 
 
@@ -82,8 +83,8 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
         recycler.adapter = recommendAdapter
         mPresenter?.getData()
         recommendAdapter.setOnItemClickListener { adapter, view, position ->
-            var intent: Intent = Intent()
-            intent.putExtra("id", recommendAdapter.data.get(position).id)
+            var intent: Intent = Intent(context,ArticleDetailActivity::class.java)
+            intent.putExtra("id", recommendAdapter.data.get(position).id.toString())
             if (null == recommendAdapter.data.get(position).pushid || "null".equals(
                     recommendAdapter.data.get(
                         position

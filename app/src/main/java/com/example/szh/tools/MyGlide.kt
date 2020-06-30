@@ -11,11 +11,14 @@ import java.io.File
 class MyGlide {
     companion object {
         fun loadImage(context: Context, url: String, iv: ImageView) {
-            Glide.with(context).load(url).apply(
-                RequestOptions().skipMemoryCache(true).diskCacheStrategy(
-                    DiskCacheStrategy.NONE
-                )
-            ).into(iv)
+            if(null!=url){
+                Glide.with(context).load(url).apply(
+                    RequestOptions().skipMemoryCache(true).diskCacheStrategy(
+                        DiskCacheStrategy.NONE
+                    )
+                ).into(iv)
+            }
+
         }
 
         fun loadImage(context: Context, file: File, iv: ImageView) {
@@ -27,10 +30,11 @@ class MyGlide {
         }
 
         fun loadImageCircle(context: Context, url: String, iv: ImageView) {
-            Glide.with(context).load(url).apply(
-                RequestOptions.bitmapTransform(CircleCrop())
-            ).into(iv)
-
+            if(null!=url){
+                Glide.with(context).load(url).apply(
+                    RequestOptions.bitmapTransform(CircleCrop())
+                ).into(iv)
+            }
         }
 
         fun loadImageCircle(context: Context, file: File, iv: ImageView) {

@@ -56,7 +56,7 @@ constructor(model: LookContract.Model, rootView: LookContract.View) :
             .subscribe(object :
                 ErrorHandleSubscriber<FocusListBean>(mErrorHandler) {
                 override fun onNext(t: FocusListBean) {
-                    if (t.code.equals(Api.SUCCESS)) {
+                    if (t.code.toString().equals(Api.SUCCESS)) {
                         mRootView.success(t.result)
                     } else {
                         MyToast().makeToast(mApplication, t.message)

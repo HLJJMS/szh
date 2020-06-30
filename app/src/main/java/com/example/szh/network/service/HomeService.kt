@@ -31,7 +31,7 @@ interface HomeService {
     @FormUrlEncoded
     @POST(Api.ARTICLE_DETAIL)
     fun getArticleDetail(
-        @Field("userid") id: String, @Field("articleid ") articleid : String, @Field("pushid ") pushid : String
+        @Field("userid") id: String, @Field("articleid") articleid: String, @Field("pushid") pushid: String
     ): Observable<ArticleDetailBean>
 
     //  每日取钱
@@ -41,11 +41,24 @@ interface HomeService {
         @Field("userid") id: String
     ): Observable<BaseBean.BaseResponse<String>>
 
-    //  每日取钱
+    //  关注列表
     @FormUrlEncoded
     @POST(Api.FOCUS_LIST)
     fun getFocusList(
         @Field("userid") id: String
     ): Observable<FocusListBean>
 
+    //  喜欢文章 0:喜欢，1:不喜欢
+    @FormUrlEncoded
+    @POST(Api.ARTICLE_LIKE)
+    fun likeArticle(
+        @Field("userid") id: String, @Field("articleid") articleid: String,@Field("like") like: String
+    ): Observable<BaseBean.BaseResponse<String>>
+
+    //  收藏 0:ok，1:取消
+    @FormUrlEncoded
+    @POST(Api.ARTICLE_CLLECTION)
+    fun cllectionArticle(
+        @Field("userid") id: String, @Field("articleid") articleid: String,@Field("type") cllection: String
+    ): Observable<BaseBean.BaseResponse<String>>
 }

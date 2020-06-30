@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
@@ -17,7 +18,9 @@ import com.example.szh.mvp.contract.LookContract
 import com.example.szh.mvp.presenter.LookPresenter
 
 import com.example.szh.R
+import com.example.szh.adapter.LookAdapter
 import com.example.szh.bean.FocusListBean
+import kotlinx.android.synthetic.main.fragment_look.*
 
 
 /**
@@ -53,6 +56,7 @@ class LookFragment : BaseFragment<LookPresenter>(), LookContract.View {
         }
     }
 
+    var adapter: LookAdapter = LookAdapter()
 
     override fun setupFragmentComponent(appComponent: AppComponent) {
         DaggerLookComponent //如找不到该类,请编译一下项目
@@ -72,7 +76,9 @@ class LookFragment : BaseFragment<LookPresenter>(), LookContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(context)
+        mPresenter?.getData()
     }
 
     /**
@@ -116,7 +122,7 @@ class LookFragment : BaseFragment<LookPresenter>(), LookContract.View {
     }
 
     override fun success(bean: MutableList<FocusListBean.ResultBean>) {
-        TODO("Not yet implemented")
+        adapter.setList(bean)
     }
 
     override fun showLoading() {

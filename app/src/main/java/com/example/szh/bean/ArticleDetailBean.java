@@ -168,7 +168,7 @@ public class ArticleDetailBean {
             private String createdate;
             private Object remark;
             private int reward;
-            private Object pic;
+            private String pic="";
             private int category;
             private int audiolength;
             private String audiopath;
@@ -306,11 +306,11 @@ public class ArticleDetailBean {
                 this.reward = reward;
             }
 
-            public Object getPic() {
+            public String getPic() {
                 return pic;
             }
 
-            public void setPic(Object pic) {
+            public void setPic(String pic) {
                 this.pic = pic;
             }
 

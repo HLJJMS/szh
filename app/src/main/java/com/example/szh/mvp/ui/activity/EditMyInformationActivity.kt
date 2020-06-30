@@ -354,7 +354,7 @@ class EditMyInformationActivity : BaseActivity<EditMyInformationPresenter>(),
         builder.addFormDataPart("city",city)
         builder.addFormDataPart("province",province)
         if (changePhoto){
-            val requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+            var requestBody: RequestBody = RequestBody.create(MediaType.parse("application/octet-stream"), file)
             builder.addFormDataPart("avatarUrl", file.name, requestBody)
         }
         mPresenter?.postData(builder.build())

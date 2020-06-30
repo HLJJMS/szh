@@ -43,6 +43,14 @@ object Api {
     //获取榜单列表
     const val EVERYDAY_AG= "index/everyDay/login"
 
-
+    //关注列表
     const val FOCUS_LIST ="index/focusList"
+
+    //文章喜欢
+    const val ARTICLE_LIKE ="article/like"
+
+    //文章收藏
+    const val ARTICLE_CLLECTION ="article/collection"
+
+
 }

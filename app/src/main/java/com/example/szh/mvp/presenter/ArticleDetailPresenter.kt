@@ -53,9 +53,9 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
         super.onDestroy();
     }
 
-    fun getData(article:String,pushid:String) {
+    fun getData(article: String, pushid: String) {
         mRootView.showLoading()
-        mModel.getData(SPToll(mApplication).getId(),article,pushid)
+        mModel.getData(SPToll(mApplication).getId(), article, pushid)
             .compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
                 ErrorHandleSubscriber<ArticleDetailBean>(mErrorHandler) {
                 override fun onNext(t: ArticleDetailBean) {
@@ -65,6 +65,32 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
                         MyToast().makeToast(mApplication, t.message)
                     }
 
+                    mRootView.hideLoading()
+                }
+
+            })
+    }
+
+    fun like(article: String, like: String) {
+        mRootView.showLoading()
+        mModel.like(SPToll(mApplication).getId(), article, like)
+            .compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<String>) {
+                    MyToast().makeToast(mApplication, t.message)
+                    mRootView.hideLoading()
+                }
+
+            })
+    }
+
+    fun cllection(article: String, cllection: String) {
+        mRootView.showLoading()
+        mModel.cllection(SPToll(mApplication).getId(), article, cllection)
+            .compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<String>) {
+                    MyToast().makeToast(mApplication, t.message)
                     mRootView.hideLoading()
                 }
 

@@ -2,6 +2,8 @@ package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
+import android.text.Html.FROM_HTML_MODE_COMPACT
 
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -15,7 +17,10 @@ import com.example.szh.mvp.presenter.ArticleDetailPresenter
 import com.example.szh.R
 import com.example.szh.bean.ArticleDetailBean
 import com.example.szh.tools.MyGlide
+import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.activity_article_detail.*
+import kotlinx.android.synthetic.main.fragment_home.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -62,13 +67,24 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
     override fun initData(savedInstanceState: Bundle?) {
         mPresenter?.getData(intent.getStringExtra("id"),"")
+
     }
 
     override fun getDataSuccess(bean: ArticleDetailBean.ResultBean) {
         titleBar.setCenterText(bean.articles.dirname)
         tv_look.setText(bean.articles.view.toString() + "阅读")
-        tv_detail.text = bean.articles.contenttext.toString()
-        MyGlide.loadImage(this,bean.articles.pic.toString(),iv_img)
+        tv_detail.text = Html.fromHtml(bean.articles.contenttext.toString(),FROM_HTML_MODE_COMPACT)
+        if(null!=bean.articles.pic){
+            MyGlide.loadImage(this,bean.articles.pic.toString(),iv_img)
+        }
+        tv_title.setText(bean.articles.title)
+        tv_off.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            mPresenter?.cllection(intent.getStringExtra("id"),Math.abs(bean.collection-1).toString())
+        }
+        tv_like.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            mPresenter?.like(intent.getStringExtra("id"),Math.abs(bean.articles.like-1).toString())
+        }
+
     }
 
 

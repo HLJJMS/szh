@@ -10,8 +10,8 @@ import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.ArticleDetailContract
+import com.example.szh.network.bean.BaseBean
 import com.example.szh.network.service.HomeService
-import com.example.szh.network.service.LoginService
 import io.reactivex.Observable
 
 
@@ -42,7 +42,26 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         articleid: String,
         pushid: String
     ): Observable<ArticleDetailBean> {
-        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getArticleDetail(id, articleid, pushid)
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java)
+            .getArticleDetail(id, articleid, pushid)
+    }
+
+    override fun like(
+        id: String,
+        articleid: String,
+        like: String
+    ): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java)
+            .likeArticle(id, articleid, like)
+    }
+
+    override fun cllection(
+        id: String,
+        articleid: String,
+        cllection: String
+    ): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java)
+            .cllectionArticle(id, articleid, cllection)
     }
 
     override fun onDestroy() {

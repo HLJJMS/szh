@@ -1,5 +1,6 @@
 package com.example.szh.mvp.ui.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Message
@@ -22,6 +23,7 @@ import com.example.szh.mvp.presenter.HomePresenter
 
 import com.example.szh.R
 import com.example.szh.adapter.HomePageAdapter
+import com.example.szh.mvp.ui.activity.SearchActivityActivity
 import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -86,6 +88,7 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    @SuppressLint("CheckResult")
     override fun initData(savedInstanceState: Bundle?) {
         mFragments.add(recommendFragment)
         mFragments.add(listFragment)
@@ -119,6 +122,9 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         }
         tv_guanzhu.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             viewpager.currentItem = 2
+        }
+        iv_search.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context,SearchActivityActivity::class.java))
         }
     }
 

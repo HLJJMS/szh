@@ -52,5 +52,10 @@ object Api {
     //文章收藏
     const val ARTICLE_CLLECTION ="article/collection"
 
+    //首页搜索
+    const val INDEX_SEARCH ="index/search"
+
+
+
 
 }

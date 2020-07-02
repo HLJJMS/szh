@@ -20,7 +20,7 @@
                 android:id="@+id/titleBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:center_txt="国内焦点"
+                app:center_txt=""
                 tools:ignore="MissingConstraints" />
 
             <TextView
@@ -29,7 +29,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:paddingStart="14dp"
-                android:text="SpaceX“龙”飞船首次载人试飞"
                 android:textColor="#ff020202"
                 android:textSize="19sp"
                 app:layout_constraintTop_toBottomOf="@id/titleBar" />
@@ -312,9 +311,10 @@
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:src="@mipmap/ic_send"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/et_comment"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+             />
 
         <ImageView
             android:id="@+id/iv_message"
@@ -322,21 +322,81 @@
             android:layout_height="23dp"
             android:layout_marginEnd="25dp"
             android:src="@mipmap/ic_home_talk_off"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/et_comment"
             app:layout_constraintEnd_toStartOf="@id/iv_send"
-            app:layout_constraintTop_toTopOf="parent" />
+             />
 
         <EditText
+            android:id="@+id/et_comment"
             android:layout_width="0dp"
-            android:textColor="#FF2F2F2F"
             android:layout_height="wrap_content"
             android:layout_marginEnd="23dp"
             android:background="@drawable/conner5_solid_gray"
             android:paddingStart="5dp"
             android:paddingTop="11dp"
             android:paddingEnd="5dp"
-            android:paddingBottom="11dp"
+            android:paddingBottom="7dp"
+            android:textColor="#FF2F2F2F"
             app:layout_constraintEnd_toStartOf="@id/iv_message"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_add_photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/ic_add_img"
+            app:layout_constraintTop_toBottomOf="@id/et_comment" />
+
+        <ImageView
+            android:id="@+id/iv_check"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="10dp"
+            android:src="@mipmap/ic_check_off"
+            app:layout_constraintBottom_toBottomOf="@id/tv_only"
+            app:layout_constraintEnd_toStartOf="@id/tv_only"
+            app:layout_constraintTop_toTopOf="@id/tv_only" />
+
+        <TextView
+            android:id="@+id/tv_only"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="仅帖子作者可见"
+            android:textColor="#ff5b5b5b"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_add_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_add_photo" />
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发布"
+            android:textColor="#ff989898"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/et_comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/et_comment" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/g_comment_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="iv_send,iv_message"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="6dp" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/g_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tv_only,iv_check,iv_add_photo,tv_ok"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="7dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

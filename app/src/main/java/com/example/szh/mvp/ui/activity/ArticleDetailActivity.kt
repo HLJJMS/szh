@@ -1,9 +1,12 @@
 package com.example.szh.mvp.ui.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.Html
 import android.text.Html.FROM_HTML_MODE_COMPACT
+import android.view.View
 
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -17,10 +20,20 @@ import com.example.szh.mvp.presenter.ArticleDetailPresenter
 import com.example.szh.R
 import com.example.szh.bean.ArticleDetailBean
 import com.example.szh.tools.MyGlide
+import com.example.szh.tools.MyToast
 import com.jakewharton.rxbinding3.view.clicks
+import com.tbruyelle.rxpermissions2.RxPermissions
+import com.zhihu.matisse.Matisse
+import com.zhihu.matisse.MimeType
+import com.zhihu.matisse.engine.impl.GlideEngine
+import com.zhihu.matisse.internal.entity.CaptureStrategy
 import kotlinx.android.synthetic.main.activity_article_detail.*
+import kotlinx.android.synthetic.main.activity_article_detail.titleBar
+import kotlinx.android.synthetic.main.activity_edit_my_information.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.io.File
 import java.util.concurrent.TimeUnit
+import java.util.function.Consumer
 
 
 /**
@@ -49,7 +62,12 @@ import java.util.concurrent.TimeUnit
  * }
  */
 class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDetailContract.View {
-
+    var like: Int = 0
+    var collection: Int = 0
+    var photoCode = 1001;
+    lateinit var file: File
+    private var changePhoto:Boolean = false
+    private var cheak:String = "0" //0:全部可见 1:仅评论作者和帖子作者可见
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerArticleDetailComponent //如找不到该类,请编译一下项目
             .builder()
@@ -66,27 +84,109 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
 
     override fun initData(savedInstanceState: Bundle?) {
-        mPresenter?.getData(intent.getStringExtra("id"),"")
-
+        mPresenter?.getData(intent.getStringExtra("id"), intent.getStringExtra("pushid"))
+        et_comment.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                g_comment.visibility = View.VISIBLE
+                g_comment_no.visibility = View.GONE
+            } else {
+                g_comment.visibility = View.GONE
+                g_comment_no.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun getDataSuccess(bean: ArticleDetailBean.ResultBean) {
         titleBar.setCenterText(bean.articles.dirname)
         tv_look.setText(bean.articles.view.toString() + "阅读")
-        tv_detail.text = Html.fromHtml(bean.articles.contenttext.toString(),FROM_HTML_MODE_COMPACT)
-        if(null!=bean.articles.pic){
-            MyGlide.loadImage(this,bean.articles.pic.toString(),iv_img)
+        tv_detail.text = Html.fromHtml(bean.articles.contenttext.toString(), FROM_HTML_MODE_COMPACT)
+        if (null != bean.articles.pic) {
+            MyGlide.loadImage(this, bean.articles.pic.toString(), iv_img)
         }
         tv_title.setText(bean.articles.title)
+        like = bean.like
+        collection = bean.collection
+        isLikeOrCollection()
         tv_off.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            mPresenter?.cllection(intent.getStringExtra("id"),Math.abs(bean.collection-1).toString())
+            collection = Math.abs(collection - 1)
+            mPresenter?.cllection(intent.getStringExtra("id"), collection.toString())
+            isLikeOrCollection()
         }
         tv_like.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            mPresenter?.like(intent.getStringExtra("id"),Math.abs(bean.articles.like-1).toString())
+            like = Math.abs(like - 1)
+            mPresenter?.like(intent.getStringExtra("id"), like.toString())
+            isLikeOrCollection()
         }
-
+        iv_add_photo.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            getPermissions();
+        }
+        iv_check.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+           if(cheak.equals("0")){
+               cheak = "1"
+               iv_check.setImageResource(R.mipmap.ic_check_on)
+           }else{
+               cheak = "0"
+               iv_check.setImageResource(R.mipmap.ic_check_off)
+           }
+        }
     }
 
+
+    fun getPermissions() {
+        val rxPermissions: RxPermissions = RxPermissions(this)
+        rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+            .subscribe(Consumer<Boolean>() {
+                if (it) {
+                    getPhoto()
+                } else {
+                    MyToast().makeToast(this, "暂无权限")
+                }
+            });
+    }
+    private fun getPhoto() {
+        Matisse.from(this)
+            .choose(MimeType.ofAll()) //是否只显示选择的类型的缩略图，就不会把所有图片视频都放在一起，而是需要什么展示什么
+            .showSingleMediaType(true) //这两行要连用 是否在选择图片中展示照相 和适配安卓7.0 FileProvider
+            .capture(true)
+            .captureStrategy(
+                CaptureStrategy(
+                    true,
+                    "com.example.szh.photo"
+                )
+            ) //有序选择图片 123456...
+            .countable(false) //最大选择数量为6
+            .maxSelectable(1) //选择方向
+            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) //界面中缩略图的质量
+            .thumbnailScale(0.8f) //黑色主题
+            .theme(R.style.Matisse_Dracula) //Glide加载方式
+            .imageEngine(GlideEngine()) //请求码
+            .forResult(photoCode)
+    }
+
+    fun isLikeOrCollection() {
+        if (like == 0) {
+            tv_off.text = "取消收藏"
+        } else {
+            tv_off.text = "收藏"
+        }
+        if (collection == 0) {
+            tv_like.text = "取消喜欢"
+        } else {
+            tv_like.text = "喜欢"
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == photoCode && resultCode == RESULT_OK) {
+            for (i in Matisse.obtainPathResult(data).indices) {
+                //解析文件
+                changePhoto = true
+                file = File(Matisse.obtainPathResult(data)[i])
+                MyGlide.loadImageCircle(this, file, iv_head)
+            }
+        }
+    }
 
     override fun showLoading() {
 

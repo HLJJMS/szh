@@ -61,4 +61,14 @@ interface HomeService {
     fun cllectionArticle(
         @Field("userid") id: String, @Field("articleid") articleid: String,@Field("type") cllection: String
     ): Observable<BaseBean.BaseResponse<String>>
+
+
+
+    //  搜索 0用户 1 文章
+    @FormUrlEncoded
+    @POST(Api.INDEX_SEARCH)
+    fun search(
+        @Field("userid") id: String, @Field("searchKey") searchKey : String,@Field("type") cllection: String
+    ): Observable<RecommendBean>
+
 }

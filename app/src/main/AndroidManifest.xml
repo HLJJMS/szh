@@ -20,11 +20,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/QMUI.NoActionBar">
+        <activity android:name=".mvp.ui.activity.SearchActivityActivity" />
+        <activity android:name=".mvp.ui.activity.MainActivity2" />
         <activity android:name=".mvp.ui.activity.ArticleDetailActivity" />
         <activity android:name=".mvp.ui.activity.WalletRecordActivity" />
         <activity android:name=".mvp.ui.activity.AddRmbActivity" />
         <activity android:name=".mvp.ui.activity.ReleaseActivity" />
-        <activity android:name=".mvp.ui.activity.PushTieActivity"></activity>
+        <activity android:name=".mvp.ui.activity.PushTieActivity" />
         <activity android:name=".mvp.ui.activity.ReportActivity" />
         <activity android:name=".mvp.ui.activity.FriendDetailActivity" />
         <activity android:name=".mvp.ui.activity.AddFriendActivity" />
@@ -34,7 +36,7 @@
         <activity android:name=".mvp.ui.activity.SettingActivity" />
         <activity android:name=".mvp.ui.activity.ResetPassWordActivity" />
         <activity android:name=".mvp.ui.activity.RegisterActivity" />
-        <activity android:name=".mvp.ui.activity.LoginActivity"></activity>
+        <activity android:name=".mvp.ui.activity.LoginActivity" />
         <activity
             android:name=".mvp.ui.activity.MainActivity"
             android:launchMode="singleTask">

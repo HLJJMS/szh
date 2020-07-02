@@ -67,7 +67,6 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
 
                     mRootView.hideLoading()
                 }
-
             })
     }
 

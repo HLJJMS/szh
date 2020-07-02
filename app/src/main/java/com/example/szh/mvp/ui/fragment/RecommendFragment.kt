@@ -85,15 +85,10 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
         recommendAdapter.setOnItemClickListener { adapter, view, position ->
             var intent: Intent = Intent(context,ArticleDetailActivity::class.java)
             intent.putExtra("id", recommendAdapter.data.get(position).id.toString())
-            if (null == recommendAdapter.data.get(position).pushid || "null".equals(
-                    recommendAdapter.data.get(
-                        position
-                    ).pushid
-                )
-            ) {
+            if (null == recommendAdapter.data.get(position).pushid || "null".equals(recommendAdapter.data.get(position).pushid)) {
                 intent.putExtra("pushid", "")
             } else {
-                intent.putExtra("pushid", recommendAdapter.data.get(position).pushid)
+                intent.putExtra("pushid", recommendAdapter.data.get(position).pushid.toString())
             }
             startActivity(intent)
         }

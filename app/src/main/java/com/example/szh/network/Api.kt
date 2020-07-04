@@ -55,7 +55,9 @@ object Api {
     //首页搜索
     const val INDEX_SEARCH ="index/search"
 
+    //新增评论
+    const val COMMENT_ADD ="comment/add"
 
-
-
+    //获取文章评论
+    const val COMMENT_GET = "comment/select"
 }

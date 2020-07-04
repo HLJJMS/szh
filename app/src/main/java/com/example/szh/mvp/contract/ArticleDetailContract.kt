@@ -1,10 +1,13 @@
 package com.example.szh.mvp.contract
 
 import com.example.szh.bean.ArticleDetailBean
+import com.example.szh.bean.CommentBean
 import com.example.szh.network.bean.BaseBean
 import com.jess.arms.mvp.IView
 import com.jess.arms.mvp.IModel
 import io.reactivex.Observable
+import okhttp3.MultipartBody
+import retrofit2.http.Field
 
 
 /**
@@ -23,6 +26,8 @@ interface ArticleDetailContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
     interface View : IView{
      fun getDataSuccess(bean:ArticleDetailBean.ResultBean)
+        fun commentSuccess()
+        fun getCommentListSuccess(bean:MutableList<CommentBean.ResultBean.RecordsBean>)
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
@@ -37,6 +42,13 @@ interface ArticleDetailContract {
         fun cllection(
             id: String, articleid: String, cllection: String
         ): Observable<BaseBean.BaseResponse<String>>
-    }
 
+        fun addComment(
+            body: MultipartBody
+        ): Observable<BaseBean.BaseResponse<Any>>
+
+        fun getComment(
+            id: String, articleid: String, current: String,type:String
+        ): Observable<CommentBean>
+    }
 }

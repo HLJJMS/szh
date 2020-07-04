@@ -2,6 +2,7 @@ package com.example.szh.mvp.model
 
 import android.app.Application
 import com.example.szh.bean.ArticleDetailBean
+import com.example.szh.bean.CommentBean
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
@@ -11,8 +12,11 @@ import javax.inject.Inject
 
 import com.example.szh.mvp.contract.ArticleDetailContract
 import com.example.szh.network.bean.BaseBean
+import com.example.szh.network.service.CommentService
 import com.example.szh.network.service.HomeService
+import com.example.szh.network.service.UserService
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 
 
 /**
@@ -63,6 +67,20 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         return mRepositoryManager.obtainRetrofitService(HomeService::class.java)
             .cllectionArticle(id, articleid, cllection)
     }
+
+    override fun addComment(body: MultipartBody): Observable<BaseBean.BaseResponse<Any>> {
+        return mRepositoryManager.obtainRetrofitService(CommentService::class.java).addComment(body)
+    }
+
+    override fun getComment(
+        id: String,
+        articleid: String,
+        current: String,
+        type: String
+    ): Observable<CommentBean> {
+        return mRepositoryManager.obtainRetrofitService(CommentService::class.java).getComment(id, articleid, current, type)
+    }
+
 
     override fun onDestroy() {
         super.onDestroy();

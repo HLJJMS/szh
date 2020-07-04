@@ -347,14 +347,15 @@ class EditMyInformationActivity : BaseActivity<EditMyInformationPresenter>(),
 
     fun saveData() {
         val builder: MultipartBody.Builder = MultipartBody.Builder()
-        builder.addFormDataPart("userid ",SPToll(context).getId())
+        builder.setType(MultipartBody.FORM)
+        builder.addFormDataPart("userid",SPToll(context).getId())
         builder.addFormDataPart("name",tv_name.text.toString())
         builder.addFormDataPart("gender",tv_sex.text.toString())
         builder.addFormDataPart("birthday",tv_birthday.text.toString())
         builder.addFormDataPart("city",city)
         builder.addFormDataPart("province",province)
         if (changePhoto){
-            var requestBody: RequestBody = RequestBody.create(MediaType.parse("application/octet-stream"), file)
+            var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
             builder.addFormDataPart("avatarUrl", file.name, requestBody)
         }
         mPresenter?.postData(builder.build())

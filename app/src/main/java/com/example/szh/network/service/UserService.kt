@@ -17,7 +17,6 @@ interface UserService {
     ): Observable<BaseBean.BaseResponse<MyInfoBean>>
 
     //用户信息(编辑)
-
     @POST(Api.USER_EDIT)
     fun postUserInfo(
         @Body body: RequestBody

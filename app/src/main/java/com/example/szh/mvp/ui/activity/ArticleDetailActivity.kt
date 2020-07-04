@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.Html
 import android.text.Html.FROM_HTML_MODE_COMPACT
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -18,9 +19,12 @@ import com.example.szh.mvp.contract.ArticleDetailContract
 import com.example.szh.mvp.presenter.ArticleDetailPresenter
 
 import com.example.szh.R
+import com.example.szh.adapter.CommentAdapter
 import com.example.szh.bean.ArticleDetailBean
+import com.example.szh.bean.CommentBean
 import com.example.szh.tools.MyGlide
 import com.example.szh.tools.MyToast
+import com.example.szh.tools.SPToll
 import com.jakewharton.rxbinding3.view.clicks
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zhihu.matisse.Matisse
@@ -28,12 +32,15 @@ import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import kotlinx.android.synthetic.main.activity_article_detail.*
+import kotlinx.android.synthetic.main.activity_article_detail.tv_ok
 import kotlinx.android.synthetic.main.activity_article_detail.titleBar
 import kotlinx.android.synthetic.main.activity_edit_my_information.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import java.io.File
 import java.util.concurrent.TimeUnit
-import java.util.function.Consumer
+import io.reactivex.functions.Consumer
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 
 /**
@@ -66,8 +73,9 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     var collection: Int = 0
     var photoCode = 1001;
     lateinit var file: File
-    private var changePhoto:Boolean = false
-    private var cheak:String = "0" //0:全部可见 1:仅评论作者和帖子作者可见
+    private var changePhoto: Boolean = false
+    private var cheak: String = "0" //0:全部可见 1:仅评论作者和帖子作者可见
+     var adapter: CommentAdapter = CommentAdapter()
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerArticleDetailComponent //如找不到该类,请编译一下项目
             .builder()
@@ -121,14 +129,31 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             getPermissions();
         }
         iv_check.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-           if(cheak.equals("0")){
-               cheak = "1"
-               iv_check.setImageResource(R.mipmap.ic_check_on)
-           }else{
-               cheak = "0"
-               iv_check.setImageResource(R.mipmap.ic_check_off)
-           }
+            if (cheak.equals("0")) {
+                cheak = "1"
+                iv_check.setImageResource(R.mipmap.ic_check_on)
+            } else {
+                cheak = "0"
+                iv_check.setImageResource(R.mipmap.ic_check_off)
+            }
         }
+
+        tv_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            if (changePhoto || !et_comment.text.toString().equals("")) {
+                addComment()
+
+            }
+        }
+        recycler.layoutManager = LinearLayoutManager(this)
+       recycler.adapter = adapter
+    }
+
+    override fun commentSuccess() {
+
+    }
+
+    override fun getCommentListSuccess(bean: MutableList<CommentBean.ResultBean.RecordsBean>) {
+       adapter.setList(bean)
     }
 
 
@@ -143,6 +168,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 }
             });
     }
+
     private fun getPhoto() {
         Matisse.from(this)
             .choose(MimeType.ofAll()) //是否只显示选择的类型的缩略图，就不会把所有图片视频都放在一起，而是需要什么展示什么
@@ -183,7 +209,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 //解析文件
                 changePhoto = true
                 file = File(Matisse.obtainPathResult(data)[i])
-                MyGlide.loadImageCircle(this, file, iv_head)
+                MyGlide.loadImageCircle(this, file, iv_add_photo)
             }
         }
     }
@@ -207,4 +233,21 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     override fun killMyself() {
         finish()
     }
+
+    fun addComment() {
+        val builder: MultipartBody.Builder = MultipartBody.Builder()
+        builder.setType(MultipartBody.FORM)
+        builder.addFormDataPart("userid", SPToll(this).getId())
+        builder.addFormDataPart("articleid", intent.getStringExtra("id"))
+        builder.addFormDataPart("pushid", intent.getStringExtra("pushid"))
+        builder.addFormDataPart("onlyauth", cheak)
+        builder.addFormDataPart("content", et_comment.text.toString())
+        if (changePhoto) {
+            var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+            builder.addFormDataPart("file", file.name, requestBody)
+        }
+        mPresenter?.addComment(builder.build())
+
+    }
+
 }

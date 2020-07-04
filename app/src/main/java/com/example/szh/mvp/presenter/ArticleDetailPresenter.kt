@@ -2,6 +2,7 @@ package com.example.szh.mvp.presenter
 
 import android.app.Application
 import com.example.szh.bean.ArticleDetailBean
+import com.example.szh.bean.CommentBean
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.ActivityScope
@@ -17,6 +18,7 @@ import com.example.szh.network.bean.BaseBean
 import com.example.szh.tools.MyToast
 import com.example.szh.tools.SPToll
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
+import okhttp3.MultipartBody
 
 
 /**
@@ -93,6 +95,32 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
                     mRootView.hideLoading()
                 }
 
+            })
+    }
+
+    fun addComment(body: MultipartBody) {
+        mModel.addComment(body).compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<Any>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<Any>) {
+                    if (t.code.equals(Api.SUCCESS)) {
+                        mRootView.commentSuccess()
+                    }
+                    MyToast().makeToast(mApplication, t.message)
+                }
+            })
+    }
+
+    fun getComment(articleid: String, current: String,type:String){
+        mModel.getComment(SPToll(mApplication).getId(), articleid,current,type).compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<CommentBean>(mErrorHandler) {
+                override fun onNext(t: CommentBean) {
+                    if (t.code.equals(Api.SUCCESS)) {
+                        mRootView.commentSuccess()
+                    }
+                    MyToast().makeToast(mApplication, t.message)
+                }
             })
     }
 }

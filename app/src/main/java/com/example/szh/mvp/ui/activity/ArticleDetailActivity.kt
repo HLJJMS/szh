@@ -8,39 +8,34 @@ import android.text.Html
 import android.text.Html.FROM_HTML_MODE_COMPACT
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-
-import com.jess.arms.base.BaseActivity
-import com.jess.arms.di.component.AppComponent
-import com.jess.arms.utils.ArmsUtils
-
-import com.example.szh.di.component.DaggerArticleDetailComponent
-import com.example.szh.di.module.ArticleDetailModule
-import com.example.szh.mvp.contract.ArticleDetailContract
-import com.example.szh.mvp.presenter.ArticleDetailPresenter
-
+import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.example.szh.R
 import com.example.szh.adapter.CommentAdapter
 import com.example.szh.bean.ArticleDetailBean
 import com.example.szh.bean.CommentBean
+import com.example.szh.di.component.DaggerArticleDetailComponent
+import com.example.szh.di.module.ArticleDetailModule
+import com.example.szh.mvp.contract.ArticleDetailContract
+import com.example.szh.mvp.presenter.ArticleDetailPresenter
 import com.example.szh.tools.MyGlide
 import com.example.szh.tools.MyToast
 import com.example.szh.tools.SPToll
 import com.jakewharton.rxbinding3.view.clicks
+import com.jess.arms.base.BaseActivity
+import com.jess.arms.di.component.AppComponent
+import com.jess.arms.utils.ArmsUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import com.zhihu.matisse.internal.entity.CaptureStrategy
-import kotlinx.android.synthetic.main.activity_article_detail.*
-import kotlinx.android.synthetic.main.activity_article_detail.tv_ok
-import kotlinx.android.synthetic.main.activity_article_detail.titleBar
-import kotlinx.android.synthetic.main.activity_edit_my_information.*
-import java.io.File
-import java.util.concurrent.TimeUnit
 import io.reactivex.functions.Consumer
+import kotlinx.android.synthetic.main.activity_article_detail.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.io.File
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -75,7 +70,9 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     lateinit var file: File
     private var changePhoto: Boolean = false
     private var cheak: String = "0" //0:全部可见 1:仅评论作者和帖子作者可见
-     var adapter: CommentAdapter = CommentAdapter()
+    var type = "0"//0最热，1最新，2推+送
+    var page = 1
+    var adapter: CommentAdapter = CommentAdapter()
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerArticleDetailComponent //如找不到该类,请编译一下项目
             .builder()
@@ -102,6 +99,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 g_comment_no.visibility = View.VISIBLE
             }
         }
+
     }
 
     override fun getDataSuccess(bean: ArticleDetailBean.ResultBean) {
@@ -145,15 +143,42 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             }
         }
         recycler.layoutManager = LinearLayoutManager(this)
-       recycler.adapter = adapter
+        recycler.adapter = adapter
+//        mPresenter?.getComment(intent.getStringExtra("id"), page, type)
+        initLoadMore()
     }
 
     override fun commentSuccess() {
-
+        TODO("Not yet implemented")
     }
 
+    override fun getCommentListNull() {
+        adapter.loadMoreModule.loadMoreEnd(true)
+    }
+
+    override fun getCommentListFail() {
+        adapter.loadMoreModule.loadMoreFail()
+    }
+
+
+    /**
+     * 初始化加载更多
+     */
+    private fun initLoadMore() {
+        adapter.loadMoreModule.setOnLoadMoreListener {
+            page++
+            mPresenter?.getComment(intent.getStringExtra("id"), page, type)
+        }
+        adapter.loadMoreModule.isAutoLoadMore = true
+        //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
+        adapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
+    }
+
+
+
     override fun getCommentListSuccess(bean: MutableList<CommentBean.ResultBean.RecordsBean>) {
-       adapter.setList(bean)
+        adapter.setList(bean)
+        adapter.loadMoreModule.loadMoreComplete()
     }
 
 

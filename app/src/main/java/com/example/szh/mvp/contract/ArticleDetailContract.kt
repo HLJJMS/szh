@@ -27,6 +27,8 @@ interface ArticleDetailContract {
     interface View : IView{
      fun getDataSuccess(bean:ArticleDetailBean.ResultBean)
         fun commentSuccess()
+        fun getCommentListNull()
+        fun getCommentListFail()
         fun getCommentListSuccess(bean:MutableList<CommentBean.ResultBean.RecordsBean>)
     }
 

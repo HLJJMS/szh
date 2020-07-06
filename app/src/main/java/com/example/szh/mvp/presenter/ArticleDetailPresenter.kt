@@ -111,15 +111,23 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
             })
     }
 
-    fun getComment(articleid: String, current: String,type:String){
-        mModel.getComment(SPToll(mApplication).getId(), articleid,current,type).compose(RxUtils.applySchedulers(mRootView))
+    fun getComment(articleid: String, current: Int,type:String){
+        mModel.getComment(SPToll(mApplication).getId(), articleid,current.toString(),type).compose(RxUtils.applySchedulers(mRootView))
             .subscribe(object :
                 ErrorHandleSubscriber<CommentBean>(mErrorHandler) {
                 override fun onNext(t: CommentBean) {
                     if (t.code.equals(Api.SUCCESS)) {
-                        mRootView.commentSuccess()
+                        if (t.result.records.size==0){
+                            mRootView.getCommentListNull()
+                        }else{
+                            mRootView.getCommentListSuccess(t.result.records)
+                        }
+
+                    }else{
+                        mRootView.getCommentListFail()
+                        MyToast().makeToast(mApplication, t.message)
                     }
-                    MyToast().makeToast(mApplication, t.message)
+
                 }
             })
     }

@@ -52,5 +52,10 @@ interface ArticleDetailContract {
         fun getComment(
             id: String, articleid: String, current: String,type:String
         ): Observable<CommentBean>
+
+
+        fun goodComment(
+            id: String, articleid: String, commentid: String,type:String
+        ): Observable<BaseBean.BaseResponse<Any>>
     }
 }

@@ -168,7 +168,7 @@ public class CommentBean {
             private int onlyauth;
             private String avatarUrl;
             private String name;
-            private Object isUp;
+            private boolean isUp;
             private Object articles;
             private List<?> replysList;
 
@@ -284,11 +284,11 @@ public class CommentBean {
                 this.name = name;
             }
 
-            public Object getIsUp() {
+            public boolean getIsUp() {
                 return isUp;
             }
 
-            public void setIsUp(Object isUp) {
+            public void setIsUp(boolean isUp) {
                 this.isUp = isUp;
             }
 

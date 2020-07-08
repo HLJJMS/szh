@@ -78,7 +78,18 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         current: String,
         type: String
     ): Observable<CommentBean> {
-        return mRepositoryManager.obtainRetrofitService(CommentService::class.java).getComment(id, articleid, current, type)
+        return mRepositoryManager.obtainRetrofitService(CommentService::class.java)
+            .getComment(id, articleid, current, type)
+    }
+
+    override fun goodComment(
+        id: String,
+        articleid: String,
+        commentid: String,
+        type: String
+    ): Observable<BaseBean.BaseResponse<Any>> {
+        return mRepositoryManager.obtainRetrofitService(CommentService::class.java).goodComment(id, articleid, commentid, type)
+
     }
 
 

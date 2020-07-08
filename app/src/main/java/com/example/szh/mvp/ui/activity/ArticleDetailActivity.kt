@@ -65,6 +65,7 @@ import java.util.concurrent.TimeUnit
  */
 class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDetailContract.View {
     var like: Int = 0
+    var goodComment = "0"
     var collection: Int = 0
     var photoCode = 1001;
     lateinit var file: File
@@ -144,12 +145,12 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         }
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
-//        mPresenter?.getComment(intent.getStringExtra("id"), page, type)
+        mPresenter?.getComment(intent.getStringExtra("id"), page, type)
         initLoadMore()
     }
 
     override fun commentSuccess() {
-        TODO("Not yet implemented")
+
     }
 
     override fun getCommentListNull() {
@@ -172,6 +173,16 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         adapter.loadMoreModule.isAutoLoadMore = true
         //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
         adapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
+        adapter.addChildClickViewIds(R.id.iv_good)
+        adapter.setOnItemChildClickListener { adapter, view, position ->
+            if(view.id==R.id.iv_good){
+                if(this.adapter.data.get(position).isUp){
+                    mPresenter?.goodComment(intent.getStringExtra("id"),this.adapter.data.get(position).id.toString(),"1")
+                }else {
+                    mPresenter?.goodComment(intent.getStringExtra("id"),this.adapter.data.get(position).id.toString(),"0")
+                }
+            }
+        }
     }
 
 
@@ -215,16 +226,20 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     }
 
     fun isLikeOrCollection() {
-        if (like == 0) {
+        if (collection == 0) {
             tv_off.text = "取消收藏"
         } else {
             tv_off.text = "收藏"
         }
-        if (collection == 0) {
+        if (like == 0) {
             tv_like.text = "取消喜欢"
         } else {
             tv_like.text = "喜欢"
         }
+    }
+
+    fun isGoodComment(){
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -272,7 +287,9 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             builder.addFormDataPart("file", file.name, requestBody)
         }
         mPresenter?.addComment(builder.build())
-
     }
+
+
+
 
 }

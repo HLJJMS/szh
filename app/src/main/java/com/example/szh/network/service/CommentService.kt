@@ -8,6 +8,7 @@ import io.reactivex.Observable
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 import java.util.*
 
@@ -20,6 +21,7 @@ interface CommentService {
 
 
     //评论获取
+    @FormUrlEncoded
     @POST(Api.COMMENT_GET)
     fun getComment(
         @Field("userid") id: String,
@@ -28,4 +30,13 @@ interface CommentService {
         @Field("type") type: String
     ): Observable<CommentBean>
 
+    //评论获取
+    @FormUrlEncoded
+    @POST(Api.COMMENT_GOOD)
+    fun goodComment(
+        @Field("userid") id: String,
+        @Field("articleid") articleid: String,
+        @Field("commentid") current: String,
+        @Field("type") type: String//0：点赞，1取消
+    ): Observable<BaseBean.BaseResponse<Any>>
 }

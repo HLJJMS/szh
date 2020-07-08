@@ -60,4 +60,9 @@ object Api {
 
     //获取文章评论
     const val COMMENT_GET = "comment/select"
+
+    //点赞评论
+    const val COMMENT_GOOD = "comment/commentUpOrCancel"
+
+
 }

@@ -20,9 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/QMUI.NoActionBar">
+        <activity android:name=".mvp.ui.activity.RmbMaketMainActivity" />
         <activity android:name=".mvp.ui.activity.SearchActivityActivity" />
-        <activity android:name=".mvp.ui.activity.MainActivity2" />
-        <activity android:name=".mvp.ui.activity.ArticleDetailActivity" />
+        <activity
+            android:name=".mvp.ui.activity.ArticleDetailActivity"
+            android:configChanges="keyboardHidden"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".mvp.ui.activity.WalletRecordActivity" />
         <activity android:name=".mvp.ui.activity.AddRmbActivity" />
         <activity android:name=".mvp.ui.activity.ReleaseActivity" />

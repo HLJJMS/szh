@@ -8,7 +8,6 @@ import android.text.Html
 import android.text.Html.FROM_HTML_MODE_COMPACT
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.example.szh.R
 import com.example.szh.adapter.CommentAdapter
 import com.example.szh.bean.ArticleDetailBean
@@ -20,6 +19,7 @@ import com.example.szh.mvp.presenter.ArticleDetailPresenter
 import com.example.szh.tools.MyGlide
 import com.example.szh.tools.MyToast
 import com.example.szh.tools.SPToll
+import com.example.szh.tools.SoftKeyBoardListener
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -175,16 +175,23 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         adapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
         adapter.addChildClickViewIds(R.id.iv_good)
         adapter.setOnItemChildClickListener { adapter, view, position ->
-            if(view.id==R.id.iv_good){
-                if(this.adapter.data.get(position).isUp){
-                    mPresenter?.goodComment(intent.getStringExtra("id"),this.adapter.data.get(position).id.toString(),"1")
-                }else {
-                    mPresenter?.goodComment(intent.getStringExtra("id"),this.adapter.data.get(position).id.toString(),"0")
+            if (view.id == R.id.iv_good) {
+                if (this.adapter.data.get(position).isUp) {
+                    mPresenter?.goodComment(
+                        intent.getStringExtra("id"),
+                        this.adapter.data.get(position).id.toString(),
+                        "1"
+                    )
+                } else {
+                    mPresenter?.goodComment(
+                        intent.getStringExtra("id"),
+                        this.adapter.data.get(position).id.toString(),
+                        "0"
+                    )
                 }
             }
         }
     }
-
 
 
     override fun getCommentListSuccess(bean: MutableList<CommentBean.ResultBean.RecordsBean>) {
@@ -238,9 +245,6 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         }
     }
 
-    fun isGoodComment(){
-
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -290,6 +294,21 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     }
 
 
+    //监听软件盘是否弹起
+    private fun onKeyBoardListener() {
+        SoftKeyBoardListener.setListener(
+            this,
+            object : SoftKeyBoardListener.OnSoftKeyBoardChangeListener {
+                override fun keyBoardShow(height: Int) {
+                    g_comment.visibility = View.VISIBLE
+                    g_comment_no.visibility = View.GONE
+                }
 
+                override fun keyBoardHide(height: Int) {
+                    g_comment.visibility = View.GONE
+                    g_comment_no.visibility = View.VISIBLE
+                }
 
+            })
+    }
 }

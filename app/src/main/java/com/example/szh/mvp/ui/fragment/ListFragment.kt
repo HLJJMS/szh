@@ -23,6 +23,7 @@ import com.example.szh.R
 import com.example.szh.adapter.BangdanAdapter
 import com.example.szh.adapter.CaiJingAdapter
 import com.example.szh.bean.BangdanBean
+import com.example.szh.mvp.ui.activity.RmbMaketMainActivity
 import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.fragment_list.*
 import java.util.concurrent.TimeUnit
@@ -109,6 +110,12 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
             }
         }
         mPresenter?.getData()
+
+        caiJingAdapter.setOnItemClickListener { adapter, view, position ->
+            var intent = Intent(context,RmbMaketMainActivity::class.java)
+            intent.putExtra("id",caiJingAdapter.data.get(position).id.toString())
+            startActivity(intent)
+        }
     }
 
     /**

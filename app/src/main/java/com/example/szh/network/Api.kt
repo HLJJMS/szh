@@ -64,5 +64,10 @@ object Api {
     //点赞评论
     const val COMMENT_GOOD = "comment/commentUpOrCancel"
 
+    //预测主页
+    const val PREDICT_SELECT = "index/predict/select"
+
+    //预测正价
+    const val ADD_PREDICT_SELECT = "index/predict/add"
 
 }

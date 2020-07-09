@@ -1,9 +1,6 @@
 package com.example.szh.network.service
 
-import com.example.szh.bean.ArticleDetailBean
-import com.example.szh.bean.BangdanBean
-import com.example.szh.bean.FocusListBean
-import com.example.szh.bean.RecommendBean
+import com.example.szh.bean.*
 import com.example.szh.network.Api
 import com.example.szh.network.bean.BaseBean
 import com.example.szh.network.bean.LoginBean
@@ -70,5 +67,21 @@ interface HomeService {
     fun search(
         @Field("userid") id: String, @Field("searchKey") searchKey : String,@Field("type") cllection: String
     ): Observable<RecommendBean>
+
+
+    //  预测
+    @FormUrlEncoded
+    @POST(Api.PREDICT_SELECT)
+    fun getPredict(
+        @Field("userid") id: String, @Field("dirid") dirid  : String,@Field("type") type: String
+    ): Observable<RmbMaketBean>
+
+
+    //  预测add
+    @FormUrlEncoded
+    @POST(Api.ADD_PREDICT_SELECT)
+    fun addPredict(
+        @Field("userid") id: String, @Field("silver") silver   : String,@Field("predictid") predictid: String,@Field("option") option : String,@Field("hide") hide : String
+    ): Observable<BaseBean.BaseResponse<String>>
 
 }

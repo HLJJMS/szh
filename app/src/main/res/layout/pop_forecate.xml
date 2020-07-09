@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="15dp"
     android:background="@drawable/conner5_solid_white_stoken_gray"
+    android:paddingBottom="15dp"
     tools:ignore="MissingConstraints">
 
     <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
@@ -43,6 +43,73 @@
         app:layout_constraintTop_toTopOf="@id/tv_title"
         tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/tv_dazhang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="大涨"
+        android:textColor="#FFff6258"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_zhang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_zhang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="涨"
+        android:textColor="#FFff6258"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_ping"
+        app:layout_constraintStart_toEndOf="@id/tv_dazhang"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+
+        android:id="@+id/tv_ping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="平"
+        android:textColor="@color/qmui_config_color_white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_die"
+        app:layout_constraintStart_toEndOf="@id/tv_zhang"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_die"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="跌"
+        android:textColor="#FFff6258"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_dadie"
+        app:layout_constraintStart_toEndOf="@id/tv_ping"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_dadie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="大跌"
+        android:textColor="#FFff6258"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_die"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:ignore="MissingConstraints" />
+
+
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
@@ -51,7 +118,7 @@
         android:layout_marginTop="11dp"
         android:layout_marginEnd="26dp"
         android:background="@color/qmui_config_color_white"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_dazhang" />
 
     <TextView
         android:id="@+id/title2"
@@ -130,9 +197,10 @@
         android:layout_marginEnd="15dp"
         android:background="@drawable/conner5_solid_gray"
         android:gravity="top"
+        android:maxEms="50"
         android:padding="9dp"
-        android:text="发表你的评论，最多50字"
-        android:textColor="#ff989898"
+        android:hint="发表你的评论，最多50字"
+        android:textColor="@color/color_020202"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/zhanwie" />
 

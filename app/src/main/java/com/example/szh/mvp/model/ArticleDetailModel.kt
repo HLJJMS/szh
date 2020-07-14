@@ -92,6 +92,15 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     }
 
+    override fun commentReplay(
+        id: String,
+        articleid: String,
+        commentid: String,
+        neirong: String
+    ): Observable<BaseBean.BaseResponse<Any>> {
+        return mRepositoryManager.obtainRetrofitService(CommentService::class.java).commentReplay(id, articleid, commentid, neirong)
+    }
+
 
     override fun onDestroy() {
         super.onDestroy();

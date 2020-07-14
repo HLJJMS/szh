@@ -57,5 +57,9 @@ interface ArticleDetailContract {
         fun goodComment(
             id: String, articleid: String, commentid: String,type:String
         ): Observable<BaseBean.BaseResponse<Any>>
+
+        fun commentReplay(
+            id: String, articleid: String, commentid: String,neirong:String
+        ): Observable<BaseBean.BaseResponse<Any>>
     }
 }

@@ -20,6 +20,7 @@ import com.example.szh.mvp.presenter.LookPresenter
 import com.example.szh.R
 import com.example.szh.adapter.LookAdapter
 import com.example.szh.bean.FocusListBean
+import com.example.szh.mvp.ui.activity.ArticleDetailActivity
 import kotlinx.android.synthetic.main.fragment_look.*
 
 
@@ -79,6 +80,16 @@ class LookFragment : BaseFragment<LookPresenter>(), LookContract.View {
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         mPresenter?.getData()
+        adapter.setOnItemClickListener { adapter, view, position ->
+            var intent: Intent = Intent(context, ArticleDetailActivity::class.java)
+            intent.putExtra("id", this.adapter.data.get(position).id.toString())
+            if (null == this.adapter.data.get(position).pushid || "null".equals(this.adapter.data.get(position).pushid)) {
+                intent.putExtra("pushid", "")
+            } else {
+                intent.putExtra("pushid", this.adapter.data.get(position).pushid.toString())
+            }
+            startActivity(intent)
+        }
     }
 
     /**

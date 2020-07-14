@@ -148,5 +148,17 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
             })
     }
 
+    fun commentReplay(articleid: String, commentId: String,type:String){
+        mModel.commentReplay(SPToll(mApplication).getId(), articleid,commentId,type).compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<Any>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<Any>) {
+                    if (t.code.equals(Api.SUCCESS)) {
+                        mRootView.commentSuccess()
+                    }
+                    MyToast().makeToast(mApplication, t.message)
 
+                }
+            })
+    }
 }

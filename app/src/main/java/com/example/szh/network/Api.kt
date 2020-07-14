@@ -70,4 +70,7 @@ object Api {
     //预测正价
     const val ADD_PREDICT_SELECT = "index/predict/add"
 
+    //评论回复
+    const val COMMENT_ADDREPLAY="comment/addReply";
+
 }

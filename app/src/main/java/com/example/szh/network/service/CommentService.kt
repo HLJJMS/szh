@@ -30,7 +30,7 @@ interface CommentService {
         @Field("type") type: String
     ): Observable<CommentBean>
 
-    //评论获取
+    //评论赞
     @FormUrlEncoded
     @POST(Api.COMMENT_GOOD)
     fun goodComment(
@@ -39,4 +39,15 @@ interface CommentService {
         @Field("commentid") current: String,
         @Field("type") type: String//0：点赞，1取消
     ): Observable<BaseBean.BaseResponse<Any>>
+
+    //评论回复
+    @FormUrlEncoded
+    @POST(Api.COMMENT_ADDREPLAY)
+    fun commentReplay(
+        @Field("userid") id: String,
+        @Field("articleid") articleid: String,
+        @Field("commentid") current: String,
+        @Field("content ") type: String
+    ): Observable<BaseBean.BaseResponse<Any>>
+
 }

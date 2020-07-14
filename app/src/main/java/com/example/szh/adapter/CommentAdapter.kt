@@ -14,7 +14,12 @@ class CommentAdapter : BaseQuickAdapter<CommentBean.ResultBean.RecordsBean, Base
         holder.setText(R.id.tv_title,item.content)
         holder.setText(R.id.tv_time,item.createdatetime)
         holder.setText(R.id.tv_good,item.up.toString())
-        MyGlide.loadImage(context,item.pic,holder.getView(R.id.iv_detail))
-        MyGlide.loadImage(context,item.avatarUrl,holder.getView(R.id.iv_head))
+        if(null!=item.pic){
+            MyGlide.loadImage(context,item.pic,holder.getView(R.id.iv_detail))
+        }
+        if(null!=item.avatarUrl){
+            MyGlide.loadImage(context,item.avatarUrl,holder.getView(R.id.iv_head))
+        }
+
     }
 }

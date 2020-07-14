@@ -100,6 +100,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 g_comment_no.visibility = View.VISIBLE
             }
         }
+        onKeyBoardListener()
 
     }
 
@@ -138,13 +139,16 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         }
 
         tv_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            if (changePhoto || !et_comment.text.toString().equals("")) {
-                addComment()
-
+            if (!et_comment.text.toString().equals("")) {
+                if(changePhoto){
+                    addComment()
+                }
             }
         }
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
+
+
         mPresenter?.getComment(intent.getStringExtra("id"), page, type)
         initLoadMore()
     }
@@ -173,7 +177,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         adapter.loadMoreModule.isAutoLoadMore = true
         //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
         adapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
-        adapter.addChildClickViewIds(R.id.iv_good)
+        adapter.addChildClickViewIds(R.id.iv_good,R.id.tv_replay)
         adapter.setOnItemChildClickListener { adapter, view, position ->
             if (view.id == R.id.iv_good) {
                 if (this.adapter.data.get(position).isUp) {
@@ -189,6 +193,9 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                         "0"
                     )
                 }
+            }else if(view.id == R.id.tv_replay){
+                g_comment.visibility = View.VISIBLE
+                g_comment_no.visibility = View.GONE
             }
         }
     }
@@ -292,6 +299,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         }
         mPresenter?.addComment(builder.build())
     }
+
 
 
     //监听软件盘是否弹起

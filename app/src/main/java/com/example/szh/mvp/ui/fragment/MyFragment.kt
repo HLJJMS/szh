@@ -7,6 +7,7 @@ import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseFragment
@@ -22,6 +23,9 @@ import com.example.szh.R
 import com.example.szh.adapter.MyFramgentAdapter
 import com.example.szh.bean.MyInfoBean
 import com.example.szh.bean.MyItemBean
+import com.example.szh.mvp.ui.activity.MyCollectActivity
+import com.example.szh.mvp.ui.activity.MyCommentActivity
+import com.example.szh.mvp.ui.activity.MyFriendActivity
 import com.example.szh.mvp.ui.activity.SettingActivity
 import com.example.szh.tools.MyGlide
 import com.example.szh.tools.SPToll
@@ -91,14 +95,16 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         iv_setting.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, SettingActivity::class.java))
         }
-
+        friend.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context, MyFriendActivity::class.java))
+        }
 
     }
 
     fun getData() {
         if (!SPToll(mContext).getId().equals("")) {
             mPresenter?.getData()
-        }else{
+        } else {
             clearData()
         }
     }
@@ -157,19 +163,85 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         tv_create_level.text = bean.user.createlevel
         tv_test_level.text = bean.user.predictlevel
         list?.clear()
-        list?.add(MyItemBean("帖子", R.mipmap.ic_my_tieba, bean.tiezi))
-        list?.add(MyItemBean("评论", R.mipmap.ic_my_message, bean.pinlun))
-        list?.add(MyItemBean("预测", R.mipmap.ic_my_clock, bean.yuce))
-        list?.add(MyItemBean("屏蔽", R.mipmap.ic_pingbi, bean.pingbi))
-        list?.add(MyItemBean("处罚", R.mipmap.ic_chufa, bean.chufa))
-        list?.add(MyItemBean("权限", R.mipmap.ic_quanxian, bean.quanxian))
-        list?.add(MyItemBean("推荐", R.mipmap.ic_my_heart, bean.tuijian))
-        list?.add(MyItemBean("收藏", R.mipmap.ic_start, bean.shoucang))
-        list?.add(MyItemBean("草稿箱", R.mipmap.ic_test, bean.caogaoxiang))
+        list?.add(
+            MyItemBean(
+                "帖子", R.mipmap.ic_my_tieba, bean.tiezi, Intent(
+                    context,
+                    MyCollectActivity::class.java
+                )
+            )
+        )
+        list?.add(
+            MyItemBean(
+                "评论", R.mipmap.ic_my_message, bean.pinlun, Intent(
+                    context,
+                    MyCommentActivity::class.java
+                )
+            )
+        )
+        list?.add(
+            MyItemBean(
+                "预测", R.mipmap.ic_my_clock, bean.yuce, Intent(
+                    context,
+                    MyCollectActivity::class.java
+                )
+            )
+        )
+        list?.add(
+            MyItemBean(
+                "屏蔽", R.mipmap.ic_pingbi, bean.pingbi, Intent(
+                    context,
+                    MyCollectActivity::class.java
+                )
+            )
+        )
+        list?.add(
+            MyItemBean(
+                "处罚", R.mipmap.ic_chufa, bean.chufa, Intent(
+                    context,
+                    MyCollectActivity::class.java
+                )
+            )
+        )
+        list?.add(
+            MyItemBean(
+                "权限", R.mipmap.ic_quanxian, bean.quanxian, Intent(
+                    context,
+                    MyCollectActivity::class.java
+                )
+            )
+        )
+        list?.add(
+            MyItemBean(
+                "推荐", R.mipmap.ic_my_heart, bean.tuijian, Intent(
+                    context,
+                    MyCollectActivity::class.java
+                )
+            )
+        )
+        list?.add(
+            MyItemBean(
+                "收藏", R.mipmap.ic_start, bean.shoucang, Intent(
+                    context,
+                    MyCollectActivity::class.java
+                )
+            )
+        )
+        list?.add(
+            MyItemBean(
+                "草稿箱", R.mipmap.ic_test, bean.caogaoxiang, Intent(
+                    context,
+                    MyCollectActivity::class.java
+                )
+            )
+        )
         myFramgentAdapter = MyFramgentAdapter(list)
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = myFramgentAdapter
         myFramgentAdapter?.setList(list)
+        myFramgentAdapter?.setOnItemClickListener { adapter, view, position ->
+            startActivity(list.get(position).intent)
+        }
     }
 
     override fun showLoading() {

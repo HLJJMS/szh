@@ -20,6 +20,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/QMUI.NoActionBar">
+        <activity android:name=".mvp.ui.activity.MyFansAndLookActivity" />
+        <activity android:name=".mvp.ui.activity.MyCommentActivity" />
+        <activity android:name=".mvp.ui.activity.MyCollectActivity" />
+        <activity android:name=".mvp.ui.activity.MyLookActivity" />
         <activity android:name=".mvp.ui.activity.RmbMaketMainActivity" />
         <activity android:name=".mvp.ui.activity.SearchActivityActivity" />
         <activity

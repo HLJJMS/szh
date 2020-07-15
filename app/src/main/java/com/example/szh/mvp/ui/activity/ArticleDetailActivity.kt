@@ -66,9 +66,11 @@ import java.util.concurrent.TimeUnit
 class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDetailContract.View {
     var like: Int = 0
     var goodComment = "0"
+    var commentId = "";
     var collection: Int = 0
     var photoCode = 1001;
     lateinit var file: File
+    private var isComment: Boolean = true
     private var changePhoto: Boolean = false
     private var cheak: String = "0" //0:全部可见 1:仅评论作者和帖子作者可见
     var type = "0"//0最热，1最新，2推+送
@@ -140,9 +142,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
         tv_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             if (!et_comment.text.toString().equals("")) {
-                if(changePhoto){
-                    addComment()
-                }
+                addComment()
             }
         }
         recycler.layoutManager = LinearLayoutManager(this)
@@ -177,7 +177,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         adapter.loadMoreModule.isAutoLoadMore = true
         //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
         adapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
-        adapter.addChildClickViewIds(R.id.iv_good,R.id.tv_replay)
+        adapter.addChildClickViewIds(R.id.iv_good, R.id.tv_replay)
         adapter.setOnItemChildClickListener { adapter, view, position ->
             if (view.id == R.id.iv_good) {
                 if (this.adapter.data.get(position).isUp) {
@@ -193,9 +193,10 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                         "0"
                     )
                 }
-            }else if(view.id == R.id.tv_replay){
+            } else if (view.id == R.id.tv_replay) {
                 g_comment.visibility = View.VISIBLE
                 g_comment_no.visibility = View.GONE
+                commentId = this.adapter.data.get(position).id.toString()
             }
         }
     }
@@ -286,20 +287,29 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     }
 
     fun addComment() {
-        val builder: MultipartBody.Builder = MultipartBody.Builder()
-        builder.setType(MultipartBody.FORM)
-        builder.addFormDataPart("userid", SPToll(this).getId())
-        builder.addFormDataPart("articleid", intent.getStringExtra("id"))
-        builder.addFormDataPart("pushid", intent.getStringExtra("pushid"))
-        builder.addFormDataPart("onlyauth", cheak)
-        builder.addFormDataPart("content", et_comment.text.toString())
-        if (changePhoto) {
-            var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
-            builder.addFormDataPart("file", file.name, requestBody)
+        if (commentId.equals("")) {
+            val builder: MultipartBody.Builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+            builder.addFormDataPart("userid", SPToll(this).getId())
+            builder.addFormDataPart("articleid", intent.getStringExtra("id"))
+            builder.addFormDataPart("pushid", intent.getStringExtra("pushid"))
+            builder.addFormDataPart("onlyauth", cheak)
+            builder.addFormDataPart("content", et_comment.text.toString())
+            if (changePhoto) {
+                var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+                builder.addFormDataPart("file", file.name, requestBody)
+            }
+            mPresenter?.addComment(builder.build())
+        } else {
+            mPresenter?.commentReplay(
+                intent.getStringExtra("id"),
+                commentId,
+                et_comment.text.toString()
+            )
         }
-        mPresenter?.addComment(builder.build())
-    }
 
+
+    }
 
 
     //监听软件盘是否弹起
@@ -308,13 +318,15 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             this,
             object : SoftKeyBoardListener.OnSoftKeyBoardChangeListener {
                 override fun keyBoardShow(height: Int) {
-                    g_comment.visibility = View.VISIBLE
-                    g_comment_no.visibility = View.GONE
+//                    g_comment.visibility = View.VISIBLE
+//                    g_comment_no.visibility = View.GONE
                 }
 
                 override fun keyBoardHide(height: Int) {
                     g_comment.visibility = View.GONE
                     g_comment_no.visibility = View.VISIBLE
+                    tv_ok_replay.visibility = View.GONE
+                    commentId = ""
                 }
 
             })

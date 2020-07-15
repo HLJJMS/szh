@@ -27,7 +27,6 @@
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
         android:textColorHint="#989898"
-
         app:layout_constraintTop_toBottomOf="@id/titleBar" />
 
     <ImageView
@@ -49,5 +48,12 @@
         android:padding="16dp"
         android:text="朋友列表"
         app:layout_constraintTop_toBottomOf="@id/et_search" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recycler"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_height="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

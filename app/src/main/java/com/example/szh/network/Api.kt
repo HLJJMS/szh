@@ -41,22 +41,22 @@ object Api {
     const val ARTICLE_DETAIL = "article/detail"
 
     //获取榜单列表
-    const val EVERYDAY_AG= "index/everyDay/login"
+    const val EVERYDAY_AG = "index/everyDay/login"
 
     //关注列表
-    const val FOCUS_LIST ="index/focusList"
+    const val FOCUS_LIST = "index/focusList"
 
     //文章喜欢
-    const val ARTICLE_LIKE ="article/like"
+    const val ARTICLE_LIKE = "article/like"
 
     //文章收藏
-    const val ARTICLE_CLLECTION ="article/collection"
+    const val ARTICLE_CLLECTION = "article/collection"
 
     //首页搜索
-    const val INDEX_SEARCH ="index/search"
+    const val INDEX_SEARCH = "index/search"
 
     //新增评论
-    const val COMMENT_ADD ="comment/add"
+    const val COMMENT_ADD = "comment/add"
 
     //获取文章评论
     const val COMMENT_GET = "comment/select"
@@ -71,6 +71,18 @@ object Api {
     const val ADD_PREDICT_SELECT = "index/predict/add"
 
     //评论回复
-    const val COMMENT_ADDREPLAY="comment/addReply";
+    const val COMMENT_ADDREPLAY = "comment/addReply";
+
+    //朋友类表
+    const val FRIEND_LIST = "friends/list";
+
+    //朋友类表
+    const val SEARCH_FRIEND = "friends/searchFriends";
+
+    //我的收藏
+    const val MY_COLLECTION = "my/articles/collection";
+
+    //我的评论
+    const val MY_COMMENT = "my/comment/list";
 
 }

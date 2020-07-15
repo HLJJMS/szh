@@ -2,32 +2,27 @@ package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.recyclerview.widget.LinearLayoutManager
-
+import com.example.szh.R
+import com.example.szh.adapter.CollectAdapter
+import com.example.szh.adapter.LookAdapter
+import com.example.szh.bean.CollectBean
+import com.example.szh.bean.FocusListBean
+import com.example.szh.di.component.DaggerMyCollectComponent
+import com.example.szh.di.module.MyCollectModule
+import com.example.szh.mvp.contract.MyCollectContract
+import com.example.szh.mvp.presenter.MyCollectPresenter
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
-
-import com.example.szh.di.component.DaggerMyFriendComponent
-import com.example.szh.di.module.MyFriendModule
-import com.example.szh.mvp.contract.MyFriendContract
-import com.example.szh.mvp.presenter.MyFriendPresenter
-
-import com.example.szh.R
-import com.example.szh.adapter.FriendListAdapter
-import com.example.szh.bean.FriendListBean
-import kotlinx.android.synthetic.main.activity_article_detail.*
-import kotlinx.android.synthetic.main.activity_my_friend.*
-import kotlinx.android.synthetic.main.activity_my_friend.recycler
+import kotlinx.android.synthetic.main.activity_my_collect.*
 
 
 /**
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 06/10/2020 11:25
+ * Created by MVPArmsTemplate on 07/15/2020 17:49
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -48,46 +43,41 @@ import kotlinx.android.synthetic.main.activity_my_friend.recycler
  * }
  * }
  */
-class MyFriendActivity : BaseActivity<MyFriendPresenter>(), MyFriendContract.View {
-    var adapter: FriendListAdapter = FriendListAdapter()
+class MyCollectActivity : BaseActivity<MyCollectPresenter>(), MyCollectContract.View {
+    var adapter: CollectAdapter = CollectAdapter()
     override fun setupActivityComponent(appComponent: AppComponent) {
-        DaggerMyFriendComponent //如找不到该类,请编译一下项目
+        DaggerMyCollectComponent //如找不到该类,请编译一下项目
             .builder()
             .appComponent(appComponent)
-            .myFriendModule(MyFriendModule(this))
+            .myCollectModule(MyCollectModule(this))
             .build()
             .inject(this)
     }
 
 
     override fun initView(savedInstanceState: Bundle?): Int {
-        return R.layout.activity_my_friend //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+        return R.layout.activity_my_collect //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
 
     override fun initData(savedInstanceState: Bundle?) {
-        recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(this)
         mPresenter?.getData()
-        et_search.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                mPresenter?.searcheData(s.toString())
-
+        adapter.setOnItemClickListener { adapter, view, position ->
+            var intent: Intent = Intent(this, ArticleDetailActivity::class.java)
+            intent.putExtra("id", this.adapter.data.get(position).id.toString())
+            if (null == this.adapter.data.get(position).pushid || "null".equals(this.adapter.data.get(position).pushid)) {
+                intent.putExtra("pushid", "")
+            } else {
+                intent.putExtra("pushid", this.adapter.data.get(position).pushid.toString())
             }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                TODO("Not yet implemented")
-            }
-
-        })
+            startActivity(intent)
+        }
     }
 
-    override fun success(bean: FriendListBean) {
-        adapter.setList(bean.result)
+    override fun success(bean: MutableList<CollectBean.ResultBean.ListBean.RecordsBean>) {
+        adapter.setList(bean)
     }
 
 

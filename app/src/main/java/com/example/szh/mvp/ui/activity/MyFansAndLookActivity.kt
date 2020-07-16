@@ -13,6 +13,8 @@ import com.example.szh.mvp.contract.MyFansAndLookContract
 import com.example.szh.mvp.presenter.MyFansAndLookPresenter
 
 import com.example.szh.R
+import com.example.szh.adapter.FansAndLookAdapter
+import com.example.szh.bean.FriendListBean
 import kotlinx.android.synthetic.main.activity_my_fans_and_look.*
 
 
@@ -42,7 +44,8 @@ import kotlinx.android.synthetic.main.activity_my_fans_and_look.*
  * }
  */
 class MyFansAndLookActivity : BaseActivity<MyFansAndLookPresenter>(), MyFansAndLookContract.View {
-
+    var adapter: FansAndLookAdapter? = null
+    var type: String = "0"
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMyFansAndLookComponent //如找不到该类,请编译一下项目
             .builder()
@@ -59,14 +62,30 @@ class MyFansAndLookActivity : BaseActivity<MyFansAndLookPresenter>(), MyFansAndL
 
 
     override fun initData(savedInstanceState: Bundle?) {
-        if (intent.getBooleanExtra("fans",false)){
+        if (intent.getBooleanExtra("fans", false)) {
             titlebar.setCenterText("我的粉丝")
-        }else{
+            adapter = FansAndLookAdapter(0)
+            type = "0"
+        } else {
             titlebar.setCenterText("我的关注")
+            adapter = FansAndLookAdapter(1)
+            type = "1"
         }
         titlebar.setBackClick {
             finish()
         }
+        adapter?.addChildClickViewIds(R.id.rb_ok, R.id.rb_no)
+        adapter?.setOnItemChildClickListener { adapter, view, position ->
+            if (view.id == R.id.rb_ok) {
+
+            } else if (view.id == R.id.rb_no) {
+
+            }
+        }
+    }
+
+    override fun success(bean: FriendListBean) {
+        adapter?.setList(bean.result)
     }
 
 

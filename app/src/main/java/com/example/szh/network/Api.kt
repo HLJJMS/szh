@@ -85,4 +85,10 @@ object Api {
     //我的评论
     const val MY_COMMENT = "my/comment/list";
 
+    //我的评论
+    const val MY_FOCUS = "my/focus";
+
+    //上传图片
+    const val IMAGE_UPLOAD = "imgUpload/upload";
+
 }

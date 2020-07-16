@@ -66,11 +66,11 @@
         android:paddingEnd="13dp"
         android:paddingBottom="8dp"
         android:text="+关注"
-        android:qmui_backgroundColor="@color/qmui_config_color_white"
+        app:qmui_backgroundColor="@color/qmui_config_color_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:textColor="#FF017BD0"
+        android:textColor="#FF017BD0"
         app:qmui_radius="5dp"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

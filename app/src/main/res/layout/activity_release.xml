@@ -85,18 +85,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_spnner" />
 
-    <EditText
-        android:id="@+id/et_title"
+    <ScrollView
+        android:id="@+id/sl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/qmui_config_color_white"
-        android:hint="请输入标题"
-        android:paddingStart="21dp"
-        android:paddingTop="25dp"
-        android:paddingBottom="12.5dp"
-        android:textColor="#ff5b5b5b"
-        android:textSize="21sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_spnner" />
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_send_fans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_spnner">
+
+        <com.example.szh.tools.RichEditText
+            android:id="@+id/richEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="top|left"
+            android:hint="编辑内容"
+            android:textSize="16sp" />
+    </ScrollView>
 
     <ImageView
         android:id="@+id/iv_b"

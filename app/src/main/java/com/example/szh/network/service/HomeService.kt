@@ -84,4 +84,5 @@ interface HomeService {
         @Field("userid") id: String, @Field("silver") silver   : String,@Field("predictid") predictid: String,@Field("option") option : String,@Field("hide") hide : String
     ): Observable<BaseBean.BaseResponse<String>>
 
+
 }

@@ -1,6 +1,7 @@
 package com.example.szh.mvp.model
 
 import android.app.Application
+import com.example.szh.bean.FriendListBean
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
@@ -9,6 +10,8 @@ import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.MyFansAndLookContract
+import com.example.szh.network.service.UserService
+import io.reactivex.Observable
 
 
 /**
@@ -33,6 +36,10 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     @Inject
     lateinit var mApplication: Application;
+    override fun getData(id: String, type: String): Observable<FriendListBean> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java)
+            .getFansAndLook(id, type)
+    }
 
     override fun onDestroy() {
         super.onDestroy();

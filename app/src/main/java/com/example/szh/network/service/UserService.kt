@@ -50,4 +50,13 @@ interface UserService {
     ): Observable<MyCommentBean>
 
 
+    //  评论列表
+    @FormUrlEncoded
+    @POST(Api.MY_FOCUS)
+    fun getFansAndLook(
+        @Field("userid") id: String, @Field("type") type: String
+    ): Observable<FriendListBean>
+
+
+
 }

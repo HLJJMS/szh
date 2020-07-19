@@ -5,10 +5,8 @@ import com.example.szh.network.Api
 import com.example.szh.network.bean.BaseBean
 import com.example.szh.network.bean.LoginBean
 import io.reactivex.Observable
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 interface HomeService {
     //    首页推进
@@ -23,12 +21,13 @@ interface HomeService {
     fun getBangdan(): Observable<BangdanBean>
 
 
-
     //    文章详情
     @FormUrlEncoded
     @POST(Api.ARTICLE_DETAIL)
     fun getArticleDetail(
-        @Field("userid") id: String, @Field("articleid") articleid: String, @Field("pushid") pushid: String
+        @Field("userid") id: String,
+        @Field("articleid") articleid: String,
+        @Field("pushid") pushid: String
     ): Observable<ArticleDetailBean>
 
     //  每日取钱
@@ -49,23 +48,28 @@ interface HomeService {
     @FormUrlEncoded
     @POST(Api.ARTICLE_LIKE)
     fun likeArticle(
-        @Field("userid") id: String, @Field("articleid") articleid: String,@Field("like") like: String
+        @Field("userid") id: String,
+        @Field("articleid") articleid: String,
+        @Field("like") like: String
     ): Observable<BaseBean.BaseResponse<String>>
 
     //  收藏 0:ok，1:取消
     @FormUrlEncoded
     @POST(Api.ARTICLE_CLLECTION)
     fun cllectionArticle(
-        @Field("userid") id: String, @Field("articleid") articleid: String,@Field("type") cllection: String
+        @Field("userid") id: String,
+        @Field("articleid") articleid: String,
+        @Field("type") cllection: String
     ): Observable<BaseBean.BaseResponse<String>>
-
 
 
     //  搜索 0用户 1 文章
     @FormUrlEncoded
     @POST(Api.INDEX_SEARCH)
     fun search(
-        @Field("userid") id: String, @Field("searchKey") searchKey : String,@Field("type") cllection: String
+        @Field("userid") id: String,
+        @Field("searchKey") searchKey: String,
+        @Field("type") cllection: String
     ): Observable<RecommendBean>
 
 
@@ -73,7 +77,7 @@ interface HomeService {
     @FormUrlEncoded
     @POST(Api.PREDICT_SELECT)
     fun getPredict(
-        @Field("userid") id: String, @Field("dirid") dirid  : String,@Field("type") type: String
+        @Field("userid") id: String, @Field("dirid") dirid: String, @Field("type") type: String
     ): Observable<RmbMaketBean>
 
 
@@ -81,8 +85,23 @@ interface HomeService {
     @FormUrlEncoded
     @POST(Api.ADD_PREDICT_SELECT)
     fun addPredict(
-        @Field("userid") id: String, @Field("silver") silver   : String,@Field("predictid") predictid: String,@Field("option") option : String,@Field("hide") hide : String
+        @Field("userid") id: String,
+        @Field("silver") silver: String,
+        @Field("predictid") predictid: String,
+        @Field("option") option: String,
+        @Field("hide") hide: String
+    ): Observable<BaseBean.BaseResponse<String>>
+
+    //文章上传图片
+    @POST(Api.IMAGE_UPLOAD)
+    fun postPhoto(
+        @Body body: RequestBody
     ): Observable<BaseBean.BaseResponse<String>>
 
 
+    //发布帖子
+    @POST(Api.ARTICLE_RELEASE)
+    fun addArticle(
+        @Body body: RequestBody
+    ): Observable<BaseBean.BaseResponse<String>>
 }

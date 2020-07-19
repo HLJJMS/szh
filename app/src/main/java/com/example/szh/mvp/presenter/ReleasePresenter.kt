@@ -10,6 +10,11 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.ReleaseContract
+import com.example.szh.network.RxUtils
+import com.example.szh.network.bean.BaseBean
+import com.example.szh.tools.MyToast
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
+import okhttp3.RequestBody
 
 
 /**
@@ -44,5 +49,32 @@ constructor(model: ReleaseContract.Model, rootView: ReleaseContract.View) :
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+
+    fun postImage(body: RequestBody) {
+        mModel.postPhoto(body).compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<String>) {
+                    if (t.code.equals("200")) {
+                        mRootView.postPhotoSuccess(t.message)
+                    }
+                    MyToast().makeToast(mApplication, t.message)
+                }
+            })
+    }
+
+
+    fun postData(body: RequestBody) {
+        mModel.postPhoto(body).compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<String>) {
+                    if (t.code.equals("200")) {
+
+                    }
+                    MyToast().makeToast(mApplication, t.message)
+                }
+            })
     }
 }

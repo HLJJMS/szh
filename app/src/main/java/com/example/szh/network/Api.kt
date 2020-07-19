@@ -91,4 +91,8 @@ object Api {
     //上传图片
     const val IMAGE_UPLOAD = "imgUpload/upload";
 
+    //上传图片
+    const val ARTICLE_RELEASE = "article/release";
+
+
 }

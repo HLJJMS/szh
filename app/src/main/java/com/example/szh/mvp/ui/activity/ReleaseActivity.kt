@@ -4,28 +4,28 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-
-import com.jess.arms.base.BaseActivity
-import com.jess.arms.di.component.AppComponent
-import com.jess.arms.utils.ArmsUtils
-
+import com.example.szh.R
 import com.example.szh.di.component.DaggerReleaseComponent
 import com.example.szh.di.module.ReleaseModule
 import com.example.szh.mvp.contract.ReleaseContract
 import com.example.szh.mvp.presenter.ReleasePresenter
-
-import com.example.szh.R
-import com.example.szh.tools.MyGlide
+import com.example.szh.tools.CustomHtml
 import com.example.szh.tools.MyToast
+import com.example.szh.tools.SPToll
 import com.jakewharton.rxbinding3.view.clicks
+import com.jess.arms.base.BaseActivity
+import com.jess.arms.di.component.AppComponent
+import com.jess.arms.utils.ArmsUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import io.reactivex.functions.Consumer
-import kotlinx.android.synthetic.main.activity_edit_my_information.*
 import kotlinx.android.synthetic.main.activity_release.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -119,7 +119,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
             }
         iv_img.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-
+                getPermissions()
             }
         iv_send_fans.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -141,6 +141,14 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
                     iv_send_friend.setImageResource(R.mipmap.ic_check_on)
                 }
             }
+    }
+
+    override fun postPhotoSuccess(url: String) {
+        richEditText.setImg(url)
+    }
+
+    override fun postDataSuccess() {
+        finish()
     }
 
 
@@ -202,7 +210,46 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
             for (i in Matisse.obtainPathResult(data).indices) {
                 //解析文件
                 file = File(Matisse.obtainPathResult(data)[i])
+
+                val builder: MultipartBody.Builder = MultipartBody.Builder()
+                builder.setType(MultipartBody.FORM)
+                var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+                builder.addFormDataPart("file", file.name, requestBody)
+                mPresenter?.postImage(builder.build())
             }
         }
+    }
+
+    fun postdata(type: String) {
+        val builder: MultipartBody.Builder = MultipartBody.Builder()
+        builder.setType(MultipartBody.FORM)
+        builder.addFormDataPart(
+            "contenttext",
+            CustomHtml.toHtml(
+                richEditText.editableText,
+                CustomHtml.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE
+            )
+        )
+        builder.addFormDataPart("dirid", "1")
+        builder.addFormDataPart("dirname", "资讯")
+        builder.addFormDataPart("state", type)
+
+        builder.addFormDataPart("title", tv_title.text.toString())
+        builder.addFormDataPart("state", type)
+
+
+        builder.addFormDataPart("userid ", SPToll(this).getId())
+
+        if (fans) {
+            builder.addFormDataPart("tofans", "1")
+        } else {
+            builder.addFormDataPart("tofans", "0")
+        }
+        if (friend) {
+            builder.addFormDataPart("tofriend", "1")
+        } else {
+            builder.addFormDataPart("tofriend", "0")
+        }
+        mPresenter?.postData(builder.build())
     }
 }

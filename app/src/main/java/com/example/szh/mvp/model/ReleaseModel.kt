@@ -9,6 +9,11 @@ import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
 import com.example.szh.mvp.contract.ReleaseContract
+import com.example.szh.network.bean.BaseBean
+import com.example.szh.network.service.HomeService
+import com.example.szh.network.service.LoginService
+import io.reactivex.Observable
+import okhttp3.RequestBody
 
 
 /**
@@ -33,6 +38,12 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     @Inject
     lateinit var mApplication: Application;
+    override fun postPhoto(body: RequestBody): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).postPhoto(body)
+    }
+
+    override fun postData(body: RequestBody): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).addArticle(body)    }
 
     override fun onDestroy() {
         super.onDestroy();

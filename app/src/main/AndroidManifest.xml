@@ -20,6 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/QMUI.NoActionBar">
+        <activity android:name=".mvp.ui.activity.MyArticleActivity" />
         <activity android:name=".mvp.ui.activity.MyFansAndLookActivity" />
         <activity android:name=".mvp.ui.activity.MyCommentActivity" />
         <activity android:name=".mvp.ui.activity.MyCollectActivity" />
@@ -32,13 +33,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".mvp.ui.activity.WalletRecordActivity" />
         <activity android:name=".mvp.ui.activity.AddRmbActivity" />
-        <activity android:name=".mvp.ui.activity.ReleaseActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".mvp.ui.activity.ReleaseActivity"></activity>
         <activity android:name=".mvp.ui.activity.PushTieActivity" />
         <activity android:name=".mvp.ui.activity.ReportActivity" />
         <activity android:name=".mvp.ui.activity.FriendDetailActivity" />
@@ -53,7 +48,11 @@
         <activity
             android:name=".mvp.ui.activity.MainActivity"
             android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data

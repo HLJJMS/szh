@@ -101,6 +101,14 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         return mRepositoryManager.obtainRetrofitService(CommentService::class.java).commentReplay(id, articleid, commentid, neirong)
     }
 
+    override fun pingbi(
+        id: String,
+        title: String,
+        articleid: String
+    ): Observable<BaseBean.BaseResponse<Any>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).pingbi(id, title,articleid)
+    }
+
 
     override fun onDestroy() {
         super.onDestroy();

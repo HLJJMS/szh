@@ -170,7 +170,7 @@ public class MyArticleBean {
             private Object tags;
             private int top;
             private Object articlecontent;
-            private Object name;
+            private String name;
             private Object avatarUrl;
             private Object commentCount;
             private Object type;
@@ -448,11 +448,11 @@ public class MyArticleBean {
                 this.articlecontent = articlecontent;
             }
 
-            public Object getName() {
+            public String getName() {
                 return name;
             }
 
-            public void setName(Object name) {
+            public void setName(String name) {
                 this.name = name;
             }
 

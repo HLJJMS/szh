@@ -23,10 +23,7 @@ import com.example.szh.R
 import com.example.szh.adapter.MyFramgentAdapter
 import com.example.szh.bean.MyInfoBean
 import com.example.szh.bean.MyItemBean
-import com.example.szh.mvp.ui.activity.MyCollectActivity
-import com.example.szh.mvp.ui.activity.MyCommentActivity
-import com.example.szh.mvp.ui.activity.MyFriendActivity
-import com.example.szh.mvp.ui.activity.SettingActivity
+import com.example.szh.mvp.ui.activity.*
 import com.example.szh.tools.MyGlide
 import com.example.szh.tools.SPToll
 import com.jakewharton.rxbinding3.view.clicks
@@ -167,8 +164,8 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
             MyItemBean(
                 "帖子", R.mipmap.ic_my_tieba, bean.tiezi, Intent(
                     context,
-                    MyCollectActivity::class.java
-                )
+                    MyArticleActivity::class.java
+                ).putExtra("type", "1")
             )
         )
         list?.add(
@@ -231,8 +228,8 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
             MyItemBean(
                 "草稿箱", R.mipmap.ic_test, bean.caogaoxiang, Intent(
                     context,
-                    MyCollectActivity::class.java
-                )
+                    MyArticleActivity::class.java
+                ).putExtra("type", "0")
             )
         )
         myFramgentAdapter = MyFramgentAdapter(list)

@@ -135,6 +135,7 @@
         android:layout_height="10dp"/>
 
     <TextView
+        android:id="@+id/tv_jubao"
         android:paddingBottom="12dp"
         android:layout_marginLeft="6dp"
         app:layout_constraintTop_toTopOf="@id/iv_jinggao"

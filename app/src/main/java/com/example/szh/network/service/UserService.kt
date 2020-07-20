@@ -42,6 +42,7 @@ interface UserService {
     fun getCollectionList(
         @Field("userid") id: String, @Field("current") current: String, @Field("size") size: String
     ): Observable<CollectBean>
+
     //  评论列表
     @FormUrlEncoded
     @POST(Api.MY_COMMENT)
@@ -57,6 +58,12 @@ interface UserService {
         @Field("userid") id: String, @Field("type") type: String
     ): Observable<FriendListBean>
 
+    //  文章或草稿
+    @FormUrlEncoded
+    @POST(Api.ARTICLE_MY)
+    fun getMyArticle(
+        @Field("userid") id: String, @Field("state") state: String
+    ): Observable<MyArticleBean>
 
 
 }

@@ -104,4 +104,19 @@ interface HomeService {
     fun addArticle(
         @Body body: RequestBody
     ): Observable<BaseBean.BaseResponse<String>>
+
+
+    //pingbi
+    @POST(Api.REPORT_PINGBI)
+    fun pingbi(
+        @Field("userid") id: String,
+        @Field("title") title: String,
+        @Field("articleid") articleid: String
+    ): Observable<BaseBean.BaseResponse<Any>>
+
+    //发布帖子
+    @POST(Api.REPORT_ADD)
+    fun jvbao(
+        @Body body: RequestBody
+    ): Observable<BaseBean.BaseResponse<Any>>
 }

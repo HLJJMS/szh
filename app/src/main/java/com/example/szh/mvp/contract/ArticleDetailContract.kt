@@ -30,6 +30,7 @@ interface ArticleDetailContract {
         fun getCommentListNull()
         fun getCommentListFail()
         fun getCommentListSuccess(bean:MutableList<CommentBean.ResultBean.RecordsBean>)
+        fun pingbiSuccess()
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
@@ -61,5 +62,10 @@ interface ArticleDetailContract {
         fun commentReplay(
             id: String, articleid: String, commentid: String,neirong:String
         ): Observable<BaseBean.BaseResponse<Any>>
+
+        fun pingbi(
+            id: String, title: String,articleid: String
+        ): Observable<BaseBean.BaseResponse<Any>>
+
     }
 }

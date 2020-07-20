@@ -91,8 +91,17 @@ object Api {
     //上传图片
     const val IMAGE_UPLOAD = "imgUpload/upload";
 
-    //上传图片
+    //发布文章
     const val ARTICLE_RELEASE = "article/release";
+
+    //查询草稿或文章
+    const val ARTICLE_MY = "article/my";
+
+    //举报
+    const val REPORT_ADD = "report/add";
+
+    //屏蔽
+    const val REPORT_PINGBI = "report/shielding";
 
 
 }

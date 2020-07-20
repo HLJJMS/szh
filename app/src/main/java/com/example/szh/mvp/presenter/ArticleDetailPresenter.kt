@@ -112,19 +112,20 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
             })
     }
 
-    fun getComment(articleid: String, current: Int,type:String){
-        mModel.getComment(SPToll(mApplication).getId(), articleid,current.toString(),type).compose(RxUtils.applySchedulers(mRootView))
+    fun getComment(articleid: String, current: Int, type: String) {
+        mModel.getComment(SPToll(mApplication).getId(), articleid, current.toString(), type)
+            .compose(RxUtils.applySchedulers(mRootView))
             .subscribe(object :
                 ErrorHandleSubscriber<CommentBean>(mErrorHandler) {
                 override fun onNext(t: CommentBean) {
                     if (t.code.equals(Api.SUCCESS)) {
-                        if (t.result.records.size==0){
+                        if (t.result.records.size == 0) {
                             mRootView.getCommentListNull()
-                        }else{
+                        } else {
                             mRootView.getCommentListSuccess(t.result.records)
                         }
 
-                    }else{
+                    } else {
                         mRootView.getCommentListFail()
                         MyToast().makeToast(mApplication, t.message)
                     }
@@ -134,8 +135,9 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
     }
 
 
-    fun goodComment(articleid: String, commentId: String,type:String){
-        mModel.goodComment(SPToll(mApplication).getId(), articleid,commentId,type).compose(RxUtils.applySchedulers(mRootView))
+    fun goodComment(articleid: String, commentId: String, type: String) {
+        mModel.goodComment(SPToll(mApplication).getId(), articleid, commentId, type)
+            .compose(RxUtils.applySchedulers(mRootView))
             .subscribe(object :
                 ErrorHandleSubscriber<BaseBean.BaseResponse<Any>>(mErrorHandler) {
                 override fun onNext(t: BaseBean.BaseResponse<Any>) {
@@ -148,13 +150,29 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
             })
     }
 
-    fun commentReplay(articleid: String, commentId: String,type:String){
-        mModel.commentReplay(SPToll(mApplication).getId(), articleid,commentId,type).compose(RxUtils.applySchedulers(mRootView))
+    fun commentReplay(articleid: String, commentId: String, type: String) {
+        mModel.commentReplay(SPToll(mApplication).getId(), articleid, commentId, type)
+            .compose(RxUtils.applySchedulers(mRootView))
             .subscribe(object :
                 ErrorHandleSubscriber<BaseBean.BaseResponse<Any>>(mErrorHandler) {
                 override fun onNext(t: BaseBean.BaseResponse<Any>) {
                     if (t.code.equals(Api.SUCCESS)) {
                         mRootView.commentSuccess()
+                    }
+                    MyToast().makeToast(mApplication, t.message)
+
+                }
+            })
+    }
+
+    fun pingbi(articleid: String, title: String) {
+        mModel.pingbi(SPToll(mApplication).getId(), title, articleid)
+            .compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<Any>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<Any>) {
+                    if (t.code.equals(Api.SUCCESS)) {
+                        mRootView.pingbiSuccess()
                     }
                     MyToast().makeToast(mApplication, t.message)
 

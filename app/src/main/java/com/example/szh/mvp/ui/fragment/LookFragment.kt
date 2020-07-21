@@ -21,6 +21,7 @@ import com.example.szh.R
 import com.example.szh.adapter.LookAdapter
 import com.example.szh.bean.FocusListBean
 import com.example.szh.mvp.ui.activity.ArticleDetailActivity
+import com.example.szh.mvp.ui.activity.PushTieActivity
 import kotlinx.android.synthetic.main.fragment_look.*
 
 
@@ -83,11 +84,24 @@ class LookFragment : BaseFragment<LookPresenter>(), LookContract.View {
         adapter.setOnItemClickListener { adapter, view, position ->
             var intent: Intent = Intent(context, ArticleDetailActivity::class.java)
             intent.putExtra("id", this.adapter.data.get(position).id.toString())
-            if (null == this.adapter.data.get(position).pushid || "null".equals(this.adapter.data.get(position).pushid)) {
+            if (null == this.adapter.data.get(position).pushid || "null".equals(
+                    this.adapter.data.get(
+                        position
+                    ).pushid
+                )
+            ) {
                 intent.putExtra("pushid", "")
             } else {
                 intent.putExtra("pushid", this.adapter.data.get(position).pushid.toString())
             }
+            startActivity(intent)
+        }
+        adapter.addChildClickViewIds(R.id.iv_go, R.id.tv_tui)
+        adapter.setOnItemChildClickListener { adapters, view, position ->
+            var intent = Intent(context, PushTieActivity::class.java)
+            intent.putExtra("id", adapter.data.get(position).id)
+            intent.putExtra("img", adapter.data.get(position).avatarUrl)
+            intent.putExtra("title", adapter.data.get(position).title)
             startActivity(intent)
         }
     }

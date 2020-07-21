@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="103dp"
+    android:id="@+id/cl_bg"
     android:layout_height="wrap_content"
     android:background="@drawable/conner5_solid_white_stoken_gray"
     android:paddingTop="20dp"
     android:paddingBottom="20dp"
+    android:layout_marginTop="10dp"
     tools:ignore="MissingConstraints">
 
     <TextView

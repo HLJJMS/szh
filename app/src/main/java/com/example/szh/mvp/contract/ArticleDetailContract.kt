@@ -65,7 +65,7 @@ interface ArticleDetailContract {
 
         fun pingbi(
             id: String, title: String,articleid: String
-        ): Observable<BaseBean.BaseResponse<Any>>
+        ): Observable<BaseBean.BaseResponse<String>>
 
     }
 }

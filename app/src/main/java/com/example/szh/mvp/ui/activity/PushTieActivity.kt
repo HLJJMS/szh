@@ -2,6 +2,7 @@ package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
 
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -13,6 +14,9 @@ import com.example.szh.mvp.contract.PushTieContract
 import com.example.szh.mvp.presenter.PushTiePresenter
 
 import com.example.szh.R
+import com.example.szh.adapter.PushTieAdapter
+import com.example.szh.tools.MyGlide
+import kotlinx.android.synthetic.main.activity_push_tie.*
 
 
 /**
@@ -41,7 +45,11 @@ import com.example.szh.R
  * }
  */
 class PushTieActivity : BaseActivity<PushTiePresenter>(), PushTieContract.View {
-
+    var auAdapter: PushTieAdapter = PushTieAdapter()
+    var agAdapter: PushTieAdapter = PushTieAdapter()
+    var listPerson: MutableList<String> = ArrayList<String>()
+    var type="1"//1银2金
+    var person = "10"
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerPushTieComponent //如找不到该类,请编译一下项目
             .builder()
@@ -58,7 +66,45 @@ class PushTieActivity : BaseActivity<PushTiePresenter>(), PushTieContract.View {
 
 
     override fun initData(savedInstanceState: Bundle?) {
+        titleBar.setBackClick {
+            finish()
+        }
+        titleBar.setEndTextClick {
+            mPresenter?.postData(person,type,intent.getStringExtra("id"))
+        }
+        listPerson?.add("10")
+        listPerson?.add("20")
+        listPerson?.add("50")
+        listPerson?.add("100")
+        listPerson?.add("200")
+        listPerson?.add("500")
+        rv_ag.layoutManager = GridLayoutManager(this, 3)
+        rv_au.layoutManager = GridLayoutManager(this, 3)
+        rv_ag.adapter = agAdapter
+        rv_au.adapter = auAdapter
+        agAdapter.setList(listPerson)
+        auAdapter.setList(listPerson)
+        agAdapter.setOnItemClickListener { adapter, view, position ->
+            agAdapter.setClickPosition(position)
+            auAdapter.setClickPosition(100)
+            person = listPerson?.get(position).toString()
+            type = "1"
+        }
+        auAdapter.setOnItemClickListener { adapter, view, position ->
+            auAdapter.setClickPosition(position)
+            agAdapter.setClickPosition(100)
+            person = listPerson?.get(position).toString()
+            type="2"
+        }
+        agAdapter.setClickPosition(0)
+        auAdapter.setClickPosition(100)
+        tv_title.text = intent.getStringExtra("title")
+        MyGlide.loadImage(this, intent.getStringExtra("img"), iv_img)
 
+    }
+
+    override fun success() {
+        finish()
     }
 
 

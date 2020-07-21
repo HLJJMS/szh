@@ -17,15 +17,21 @@ import com.example.szh.mvp.presenter.ReportPresenter
 import com.example.szh.R
 import com.example.szh.tools.MyGlide
 import com.example.szh.tools.MyToast
+import com.example.szh.tools.SPToll
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import io.reactivex.functions.Consumer
+import kotlinx.android.synthetic.main.activity_article_detail.*
 
 import kotlinx.android.synthetic.main.activity_report.*
+import kotlinx.android.synthetic.main.activity_report.iv_img
 import kotlinx.android.synthetic.main.activity_report.titleBar
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 
 
@@ -109,9 +115,18 @@ class ReportActivity : BaseActivity<ReportPresenter>(), ReportContract.View {
             if (rb_tort.isChecked) {
                 title = title + rb_tort.text
             }
-
-
-
+            val builder: MultipartBody.Builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+            builder.addFormDataPart("userid", SPToll(this).getId())
+            builder.addFormDataPart("objid", intent.getStringExtra("id"))
+            builder.addFormDataPart("type", "1")
+            builder.addFormDataPart("title", title )
+            builder.addFormDataPart("text", et_txt.text.toString())
+            if (changePhoto) {
+                var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+                builder.addFormDataPart("file", file.name, requestBody)
+            }
+            mPresenter?.postData(builder.build())
 
 
         }
@@ -183,7 +198,7 @@ class ReportActivity : BaseActivity<ReportPresenter>(), ReportContract.View {
                 //解析文件
                 changePhoto = true
                 file = File(Matisse.obtainPathResult(data)[i])
-                MyGlide.loadImageCircle(this, file, iv_img)
+                MyGlide.loadImage(this, file, iv_img)
             }
         }
     }}

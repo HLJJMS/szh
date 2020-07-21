@@ -1,7 +1,8 @@
 package com.example.szh.mvp.presenter
 
 import android.app.Application
-import com.example.szh.bean.ArticleDetailBean
+import com.example.szh.bean.FocusListBean
+import com.example.szh.bean.YuCeBean
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.ActivityScope
@@ -10,21 +11,19 @@ import com.jess.arms.http.imageloader.ImageLoader
 import me.jessyan.rxerrorhandler.core.RxErrorHandler
 import javax.inject.Inject
 
-import com.example.szh.mvp.contract.ReportContract
+import com.example.szh.mvp.contract.MyYuCeContract
 import com.example.szh.network.Api
 import com.example.szh.network.RxUtils
-import com.example.szh.network.bean.BaseBean
 import com.example.szh.tools.MyToast
 import com.example.szh.tools.SPToll
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
-import okhttp3.MultipartBody
 
 
 /**
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 06/10/2020 16:26
+ * Created by MVPArmsTemplate on 07/21/2020 15:13
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -33,10 +32,10 @@ import okhttp3.MultipartBody
  * ================================================
  */
 @ActivityScope
-class ReportPresenter
+class MyYuCePresenter
 @Inject
-constructor(model: ReportContract.Model, rootView: ReportContract.View) :
-    BasePresenter<ReportContract.Model, ReportContract.View>(model, rootView) {
+constructor(model: MyYuCeContract.Model, rootView: MyYuCeContract.View) :
+    BasePresenter<MyYuCeContract.Model, MyYuCeContract.View>(model, rootView) {
     @Inject
     lateinit var mErrorHandler: RxErrorHandler
 
@@ -53,15 +52,16 @@ constructor(model: ReportContract.Model, rootView: ReportContract.View) :
     override fun onDestroy() {
         super.onDestroy();
     }
-    fun postData(body: MultipartBody) {
-        mModel.postData(body).compose(RxUtils.applySchedulers(mRootView))
+    fun getData(){
+        mModel.getData(SPToll(mApplication).getId()).compose(RxUtils.applySchedulers(mRootView))
             .subscribe(object :
-                ErrorHandleSubscriber<BaseBean.BaseResponse<Any>>(mErrorHandler) {
-                override fun onNext(t: BaseBean.BaseResponse<Any>) {
-                    if (t.code.equals(Api.SUCCESS)) {
-                        mRootView.success()
+                ErrorHandleSubscriber<YuCeBean>(mErrorHandler) {
+                override fun onNext(t: YuCeBean) {
+                    if (t.code.toString().equals(Api.SUCCESS)) {
+                        mRootView.success(t.result.list.records)
+                    } else {
+                        MyToast().makeToast(mApplication, t.message)
                     }
-                    MyToast().makeToast(mApplication, t.message)
                 }
             })
     }

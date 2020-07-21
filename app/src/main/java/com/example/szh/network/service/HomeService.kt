@@ -112,11 +112,20 @@ interface HomeService {
         @Field("userid") id: String,
         @Field("title") title: String,
         @Field("articleid") articleid: String
-    ): Observable<BaseBean.BaseResponse<Any>>
+    ): Observable<BaseBean.BaseResponse<String>>
 
     //发布帖子
     @POST(Api.REPORT_ADD)
     fun jvbao(
         @Body body: RequestBody
+    ): Observable<BaseBean.BaseResponse<Any>>
+
+    //tui帖子
+    @POST(Api.REPORT_ADD)
+    fun pushTie(
+        @Field("userid") id: String,
+        @Field("peoplecount") peoplecount: String,
+        @Field("type") type: String,
+        @Field("articleid") articleid: String
     ): Observable<BaseBean.BaseResponse<Any>>
 }

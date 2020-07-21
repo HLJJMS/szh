@@ -79,11 +79,11 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     var photoCode = 1001;
     lateinit var file: File
     var view: View? = null
-    lateinit var rbOk: QMUIRoundButton
-    lateinit var rbNo: QMUIRoundButton
-    lateinit var rbBead: QMUIRoundButton
-    lateinit var rbLooked: QMUIRoundButton
-    lateinit var rbSource: QMUIRoundButton
+    var rbOk: QMUIRoundButton? = null
+    var rbNo: QMUIRoundButton? = null
+    var rbBead: QMUIRoundButton? = null
+    var rbLooked: QMUIRoundButton? = null
+    var rbSource: QMUIRoundButton? = null
     private var isComment: Boolean = true
     private var changePhoto: Boolean = false
     private var cheak: String = "0" //0:全部可见 1:仅评论作者和帖子作者可见
@@ -91,7 +91,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     var page = 1
     var popupWindow: PopupWindow = PopupWindow()
     var adapter: CommentAdapter = CommentAdapter()
-    lateinit var tv_jubao : TextView
+     var tv_jubao: TextView?=null
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerArticleDetailComponent //如找不到该类,请编译一下项目
             .builder()
@@ -229,7 +229,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     }
 
     override fun pingbiSuccess() {
-      popupWindow.dismiss()
+        popupWindow.dismiss()
     }
 
 
@@ -359,46 +359,51 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
     fun setPopWindow() {
         var title = ""
-        view = LayoutInflater.from(this).inflate(R.layout.pop_forecate, null);
+        view = LayoutInflater.from(this).inflate(R.layout.pop_pingbi, null);
         popupWindow.contentView = view
-        popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
         popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
         popupWindow.setOutsideTouchable(true)
         popupWindow.setFocusable(true) //点击返回键取消
         popupWindow.setBackgroundDrawable(BitmapDrawable())
-        rbBead = view?.findViewById(R.id.rb_bead) as QMUIRoundButton;
-        rbLooked = view?.findViewById(R.id.rb_looked) as QMUIRoundButton;
-        rbNo = view?.findViewById(R.id.rb_no) as QMUIRoundButton;
-        rbOk = view?.findViewById(R.id.rb_ok) as QMUIRoundButton;
-        rbSource = view?.findViewById(R.id.rb_source) as QMUIRoundButton;
-        title = rbBead.text.toString()
-        rbBead.setOnClickListener {
-            rbBead.setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
-            rbLooked.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            rbSource.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            title = rbBead.text.toString()
+        rbBead = view?.findViewById(R.id.rb_bead);
+        rbLooked = view?.findViewById(R.id.rb_looked);
+        rbNo = view?.findViewById(R.id.rb_no);
+        rbOk = view?.findViewById(R.id.rb_ok);
+        rbSource = view?.findViewById(R.id.rb_source);
+        title = rbBead?.text.toString()
+        rbBead?.setOnClickListener {
+            rbBead?.setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
+            rbLooked?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
+            rbSource?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
+            title = rbBead?.text.toString()
         }
-        rbSource.setOnClickListener {
-            rbSource.setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
-            rbLooked.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            rbBead.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            title = rbSource.text.toString()
+        rbSource?.setOnClickListener {
+            rbSource?.setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
+            rbLooked?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
+            rbBead?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
+            title = rbSource?.text.toString()
         }
-        rbLooked.setOnClickListener {
-            rbLooked.setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
-            rbSource.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            rbBead.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            title = rbLooked.text.toString()
+        rbLooked?.setOnClickListener {
+            rbLooked?.setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
+            rbSource?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
+            rbBead?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
+            title = rbLooked?.text.toString()
         }
-        tv_jubao =  view?.findViewById(R.id.tv_jubao) as TextView
-        tv_jubao.setOnClickListener {
-           startActivity( Intent(this,ReportActivity::class.java))
+        tv_jubao = view?.findViewById(R.id.tv_jubao)
+        tv_jubao?.setOnClickListener {
+            startActivity(Intent(this, ReportActivity::class.java).putExtra("id",intent.getStringExtra("id")))
         }
-        rbOk.setOnClickListener {
-           mPresenter?.pingbi(intent.getStringExtra("id"),title)
+        rbOk?.setOnClickListener {
+            mPresenter?.pingbi(intent.getStringExtra("id"), title)
         }
-        rbNo.setOnClickListener {
+        rbNo?.setOnClickListener {
             popupWindow.dismiss()
+        }
+        popupWindow.setOnDismissListener {
+            val lp = window.attributes
+            lp.alpha = 1f
+            window.attributes = lp
         }
     }
 

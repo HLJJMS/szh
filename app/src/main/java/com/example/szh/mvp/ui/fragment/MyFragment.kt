@@ -180,7 +180,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
             MyItemBean(
                 "预测", R.mipmap.ic_my_clock, bean.yuce, Intent(
                     context,
-                    MyCollectActivity::class.java
+                    MyYuCeActivity::class.java
                 )
             )
         )

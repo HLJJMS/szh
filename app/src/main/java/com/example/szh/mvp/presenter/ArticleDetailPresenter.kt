@@ -169,8 +169,8 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
         mModel.pingbi(SPToll(mApplication).getId(), title, articleid)
             .compose(RxUtils.applySchedulers(mRootView))
             .subscribe(object :
-                ErrorHandleSubscriber<BaseBean.BaseResponse<Any>>(mErrorHandler) {
-                override fun onNext(t: BaseBean.BaseResponse<Any>) {
+                ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<String>) {
                     if (t.code.equals(Api.SUCCESS)) {
                         mRootView.pingbiSuccess()
                     }

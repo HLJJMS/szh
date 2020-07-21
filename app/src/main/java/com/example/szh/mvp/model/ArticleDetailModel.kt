@@ -105,7 +105,7 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         id: String,
         title: String,
         articleid: String
-    ): Observable<BaseBean.BaseResponse<Any>> {
+    ): Observable<BaseBean.BaseResponse<String>> {
         return mRepositoryManager.obtainRetrofitService(HomeService::class.java).pingbi(id, title,articleid)
     }
 

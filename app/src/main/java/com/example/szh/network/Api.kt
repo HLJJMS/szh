@@ -103,5 +103,11 @@ object Api {
     //屏蔽
     const val REPORT_PINGBI = "report/shielding";
 
+    //预测
+    const val MY_YUCE = "my/userpredict/list";
+
+    //推贴
+    const val INDEX_PUSH = "index/push";
+
 
 }

@@ -66,4 +66,11 @@ interface UserService {
     ): Observable<MyArticleBean>
 
 
+
+    //  预测列表
+    @FormUrlEncoded
+    @POST(Api.MY_YUCE)
+    fun getMyYuCe(
+        @Field("userid") id: String
+    ): Observable<YuCeBean>
 }

@@ -1,6 +1,7 @@
 package com.example.szh.mvp.model
 
 import android.app.Application
+import com.example.szh.bean.YuCeBean
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
@@ -8,9 +9,8 @@ import com.jess.arms.mvp.BaseModel
 import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
-import com.example.szh.mvp.contract.PushTieContract
-import com.example.szh.network.bean.BaseBean
-import com.example.szh.network.service.HomeService
+import com.example.szh.mvp.contract.MyYuCeContract
+import com.example.szh.network.service.UserService
 import io.reactivex.Observable
 
 
@@ -18,7 +18,7 @@ import io.reactivex.Observable
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 06/10/2020 17:24
+ * Created by MVPArmsTemplate on 07/21/2020 15:13
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -27,22 +27,17 @@ import io.reactivex.Observable
  * ================================================
  */
 @ActivityScope
-class PushTieModel
+class MyYuCeModel
 @Inject
 constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager),
-    PushTieContract.Model {
+    MyYuCeContract.Model {
     @Inject
     lateinit var mGson: Gson;
 
     @Inject
     lateinit var mApplication: Application;
-    override fun postData(
-        id: String,
-        peoplecount: String,
-        type: String,
-        articleid: String
-    ): Observable<BaseBean.BaseResponse<Any>> {
-        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).pushTie(id, peoplecount, type, articleid)
+    override fun getData(id: String): Observable<YuCeBean> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java).getMyYuCe(id)
     }
 
     override fun onDestroy() {

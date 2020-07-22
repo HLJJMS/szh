@@ -83,6 +83,9 @@ class RegisterActivity : BaseActivity<RegisterPresenter>(), RegisterContract.Vie
         rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             postData()
         }
+        iv_close.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            finish()
+        }
 
     }
 

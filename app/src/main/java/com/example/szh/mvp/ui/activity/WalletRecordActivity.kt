@@ -65,6 +65,7 @@ class WalletRecordActivity : BaseActivity<WalletRecordPresenter>(), WalletRecord
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
         mPresenter?.getList(intent.getStringExtra("type"))
+        titlebar.setBackClick { finish() }
     }
 
     override fun success(bean: MutableList<WelltaRecordBean.ResultBean>) {

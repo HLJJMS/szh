@@ -109,5 +109,7 @@ object Api {
     //推贴
     const val INDEX_PUSH = "index/push";
 
+    //榜单分类咨询
+    const val ZX_LIST = "index/top/zxList";
 
 }

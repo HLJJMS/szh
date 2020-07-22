@@ -99,7 +99,7 @@ class LookFragment : BaseFragment<LookPresenter>(), LookContract.View {
         adapter.addChildClickViewIds(R.id.iv_go, R.id.tv_tui)
         adapter.setOnItemChildClickListener { adapters, view, position ->
             var intent = Intent(context, PushTieActivity::class.java)
-            intent.putExtra("id", adapter.data.get(position).id)
+            intent.putExtra("id", adapter.data.get(position).id.toString())
             intent.putExtra("img", adapter.data.get(position).avatarUrl)
             intent.putExtra("title", adapter.data.get(position).title)
             startActivity(intent)

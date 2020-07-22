@@ -9,7 +9,7 @@ import com.example.szh.tools.MyGlide
 class MyArticleAdapter :
     BaseQuickAdapter<MyArticleBean.ResultBean.ArticlesListBean, BaseViewHolder>(R.layout.item_my_artcle) {
     override fun convert(holder: BaseViewHolder, item: MyArticleBean.ResultBean.ArticlesListBean) {
-        holder.setText(R.id.tv_name, item.name.toString())
+//        holder.setText(R.id.tv_name, item.name.toString())
         holder.setText(R.id.tv_title, item.title)
         holder.setText(R.id.tv_time, item.createdate)
         holder.setText(R.id.tv_detail, item.content)

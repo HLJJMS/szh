@@ -20,6 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/QMUI.NoActionBar">
+        <activity android:name=".mvp.ui.activity.TypeListActivityActivity" />
         <activity android:name=".mvp.ui.activity.MyYuCeActivity" />
         <activity android:name=".mvp.ui.activity.MyArticleActivity" />
         <activity android:name=".mvp.ui.activity.MyFansAndLookActivity" />

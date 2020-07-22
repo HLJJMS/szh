@@ -107,6 +107,7 @@ interface HomeService {
 
 
     //pingbi
+    @FormUrlEncoded
     @POST(Api.REPORT_PINGBI)
     fun pingbi(
         @Field("userid") id: String,
@@ -121,11 +122,23 @@ interface HomeService {
     ): Observable<BaseBean.BaseResponse<Any>>
 
     //tui帖子
-    @POST(Api.REPORT_ADD)
+    @FormUrlEncoded
+    @POST(Api.INDEX_PUSH)
     fun pushTie(
         @Field("userid") id: String,
         @Field("peoplecount") peoplecount: String,
         @Field("type") type: String,
         @Field("articleid") articleid: String
     ): Observable<BaseBean.BaseResponse<Any>>
+
+    //分类查询文章列表
+    @FormUrlEncoded
+    @POST(Api.ZX_LIST)
+    fun getZXList(
+        @Field("userid") id: String,
+        @Field("dirid") dirid: String,
+        @Field("type") type: String,
+        @Field("current") articleid: String,
+        @Field("size") size: String
+    ): Observable<TypeListBean>
 }

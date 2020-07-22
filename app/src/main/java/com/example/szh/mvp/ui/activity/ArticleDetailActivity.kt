@@ -91,7 +91,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     var page = 1
     var popupWindow: PopupWindow = PopupWindow()
     var adapter: CommentAdapter = CommentAdapter()
-     var tv_jubao: TextView?=null
+    var tv_jubao: TextView? = null
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerArticleDetailComponent //如找不到该类,请编译一下项目
             .builder()
@@ -118,6 +118,9 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 g_comment_no.visibility = View.VISIBLE
             }
         }
+        titleBar.setBackClick {
+            finish()
+        }
         onKeyBoardListener()
 
     }
@@ -132,6 +135,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         tv_title.setText(bean.articles.title)
         like = bean.like
         collection = bean.collection
+        tv_like_number.text = like.toString()
         isLikeOrCollection()
         tv_off.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             collection = Math.abs(collection - 1)
@@ -172,6 +176,13 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         mPresenter?.getComment(intent.getStringExtra("id"), page, type)
         initLoadMore()
         setPopWindow()
+        iv_send.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            var intent = Intent(this, PushTieActivity::class.java)
+            intent.putExtra("id", intent.getStringExtra("id"))
+            intent.putExtra("img", bean.articles.pic.toString())
+            intent.putExtra("title", bean.articles.title)
+            startActivity(intent)
+        }
     }
 
     override fun commentSuccess() {
@@ -392,7 +403,12 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         }
         tv_jubao = view?.findViewById(R.id.tv_jubao)
         tv_jubao?.setOnClickListener {
-            startActivity(Intent(this, ReportActivity::class.java).putExtra("id",intent.getStringExtra("id")))
+            startActivity(
+                Intent(this, ReportActivity::class.java).putExtra(
+                    "id",
+                    intent.getStringExtra("id")
+                )
+            )
         }
         rbOk?.setOnClickListener {
             mPresenter?.pingbi(intent.getStringExtra("id"), title)

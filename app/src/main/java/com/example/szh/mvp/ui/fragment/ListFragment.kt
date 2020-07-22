@@ -24,6 +24,7 @@ import com.example.szh.adapter.BangdanAdapter
 import com.example.szh.adapter.CaiJingAdapter
 import com.example.szh.bean.BangdanBean
 import com.example.szh.mvp.ui.activity.RmbMaketMainActivity
+import com.example.szh.mvp.ui.activity.TypeListActivityActivity
 import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.fragment_list.*
 import java.util.concurrent.TimeUnit
@@ -102,19 +103,16 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
             recycler_v.visibility = View.VISIBLE
             caiJingAdapter.setList(bean?.get(1)?.dirsList?.get(0)?.dirsList)
         }
-        bangdanAdapter.setOnItemClickListener { adapter, view, position ->
-            if(recycler_v.visibility == View.GONE){
 
-            }else{
-
-            }
-        }
         mPresenter?.getData()
 
         caiJingAdapter.setOnItemClickListener { adapter, view, position ->
             var intent = Intent(context,RmbMaketMainActivity::class.java)
             intent.putExtra("id",caiJingAdapter.data.get(position).id.toString())
             startActivity(intent)
+        }
+        bangdanAdapter.setOnItemClickListener { adapter, view, position ->
+            startActivity(Intent(context, TypeListActivityActivity::class.java).putExtra("id",bangdanAdapter.data.get(position).id.toString()).putExtra("title",bangdanAdapter.data.get(position).title))
         }
     }
 

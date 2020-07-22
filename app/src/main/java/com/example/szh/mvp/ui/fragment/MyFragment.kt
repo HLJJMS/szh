@@ -95,6 +95,9 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         friend.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, MyFriendActivity::class.java))
         }
+        tv_add_friend.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context, AddFriendActivity::class.java))
+        }
 
     }
 

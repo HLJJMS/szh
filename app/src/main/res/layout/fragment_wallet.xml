@@ -241,12 +241,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_au_record" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/g_login_on"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        app:constraint_referenced_ids="tv_au,iv_au,tv_number_au,rb_add,tv_ag,iv_ag,tv_number_ag,bg_one,imageView,week,tv_ag_record,tv_au_record,imageView2,tv_week,tv_day,tv_month,today,month" />
+
 
     <ImageView
         android:id="@+id/iv_no_login"
@@ -295,4 +290,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:constraint_referenced_ids="iv_no_login,tv_login,rb_login" />
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/g_login_on"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tv_au,iv_au,tv_number_au,rb_add,tv_ag,iv_ag,tv_number_ag,bg_one,imageView,week,tv_ag_record,tv_au_record,imageView2,tv_week,tv_day,tv_month,today,month" />
 </androidx.constraintlayout.widget.ConstraintLayout>

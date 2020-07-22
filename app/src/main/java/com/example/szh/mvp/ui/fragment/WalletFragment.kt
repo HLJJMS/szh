@@ -76,7 +76,7 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
     override fun initData(savedInstanceState: Bundle?) {
         getData()
         //1:silver(银币) 2:gold(金币)
-        tv_au_record.setOnClickListener {
+        tv_au_record.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             var intent = Intent(context, WalletRecordActivity::class.java)
             intent.putExtra("type", "2")
             startActivity(intent)
@@ -152,10 +152,7 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
         tv_day.text = wellatIndexBean.rewarddaycount
         tv_month.text = wellatIndexBean.rewardmonthcount
         tv_week.text = wellatIndexBean.rewardweekcount
-        tv_au_record.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
 
-            }
     }
 
     override fun showLoading() {

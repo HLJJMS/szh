@@ -17,7 +17,7 @@
         android:paddingEnd="11dp"
         android:paddingBottom="16dp"
         android:text="推荐"
-        android:textColor="#ff959595"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@id/tv_bangdan"
         app:layout_constraintHorizontal_chainStyle="packed"

@@ -10,7 +10,7 @@
         android:id="@+id/titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:star_txt="银币交易记录" />
+        app:star_txt="交易记录" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"

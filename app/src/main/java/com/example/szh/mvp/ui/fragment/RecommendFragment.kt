@@ -21,6 +21,7 @@ import com.example.szh.R
 import com.example.szh.adapter.RecommendAdapter
 import com.example.szh.bean.RecommendBean
 import com.example.szh.mvp.ui.activity.ArticleDetailActivity
+import com.example.szh.mvp.ui.activity.PushTieActivity
 import kotlinx.android.synthetic.main.fragment_recommend.*
 
 
@@ -90,6 +91,14 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
             } else {
                 intent.putExtra("pushid", recommendAdapter.data.get(position).pushid.toString())
             }
+            startActivity(intent)
+        }
+        recommendAdapter.addChildClickViewIds(R.id.iv_go, R.id.tv_tui)
+        recommendAdapter.setOnItemChildClickListener { adapters, view, position ->
+            var intent = Intent(context, PushTieActivity::class.java)
+            intent.putExtra("id", recommendAdapter.data.get(position).id.toString())
+            intent.putExtra("img", recommendAdapter.data.get(position).avatarUrl)
+            intent.putExtra("title", recommendAdapter.data.get(position).title)
             startActivity(intent)
         }
     }

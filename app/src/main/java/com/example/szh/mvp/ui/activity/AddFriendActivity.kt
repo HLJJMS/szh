@@ -13,6 +13,7 @@ import com.example.szh.mvp.contract.AddFriendContract
 import com.example.szh.mvp.presenter.AddFriendPresenter
 
 import com.example.szh.R
+import kotlinx.android.synthetic.main.activity_add_friend.*
 
 
 /**
@@ -58,7 +59,9 @@ class AddFriendActivity : BaseActivity<AddFriendPresenter>(), AddFriendContract.
 
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        titleBar.setBackClick {
+            finish()
+        }
     }
 
 

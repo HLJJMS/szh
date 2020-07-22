@@ -35,7 +35,7 @@ class PushTieAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_rm
     }
 
     fun setClickPosition(i: Int) {
-        position - i
+        position = i
         notifyDataSetChanged()
     }
 }

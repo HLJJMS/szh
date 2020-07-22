@@ -2,8 +2,12 @@ package com.example.szh.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
+import android.view.KeyEvent
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -67,6 +71,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     private var homePageAdapter: HomePageAdapter? = null
     private var buttonList = ArrayList<ImageView>()
     private var textList = ArrayList<TextView>()
+     var isExit = false
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent //如找不到该类,请编译一下项目
             .builder()
@@ -210,6 +215,32 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
     override fun onStart() {
         super.onStart()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+  fun exit(){
+        if(!isExit){
+            isExit=true;
+            Toast.makeText(this,"再按一退出程序",Toast.LENGTH_SHORT).show();
+                    //利用handler延迟发送更改状态信息
+                    handler.sendEmptyMessageDelayed(0,2000);
+        }
+        else{
+            finish();
+            System.exit(0);
+        }
+    }
+    var handler: Handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            isExit = false
+        }
     }
 }
 

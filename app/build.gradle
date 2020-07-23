@@ -8,7 +8,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.example.szh"
+        applicationId "com.diwaves.news"
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
@@ -24,7 +24,6 @@ android {
             storePassword '123456'
         }
     }
-
 
     buildTypes {
         release {
@@ -81,4 +80,6 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
 
     implementation 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
+
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 }

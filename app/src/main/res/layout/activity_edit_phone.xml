@@ -6,7 +6,7 @@
     android:layout_height="match_parent"  tools:ignore="MissingConstraints"
     android:orientation="vertical">
 
-    <com.example.szh.tools.MyTitleBar
+    <com.diwaves.news.tools.MyTitleBar
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -11,6 +11,7 @@ import javax.inject.Inject
 import com.diwaves.news.mvp.contract.EditPhoneContract
 import com.diwaves.news.network.bean.BaseBean
 import com.diwaves.news.network.service.LoginService
+import com.diwaves.news.network.service.UserService
 import io.reactivex.Observable
 
 
@@ -36,11 +37,28 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     @Inject
     lateinit var mApplication: Application;
-    override fun getCode(phone: String): Observable<BaseBean.BaseResponse<String>> {
-        return mRepositoryManager.obtainRetrofitService(LoginService::class.java).getCode(phone, 2)
+    override fun getCode(phone: String,type:String): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(LoginService::class.java).getCode(phone, type.toInt())
+    }
+
+    override fun bind(
+        openid: String,
+        phone: String,
+        code: String
+    ): Observable<BaseBean.BaseResponse<String>> {
+      return  mRepositoryManager.obtainRetrofitService(UserService::class.java).wxBindUser(openid,phone,code)
+    }
+
+    override fun editPhone(
+        id: String,
+        phone: String,
+        code: String
+    ): Observable<BaseBean.BaseResponse<String>> {
+        return  mRepositoryManager.obtainRetrofitService(UserService::class.java).editPhone(id,phone,code)
     }
 
     override fun onDestroy() {
         super.onDestroy();
     }
+
 }

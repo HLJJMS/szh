@@ -118,4 +118,12 @@ object Api {
 
     //微信支付
     const val WXPAY = "pay/wxpay"
+
+    //微信绑定
+    const val WXBINDUSER = "system/wxbinduser"
+
+    //更换手机号
+    const val EDIT_PHONE = "system/replacePhone"
+
+
 }

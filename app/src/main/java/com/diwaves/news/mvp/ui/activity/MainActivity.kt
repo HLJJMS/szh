@@ -89,6 +89,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             .mainModule(MainModule(this))
             .build()
             .inject(this)
+        regToWx()
     }
 
 
@@ -237,7 +238,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
         }
 
     }
-
     override fun onStart() {
         super.onStart()
     }

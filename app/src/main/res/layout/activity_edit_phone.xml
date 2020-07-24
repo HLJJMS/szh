@@ -10,7 +10,7 @@
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:star_txt="更改手机号"
+        app:star_txt=""
        />
 
     <EditText

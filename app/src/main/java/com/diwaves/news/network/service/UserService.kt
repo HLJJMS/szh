@@ -5,7 +5,10 @@ import com.diwaves.news.network.Api
 import com.diwaves.news.network.bean.BaseBean
 import io.reactivex.Observable
 import okhttp3.RequestBody
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
 
 interface UserService {
     //用户信息
@@ -73,10 +76,31 @@ interface UserService {
         @Field("userid") id: String
     ): Observable<YuCeBean>
 
-    //  预测列表
+    //  支付
     @FormUrlEncoded
     @POST(Api.WXPAY)
     fun wxPay(
         @Field("userid") id: String, @Field("count") count: String
     ): Observable<PayBean>
+
+    //  绑手机
+    @FormUrlEncoded
+    @POST(Api.WXBINDUSER)
+    fun wxBindUser(
+        @Field("openid") openid: String,
+        @Field("phone") phone: String,
+        @Field("verificaCode") verificaCode: String
+    ): Observable<BaseBean.BaseResponse<String>>
+
+
+
+    //  绑手机
+    @FormUrlEncoded
+    @POST(Api.EDIT_PHONE)
+    fun editPhone(
+        @Field("userid") userid: String,
+        @Field("phone") phone: String,
+        @Field("verificaCode") verificaCode: String
+    ): Observable<BaseBean.BaseResponse<String>>
+
 }

@@ -15,6 +15,7 @@ import com.diwaves.news.mvp.contract.EditPhoneContract
 import com.diwaves.news.mvp.presenter.EditPhonePresenter
 
 import com.diwaves.news.R
+import com.diwaves.news.tools.MyToast
 import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.activity_edit_phone.*
 import java.util.concurrent.TimeUnit
@@ -46,7 +47,7 @@ import java.util.concurrent.TimeUnit
  * }
  */
 class EditPhoneActivity : BaseActivity<EditPhonePresenter>(), EditPhoneContract.View {
-
+    var type:String=""
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerEditPhoneComponent //如找不到该类,请编译一下项目
             .builder()
@@ -63,15 +64,31 @@ class EditPhoneActivity : BaseActivity<EditPhonePresenter>(), EditPhoneContract.
 
 
     override fun initData(savedInstanceState: Bundle?) {
-        tv_get_code.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+       tv_get_code.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+           if(et_phone.text.toString().length==11){
+               mPresenter?.getCode(et_phone.text.toString(),type)
+           }else{
+               MyToast().makeToast(this,"手机号错误")
+           }
 
-        }
-        rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+       }
 
-        }
         titleBar.setBackClick(View.OnClickListener {
             finish()
         })
+        if(null==intent.getStringExtra("openId")){
+           titleBar.setLeftText("更换手机号")
+            type = "2"
+            rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+                mPresenter?.editPhone(et_phone.text.toString(),tv_get_code.text.toString())
+            }
+        }else{
+            titleBar.setLeftText("绑定手机号")
+            type = "1"
+            rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+                mPresenter?.bindPhone(intent.getStringExtra("openId"),et_phone.text.toString(),et_psd.text.toString())
+            }
+        }
     }
 
     override fun codeSuccess() {
@@ -85,11 +102,19 @@ class EditPhoneActivity : BaseActivity<EditPhonePresenter>(), EditPhoneContract.
     }
 
     override fun editSuccess() {
-        TODO("Not yet implemented")
+       finish()
     }
 
     override fun editFail() {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun bindSuccess() {
+        finish()
+    }
+
+    override fun bindFail() {
+
     }
 
 

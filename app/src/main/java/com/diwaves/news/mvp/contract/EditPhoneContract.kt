@@ -25,11 +25,24 @@ interface EditPhoneContract {
         fun codeFail()
         fun editSuccess()
         fun editFail()
+        fun bindSuccess()
+        fun bindFail()
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model : IModel {
-        fun getCode(phone: String): Observable<BaseBean.BaseResponse<String>>
+        fun getCode(phone: String, type: String): Observable<BaseBean.BaseResponse<String>>
+        fun bind(
+            openid: String,
+            phone: String,
+            code: String
+        ): Observable<BaseBean.BaseResponse<String>>
+
+        fun editPhone(
+            id: String,
+            phone: String,
+            code: String
+        ): Observable<BaseBean.BaseResponse<String>>
     }
 
 }

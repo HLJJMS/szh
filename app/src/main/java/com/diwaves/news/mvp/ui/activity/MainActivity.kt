@@ -71,15 +71,15 @@ import java.util.concurrent.TimeUnit
 class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     private val mTabEntities =
         ArrayList<CustomTabEntity>()
-    private val mFragments = ArrayList<Fragment>()
-    private var myFragment = MyFragment()
-    private val homeFragment = HomeFragment()
-    private val walletFragment = WalletFragment()
-    private val messageFragment = MessageFragment()
-    private var homePageAdapter: HomePageAdapter? = null
-    private var buttonList = ArrayList<ImageView>()
-    private var textList = ArrayList<TextView>()
-     var isExit = false
+     val mFragments = ArrayList<Fragment>()
+     var myFragment = MyFragment()
+     val homeFragment = HomeFragment()
+     val walletFragment = WalletFragment()
+     val messageFragment = MessageFragment()
+     var homePageAdapter: HomePageAdapter? = null
+     var buttonList = ArrayList<ImageView>()
+     var textList = ArrayList<TextView>()
+    var isExit = false
 
     private var api: IWXAPI? = null
     override fun setupActivityComponent(appComponent: AppComponent) {
@@ -96,6 +96,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     override fun initView(savedInstanceState: Bundle?): Int {
         return R.layout.activity_main //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
+
     private fun regToWx() {
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
         api = WXAPIFactory.createWXAPI(this, APP_ID, true)
@@ -229,44 +230,48 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: MainEvent?) {/* Do something */
+    public fun onMessageEvent(event: MainEvent?) {/* Do something */
         if (event!!.isLogin) {
             walletFragment.getData()
             myFragment.getData()
         } else {
             myFragment.clearData()
+            walletFragment.getData()
         }
 
     }
+
     override fun onStart() {
         super.onStart()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if(keyCode==KeyEvent.KEYCODE_BACK){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             exit();
             return false;
         }
         return super.onKeyDown(keyCode, event)
     }
-  fun exit(){
-        if(!isExit){
-            isExit=true;
-            Toast.makeText(this,"再按一退出程序",Toast.LENGTH_SHORT).show();
-                    //利用handler延迟发送更改状态信息
-                    handler.sendEmptyMessageDelayed(0,2000);
-        }
-        else{
+
+    fun exit() {
+        if (!isExit) {
+            isExit = true;
+            Toast.makeText(this, "再按一退出程序", Toast.LENGTH_SHORT).show();
+            //利用handler延迟发送更改状态信息
+            handler.sendEmptyMessageDelayed(0, 2000);
+        } else {
             finish();
             System.exit(0);
         }
     }
+
     var handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             isExit = false
         }
     }
+
 }
 
 

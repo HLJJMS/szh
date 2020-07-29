@@ -72,6 +72,9 @@ class MyCollectActivity : BaseActivity<MyCollectPresenter>(), MyCollectContract.
             }
             startActivity(intent)
         }
+        titlebar.setBackClick {
+            finish()
+        }
     }
 
     override fun success(bean: MutableList<CollectBean.ResultBean.ListBean.RecordsBean>) {

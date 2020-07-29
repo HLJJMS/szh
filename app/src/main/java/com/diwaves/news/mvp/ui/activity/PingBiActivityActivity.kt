@@ -8,22 +8,21 @@ import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
 
-import com.diwaves.news.di.component.DaggerMyCommentComponent
-import com.diwaves.news.di.module.MyCommentModule
-import com.diwaves.news.mvp.contract.MyCommentContract
-import com.diwaves.news.mvp.presenter.MyCommentPresenter
+import com.diwaves.news.di.component.DaggerPingBiActivityComponent
+import com.diwaves.news.di.module.PingBiActivityModule
+import com.diwaves.news.mvp.contract.PingBiActivityContract
+import com.diwaves.news.mvp.presenter.PingBiActivityPresenter
 
 import com.diwaves.news.R
-import com.diwaves.news.adapter.MyCommentAdapter
-import com.diwaves.news.bean.MyCommentBean
-import kotlinx.android.synthetic.main.activity_my_comment.*
+import com.diwaves.news.adapter.PingBiAdapter
+import kotlinx.android.synthetic.main.activity_ping_bi.*
 
 
 /**
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 07/15/2020 19:31
+ * Created by MVPArmsTemplate on 07/29/2020 16:51
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -44,34 +43,35 @@ import kotlinx.android.synthetic.main.activity_my_comment.*
  * }
  * }
  */
-class MyCommentActivity : BaseActivity<MyCommentPresenter>(), MyCommentContract.View {
-    var adapter: MyCommentAdapter = MyCommentAdapter()
+class PingBiActivityActivity : BaseActivity<PingBiActivityPresenter>(),
+    PingBiActivityContract.View {
+    var adapter: PingBiAdapter = PingBiAdapter()
     override fun setupActivityComponent(appComponent: AppComponent) {
-        DaggerMyCommentComponent //如找不到该类,请编译一下项目
+        DaggerPingBiActivityComponent //如找不到该类,请编译一下项目
             .builder()
             .appComponent(appComponent)
-            .myCommentModule(MyCommentModule(this))
+            .pingBiActivityModule(PingBiActivityModule(this))
             .build()
             .inject(this)
     }
 
 
     override fun initView(savedInstanceState: Bundle?): Int {
-        return R.layout.activity_my_comment //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+        return R.layout.activity_ping_bi //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+
     }
 
 
     override fun initData(savedInstanceState: Bundle?) {
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = adapter
-        mPresenter?.getData()
-        titlebar.setBackClick {
+        titleBar.setBackClick {
             finish()
         }
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
     }
 
-    override fun success(bean: MutableList<MyCommentBean.ResultBean.ListBean.RecordsBean>) {
-        adapter.setList(bean)
+    override fun success() {
+
     }
 
 

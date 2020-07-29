@@ -179,4 +179,19 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
                 }
             })
     }
+
+    fun sorce(articleid: String, sorce: String) {
+        mModel.sorce(SPToll(mApplication).getId(), sorce, articleid)
+            .compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<String>) {
+                    if (t.code.equals(Api.SUCCESS)) {
+                        mRootView.commentSuccess()
+                    }
+                    MyToast().makeToast(mApplication, t.message)
+
+                }
+            })
+    }
 }

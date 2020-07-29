@@ -153,7 +153,7 @@ public class ArticleDetailBean {
              * type : null
              * pushid : null
              */
-
+            private String score;
             private int id;
             private String title;
             private String content;
@@ -168,7 +168,7 @@ public class ArticleDetailBean {
             private String createdate;
             private Object remark;
             private int reward;
-            private String pic="";
+            private String pic = "";
             private int category;
             private int audiolength;
             private String audiopath;
@@ -193,6 +193,14 @@ public class ArticleDetailBean {
             private Object commentCount;
             private Object type;
             private Object pushid;
+
+            public String getScore() {
+                return score;
+            }
+
+            public void setScore(String score) {
+                this.score = score;
+            }
 
             public int getId() {
                 return id;

@@ -103,4 +103,13 @@ interface UserService {
         @Field("verificaCode") verificaCode: String
     ): Observable<BaseBean.BaseResponse<String>>
 
+    //  屏蔽列表
+    @FormUrlEncoded
+    @POST(Api.PINGBI_LIST)
+    fun pingbiList(
+        @Field("userid") userid: String,
+        @Field("page") page: String,
+        @Field("size") size: String
+    ): Observable<BaseBean.BaseResponse<PingBiListBean>>
+
 }

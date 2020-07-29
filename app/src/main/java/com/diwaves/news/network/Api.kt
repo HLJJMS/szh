@@ -125,5 +125,11 @@ object Api {
     //更换手机号
     const val EDIT_PHONE = "system/replacePhone"
 
+    //    文章评分接口
+    const val SCORE = "article/score"
+
+    //    屏蔽接口
+    const val PINGBI_LIST = "my/shielding/list"
+
 
 }

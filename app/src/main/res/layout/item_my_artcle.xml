@@ -181,6 +181,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        android:background="@color/black"
+        android:background="@color/color_A4A4A4"
         app:layout_constraintTop_toBottomOf="@id/tv_tui" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -140,4 +140,13 @@ interface HomeService {
         @Field("current") articleid: String,
         @Field("size") size: String
     ): Observable<TypeListBean>
+
+    //评分
+    @FormUrlEncoded
+    @POST(Api.INDEX_PUSH)
+    fun sorce(
+        @Field("userid") id: String,
+        @Field("score") score : String,
+        @Field("articleid") articleid: String
+    ): Observable<BaseBean.BaseResponse<String>>
 }

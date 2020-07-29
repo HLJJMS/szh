@@ -23,12 +23,12 @@ import okhttp3.MultipartBody
  */
 interface ArticleDetailContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
-    interface View : IView{
-     fun getDataSuccess(bean:ArticleDetailBean.ResultBean)
+    interface View : IView {
+        fun getDataSuccess(bean: ArticleDetailBean.ResultBean)
         fun commentSuccess()
         fun getCommentListNull()
         fun getCommentListFail()
-        fun getCommentListSuccess(bean:MutableList<CommentBean.ResultBean.RecordsBean>)
+        fun getCommentListSuccess(bean: MutableList<CommentBean.ResultBean.RecordsBean>)
         fun pingbiSuccess()
     }
 
@@ -37,6 +37,7 @@ interface ArticleDetailContract {
         fun getData(
             id: String, articleid: String, pushid: String
         ): Observable<ArticleDetailBean>
+
         fun like(
             id: String, articleid: String, like: String
         ): Observable<BaseBean.BaseResponse<String>>
@@ -50,21 +51,26 @@ interface ArticleDetailContract {
         ): Observable<BaseBean.BaseResponse<Any>>
 
         fun getComment(
-            id: String, articleid: String, current: String,type:String
+            id: String, articleid: String, current: String, type: String
         ): Observable<CommentBean>
 
 
         fun goodComment(
-            id: String, articleid: String, commentid: String,type:String
+            id: String, articleid: String, commentid: String, type: String
         ): Observable<BaseBean.BaseResponse<Any>>
 
         fun commentReplay(
-            id: String, articleid: String, commentid: String,neirong:String
+            id: String, articleid: String, commentid: String, neirong: String
         ): Observable<BaseBean.BaseResponse<Any>>
 
         fun pingbi(
-            id: String, title: String,articleid: String
+            id: String, title: String, articleid: String
         ): Observable<BaseBean.BaseResponse<String>>
 
+        fun sorce(
+            id: String,
+            sorce: String,
+            articleid: String
+        ): Observable<BaseBean.BaseResponse<String>>
     }
 }

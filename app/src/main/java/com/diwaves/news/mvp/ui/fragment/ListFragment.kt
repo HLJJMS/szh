@@ -104,7 +104,7 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
             caiJingAdapter.setList(bean?.get(1)?.dirsList?.get(0)?.dirsList)
         }
 
-        mPresenter?.getData()
+
 
         caiJingAdapter.setOnItemClickListener { adapter, view, position ->
             var intent = Intent(context,RmbMaketMainActivity::class.java)
@@ -114,6 +114,8 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
         bangdanAdapter.setOnItemClickListener { adapter, view, position ->
             startActivity(Intent(context, TypeListActivityActivity::class.java).putExtra("id",bangdanAdapter.data.get(position).id.toString()).putExtra("title",bangdanAdapter.data.get(position).title))
         }
+
+        mPresenter?.getData()
     }
 
     /**

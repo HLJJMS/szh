@@ -96,12 +96,17 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         tv_add_friend.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, AddFriendActivity::class.java))
         }
+        rb_login.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context, LoginActivity::class.java))
+        }
 
     }
 
     fun getData() {
         if (!SPToll(mContext).getId().equals("")) {
             mPresenter?.getData()
+            cl_my.visibility = View.VISIBLE
+            cl_login.visibility = View.GONE
         } else {
             clearData()
         }
@@ -263,6 +268,8 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     }
 
     fun clearData() {
+        cl_my.visibility = View.GONE
+        cl_login.visibility = View.VISIBLE
         recycler.visibility = View.GONE
         MyGlide.loadImageCircle(mContext, "", iv_head)
         tv_name.text = ""

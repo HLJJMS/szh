@@ -70,8 +70,9 @@ class SettingActivity : BaseActivity<SettingPresenter>(), SettingContract.View {
 
         tv_exit.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             SPToll(this).setId("")
-            EventBus.getDefault().post(MainEvent(false));
+
             startActivity(Intent(this, MainActivity::class.java))
+            EventBus.getDefault().post(MainEvent(false));
         }
     }
 

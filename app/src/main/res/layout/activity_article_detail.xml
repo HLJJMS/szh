@@ -7,6 +7,7 @@
     tools:ignore="MissingConstraints">
 
     <ScrollView
+        android:id="@+id/sl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/cl_pinglun"
@@ -75,6 +76,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/tv_look"
                 app:layout_constraintStart_toEndOf="@id/tv_look"
                 app:layout_constraintTop_toTopOf="@id/tv_look" />
+
             <TextView
                 android:id="@+id/tv_like_number"
                 android:layout_width="wrap_content"
@@ -86,8 +88,8 @@
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_look"
                 app:layout_constraintStart_toEndOf="@id/iv_like"
-                app:layout_constraintTop_toTopOf="@id/tv_look"
-                 />
+                app:layout_constraintTop_toTopOf="@id/tv_look" />
+
             <ImageView
                 android:id="@+id/iv_close"
                 android:layout_width="21dp"
@@ -141,14 +143,15 @@
                 app:qmui_borderColor="#e9e9e9" />
 
             <ImageView
+                android:id="@+id/iv_star"
                 android:layout_width="12dp"
                 android:layout_height="15dp"
                 android:layout_marginStart="16dp"
-                android:src="@mipmap/ic_start"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/tv_off"
-                app:layout_constraintStart_toStartOf="@id/tv_off"
-                app:layout_constraintTop_toTopOf="@id/tv_off" />
+                android:layout_marginEnd="20dp"
+                android:src="@mipmap/ic_start_yellow"
+                app:layout_constraintBottom_toBottomOf="@id/titleBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/titleBar" />
 
             <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
                 android:id="@+id/tv_wx"
@@ -163,7 +166,6 @@
                 android:text="微信"
                 android:textColor="#ff111111"
                 android:textSize="11sp"
-
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_look"
                 app:qmui_borderColor="#e9e9e9" />
@@ -183,6 +185,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="19dp"
+                android:layout_marginEnd="20dp"
                 android:paddingStart="35dp"
                 android:paddingTop="11dp"
                 android:paddingEnd="14dp"
@@ -190,7 +193,7 @@
                 android:text="朋友圈"
                 android:textColor="#ff111111"
                 android:textSize="11sp"
-                app:layout_constraintStart_toEndOf="@id/tv_wx"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_look"
                 app:qmui_borderColor="#e9e9e9" />
 
@@ -203,41 +206,107 @@
                 app:layout_constraintStart_toStartOf="@id/tv_pyq"
                 app:layout_constraintTop_toTopOf="@id/tv_pyq" />
 
+            <TextView
+                android:id="@+id/tv_fen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="评分：0.0"
+                android:textColor="#ff111111"
+                app:layout_constraintBottom_toBottomOf="@id/tv_wx"
+                app:layout_constraintTop_toTopOf="@id/tv_wx" />
+
             <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-                android:id="@+id/rb_good"
+                android:id="@+id/rb_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:paddingStart="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingStart="21dp"
                 android:paddingTop="10dp"
-                android:paddingEnd="15dp"
+                android:paddingEnd="21dp"
                 android:paddingBottom="10dp"
-                android:text="利好(3)"
-                android:textColor="#ff111111"
+                android:text="1"
+                android:textColor="@color/black"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/tv_wx"
+                app:layout_constraintEnd_toStartOf="@+id/rb_2"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_wx"
-                app:qmui_backgroundColor="#FECD33"
-                app:qmui_borderWidth="0dp"
+                app:qmui_backgroundColor="@color/color_e9e9e9"
+                app:qmui_borderColor="@color/color_e9e9e9"
                 app:qmui_radius="16dp" />
 
             <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-                android:id="@+id/rb_bead"
+                android:id="@+id/rb_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:paddingStart="15dp"
+                android:paddingStart="21dp"
                 android:paddingTop="10dp"
-                android:paddingEnd="15dp"
+                android:paddingEnd="21dp"
                 android:paddingBottom="10dp"
-                android:text="利空"
-                android:textColor="#111111"
+                android:text="2"
+                android:textColor="@color/black"
                 android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@id/rb_good"
-                app:layout_constraintTop_toTopOf="@id/rb_good"
-                app:qmui_backgroundColor="#EEEEEE"
-                app:qmui_borderWidth="0dp"
+                app:layout_constraintEnd_toStartOf="@id/rb_3"
+                app:layout_constraintStart_toEndOf="@id/rb_1"
+                app:layout_constraintTop_toTopOf="@id/rb_1"
+                app:qmui_backgroundColor="@color/color_e9e9e9"
+                app:qmui_borderColor="@color/color_e9e9e9"
                 app:qmui_radius="16dp" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/rb_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="21dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="21dp"
+                android:paddingBottom="10dp"
+                android:text="3"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/rb_4"
+                app:layout_constraintStart_toEndOf="@id/rb_2"
+                app:layout_constraintTop_toTopOf="@id/rb_1"
+                app:qmui_backgroundColor="@color/color_e9e9e9"
+                app:qmui_borderColor="@color/color_e9e9e9"
+                app:qmui_radius="16dp" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/rb_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="21dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="21dp"
+                android:paddingBottom="10dp"
+                android:text="4"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/rb_5"
+                app:layout_constraintStart_toEndOf="@id/rb_3"
+                app:layout_constraintTop_toTopOf="@id/rb_1"
+                app:qmui_backgroundColor="@color/color_e9e9e9"
+                app:qmui_borderColor="@color/color_e9e9e9"
+                app:qmui_radius="16dp" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/rb_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="21dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="21dp"
+                android:paddingBottom="10dp"
+                android:text="5"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/rb_4"
+                app:layout_constraintTop_toTopOf="@id/rb_1"
+                app:qmui_backgroundColor="@color/color_e9e9e9"
+                app:qmui_borderColor="@color/color_e9e9e9"
+                app:qmui_radius="16dp" />
+
 
             <TextView
                 android:id="@+id/tv_hot"
@@ -250,7 +319,7 @@
                 app:layout_constraintEnd_toStartOf="@id/tv_1"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rb_good" />
+                app:layout_constraintTop_toBottomOf="@id/rb_1" />
 
             <TextView
                 android:id="@+id/tv_1"
@@ -276,7 +345,7 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toStartOf="@id/tv_2"
                 app:layout_constraintStart_toEndOf="@id/tv_1"
-                app:layout_constraintTop_toBottomOf="@id/rb_good" />
+                app:layout_constraintTop_toBottomOf="@id/rb_1" />
 
             <TextView
                 android:id="@+id/tv_2"
@@ -304,7 +373,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_2"
-                app:layout_constraintTop_toBottomOf="@id/rb_good" />
+                app:layout_constraintTop_toBottomOf="@id/rb_1" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"

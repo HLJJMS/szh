@@ -1,15 +1,15 @@
 package com.diwaves.news.wxapi;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.diwaves.news.tools.MyToast;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+
+//我是做软件的   可能因为工作的原因吧   和人接触的少  有点直男   但是形象可没有网上说的那么邋遢憔悴
 
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override

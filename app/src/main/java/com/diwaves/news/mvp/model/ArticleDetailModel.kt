@@ -108,6 +108,14 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         return mRepositoryManager.obtainRetrofitService(HomeService::class.java).pingbi(id, title,articleid)
     }
 
+    override fun sorce(
+        id: String,
+        sorce: String,
+        articleid: String
+    ): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).sorce(id, sorce,articleid)
+    }
+
 
     override fun onDestroy() {
         super.onDestroy();

@@ -82,11 +82,13 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
                 iv_phone.setImageResource(R.mipmap.ic_password)
                 tv_phone.text = "密码登陆"
                 tv_get_code.visibility = View.GONE
+                et_psd.hint = "请输入密码"
             } else {
                 isPsd = true
                 iv_phone.setImageResource(R.mipmap.ic_phone)
                 tv_phone.text = "手机号登陆"
                 tv_get_code.visibility = View.VISIBLE
+                et_psd.hint = "请输入验证码"
             }
         }
         rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {

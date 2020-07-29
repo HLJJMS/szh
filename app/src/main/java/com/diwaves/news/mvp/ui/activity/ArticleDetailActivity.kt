@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -136,6 +137,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         like = bean.like
         collection = bean.collection
         tv_like_number.text = like.toString()
+        tv_fen.text = bean.articles.score
         isLikeOrCollection()
         tv_off.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             collection = Math.abs(collection - 1)
@@ -145,6 +147,11 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         tv_like.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             like = Math.abs(like - 1)
             mPresenter?.like(intent.getStringExtra("id"), like.toString())
+            isLikeOrCollection()
+        }
+        iv_star.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            collection = Math.abs(collection - 1)
+            mPresenter?.cllection(intent.getStringExtra("id"), collection.toString())
             isLikeOrCollection()
         }
         iv_add_photo.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
@@ -183,6 +190,27 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             intent.putExtra("title", bean.articles.title)
             startActivity(intent)
         }
+
+        iv_message.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            sl.fullScroll(ScrollView.FOCUS_UP);
+        }
+
+        rb_1.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+         mPresenter?.sorce(intent.getStringExtra("id"),"1")
+        }
+        rb_2.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            mPresenter?.sorce(intent.getStringExtra("id"),"2")
+        }
+        rb_3.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            mPresenter?.sorce(intent.getStringExtra("id"),"3")
+        }
+        rb_4.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            mPresenter?.sorce(intent.getStringExtra("id"),"4")
+        }
+        rb_5.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            mPresenter?.sorce(intent.getStringExtra("id"),"5")
+        }
+
     }
 
     override fun commentSuccess() {

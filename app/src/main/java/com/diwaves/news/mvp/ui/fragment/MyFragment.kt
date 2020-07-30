@@ -194,7 +194,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
             MyItemBean(
                 "屏蔽", R.mipmap.ic_pingbi, bean.pingbi, Intent(
                     context,
-                    MyCollectActivity::class.java
+                    PingBiActivityActivity::class.java
                 )
             )
         )

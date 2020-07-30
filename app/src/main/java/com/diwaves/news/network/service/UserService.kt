@@ -110,6 +110,6 @@ interface UserService {
         @Field("userid") userid: String,
         @Field("page") page: String,
         @Field("size") size: String
-    ): Observable<BaseBean.BaseResponse<PingBiListBean>>
+    ): Observable<PingBiListBean>
 
 }

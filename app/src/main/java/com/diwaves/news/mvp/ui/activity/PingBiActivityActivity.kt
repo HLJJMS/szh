@@ -15,6 +15,7 @@ import com.diwaves.news.mvp.presenter.PingBiActivityPresenter
 
 import com.diwaves.news.R
 import com.diwaves.news.adapter.PingBiAdapter
+import com.diwaves.news.bean.PingBiListBean
 import kotlinx.android.synthetic.main.activity_ping_bi.*
 
 
@@ -68,10 +69,11 @@ class PingBiActivityActivity : BaseActivity<PingBiActivityPresenter>(),
         }
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
+        mPresenter?.getData()
     }
 
-    override fun success() {
-
+    override fun success(bean: MutableList<PingBiListBean.ResultBean.ListBean.RecordsBean>) {
+        adapter.setList(bean)
     }
 
 

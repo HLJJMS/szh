@@ -2,6 +2,7 @@ package com.diwaves.news.mvp.model
 
 import android.app.Application
 import com.diwaves.news.bean.FriendListBean
+import com.diwaves.news.bean.PingBiListBean
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
@@ -10,6 +11,7 @@ import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
 import com.diwaves.news.mvp.contract.PingBiActivityContract
+import com.diwaves.news.network.service.UserService
 import io.reactivex.Observable
 
 
@@ -35,8 +37,8 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     @Inject
     lateinit var mApplication: Application;
-    override fun getData(id: String): Observable<FriendListBean> {
-        TODO("Not yet implemented")
+    override fun getData(id: String): Observable<PingBiListBean> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java).pingbiList(id,"1","100")
     }
 
     override fun onDestroy() {

@@ -166,6 +166,13 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 iv_check.setImageResource(R.mipmap.ic_check_off)
             }
         }
+        et_comment.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            var intent = Intent(this, PushTieActivity::class.java)
+            intent.putExtra("id", intent.getStringExtra("id"))
+            intent.putExtra("img", bean.articles.pic.toString())
+            intent.putExtra("title", bean.articles.title)
+            startActivity(intent)
+        }
 
         tv_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             if (!et_comment.text.toString().equals("")) {

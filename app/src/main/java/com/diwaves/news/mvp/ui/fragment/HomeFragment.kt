@@ -86,7 +86,7 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    @SuppressLint("CheckResult")
+
     override fun initData(savedInstanceState: Bundle?) {
         mFragments.add(recommendFragment)
         mFragments.add(listFragment)

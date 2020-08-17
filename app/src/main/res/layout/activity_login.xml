@@ -8,38 +8,34 @@
     android:orientation="vertical"
     tools:ignore="MissingConstraints">
 
-    <ImageView
-        android:id="@+id/iv_close"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="18dp"
-        android:src="@mipmap/ic_close_x"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.diwaves.news.tools.MyTitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:center_txt="登陆数字海" />
 
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_psw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28.5dp"
-        android:layout_marginTop="27.5dp"
-        android:text="欢迎使用"
-        android:textColor="#ff020202"
-        android:textSize="21sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_close" />
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="密码登陆"
+        android:textColor="@color/color_959595"
+        app:layout_constraintBottom_toTopOf="@id/et_phone"
+        app:layout_constraintStart_toStartOf="@id/et_phone" />
 
     <TextView
+        android:id="@+id/tv_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:text="请先登录数字海"
-        android:textColor="#ff989898"
-        android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="@id/tv_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="验证码登陆"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/et_phone"
+        app:layout_constraintEnd_toEndOf="@id/et_phone" />
 
     <EditText
         android:id="@+id/et_phone"
@@ -54,22 +50,8 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:textColorHint="#989898"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/titleBar" />
 
-    <ng.max.slideview.SlideView
-        android:id="@+id/slider"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintEnd_toEndOf="@id/et_phone"
-        app:layout_constraintStart_toStartOf="@id/et_phone"
-        app:layout_constraintTop_toBottomOf="@id/et_phone"
-        app:sv_buttonBackgroundColor="#FF2BA4D9"
-        app:sv_buttonImage="@mipmap/ic_right_hua"
-        app:sv_slideBackgroundColor="#FFF5F5F5"
-        app:sv_slideText="右滑验证"
-        app:sv_slideTextColor="#FF989898" />
 
     <EditText
 
@@ -85,7 +67,22 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:textColorHint="#989898"
-        app:layout_constraintTop_toBottomOf="@id/slider" />
+        app:layout_constraintTop_toBottomOf="@id/et_phone" />
+
+    <ng.max.slideview.SlideView
+        android:id="@+id/slider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintEnd_toEndOf="@id/et_phone"
+        app:layout_constraintStart_toStartOf="@id/et_phone"
+        app:layout_constraintTop_toBottomOf="@id/et_psd"
+        app:sv_buttonBackgroundColor="#FF2BA4D9"
+        app:sv_buttonImage="@mipmap/ic_right_hua"
+        app:sv_slideBackgroundColor="#FFF5F5F5"
+        app:sv_slideText="右滑验证"
+        app:sv_slideTextColor="#FF989898" />
 
     <TextView
         android:id="@+id/tv_get_code"
@@ -109,7 +106,7 @@
         android:textColor="@color/qmui_config_color_white"
         app:layout_constraintEnd_toEndOf="@id/et_phone"
         app:layout_constraintStart_toStartOf="@id/et_phone"
-        app:layout_constraintTop_toBottomOf="@id/et_psd"
+        app:layout_constraintTop_toBottomOf="@id/slider"
         app:qmui_backgroundColor="#FF017BD0" />
 
     <TextView
@@ -118,11 +115,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
         android:text="重置密码"
         android:textColor="#ff2ba4d9"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/rb_ok"
-        app:layout_constraintTop_toBottomOf="@id/rb_ok" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/rb_ok" />
 
     <TextView
         android:id="@+id/tv_register"
@@ -130,23 +128,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginBottom="20dp"
         android:text="注册数字海"
         android:textColor="#ff2ba4d9"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/rb_ok"
-        app:layout_constraintTop_toBottomOf="@id/rb_ok" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/rb_ok" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="其他登录方式"
         android:textColor="#ff989898"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_reset" />
+        app:layout_constraintTop_toBottomOf="@id/rb_ok" />
 
     <View
         android:layout_width="0dp"
@@ -168,34 +167,16 @@
         app:layout_constraintStart_toEndOf="@id/title"
         app:layout_constraintTop_toTopOf="@id/title" />
 
-    <ImageView
-        android:id="@+id/iv_phone"
-        android:layout_width="27dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="28dp"
-        android:src="@mipmap/ic_password"
-        app:layout_constraintEnd_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/title" />
-
-    <TextView
-        android:id="@+id/tv_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:text="密码登录"
-        android:textColor="#ff989898"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@id/iv_phone"
-        app:layout_constraintStart_toStartOf="@id/iv_phone"
-        app:layout_constraintTop_toBottomOf="@id/iv_phone" />
 
     <ImageView
         android:id="@+id/iv_wx"
         android:layout_width="27dp"
         android:layout_height="27dp"
+        android:layout_marginTop="10dp"
         android:src="@mipmap/ic_weixin_logo"
-        app:layout_constraintStart_toEndOf="@id/title"
-        app:layout_constraintTop_toTopOf="@id/iv_phone" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -211,11 +192,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="36dp"
         android:text="登录表示同意《数字海用户协议》"
         android:textColor="#ff5d5d5d"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rb_ok" />
 </androidx.constraintlayout.widget.ConstraintLayout>

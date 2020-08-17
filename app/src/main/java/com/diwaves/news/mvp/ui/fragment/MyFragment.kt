@@ -90,9 +90,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         iv_setting.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, SettingActivity::class.java))
         }
-        friend.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            startActivity(Intent(context, MyFriendActivity::class.java))
-        }
+
         tv_add_friend.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, AddFriendActivity::class.java))
         }
@@ -105,10 +103,18 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     fun getData() {
         if (!SPToll(mContext).getId().equals("")) {
             mPresenter?.getData()
-            cl_my.visibility = View.VISIBLE
-            cl_login.visibility = View.GONE
+            tv_id.visibility = View.VISIBLE
+
+            tv_position.visibility = View.VISIBLE
+            tv_add_friend.visibility = View.VISIBLE
+            iv_add_friend.visibility = View.VISIBLE
+            iv_admin.visibility = View.VISIBLE
+            iv_vip.visibility = View.VISIBLE
+
+            rb_login.visibility = View.GONE
         } else {
             clearData()
+
         }
     }
 
@@ -156,10 +162,9 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         recycler.visibility = View.VISIBLE
         MyGlide.loadImageCircle(mContext, bean.user.avatarUrl, iv_head)
         tv_name.text = bean.user.name
-        tv_fans.text = bean.user.fans
-        tv_focus.text = bean.user.focus
+
         tv_id.text = "数字号 : " + bean.user.wxname
-        tv_friend.text = bean.user.friends
+
         tv_day.text = bean.viewdaycount
         tv_week.text = bean.viewweekcount
         tv_month.text = bean.viewmonthcount
@@ -168,17 +173,17 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         list?.clear()
         list?.add(
             MyItemBean(
-                "帖子", R.mipmap.ic_my_tieba, bean.tiezi, Intent(
+                "关注", R.mipmap.ic_my_tieba, bean.user.focus, Intent(
                     context,
-                    MyArticleActivity::class.java
-                ).putExtra("type", "1")
+                    MyFansAndLookActivity::class.java
+                ).putExtra("fans", false)
             )
         )
         list?.add(
             MyItemBean(
-                "评论", R.mipmap.ic_my_message, bean.pinlun, Intent(
+                "朋友", R.mipmap.ic_my_message, bean.user.friends, Intent(
                     context,
-                    MyCommentActivity::class.java
+                    MyFriendActivity::class.java
                 )
             )
         )
@@ -201,22 +206,6 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         list?.add(
             MyItemBean(
                 "处罚", R.mipmap.ic_chufa, bean.chufa, Intent(
-                    context,
-                    MyCollectActivity::class.java
-                )
-            )
-        )
-        list?.add(
-            MyItemBean(
-                "权限", R.mipmap.ic_quanxian, bean.quanxian, Intent(
-                    context,
-                    MyCollectActivity::class.java
-                )
-            )
-        )
-        list?.add(
-            MyItemBean(
-                "推荐", R.mipmap.ic_my_heart, bean.tuijian, Intent(
                     context,
                     MyCollectActivity::class.java
                 )
@@ -268,15 +257,21 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     }
 
     fun clearData() {
-        cl_my.visibility = View.GONE
-        cl_login.visibility = View.VISIBLE
+        tv_id.visibility = View.INVISIBLE
+
+        tv_position.visibility = View.INVISIBLE
+        tv_add_friend.visibility = View.INVISIBLE
+        iv_add_friend.visibility = View.INVISIBLE
+        iv_admin.visibility = View.INVISIBLE
+        iv_vip.visibility = View.INVISIBLE
+
+        rb_login.visibility = View.VISIBLE
         recycler.visibility = View.GONE
         MyGlide.loadImageCircle(mContext, "", iv_head)
         tv_name.text = ""
-        tv_fans.text = ""
-        tv_focus.text = ""
+
         tv_id.text = "数字号 : "
-        tv_friend.text = ""
+
         tv_day.text = ""
         tv_week.text = ""
         tv_month.text = ""

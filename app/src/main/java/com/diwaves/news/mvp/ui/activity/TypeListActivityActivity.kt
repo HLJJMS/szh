@@ -96,7 +96,21 @@ class TypeListActivityActivity : BaseActivity<TypeListActivityPresenter>(),
         adapter.loadMoreModule.isAutoLoadMore = true
         //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
         adapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
-
+        adapter.setOnItemClickListener { adapter, view, position ->
+            var intent: Intent = Intent(this, ArticleDetailActivity::class.java)
+            intent.putExtra("id", this.adapter.data.get(position).id.toString())
+            if (null == this.adapter.data.get(position).pushid || "null".equals(
+                    this.adapter.data.get(
+                        position
+                    ).pushid
+                )
+            ) {
+                intent.putExtra("pushid", "")
+            } else {
+                intent.putExtra("pushid", this.adapter.data.get(position).pushid.toString())
+            }
+            startActivity(intent)
+        }
     }
 
     override fun sunccess(bean: MutableList<TypeListBean.ResultBean.RecordsBean>) {

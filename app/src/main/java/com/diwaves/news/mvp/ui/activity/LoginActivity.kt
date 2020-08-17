@@ -5,6 +5,7 @@ import android.os.Bundle
 
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.diwaves.news.R
 import com.diwaves.news.di.component.DaggerLoginComponent
 import com.diwaves.news.di.module.LoginModule
@@ -76,25 +77,25 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
             slider.setEnabled(false)
             slider.setText("验证完成")
         }
-        iv_phone.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            if (isPsd) {
-                isPsd = false
-                iv_phone.setImageResource(R.mipmap.ic_password)
-                tv_phone.text = "密码登陆"
-                tv_get_code.visibility = View.GONE
-                et_psd.hint = "请输入密码"
-            } else {
-                isPsd = true
-                iv_phone.setImageResource(R.mipmap.ic_phone)
-                tv_phone.text = "手机号登陆"
-                tv_get_code.visibility = View.VISIBLE
-                et_psd.hint = "请输入验证码"
-            }
+        tv_psw.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+
+            isPsd = true
+            tv_get_code.visibility = View.GONE
+            et_psd.hint = "请输入密码"
+            tv_psw.setTextColor(ContextCompat.getColor(this, R.color.black))
+            tv_message.setTextColor(ContextCompat.getColor(this, R.color.color_959595))
+        }
+        tv_message.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            isPsd = false
+            tv_get_code.visibility = View.VISIBLE
+            et_psd.hint = "请输入验证码"
+            tv_psw.setTextColor(ContextCompat.getColor(this, R.color.color_959595))
+            tv_message.setTextColor(ContextCompat.getColor(this, R.color.black))
         }
         rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             postData()
         }
-        iv_close.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+        titleBar.setBackClick {
             finish()
         }
 
@@ -108,6 +109,12 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
             } else {
                 MyToast().makeToast(this, "未安装微信")
             }
+        }
+        tv_register.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+          startActivity(Intent(this,RegisterActivity::class.java))
+        }
+        tv_reset.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(this,ResetPassWordActivity::class.java))
         }
     }
 

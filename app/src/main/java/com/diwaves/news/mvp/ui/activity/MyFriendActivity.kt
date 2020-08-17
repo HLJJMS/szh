@@ -83,6 +83,9 @@ class MyFriendActivity : BaseActivity<MyFriendPresenter>(), MyFriendContract.Vie
             }
 
         })
+        titleBar.setBackClick { 
+            finish()
+        }
     }
 
     override fun success(bean: FriendListBean) {

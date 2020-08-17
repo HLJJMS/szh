@@ -72,10 +72,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     private val mTabEntities =
         ArrayList<CustomTabEntity>()
      val mFragments = ArrayList<Fragment>()
+
      var myFragment = MyFragment()
      val homeFragment = HomeFragment()
      val walletFragment = WalletFragment()
      val messageFragment = MessageFragment()
+
      var homePageAdapter: HomePageAdapter? = null
      var buttonList = ArrayList<ImageView>()
      var textList = ArrayList<TextView>()
@@ -148,7 +150,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             setButton(3)
         }
         iv_add.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
         tv_home.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {

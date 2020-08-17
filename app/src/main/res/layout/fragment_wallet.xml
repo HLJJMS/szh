@@ -29,7 +29,7 @@
         android:text="金币"
         android:textColor="#ff020202"
         android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/rb_login" />
 
     <ImageView
         android:id="@+id/iv_au"
@@ -242,58 +242,24 @@
         app:layout_constraintTop_toTopOf="@id/tv_au_record" />
 
 
-
-    <ImageView
-        android:id="@+id/iv_no_login"
-        android:layout_width="154dp"
-        android:layout_height="114dp"
-        android:src="@mipmap/bg_no_login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="47dp"
-        android:text="登录后可查看“钱包”页面"
-        android:textColor="#ff989898"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_no_login" />
-
     <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
         android:id="@+id/rb_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:paddingStart="34dp"
         android:paddingTop="8dp"
         android:paddingEnd="34dp"
         android:paddingBottom="8dp"
-        android:text="登录"
+        android:text="立即登录"
         android:textColor="#ff017bd0"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_login"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:qmui_backgroundColor="@color/qmui_config_color_white"
         app:qmui_borderColor="#ff017bd0"
         app:qmui_radius="5dp" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/g_login_off"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:constraint_referenced_ids="iv_no_login,tv_login,rb_login" />
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/g_login_on"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        app:constraint_referenced_ids="tv_au,iv_au,tv_number_au,rb_add,tv_ag,iv_ag,tv_number_ag,bg_one,imageView,week,tv_ag_record,tv_au_record,imageView2,tv_week,tv_day,tv_month,today,month" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

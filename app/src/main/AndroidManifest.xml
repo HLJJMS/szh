@@ -22,7 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/QMUI.NoActionBar">
         <activity android:name=".mvp.ui.activity.PingBiActivityActivity" />
-        <activity android:name=".PingBiActivity" />
         <activity android:name=".mvp.ui.activity.TypeListActivityActivity" />
         <activity android:name=".mvp.ui.activity.MyYuCeActivity" />
         <activity android:name=".mvp.ui.activity.MyArticleActivity" />

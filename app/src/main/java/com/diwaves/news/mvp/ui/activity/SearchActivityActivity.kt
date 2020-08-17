@@ -112,7 +112,7 @@ class SearchActivityActivity : BaseActivity<SearchActivityPresenter>(),
 
     }
 
-    override fun success(list: MutableList<RecommendBean.ResultBean>) {
+    override fun success(list: MutableList<RecommendBean.ResultEntity>) {
         adapter.setList(list)
     }
 

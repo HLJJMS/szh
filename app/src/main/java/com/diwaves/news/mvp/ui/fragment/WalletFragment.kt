@@ -78,35 +78,56 @@ class WalletFragment : BaseFragment<WalletPresenter>(), WalletContract.View {
         getData()
         //1:silver(银币) 2:gold(金币)
         tv_au_record.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            var intent = Intent(context, WalletRecordActivity::class.java)
-            intent.putExtra("type", "2")
-            startActivity(intent)
+            if (rb_login.visibility == View.GONE) {
+                var intent = Intent(context, WalletRecordActivity::class.java)
+                intent.putExtra("type", "2")
+                startActivity(intent)
+            } else {
+                var intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
+
         }
 
         tv_ag_record.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            var intent = Intent(context, WalletRecordActivity::class.java)
-            intent.putExtra("type", "1")
-            startActivity(intent)
+
+            if (rb_login.visibility == View.GONE) {
+                var intent = Intent(context, WalletRecordActivity::class.java)
+                intent.putExtra("type", "1")
+                startActivity(intent)
+            } else {
+                var intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
         rb_login.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             var intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
+
         }
         rb_add.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            var intent = Intent(context, AddRmbActivity::class.java)
-            startActivity(intent)
+
+            if (rb_login.visibility == View.GONE) {
+                var intent = Intent(context, AddRmbActivity::class.java)
+                startActivity(intent)
+            } else {
+                var intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
     fun getData() {
         if (!SPToll(mContext).getId().equals("")) {
-            g_login_off.visibility = View.GONE
-            g_login_on.visibility = View.VISIBLE
+            rb_login.visibility = View.GONE
             mPresenter?.getData()
-
         } else {
-            g_login_off.visibility = View.VISIBLE
-            g_login_on.visibility = View.GONE
+            rb_login.visibility = View.VISIBLE
+            tv_number_au.text = "0"
+            tv_number_ag.text = "0"
+            tv_day.text = "0"
+            tv_month.text = "0"
+            tv_week.text = "0"
         }
     }
 

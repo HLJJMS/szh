@@ -42,6 +42,7 @@
         android:paddingStart="13dp"
         android:paddingTop="7dp"
         android:paddingEnd="13dp"
+        android:visibility="gone"
         android:paddingBottom="7dp"
         android:text="回复"
         android:textColor="#FF5B5B5B"

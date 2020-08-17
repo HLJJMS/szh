@@ -6,458 +6,645 @@ import java.util.List;
 
 public class RecommendBean {
 
+
     /**
+     * result : [{"articlecontent":"\n                <p><\/p><p><img id=\"FC7600E9-F339-40DB-9E64-641DF9355A65-img\" class=\"real-img\" src=\"http://116.62.114.248:10019/image/article/20200817/f787f961634a4825a45469520c621a68.png\"><br><\/p><p><br><\/p>","bad":0,"tofans":1,"dislike":0,"link":"","createdate":"2020-08-17 13:12:00.0","remark":null,"pic":"http://116.62.114.248:10019/image/article/20200817/f787f961634a4825a45469520c621a68.png","title":"哈哈","type":0,"dirname":"文娱/原创","userid":42,"audiolength":0,"good":0,"content":"42525","score":0,"view":0,"top":0,"isUp":null,"dirid":27,"id":41363,"up":0,"state":0,"topdirid":4,"replycount":null,"reward":0,"website":"娃哈哈","like":0,"avatarUrl":"image/avatar/20200801/51bcec1e9f404b349bf855c66a2092d0.png","author":"娃哈哈","push":null,"tags":null,"commentCount":null,"pushid":null,"issuetime":null,"name":"娃哈哈","comment":0,"contenttext":null,"parentdirid":4,"silver":null,"tofriend":0,"category":1,"dzcount":null,"audiopath":""},{"articlecontent":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","bad":0,"tofans":1,"dislike":0,"link":"","createdate":"2020-05-30 04:05:00.0","remark":"","pic":"","title":"测试帖子","type":0,"dirname":"财经/沪深/创业板指","userid":35,"audiolength":0,"good":0,"content":"106","score":0,"view":62,"top":0,"isUp":null,"dirid":28,"id":109,"up":0,"state":0,"topdirid":null,"replycount":null,"reward":0,"website":"郑泽辉1","like":5,"avatarUrl":"image/avatar/20200616/97463940515e4016a5c894d26f886647.png","author":"","push":null,"tags":"","commentCount":null,"pushid":null,"issuetime":"2020-06-10 18:57:44.0","name":"郑泽辉1","comment":0,"contenttext":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","parentdirid":18,"silver":null,"tofriend":1,"category":1,"dzcount":null,"audiopath":""},{"articlecontent":"<p>中新社东莞6月10日电 (李映民 李纯)中国人民政治协商会议第十三届东莞市委员会第五次会议10日在东莞市举行。受新冠肺炎疫情的影响，当前东莞外贸企业受到较大冲击，外企如何稳定经营，谋求转型，适应后疫情时期的发展形势，成为了港澳政协委员关注的焦点。<\/p><p>随着新冠肺炎疫情在世界蔓延，以外贸为主的东莞外商企业的经营受到较大冲击。在此次会议分组讨论中，东莞市委书记梁维东与港澳政协委员们围绕疫情期间外企经营情况和经济发展形势、外贸企业未来转型升级和发展等进行讨论，探讨在粤港澳大湾区发展机遇下，东莞如何引入港澳现代服务业。<\/p><p>香港永聪实业有限公司董事长邓献伦表示，在此次新冠肺炎疫情中，东莞市政府快速、高效的防疫措施和为企业复工复产做的大量工作，让他对未来发展充满信心。当前外贸经营面临多重困境，更要积极转型发展，发挥港资企业的优势，融入粤港澳大湾区发展中。<\/p><p>东莞外商投资企业协会会长连汉森则建议，东莞可以搭建平台，通过在香港成立投资协会、在东莞成立粤港澳大湾区香港服务中心，招引更多香港优质企业和人才，为融入大湾区的港人港企提供服务，把粤港澳大湾区香港服务中心打造成引进金融、会计、律师等香港现代服务业的平台。<\/p><p>香港东莞社团总会常务副主席温小燕表示，在外贸市场受到疫情冲击的情况下，只有进入内销市场才能更好发展。现在很多外贸企业对网红带货、电商等内销新模式仍然非常陌生，她希望东莞能够加大扶持力度，对外贸企业进行培训和引导，让港资企业、台资企业等外贸企业能够跟上内销经济的新发展。<\/p><p>梁维东表示，东莞对外依存度高，在新的形势下，以港澳企业为代表的外贸企业要精准把握外贸市场的变化，千方百计巩固好欧美市场，开拓\u201c一带一路\u201d沿线国家市场，同时用前所未有的力度开拓国内市场，渡过难关。东莞也将出台多项政策大力帮助外贸企业转型升级。<\/p><p>梁维东称，港澳企业要发挥香港澳门在推动制造业升级、发展现代服务业等领域的优势，抓住粤港澳大湾区发展的机遇。接下来，东莞推动高质量发展，港澳企业要抓住机遇，引进新投资、大力增资扩产，实现企业高质量发展。(完)<\/p>","bad":0,"tofans":1,"dislike":0,"link":"http://www.chinanews.com/ga/2020/06-10/9208899.shtml","createdate":"2020-08-10 15:02","remark":null,"pic":null,"title":"港澳政协委员聚焦疫情下东莞外企转型","type":1,"dirname":"国内焦点","userid":1,"audiolength":0,"good":0,"content":"哈哈啊哈","score":3,"view":66,"top":0,"isUp":false,"dirid":4,"id":21681,"up":0,"state":0,"topdirid":null,"replycount":0,"reward":0,"website":"中国新闻网","like":1,"avatarUrl":"user.png","author":"自动","push":{"tofans":0,"articleid":21681,"type":1,"userid":35,"content":"哈哈啊哈","pushcount":6,"peoplecount":10,"coincount":10,"id":23,"createdatetime":"2020-08-10 15:02","tofriend":0,"up":0,"articles":null},"tags":"企业, 香港, 外贸, 东莞, 发展, 梁维东, 粤港澳大湾区, 力度, 市场, 疫情, 经济, 国内焦点","commentCount":null,"pushid":23,"issuetime":"2020-06-10 22:15:07.0","name":"admin","comment":0,"contenttext":"<p>中新社东莞6月10日电 (李映民 李纯)中国人民政治协商会议第十三届东莞市委员会第五次会议10日在东莞市举行。受新冠肺炎疫情的影响，当前东莞外贸企业受到较大冲击，外企如何稳定经营，谋求转型，适应后疫情时期的发展形势，成为了港澳政协委员关注的焦点。<\/p><p>随着新冠肺炎疫情在世界蔓延，以外贸为主的东莞外商企业的经营受到较大冲击。在此次会议分组讨论中，东莞市委书记梁维东与港澳政协委员们围绕疫情期间外企经营情况和经济发展形势、外贸企业未来转型升级和发展等进行讨论，探讨在粤港澳大湾区发展机遇下，东莞如何引入港澳现代服务业。<\/p><p>香港永聪实业有限公司董事长邓献伦表示，在此次新冠肺炎疫情中，东莞市政府快速、高效的防疫措施和为企业复工复产做的大量工作，让他对未来发展充满信心。当前外贸经营面临多重困境，更要积极转型发展，发挥港资企业的优势，融入粤港澳大湾区发展中。<\/p><p>东莞外商投资企业协会会长连汉森则建议，东莞可以搭建平台，通过在香港成立投资协会、在东莞成立粤港澳大湾区香港服务中心，招引更多香港优质企业和人才，为融入大湾区的港人港企提供服务，把粤港澳大湾区香港服务中心打造成引进金融、会计、律师等香港现代服务业的平台。<\/p><p>香港东莞社团总会常务副主席温小燕表示，在外贸市场受到疫情冲击的情况下，只有进入内销市场才能更好发展。现在很多外贸企业对网红带货、电商等内销新模式仍然非常陌生，她希望东莞能够加大扶持力度，对外贸企业进行培训和引导，让港资企业、台资企业等外贸企业能够跟上内销经济的新发展。<\/p><p>梁维东表示，东莞对外依存度高，在新的形势下，以港澳企业为代表的外贸企业要精准把握外贸市场的变化，千方百计巩固好欧美市场，开拓\u201c一带一路\u201d沿线国家市场，同时用前所未有的力度开拓国内市场，渡过难关。东莞也将出台多项政策大力帮助外贸企业转型升级。<\/p><p>梁维东称，港澳企业要发挥香港澳门在推动制造业升级、发展现代服务业等领域的优势，抓住粤港澳大湾区发展的机遇。接下来，东莞推动高质量发展，港澳企业要抓住机遇，引进新投资、大力增资扩产，实现企业高质量发展。(完)<\/p>","parentdirid":1,"silver":0,"tofriend":1,"category":1,"dzcount":0,"audiopath":""},{"articlecontent":"\n                <p><\/p><p><img id=\"559A713F-5BBC-4E9D-B9DA-0A3180A98B38-img\" class=\"real-img\" src=\"http://116.62.114.248:10019/image/article/20200817/add4eb05cb4d4d1da401f876ebcfd5e3.png\"><br><\/p><p><br><\/p>","bad":0,"tofans":1,"dislike":0,"link":"","createdate":"2020-08-17 13:14:00.0","remark":null,"pic":"[\"http://116.62.114.248:10019/image/article/20200817/add4eb05cb4d4d1da401f876ebcfd5e3.png\"]","title":"困么","type":0,"dirname":"时事/互联网","userid":42,"audiolength":0,"good":0,"content":"42526","score":0,"view":3,"top":0,"isUp":null,"dirid":13,"id":41364,"up":0,"state":0,"topdirid":1,"replycount":null,"reward":0,"website":"娃哈哈","like":0,"avatarUrl":"image/avatar/20200801/51bcec1e9f404b349bf855c66a2092d0.png","author":"娃哈哈","push":null,"tags":null,"commentCount":null,"pushid":null,"issuetime":null,"name":"娃哈哈","comment":0,"contenttext":"\n                <p><\/p><p><img id=\"559A713F-5BBC-4E9D-B9DA-0A3180A98B38-img\" class=\"real-img\" src=\"http://116.62.114.248:10019/image/article/20200817/add4eb05cb4d4d1da401f876ebcfd5e3.png\"><br><\/p><p><br><\/p>","parentdirid":1,"silver":null,"tofriend":0,"category":1,"dzcount":null,"audiopath":""},{"articlecontent":"\n                <p>陌陌摸摸呢<\/p>","bad":0,"tofans":1,"dislike":0,"link":"","createdate":"2020-08-17 13:04:00.0","remark":null,"pic":null,"title":"噢噢噢噢噢噢","type":0,"dirname":"财经/沪深股指","userid":42,"audiolength":0,"good":0,"content":"42524","score":0,"view":0,"top":0,"isUp":null,"dirid":31,"id":41362,"up":0,"state":0,"topdirid":2,"replycount":null,"reward":0,"website":"娃哈哈","like":0,"avatarUrl":"image/avatar/20200801/51bcec1e9f404b349bf855c66a2092d0.png","author":"娃哈哈","push":null,"tags":null,"commentCount":null,"pushid":null,"issuetime":null,"name":"娃哈哈","comment":0,"contenttext":null,"parentdirid":2,"silver":null,"tofriend":0,"category":1,"dzcount":null,"audiopath":""},{"articlecontent":"\n                <p>看图<\/p>","bad":0,"tofans":1,"dislike":0,"link":"","createdate":"2020-08-17 13:03:00.0","remark":null,"pic":null,"title":"啊啊啊","type":0,"dirname":"财经/原创","userid":42,"audiolength":0,"good":0,"content":"42523","score":0,"view":0,"top":0,"isUp":null,"dirid":25,"id":41361,"up":0,"state":0,"topdirid":2,"replycount":null,"reward":0,"website":"娃哈哈","like":0,"avatarUrl":"image/avatar/20200801/51bcec1e9f404b349bf855c66a2092d0.png","author":"娃哈哈","push":null,"tags":null,"commentCount":null,"pushid":null,"issuetime":null,"name":"娃哈哈","comment":0,"contenttext":null,"parentdirid":2,"silver":null,"tofriend":0,"category":1,"dzcount":null,"audiopath":""},{"articlecontent":"<h3>(抗击新冠肺炎)中外专家一致认同疫情凸显国际合作重要性<\/h3><p>中新社北京6月10日电 (记者 刁海洋)全球智库抗疫合作云论坛于北京时间6月9日至10日举行。在10日举行的\u201c国际抗疫合作：机遇与挑战\u201d分论坛上，20多位中外专家就国际组织在疫情中发挥的作用、全球化走势以及国际合作的重要意义等议题进行研讨。<\/p><p>该分论坛由全球化智库承办。全球化智库创始人兼理事长王辉耀当天表示，疫情对全球经济的冲击是史无前例的。发展中国家受到的冲击更为严重。各方力量应该团结起来，推动合作应对疫情。<\/p><h3>支持多边机构发挥作用<\/h3><p>亚洲基础设施投资银行副行长艾德明表示，各国应继续加强对多边机构的支持，这对于各国走出当前困境非常有帮助。比如，亚投行与亚洲开发银行紧密合作，开展了一系列财政援助项目。他还表示，疫情过后，亚洲地区在基础设施投资方面的需求将更加明显。<\/p><p>日本贸易振兴机构香港负责人长谷川裕也指出，新冠疫情带来的启示是，要加强合作而非孤立，世界卫生组织可有效降低疫情带来的负面影响。他表示，信任对于国际机构的正常运行至关重要。各国有必要建立更坚韧的互信体系。<\/p><p>非洲发展研究中心首席执行官芮婉洁同样认为，多边机构的作用不可或缺。她以当前疫情举例称，非洲疾控中心在疫情暴发后迅速反应，给非洲各国提供了及时全面的防疫信息和指导，这是非洲当前疫情未出现\u201c灾难性\u201d暴发的一个主要原因。<\/p><h3>全球化只能走深不能倒退<\/h3><p>意大利经济发展部前副部长杰拉奇表示，新冠疫情确实严重影响到旅游业、运输业等行业，但这并不意味着全球化正在衰退，以数字产业为代表的新兴产业将使全球化趋势得到加强。他说，不应该让保护主义大行其道，各国需要拉近距离，而不是相反。<\/p><p>杰拉奇称，疫情让很多国家开始审视自身存在的体制与社会结构缺陷，并开始以更开放的眼光寻求应对危机的方法。他说，认识到他国政策的相对合理性与可借鉴性，是促进国际合作的重要条件。<\/p><p>德国材料经济研究所创始所长乌尔里希·布鲁姆表示，当前，全球化受到严峻挑战，疫情在一定程度上加速了逆全球化的进程。他认为，全球亟需建立更加稳定的经济和政治秩序。世界必须在不使全球化倒退的情况下提高经济的稳健性。他认为，应进一步发挥世贸组织和亚投行等多边机构的作用。<\/p><h3>疫情凸显国际合作重要性<\/h3><p>尼泊尔喜马拉雅共识研究所创始所长龙安志说，新冠疫情给了我们很多教训。其中一个很重要的教训就是，面对全球大流行病时，我们加强合作。同时，我们对未来的潜在危机应提早准备。我们应学会及时分享信息，而不是谋划\u201c脱钩\u201d。<\/p><p>马来西亚金斯利战略研究院主席丹斯里·杨元庆表示，疫情显示出国际合作和多边主义的重要性。就东亚而言，各国在金融、贸易和基础设施建设等领域加强合作非常有必要，也将创造出更多机遇。<\/p><p>埃及前副总理齐亚德·巴哈·埃尔丁表示，面向未来，我们必须有意识避免重复过去。如果我们要真正克服当前危机，避免未来出现类似危机，那我们就要批判性地审视当前经济、社会和政治框架，共同努力创造一个更美好、繁荣的世界。(完)<\/p>","bad":0,"tofans":1,"dislike":0,"link":"http://www.chinanews.com/gj/2020/06-11/9208967.shtml","createdate":"2020-08-10 15:05","remark":null,"pic":null,"title":"中外专家一致认同疫情凸显国际合作重要性","type":1,"dirname":"国内焦点","userid":1,"audiolength":0,"good":0,"content":"呵呵呵","score":5,"view":63,"top":0,"isUp":false,"dirid":4,"id":21670,"up":0,"state":0,"topdirid":null,"replycount":7,"reward":0,"website":"中国新闻网","like":2,"avatarUrl":"user.png","author":"自动","push":{"tofans":0,"articleid":21670,"type":1,"userid":35,"content":"呵呵呵","pushcount":6,"peoplecount":10,"coincount":10,"id":24,"createdatetime":"2020-08-10 15:05","tofriend":0,"up":1,"articles":null},"tags":"全球化, 合作, 疫情, 国际, 经济, 亚洲, 非洲, 机构, 抗疫, 金斯利, 国际, 国内焦点","commentCount":null,"pushid":24,"issuetime":"2020-06-11 03:11:16.0","name":"admin","comment":0,"contenttext":"<h3>(抗击新冠肺炎)中外专家一致认同疫情凸显国际合作重要性<\/h3><p>中新社北京6月10日电 (记者 刁海洋)全球智库抗疫合作云论坛于北京时间6月9日至10日举行。在10日举行的\u201c国际抗疫合作：机遇与挑战\u201d分论坛上，20多位中外专家就国际组织在疫情中发挥的作用、全球化走势以及国际合作的重要意义等议题进行研讨。<\/p><p>该分论坛由全球化智库承办。全球化智库创始人兼理事长王辉耀当天表示，疫情对全球经济的冲击是史无前例的。发展中国家受到的冲击更为严重。各方力量应该团结起来，推动合作应对疫情。<\/p><h3>支持多边机构发挥作用<\/h3><p>亚洲基础设施投资银行副行长艾德明表示，各国应继续加强对多边机构的支持，这对于各国走出当前困境非常有帮助。比如，亚投行与亚洲开发银行紧密合作，开展了一系列财政援助项目。他还表示，疫情过后，亚洲地区在基础设施投资方面的需求将更加明显。<\/p><p>日本贸易振兴机构香港负责人长谷川裕也指出，新冠疫情带来的启示是，要加强合作而非孤立，世界卫生组织可有效降低疫情带来的负面影响。他表示，信任对于国际机构的正常运行至关重要。各国有必要建立更坚韧的互信体系。<\/p><p>非洲发展研究中心首席执行官芮婉洁同样认为，多边机构的作用不可或缺。她以当前疫情举例称，非洲疾控中心在疫情暴发后迅速反应，给非洲各国提供了及时全面的防疫信息和指导，这是非洲当前疫情未出现\u201c灾难性\u201d暴发的一个主要原因。<\/p><h3>全球化只能走深不能倒退<\/h3><p>意大利经济发展部前副部长杰拉奇表示，新冠疫情确实严重影响到旅游业、运输业等行业，但这并不意味着全球化正在衰退，以数字产业为代表的新兴产业将使全球化趋势得到加强。他说，不应该让保护主义大行其道，各国需要拉近距离，而不是相反。<\/p><p>杰拉奇称，疫情让很多国家开始审视自身存在的体制与社会结构缺陷，并开始以更开放的眼光寻求应对危机的方法。他说，认识到他国政策的相对合理性与可借鉴性，是促进国际合作的重要条件。<\/p><p>德国材料经济研究所创始所长乌尔里希·布鲁姆表示，当前，全球化受到严峻挑战，疫情在一定程度上加速了逆全球化的进程。他认为，全球亟需建立更加稳定的经济和政治秩序。世界必须在不使全球化倒退的情况下提高经济的稳健性。他认为，应进一步发挥世贸组织和亚投行等多边机构的作用。<\/p><h3>疫情凸显国际合作重要性<\/h3><p>尼泊尔喜马拉雅共识研究所创始所长龙安志说，新冠疫情给了我们很多教训。其中一个很重要的教训就是，面对全球大流行病时，我们加强合作。同时，我们对未来的潜在危机应提早准备。我们应学会及时分享信息，而不是谋划\u201c脱钩\u201d。<\/p><p>马来西亚金斯利战略研究院主席丹斯里·杨元庆表示，疫情显示出国际合作和多边主义的重要性。就东亚而言，各国在金融、贸易和基础设施建设等领域加强合作非常有必要，也将创造出更多机遇。<\/p><p>埃及前副总理齐亚德·巴哈·埃尔丁表示，面向未来，我们必须有意识避免重复过去。如果我们要真正克服当前危机，避免未来出现类似危机，那我们就要批判性地审视当前经济、社会和政治框架，共同努力创造一个更美好、繁荣的世界。(完)<\/p>","parentdirid":1,"silver":0,"tofriend":1,"category":1,"dzcount":1,"audiopath":""}]
+     * code : 200
      * success : true
      * message : 操作成功！
-     * code : 200
-     * result : [{"id":110,"title":"我的第一个帖子","content":"测试推送","grandpadirid":null,"dirid":21,"dirname":"财经/沪深/上证指数","userid":1,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-05-31","remark":"","reward":0,"pic":"","category":1,"audiolength":0,"audiopath":"","contenttext":"<p>我的第一个帖子<span style=\"font-size: 1.1rem;\">我的第一个帖子<\/span><\/p>","view":2,"website":"","author":"","issuetime":"","link":"","parentdirid":18,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"","top":0,"articlecontent":"<p>我的第一个帖子<span style=\"font-size: 1.1rem;\">我的第一个帖子<\/span><\/p>","name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":1,"pushid":2},{"id":112,"title":"\t我的第一个帖子11","content":"这是第4条推荐内容","grandpadirid":null,"dirid":24,"dirname":"财经/沪深/深证指数","userid":1,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-05-31","remark":"","reward":0,"pic":"","category":1,"audiolength":0,"audiopath":"","contenttext":" 我的第一个帖子我的第一个帖子","view":0,"website":"","author":"","issuetime":"","link":"","parentdirid":18,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"","top":0,"articlecontent":"<p>&nbsp;我的第一个帖子<span style=\"font-size: 1.1rem;\">我的第一个帖子<\/span><\/p>","name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":1,"pushid":4},{"id":20092,"title":" 香港特区政府开设宣传香港维护国家安全立法网站","content":"20098","grandpadirid":null,"dirid":4,"dirname":"国内焦点","userid":1,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-06-10 00:08:51","remark":null,"reward":0,"pic":null,"category":1,"audiolength":0,"audiopath":"","contenttext":"<p>香港特区政府近期开设宣传香港维护国家安全立法网站，首页顶端以醒目的字体清晰地书写维护国家安全的标语。<\/p><p>在标语下方左侧是一段长达30分钟的宣传短片，以特首讲话等形式介绍相关立法的重要性。<\/p><p>在视频右方是与立法相关的新闻链接，较为全面地反映了近期与立法相关的新闻内容。<\/p>","view":5,"website":"21CN","author":"自动","issuetime":"2020-06-05 11:18:51","link":"http://news.21cn.com/domestic/yaowen/a/2020/0605/11/33859353.shtml","parentdirid":1,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"['维护', '香港', '立法', '国家', '安全', '宣传', '标语', '新闻', '长达', '醒目', '体育', '国内焦点']","top":0,"articlecontent":"<p>香港特区政府近期开设宣传香港维护国家安全立法网站，首页顶端以醒目的字体清晰地书写维护国家安全的标语。<\/p><p>在标语下方左侧是一段长达30分钟的宣传短片，以特首讲话等形式介绍相关立法的重要性。<\/p><p>在视频右方是与立法相关的新闻链接，较为全面地反映了近期与立法相关的新闻内容。<\/p>","name":null,"avatarUrl":null,"commentCount":null,"type":0,"pushid":null},{"id":21167,"title":"十年赛季评分：梅西碾压C罗 9年压倒仅1年并肩","content":"21173","grandpadirid":null,"dirid":7,"dirname":"体育焦点","userid":1,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-06-10 19:47:04","remark":null,"reward":0,"pic":"thu671e5cd4d34e430382b16f28965b0397.jpg","category":1,"audiolength":0,"audiopath":"","contenttext":"<h5><img src=\"http://101.133.175.194/IComment/upload/thu671e5cd4d34e430382b16f28965b0397.jpg\"><\/h5><p>根据WhoScored网站的评分显示，梅西在过去十年的赛季评分完全压过了C罗。<\/p><p>该网站利用20套数据来对梅西与C罗过去十年的表现进行评分，最终得出的结果，是梅西占据了压倒性的优势。<\/p><p>过去十年里，梅西在西甲里的场均评分是8.6分（满分10分），而C罗在这十年里的场均评分为8.3分。<\/p><p>在这十年中，只有2013-14赛季，C罗的赛季评分与梅西持平。<\/p><p>本赛季，梅西与C罗的较量还在继续，阿根廷人为巴萨出场31次，打进24球，助攻16次。在尤文图斯，C罗出场32次，打进25球，助攻2次。<\/p>","view":37,"website":"新浪","author":"自动","issuetime":"2020-06-10 19:18:00","link":"https://sports.sina.com.cn/g/laliga/2020-06-10/doc-iircuyvi7777537.shtml","parentdirid":1,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"['十年', '梅西', '评分', '西甲', '出场', '套', '赛季', '巴萨', '梅西与C罗', '尤文图斯', '体育', '体育焦点']","top":0,"articlecontent":"<h5><img src=\"http://101.133.175.194/IComment/upload/thu671e5cd4d34e430382b16f28965b0397.jpg\"><\/h5><p>根据WhoScored网站的评分显示，梅西在过去十年的赛季评分完全压过了C罗。<\/p><p>该网站利用20套数据来对梅西与C罗过去十年的表现进行评分，最终得出的结果，是梅西占据了压倒性的优势。<\/p><p>过去十年里，梅西在西甲里的场均评分是8.6分（满分10分），而C罗在这十年里的场均评分为8.3分。<\/p><p>在这十年中，只有2013-14赛季，C罗的赛季评分与梅西持平。<\/p><p>本赛季，梅西与C罗的较量还在继续，阿根廷人为巴萨出场31次，打进24球，助攻16次。在尤文图斯，C罗出场32次，打进25球，助攻2次。<\/p>","name":null,"avatarUrl":null,"commentCount":null,"type":0,"pushid":null},{"id":109,"title":"测试帖子","content":"测试推送","grandpadirid":null,"dirid":28,"dirname":"财经/沪深/创业板指","userid":30,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-05-31","remark":"","reward":0,"pic":"","category":1,"audiolength":0,"audiopath":"","contenttext":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","view":21,"website":"","author":"","issuetime":"","link":"","parentdirid":18,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"","top":0,"articlecontent":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":1,"pushid":1},{"id":21177,"title":"河北邢台一男子酒驾撞伤交警逃逸 已投案自首","content":"21183","grandpadirid":null,"dirid":4,"dirname":"国内焦点","userid":1,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-06-10 19:47:14","remark":null,"reward":0,"pic":null,"category":1,"audiolength":0,"audiopath":"","contenttext":"<p>中新网邢台6月10日电 (张鹏翔 李铁锤)针对河北邢台一男子驾车强行闯卡撞伤辅警逃逸一事，邢台市公安交通警察支队10日通报称，9日22时许，交警部门在进行夜查酒驾行动时，一男子驾车拒不接受检查并强行闯卡，在撞伤一名辅警后仍强行驶离。10日，嫌疑人王某某迫于法律威慑，投案自首。目前，此案正在进一步调查中。<\/p><p>通报称，2020年6月9日22时许，邢台市公安局交警支队桥东区二大队执勤民警在邢台市平安路与红星街交叉口附近设卡进行夜查酒驾行动，一辆白色轿车拒不接受检查，并强行闯卡，在撞伤一名辅警后仍强行驶离。交警大队民警立即锁定嫌疑车辆，并在邢台市七里河体育公园停车场发现该车。<\/p><p>10日2时许，嫌疑人王某某(男，32岁)迫于法律威慑，到邢台市公安局桥东分局南长街派出所投案自首。经初步调查，王某某承认自己是酒后驾驶。<\/p><p>目前，此案正在进一步调查中。(完)<\/p>","view":6,"website":"中国新闻网","author":"自动","issuetime":"2020-06-10 18:40:46","link":"http://www.chinanews.com/sh/2020/06-10/9208680.shtml","parentdirid":1,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"['邢台市', '李铁锤', '酒驾', '轿车', '红星街', '男子', '初步', '王某某', '七里河', '平安路', '社会', '国内焦点']","top":0,"articlecontent":"<p>中新网邢台6月10日电 (张鹏翔 李铁锤)针对河北邢台一男子驾车强行闯卡撞伤辅警逃逸一事，邢台市公安交通警察支队10日通报称，9日22时许，交警部门在进行夜查酒驾行动时，一男子驾车拒不接受检查并强行闯卡，在撞伤一名辅警后仍强行驶离。10日，嫌疑人王某某迫于法律威慑，投案自首。目前，此案正在进一步调查中。<\/p><p>通报称，2020年6月9日22时许，邢台市公安局交警支队桥东区二大队执勤民警在邢台市平安路与红星街交叉口附近设卡进行夜查酒驾行动，一辆白色轿车拒不接受检查，并强行闯卡，在撞伤一名辅警后仍强行驶离。交警大队民警立即锁定嫌疑车辆，并在邢台市七里河体育公园停车场发现该车。<\/p><p>10日2时许，嫌疑人王某某(男，32岁)迫于法律威慑，到邢台市公安局桥东分局南长街派出所投案自首。经初步调查，王某某承认自己是酒后驾驶。<\/p><p>目前，此案正在进一步调查中。(完)<\/p>","name":null,"avatarUrl":null,"commentCount":null,"type":0,"pushid":null},{"id":21175,"title":"第127届广交会将于6月15日至24日在网上举办","content":"21181","grandpadirid":null,"dirid":4,"dirname":"国内焦点","userid":1,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-06-10 19:47:10","remark":null,"reward":0,"pic":null,"category":1,"audiolength":0,"audiopath":"","contenttext":"<p>6月10日，商务部召开网上专题新闻发布会，介绍第127届广交会有关筹备情况。中国对外贸易中心主任李晋奇介绍，为稳住外贸外资基本盘，扩大对外开放，帮助中外企业开拓市场，中国政府决定，第127届广交会将在网上举办，运用先进信息技术，让中外客商足不出户下订单、做生意。<\/p>","view":6,"website":"21CN","author":"自动","issuetime":"2020-06-10 19:35:28","link":"http://news.21cn.com/domestic/yaowen/a/2020/0610/19/33861678.shtml","parentdirid":1,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"['中国', '李晋奇', '扩大', '对外', '开拓', '外贸', '基本盘', '网上', '户下', '中心', '国际', '国内焦点']","top":0,"articlecontent":"<p>6月10日，商务部召开网上专题新闻发布会，介绍第127届广交会有关筹备情况。中国对外贸易中心主任李晋奇介绍，为稳住外贸外资基本盘，扩大对外开放，帮助中外企业开拓市场，中国政府决定，第127届广交会将在网上举办，运用先进信息技术，让中外客商足不出户下订单、做生意。<\/p>","name":null,"avatarUrl":null,"commentCount":null,"type":0,"pushid":null},{"id":111,"title":"地产以双方打","content":"测试推送","grandpadirid":null,"dirid":24,"dirname":"财经/沪深/深证指数","userid":1,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-05-31","remark":"","reward":0,"pic":"","category":1,"audiolength":0,"audiopath":"","contenttext":"地产以双方打","view":0,"website":"","author":"","issuetime":"","link":"","parentdirid":18,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"","top":0,"articlecontent":"<p>地产以双方打<\/p>","name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":1,"pushid":3},{"id":21176,"title":"打开微信，随时随地开启5G美好生活","content":"21182","grandpadirid":null,"dirid":14,"dirname":"科技焦点","userid":1,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-06-10 19:47:10","remark":null,"reward":0,"pic":"thuef68c48361294384a1f43cdb089a3158.com_large_pgc_image_989daa23d6db4496b5d7c1dd3a9d2286","category":1,"audiolength":0,"audiopath":"","contenttext":"<p>5G来了！\"5G网络\"、\"5G手机\"毫无疑问成为2020年通信市场的关键词，越来越多的用户选择让5G走进生活。您是否拥有5G手机？是否也想体验5G高速互联的快感呢？<\/p><h5><img src=\"http://101.133.175.194/IComment/upload/thuef68c48361294384a1f43cdb089a3158.com_large_pgc_image_989daa23d6db4496b5d7c1dd3a9d2286\"><\/h5><p>联通\"5G升级包\"携手腾讯来了，多项权益满足您对5G的美好愿望！5G网络最高可达4G网络百倍的数据传输速率，可助您几秒钟下载一部超清电影，实现身临其境感受VR奇幻世界，甚至低配置畅玩大型云游戏\u2026\u2026无限可能只需要您通过手机微信客户端，点击\"我-支付-手机充值\"，足不出户即可完成订购，享受专属于您的5G之旅。<\/p><p>目前，联通携手腾讯为用户推出的5G升级包产品分为29元/月、69元/月两档，订购后立即生效，次月自动续订。两款产品与用户当前的套餐不冲突，相当于套餐之外单独增加的5G速率通用流量包。套餐内容方面，为76元及以上套餐用户提供29元5G升级包产品，内含国内流量10GB；另为36元及以上套餐用户同样提供了69元5G升级包产品，内含国内流量30GB。两档产品除了包含国内通用流量，均包含 \"优惠购\"及\"5G优享服务\"。<\/p><p>其中\"优惠购\"权益为用户提供会员折扣、红包等福利，涵盖视频、出行、娱乐、生活、教育等方面，每月最高可节省150元。\"5G优享服务\"权益即为5G手机用户提供上行速率峰值100Mbps,下行速率峰值500Mbps的高速率服务，帮助用户获得更快更真实的5G体验。<\/p><p>此次，联通与腾讯合作推出的5G升级包，让用户不换卡、不换号，打开微信，即刻开启5G美好生活。<\/p>","view":6,"website":"飞象网","author":"自动","issuetime":"2020-06-10 19:06:53","link":"http://www.cctime.com/html/2020-6-10/1520555.htm","parentdirid":1,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"['套餐', '手机', '用户', '级包', '腾讯', '联通', '通用', '大型', '折扣', '高速', '数码', '科技焦点']","top":0,"articlecontent":"<p>5G来了！\"5G网络\"、\"5G手机\"毫无疑问成为2020年通信市场的关键词，越来越多的用户选择让5G走进生活。您是否拥有5G手机？是否也想体验5G高速互联的快感呢？<\/p><h5><img src=\"http://101.133.175.194/IComment/upload/thuef68c48361294384a1f43cdb089a3158.com_large_pgc_image_989daa23d6db4496b5d7c1dd3a9d2286\"><\/h5><p>联通\"5G升级包\"携手腾讯来了，多项权益满足您对5G的美好愿望！5G网络最高可达4G网络百倍的数据传输速率，可助您几秒钟下载一部超清电影，实现身临其境感受VR奇幻世界，甚至低配置畅玩大型云游戏\u2026\u2026无限可能只需要您通过手机微信客户端，点击\"我-支付-手机充值\"，足不出户即可完成订购，享受专属于您的5G之旅。<\/p><p>目前，联通携手腾讯为用户推出的5G升级包产品分为29元/月、69元/月两档，订购后立即生效，次月自动续订。两款产品与用户当前的套餐不冲突，相当于套餐之外单独增加的5G速率通用流量包。套餐内容方面，为76元及以上套餐用户提供29元5G升级包产品，内含国内流量10GB；另为36元及以上套餐用户同样提供了69元5G升级包产品，内含国内流量30GB。两档产品除了包含国内通用流量，均包含 \"优惠购\"及\"5G优享服务\"。<\/p><p>其中\"优惠购\"权益为用户提供会员折扣、红包等福利，涵盖视频、出行、娱乐、生活、教育等方面，每月最高可节省150元。\"5G优享服务\"权益即为5G手机用户提供上行速率峰值100Mbps,下行速率峰值500Mbps的高速率服务，帮助用户获得更快更真实的5G体验。<\/p><p>此次，联通与腾讯合作推出的5G升级包，让用户不换卡、不换号，打开微信，即刻开启5G美好生活。<\/p>","name":null,"avatarUrl":null,"commentCount":null,"type":0,"pushid":null}]
-     * timestamp : 1593052786717
+     * timestamp : 1597667881135
      */
-
+    private List<ResultEntity> result;
+    private String code;
     private boolean success;
     private String message;
-    private String code;
     private long timestamp;
-    private List<ResultBean> result;
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getCode() {
-        return code;
+    public void setResult(List<ResultEntity> result) {
+        this.result = result;
     }
 
     public void setCode(String code) {
         this.code = code;
     }
 
-    public long getTimestamp() {
-        return timestamp;
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
-    public List<ResultBean> getResult() {
+    public List<ResultEntity> getResult() {
         return result;
     }
 
-    public void setResult(List<ResultBean> result) {
-        this.result = result;
+    public String getCode() {
+        return code;
     }
 
-    public static class ResultBean  implements MultiItemEntity {
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public class ResultEntity implements MultiItemEntity {
         /**
-         * id : 110
-         * title : 我的第一个帖子
-         * content : 测试推送
-         * grandpadirid : null
-         * dirid : 21
-         * dirname : 财经/沪深/上证指数
-         * userid : 1
-         * up : 0
-         * push : 0
-         * comment : 0
-         * state : 0
-         * createdate : 2020-05-31
-         * remark :
-         * reward : 0
-         * pic :
-         * category : 1
-         * audiolength : 0
-         * audiopath :
-         * contenttext : <p>我的第一个帖子<span style="font-size: 1.1rem;">我的第一个帖子</span></p>
-         * view : 2
-         * website :
-         * author :
-         * issuetime :
-         * link :
-         * parentdirid : 18
-         * like : 0
-         * dislike : 0
-         * good : 0
+         * articlecontent :
+         <p></p><p><img id="FC7600E9-F339-40DB-9E64-641DF9355A65-img" class="real-img" src="http://116.62.114.248:10019/image/article/20200817/f787f961634a4825a45469520c621a68.png"><br></p><p><br></p>
          * bad : 0
          * tofans : 1
-         * tofriend : 1
-         * tags :
+         * dislike : 0
+         * link :
+         * createdate : 2020-08-17 13:12:00.0
+         * remark : null
+         * pic : http://116.62.114.248:10019/image/article/20200817/f787f961634a4825a45469520c621a68.png
+         * title : 哈哈
+         * type : 0
+         * dirname : 文娱/原创
+         * userid : 42
+         * audiolength : 0
+         * good : 0
+         * content : 42525
+         * score : 0
+         * view : 0
          * top : 0
-         * articlecontent : <p>我的第一个帖子<span style="font-size: 1.1rem;">我的第一个帖子</span></p>
-         * name : 郑泽辉
-         * avatarUrl : http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png
+         * isUp : null
+         * dirid : 27
+         * id : 41363
+         * up : 0
+         * state : 0
+         * topdirid : 4
+         * replycount : null
+         * reward : 0
+         * website : 娃哈哈
+         * like : 0
+         * avatarUrl : image/avatar/20200801/51bcec1e9f404b349bf855c66a2092d0.png
+         * author : 娃哈哈
+         * push : null
+         * tags : null
          * commentCount : null
-         * type : 1
-         * pushid : 2
+         * pushid : null
+         * issuetime : null
+         * name : 娃哈哈
+         * comment : 0
+         * contenttext : null
+         * parentdirid : 4
+         * silver : null
+         * tofriend : 0
+         * category : 1
+         * dzcount : null
+         * audiopath :
          */
-
-        private int id;
-        private String title;
-        private String content;
-        private Object grandpadirid;
-        private int dirid;
-        private String dirname;
-        private int userid;
-        private int up;
-        private int push;
-        private int comment;
-        private int state;
-        private String createdate;
-        private String remark;
-        private int reward;
-        private String pic;
-        private int category;
-        private int audiolength;
-        private String audiopath;
-        private String contenttext;
-        private int view;
-        private String website;
-        private String author;
-        private String issuetime;
-        private String link;
-        private int parentdirid;
-        private int like;
-        private int dislike;
-        private int good;
+        private String articlecontent;
         private int bad;
         private int tofans;
-        private int tofriend;
-        private String tags;
-        private int top;
-        private String articlecontent;
-        private String name;
-        private String avatarUrl;
-        private Object commentCount;
+        private int dislike;
+        private String link;
+        private String createdate;
+        private String remark;
+        private String pic;
+        private String title;
         private int type;
-        private int pushid;
+        private String dirname;
+        private int userid;
+        private int audiolength;
+        private int good;
+        private String content;
+        private int score;
+        private int view;
+        private int top;
+        private String isUp;
+        private int dirid;
+        private int id;
+        private int up;
+        private int state;
+        private int topdirid;
+        private String replycount;
+        private int reward;
+        private String website;
+        private int like;
+        private String avatarUrl;
+        private String author;
+        private PushBean push;
+        private String tags;
+        private String commentCount;
+        private String pushid;
+        private String issuetime;
+        private String name;
+        private int comment;
+        private String contenttext;
+        private int parentdirid;
+        private String silver;
+        private int tofriend;
+        private int category;
+        private String dzcount;
+        private String audiopath;
 
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
-
-        public Object getGrandpadirid() {
-            return grandpadirid;
-        }
-
-        public void setGrandpadirid(Object grandpadirid) {
-            this.grandpadirid = grandpadirid;
-        }
-
-        public int getDirid() {
-            return dirid;
-        }
-
-        public void setDirid(int dirid) {
-            this.dirid = dirid;
-        }
-
-        public String getDirname() {
-            return dirname;
-        }
-
-        public void setDirname(String dirname) {
-            this.dirname = dirname;
-        }
-
-        public int getUserid() {
-            return userid;
-        }
-
-        public void setUserid(int userid) {
-            this.userid = userid;
-        }
-
-        public int getUp() {
-            return up;
-        }
-
-        public void setUp(int up) {
-            this.up = up;
-        }
-
-        public int getPush() {
-            return push;
-        }
-
-        public void setPush(int push) {
-            this.push = push;
-        }
-
-        public int getComment() {
-            return comment;
-        }
-
-        public void setComment(int comment) {
-            this.comment = comment;
-        }
-
-        public int getState() {
-            return state;
-        }
-
-        public void setState(int state) {
-            this.state = state;
-        }
-
-        public String getCreatedate() {
-            return createdate;
-        }
-
-        public void setCreatedate(String createdate) {
-            this.createdate = createdate;
-        }
-
-        public String getRemark() {
-            return remark;
-        }
-
-        public void setRemark(String remark) {
-            this.remark = remark;
-        }
-
-        public int getReward() {
-            return reward;
-        }
-
-        public void setReward(int reward) {
-            this.reward = reward;
-        }
-
-        public String getPic() {
-            return pic;
-        }
-
-        public void setPic(String pic) {
-            this.pic = pic;
-        }
-
-        public int getCategory() {
-            return category;
-        }
-
-        public void setCategory(int category) {
-            this.category = category;
-        }
-
-        public int getAudiolength() {
-            return audiolength;
-        }
-
-        public void setAudiolength(int audiolength) {
-            this.audiolength = audiolength;
-        }
-
-        public String getAudiopath() {
-            return audiopath;
-        }
-
-        public void setAudiopath(String audiopath) {
-            this.audiopath = audiopath;
-        }
-
-        public String getContenttext() {
-            return contenttext;
-        }
-
-        public void setContenttext(String contenttext) {
-            this.contenttext = contenttext;
-        }
-
-        public int getView() {
-            return view;
-        }
-
-        public void setView(int view) {
-            this.view = view;
-        }
-
-        public String getWebsite() {
-            return website;
-        }
-
-        public void setWebsite(String website) {
-            this.website = website;
-        }
-
-        public String getAuthor() {
-            return author;
-        }
-
-        public void setAuthor(String author) {
-            this.author = author;
-        }
-
-        public String getIssuetime() {
-            return issuetime;
-        }
-
-        public void setIssuetime(String issuetime) {
-            this.issuetime = issuetime;
-        }
-
-        public String getLink() {
-            return link;
-        }
-
-        public void setLink(String link) {
-            this.link = link;
-        }
-
-        public int getParentdirid() {
-            return parentdirid;
-        }
-
-        public void setParentdirid(int parentdirid) {
-            this.parentdirid = parentdirid;
-        }
-
-        public int getLike() {
-            return like;
-        }
-
-        public void setLike(int like) {
-            this.like = like;
-        }
-
-        public int getDislike() {
-            return dislike;
-        }
-
-        public void setDislike(int dislike) {
-            this.dislike = dislike;
-        }
-
-        public int getGood() {
-            return good;
-        }
-
-        public void setGood(int good) {
-            this.good = good;
-        }
-
-        public int getBad() {
-            return bad;
+        public void setArticlecontent(String articlecontent) {
+            this.articlecontent = articlecontent;
         }
 
         public void setBad(int bad) {
             this.bad = bad;
         }
 
-        public int getTofans() {
-            return tofans;
-        }
-
         public void setTofans(int tofans) {
             this.tofans = tofans;
         }
 
-        public int getTofriend() {
-            return tofriend;
+        public void setDislike(int dislike) {
+            this.dislike = dislike;
         }
 
-        public void setTofriend(int tofriend) {
-            this.tofriend = tofriend;
+        public void setLink(String link) {
+            this.link = link;
         }
 
-        public String getTags() {
-            return tags;
+        public void setCreatedate(String createdate) {
+            this.createdate = createdate;
         }
 
-        public void setTags(String tags) {
-            this.tags = tags;
+        public void setRemark(String remark) {
+            this.remark = remark;
         }
 
-        public int getTop() {
-            return top;
+        public void setPic(String pic) {
+            this.pic = pic;
         }
 
-        public void setTop(int top) {
-            this.top = top;
-        }
-
-        public String getArticlecontent() {
-            return articlecontent;
-        }
-
-        public void setArticlecontent(String articlecontent) {
-            this.articlecontent = articlecontent;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getAvatarUrl() {
-            return avatarUrl;
-        }
-
-        public void setAvatarUrl(String avatarUrl) {
-            this.avatarUrl = avatarUrl;
-        }
-
-        public Object getCommentCount() {
-            return commentCount;
-        }
-
-        public void setCommentCount(Object commentCount) {
-            this.commentCount = commentCount;
-        }
-
-        public int getType() {
-            return type;
+        public void setTitle(String title) {
+            this.title = title;
         }
 
         public void setType(int type) {
             this.type = type;
         }
 
-        public int getPushid() {
+        public void setDirname(String dirname) {
+            this.dirname = dirname;
+        }
+
+        public void setUserid(int userid) {
+            this.userid = userid;
+        }
+
+        public void setAudiolength(int audiolength) {
+            this.audiolength = audiolength;
+        }
+
+        public void setGood(int good) {
+            this.good = good;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public void setScore(int score) {
+            this.score = score;
+        }
+
+        public void setView(int view) {
+            this.view = view;
+        }
+
+        public void setTop(int top) {
+            this.top = top;
+        }
+
+        public void setIsUp(String isUp) {
+            this.isUp = isUp;
+        }
+
+        public void setDirid(int dirid) {
+            this.dirid = dirid;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public void setUp(int up) {
+            this.up = up;
+        }
+
+        public void setState(int state) {
+            this.state = state;
+        }
+
+        public void setTopdirid(int topdirid) {
+            this.topdirid = topdirid;
+        }
+
+        public void setReplycount(String replycount) {
+            this.replycount = replycount;
+        }
+
+        public void setReward(int reward) {
+            this.reward = reward;
+        }
+
+        public void setWebsite(String website) {
+            this.website = website;
+        }
+
+        public void setLike(int like) {
+            this.like = like;
+        }
+
+        public void setAvatarUrl(String avatarUrl) {
+            this.avatarUrl = avatarUrl;
+        }
+
+        public void setAuthor(String author) {
+            this.author = author;
+        }
+
+        public void setPush(PushBean push) {
+            this.push = push;
+        }
+
+        public void setTags(String tags) {
+            this.tags = tags;
+        }
+
+        public void setCommentCount(String commentCount) {
+            this.commentCount = commentCount;
+        }
+
+        public void setPushid(String pushid) {
+            this.pushid = pushid;
+        }
+
+        public void setIssuetime(String issuetime) {
+            this.issuetime = issuetime;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setComment(int comment) {
+            this.comment = comment;
+        }
+
+        public void setContenttext(String contenttext) {
+            this.contenttext = contenttext;
+        }
+
+        public void setParentdirid(int parentdirid) {
+            this.parentdirid = parentdirid;
+        }
+
+        public void setSilver(String silver) {
+            this.silver = silver;
+        }
+
+        public void setTofriend(int tofriend) {
+            this.tofriend = tofriend;
+        }
+
+        public void setCategory(int category) {
+            this.category = category;
+        }
+
+        public void setDzcount(String dzcount) {
+            this.dzcount = dzcount;
+        }
+
+        public void setAudiopath(String audiopath) {
+            this.audiopath = audiopath;
+        }
+
+        public String getArticlecontent() {
+            return articlecontent;
+        }
+
+        public int getBad() {
+            return bad;
+        }
+
+        public int getTofans() {
+            return tofans;
+        }
+
+        public int getDislike() {
+            return dislike;
+        }
+
+        public String getLink() {
+            return link;
+        }
+
+        public String getCreatedate() {
+            return createdate;
+        }
+
+        public String getRemark() {
+            return remark;
+        }
+
+        public String getPic() {
+            return pic;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public String getDirname() {
+            return dirname;
+        }
+
+        public int getUserid() {
+            return userid;
+        }
+
+        public int getAudiolength() {
+            return audiolength;
+        }
+
+        public int getGood() {
+            return good;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        public int getView() {
+            return view;
+        }
+
+        public int getTop() {
+            return top;
+        }
+
+        public String getIsUp() {
+            return isUp;
+        }
+
+        public int getDirid() {
+            return dirid;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public int getUp() {
+            return up;
+        }
+
+        public int getState() {
+            return state;
+        }
+
+        public int getTopdirid() {
+            return topdirid;
+        }
+
+        public String getReplycount() {
+            return replycount;
+        }
+
+        public int getReward() {
+            return reward;
+        }
+
+        public String getWebsite() {
+            return website;
+        }
+
+        public int getLike() {
+            return like;
+        }
+
+        public String getAvatarUrl() {
+            return avatarUrl;
+        }
+
+        public String getAuthor() {
+            return author;
+        }
+
+        public PushBean getPush() {
+            return push;
+        }
+
+        public String getTags() {
+            return tags;
+        }
+
+        public String getCommentCount() {
+            return commentCount;
+        }
+
+        public String getPushid() {
             return pushid;
         }
 
-        public void setPushid(int pushid) {
-            this.pushid = pushid;
+        public String getIssuetime() {
+            return issuetime;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getComment() {
+            return comment;
+        }
+
+        public String getContenttext() {
+            return contenttext;
+        }
+
+        public int getParentdirid() {
+            return parentdirid;
+        }
+
+        public String getSilver() {
+            return silver;
+        }
+
+        public int getTofriend() {
+            return tofriend;
+        }
+
+        public int getCategory() {
+            return category;
+        }
+
+        public String getDzcount() {
+            return dzcount;
+        }
+
+        public String getAudiopath() {
+            return audiopath;
         }
 
         @Override
         public int getItemType() {
-            return category;
+            return type;
+        }
+
+        private class PushBean {
+
+            /**
+             * tofans : 0
+             * articleid : 21670
+             * type : 1
+             * userid : 35
+             * content : 呵呵呵
+             * pushcount : 6
+             * peoplecount : 10
+             * coincount : 10
+             * id : 24
+             * createdatetime : 2020-08-10 15:05
+             * tofriend : 0
+             * up : 1
+             * articles : null
+             */
+            private int tofans;
+            private int articleid;
+            private int type;
+            private int userid;
+            private String content;
+            private int pushcount;
+            private int peoplecount;
+            private int coincount;
+            private int id;
+            private String createdatetime;
+            private int tofriend;
+            private int up;
+            private String articles;
+
+            public void setTofans(int tofans) {
+                this.tofans = tofans;
+            }
+
+            public void setArticleid(int articleid) {
+                this.articleid = articleid;
+            }
+
+            public void setType(int type) {
+                this.type = type;
+            }
+
+            public void setUserid(int userid) {
+                this.userid = userid;
+            }
+
+            public void setContent(String content) {
+                this.content = content;
+            }
+
+            public void setPushcount(int pushcount) {
+                this.pushcount = pushcount;
+            }
+
+            public void setPeoplecount(int peoplecount) {
+                this.peoplecount = peoplecount;
+            }
+
+            public void setCoincount(int coincount) {
+                this.coincount = coincount;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public void setCreatedatetime(String createdatetime) {
+                this.createdatetime = createdatetime;
+            }
+
+            public void setTofriend(int tofriend) {
+                this.tofriend = tofriend;
+            }
+
+            public void setUp(int up) {
+                this.up = up;
+            }
+
+            public void setArticles(String articles) {
+                this.articles = articles;
+            }
+
+            public int getTofans() {
+                return tofans;
+            }
+
+            public int getArticleid() {
+                return articleid;
+            }
+
+            public int getType() {
+                return type;
+            }
+
+            public int getUserid() {
+                return userid;
+            }
+
+            public String getContent() {
+                return content;
+            }
+
+            public int getPushcount() {
+                return pushcount;
+            }
+
+            public int getPeoplecount() {
+                return peoplecount;
+            }
+
+            public int getCoincount() {
+                return coincount;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public String getCreatedatetime() {
+                return createdatetime;
+            }
+
+            public int getTofriend() {
+                return tofriend;
+            }
+
+            public int getUp() {
+                return up;
+            }
+
+            public String getArticles() {
+                return articles;
+            }
         }
     }
+
 }

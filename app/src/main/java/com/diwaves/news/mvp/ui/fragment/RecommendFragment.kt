@@ -143,7 +143,7 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
 
     }
 
-    override fun success(list: MutableList<RecommendBean.ResultBean>) {
+    override fun success(list: MutableList<RecommendBean.ResultEntity>) {
         recommendAdapter.setList(list)
     }
 

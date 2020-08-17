@@ -11,7 +11,7 @@
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:star_txt="设置" />
+        app:center_txt="设置" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ll_ziliao"
@@ -169,10 +169,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:background="@color/qmui_config_color_white"
         android:gravity="center"
         android:padding="17.5dp"
-        android:background="@color/qmui_config_color_white"
         android:text="退出登陆"
         android:textColor="#ffeb090d"
         android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|bottom"
+        android:paddingBottom="30dp"
+        android:text="COPYRIGHT@2019\n苏州数字海科技有限公司" />
 </LinearLayout>

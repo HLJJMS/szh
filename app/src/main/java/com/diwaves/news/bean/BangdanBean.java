@@ -5,207 +5,204 @@ import java.util.List;
 public class BangdanBean {
 
     /**
+     * result : [{"dirsList":[{"dirsList":[],"parent":1,"level":2,"createdate":"2020-08-17","comment":1,"id":13,"title":"互联网"}],"parent":0,"level":1,"createdate":"2020-01-30","comment":1,"id":1,"title":"时事"},{"dirsList":[{"dirsList":[],"parent":2,"level":2,"createdate":"2020-08-17","comment":1,"id":14,"title":"互联网"},{"dirsList":[],"parent":2,"level":2,"createdate":"2020-08-17","comment":1,"id":25,"title":"原创"},{"dirsList":[],"parent":2,"level":2,"createdate":"2020-08-17","comment":1,"id":31,"title":"沪深股指"}],"parent":0,"level":1,"createdate":"2020-01-30","comment":1,"id":2,"title":"财经"},{"dirsList":[{"dirsList":[],"parent":3,"level":2,"createdate":"2020-08-17","comment":1,"id":15,"title":"互联网"},{"dirsList":[],"parent":3,"level":2,"createdate":"2020-08-17","comment":1,"id":26,"title":"原创"}],"parent":0,"level":1,"createdate":"2020-05-03","comment":1,"id":3,"title":"体育"},{"dirsList":[{"dirsList":[],"parent":4,"level":2,"createdate":"2020-08-17","comment":1,"id":16,"title":"互联网"},{"dirsList":[],"parent":4,"level":2,"createdate":"2020-08-17","comment":1,"id":27,"title":"原创"}],"parent":0,"level":1,"createdate":"2020-04-07","comment":1,"id":4,"title":"文娱"},{"dirsList":[{"dirsList":[],"parent":5,"level":2,"createdate":"2020-08-17","comment":1,"id":17,"title":"互联网"},{"dirsList":[],"parent":5,"level":2,"createdate":"2020-08-17","comment":1,"id":28,"title":"原创"}],"parent":0,"level":1,"createdate":"2020-05-03","comment":1,"id":5,"title":"游戏"},{"dirsList":[{"dirsList":[],"parent":6,"level":2,"createdate":"2020-08-17","comment":1,"id":18,"title":"互联网"},{"dirsList":[],"parent":6,"level":2,"createdate":"2020-08-17","comment":1,"id":29,"title":"原创"}],"parent":0,"level":1,"createdate":"2020-03-17","comment":1,"id":6,"title":"旅游"},{"dirsList":[{"dirsList":[],"parent":7,"level":2,"createdate":"2020-08-17","comment":1,"id":19,"title":"互联网"},{"dirsList":[],"parent":7,"level":2,"createdate":"2020-08-17","comment":1,"id":30,"title":"原创"}],"parent":0,"level":1,"createdate":"2020-05-03","comment":1,"id":7,"title":"情感"},{"dirsList":[{"dirsList":[],"parent":8,"level":2,"createdate":"2020-08-17","comment":1,"id":20,"title":"互联网"}],"parent":0,"level":1,"createdate":"2020-05-03","comment":1,"id":8,"title":"教育"},{"dirsList":[{"dirsList":[],"parent":9,"level":2,"createdate":"2020-08-17","comment":1,"id":21,"title":"互联网"}],"parent":0,"level":1,"createdate":"2020-05-03","comment":1,"id":9,"title":"科技"},{"dirsList":[{"dirsList":[],"parent":10,"level":2,"createdate":"2020-08-17","comment":1,"id":22,"title":"互联网"}],"parent":0,"level":1,"createdate":"2020-05-03","comment":1,"id":10,"title":"IT"},{"dirsList":[{"dirsList":[],"parent":11,"level":2,"createdate":"2020-08-17","comment":1,"id":23,"title":"互联网"}],"parent":0,"level":1,"createdate":"2020-05-03","comment":1,"id":11,"title":"其他"},{"dirsList":[{"dirsList":[],"parent":12,"level":2,"createdate":"2020-08-17","comment":1,"id":24,"title":"互联网"},{"dirsList":[],"parent":12,"level":2,"createdate":"2020-08-17","comment":1,"id":32,"title":"原创"}],"parent":0,"level":1,"createdate":"2020-01-30","comment":1,"id":12,"title":"图片"}]
+     * code : 200
      * success : true
      * message : 操作成功！
-     * code : 200
-     * result : [{"id":1,"title":"资讯","level":1,"parent":0,"comment":1,"createdate":"2020-01-30","dirsList":[{"id":4,"title":"国内","level":2,"parent":1,"comment":0,"createdate":"2020-01-30","dirsList":[]},{"id":5,"title":"国际","level":2,"parent":1,"comment":1,"createdate":"2020-01-30","dirsList":[]},{"id":6,"title":"财经","level":2,"parent":1,"comment":1,"createdate":"2020-01-30","dirsList":[]},{"id":7,"title":"体育","level":2,"parent":1,"comment":1,"createdate":"2020-05-03","dirsList":[]},{"id":8,"title":"文娱","level":2,"parent":1,"comment":1,"createdate":"2020-04-07","dirsList":[]},{"id":9,"title":"游戏","level":2,"parent":1,"comment":1,"createdate":"2020-05-03","dirsList":[]},{"id":10,"title":"教育","level":2,"parent":1,"comment":1,"createdate":"2020-03-17","dirsList":[]},{"id":11,"title":"房产","level":2,"parent":1,"comment":1,"createdate":"2020-05-03","dirsList":[]},{"id":12,"title":"汽车","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]},{"id":13,"title":"女人","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]},{"id":14,"title":"科技","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]},{"id":15,"title":"其他","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]}]},{"id":2,"title":"财经","level":1,"parent":0,"comment":1,"createdate":"2020-01-30","dirsList":[{"id":18,"title":"沪深","level":2,"parent":2,"comment":2,"createdate":"2020-01-30","dirsList":[{"id":21,"title":"上证指数","level":3,"parent":18,"comment":2,"createdate":"2020-01-30","dirsList":[]},{"id":24,"title":"深证指数","level":3,"parent":18,"comment":2,"createdate":"2020-01-30","dirsList":[]},{"id":28,"title":"创业板指","level":3,"parent":18,"comment":2,"createdate":"2020-01-30","dirsList":[]}]}]},{"id":4,"title":"国内","level":2,"parent":1,"comment":0,"createdate":"2020-01-30","dirsList":[]},{"id":5,"title":"国际","level":2,"parent":1,"comment":1,"createdate":"2020-01-30","dirsList":[]},{"id":6,"title":"财经","level":2,"parent":1,"comment":1,"createdate":"2020-01-30","dirsList":[]},{"id":7,"title":"体育","level":2,"parent":1,"comment":1,"createdate":"2020-05-03","dirsList":[]},{"id":8,"title":"文娱","level":2,"parent":1,"comment":1,"createdate":"2020-04-07","dirsList":[]},{"id":9,"title":"游戏","level":2,"parent":1,"comment":1,"createdate":"2020-05-03","dirsList":[]},{"id":10,"title":"教育","level":2,"parent":1,"comment":1,"createdate":"2020-03-17","dirsList":[]},{"id":11,"title":"房产","level":2,"parent":1,"comment":1,"createdate":"2020-05-03","dirsList":[]},{"id":12,"title":"汽车","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]},{"id":13,"title":"女人","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]},{"id":14,"title":"科技","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]},{"id":15,"title":"其他","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]},{"id":18,"title":"沪深","level":2,"parent":2,"comment":2,"createdate":"2020-01-30","dirsList":[{"id":21,"title":"上证指数","level":3,"parent":18,"comment":2,"createdate":"2020-01-30","dirsList":[]},{"id":24,"title":"深证指数","level":3,"parent":18,"comment":2,"createdate":"2020-01-30","dirsList":[]},{"id":28,"title":"创业板指","level":3,"parent":18,"comment":2,"createdate":"2020-01-30","dirsList":[]}]},{"id":21,"title":"上证指数","level":3,"parent":18,"comment":2,"createdate":"2020-01-30","dirsList":[]},{"id":24,"title":"深证指数","level":3,"parent":18,"comment":2,"createdate":"2020-01-30","dirsList":[]},{"id":28,"title":"创业板指","level":3,"parent":18,"comment":2,"createdate":"2020-01-30","dirsList":[]}]
-     * timestamp : 1593320972273
+     * timestamp : 1603369005522
      */
-
+    private List<ResultEntity> result;
+    private String code;
     private boolean success;
     private String message;
-    private String code;
     private long timestamp;
-    private List<ResultBean> result;
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getCode() {
-        return code;
+    public void setResult(List<ResultEntity> result) {
+        this.result = result;
     }
 
     public void setCode(String code) {
         this.code = code;
     }
 
-    public long getTimestamp() {
-        return timestamp;
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
-    public List<ResultBean> getResult() {
+    public List<ResultEntity> getResult() {
         return result;
     }
 
-    public void setResult(List<ResultBean> result) {
-        this.result = result;
+    public String getCode() {
+        return code;
     }
 
-    public static class ResultBean {
-        /**
-         * id : 1
-         * title : 资讯
-         * level : 1
-         * parent : 0
-         * comment : 1
-         * createdate : 2020-01-30
-         * dirsList : [{"id":4,"title":"国内","level":2,"parent":1,"comment":0,"createdate":"2020-01-30","dirsList":[]},{"id":5,"title":"国际","level":2,"parent":1,"comment":1,"createdate":"2020-01-30","dirsList":[]},{"id":6,"title":"财经","level":2,"parent":1,"comment":1,"createdate":"2020-01-30","dirsList":[]},{"id":7,"title":"体育","level":2,"parent":1,"comment":1,"createdate":"2020-05-03","dirsList":[]},{"id":8,"title":"文娱","level":2,"parent":1,"comment":1,"createdate":"2020-04-07","dirsList":[]},{"id":9,"title":"游戏","level":2,"parent":1,"comment":1,"createdate":"2020-05-03","dirsList":[]},{"id":10,"title":"教育","level":2,"parent":1,"comment":1,"createdate":"2020-03-17","dirsList":[]},{"id":11,"title":"房产","level":2,"parent":1,"comment":1,"createdate":"2020-05-03","dirsList":[]},{"id":12,"title":"汽车","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]},{"id":13,"title":"女人","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]},{"id":14,"title":"科技","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]},{"id":15,"title":"其他","level":2,"parent":1,"comment":2,"createdate":"2020-05-03","dirsList":[]}]
-         */
+    public boolean isSuccess() {
+        return success;
+    }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public class ResultEntity {
+        /**
+         * dirsList : [{"dirsList":[],"parent":1,"level":2,"createdate":"2020-08-17","comment":1,"id":13,"title":"互联网"}]
+         * parent : 0
+         * level : 1
+         * createdate : 2020-01-30
+         * comment : 1
+         * id : 1
+         * title : 时事
+         */
+        private List<DirsListEntity> dirsList;
+        private int parent;
+        private int level;
+        private String createdate;
+        private int comment;
         private int id;
         private String title;
-        private int level;
-        private int parent;
-        private int comment;
-        private String createdate;
-        private List<DirsListBean> dirsList;
 
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public int getLevel() {
-            return level;
-        }
-
-        public void setLevel(int level) {
-            this.level = level;
-        }
-
-        public int getParent() {
-            return parent;
+        public void setDirsList(List<DirsListEntity> dirsList) {
+            this.dirsList = dirsList;
         }
 
         public void setParent(int parent) {
             this.parent = parent;
         }
 
-        public int getComment() {
-            return comment;
-        }
-
-        public void setComment(int comment) {
-            this.comment = comment;
-        }
-
-        public String getCreatedate() {
-            return createdate;
+        public void setLevel(int level) {
+            this.level = level;
         }
 
         public void setCreatedate(String createdate) {
             this.createdate = createdate;
         }
 
-        public List<DirsListBean> getDirsList() {
+        public void setComment(int comment) {
+            this.comment = comment;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public List<DirsListEntity> getDirsList() {
             return dirsList;
         }
 
-        public void setDirsList(List<DirsListBean> dirsList) {
-            this.dirsList = dirsList;
+        public int getParent() {
+            return parent;
         }
 
-        public static class DirsListBean {
-            /**
-             * id : 4
-             * title : 国内
-             * level : 2
-             * parent : 1
-             * comment : 0
-             * createdate : 2020-01-30
-             * dirsList : []
-             */
+        public int getLevel() {
+            return level;
+        }
 
+        public String getCreatedate() {
+            return createdate;
+        }
+
+        public int getComment() {
+            return comment;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public class DirsListEntity {
+            /**
+             * dirsList : []
+             * parent : 1
+             * level : 2
+             * createdate : 2020-08-17
+             * comment : 1
+             * id : 13
+             * title : 互联网
+             */
+            private List<?> dirsList;
+            private int parent;
+            private int level;
+            private String createdate;
+            private int comment;
             private int id;
             private String title;
-            private int level;
-            private int parent;
-            private int comment;
-            private String createdate;
-            private List<DirsListBean> dirsList;
 
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public int getLevel() {
-                return level;
-            }
-
-            public void setLevel(int level) {
-                this.level = level;
-            }
-
-            public int getParent() {
-                return parent;
+            public void setDirsList(List<?> dirsList) {
+                this.dirsList = dirsList;
             }
 
             public void setParent(int parent) {
                 this.parent = parent;
             }
 
-            public int getComment() {
-                return comment;
-            }
-
-            public void setComment(int comment) {
-                this.comment = comment;
-            }
-
-            public String getCreatedate() {
-                return createdate;
+            public void setLevel(int level) {
+                this.level = level;
             }
 
             public void setCreatedate(String createdate) {
                 this.createdate = createdate;
             }
 
-            public List<DirsListBean> getDirsList() {
+            public void setComment(int comment) {
+                this.comment = comment;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public List<?> getDirsList() {
                 return dirsList;
             }
 
-            public void setDirsList(List<DirsListBean> dirsList) {
-                this.dirsList = dirsList;
+            public int getParent() {
+                return parent;
+            }
+
+            public int getLevel() {
+                return level;
+            }
+
+            public String getCreatedate() {
+                return createdate;
+            }
+
+            public int getComment() {
+                return comment;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public String getTitle() {
+                return title;
             }
         }
     }

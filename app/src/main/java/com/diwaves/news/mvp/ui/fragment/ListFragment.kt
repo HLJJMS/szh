@@ -57,7 +57,7 @@ import java.util.concurrent.TimeUnit
  */
 class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
     var bangdanAdapter: BangdanAdapter = BangdanAdapter()
-    var bean: MutableList<BangdanBean.ResultBean>? = null
+    var bean: MutableList<BangdanBean.ResultEntity>? = null
     var caiJingAdapter: CaiJingAdapter = CaiJingAdapter()
 
     companion object {
@@ -86,34 +86,21 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        recycler_v.layoutManager = LinearLayoutManager(context)
+        recycler_v.layoutManager = GridLayoutManager(context, 5)
         recycler_g.layoutManager = GridLayoutManager(context, 5)
         recycler_g.adapter = bangdanAdapter
         recycler_v.adapter = caiJingAdapter
-        tv_zixun.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            tv_zixun.setTextColor(ContextCompat.getColor(mContext, R.color.color_020202))
-            tv_caijing.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
-            bangdanAdapter.setList(bean?.get(0)?.dirsList)
-            recycler_v.visibility = View.GONE
-        }
-        tv_caijing.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            tv_caijing.setTextColor(ContextCompat.getColor(mContext, R.color.color_020202))
-            tv_zixun.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
-            bangdanAdapter.setList(bean?.get(1)?.dirsList)
-            recycler_v.visibility = View.VISIBLE
-            caiJingAdapter.setList(bean?.get(1)?.dirsList?.get(0)?.dirsList)
-        }
-
-
-
         caiJingAdapter.setOnItemClickListener { adapter, view, position ->
             var intent = Intent(context,RmbMaketMainActivity::class.java)
             intent.putExtra("id",caiJingAdapter.data.get(position).id.toString())
             startActivity(intent)
         }
-        bangdanAdapter.setOnItemClickListener { adapter, view, position ->
-            startActivity(Intent(context, TypeListActivityActivity::class.java).putExtra("id",bangdanAdapter.data.get(position).id.toString()).putExtra("title",bangdanAdapter.data.get(position).title))
+        bangdanAdapter.addChildClickViewIds(R.id.rb_name)
+        bangdanAdapter.setOnItemChildClickListener { adapter, view, position ->
+            caiJingAdapter.setList(bangdanAdapter.data.get(position).dirsList)
+            bangdanAdapter.setClickPosition(position)
         }
+
 
         mPresenter?.getData()
     }
@@ -158,9 +145,9 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
 
     }
 
-    override fun success(bean: MutableList<BangdanBean.ResultBean>) {
+    override fun success(bean: MutableList<BangdanBean.ResultEntity>) {
         this.bean = bean
-        bangdanAdapter.setList(bean.get(0).dirsList)
+        bangdanAdapter.setList(bean)
     }
 
     override fun showLoading() {

@@ -2,7 +2,7 @@ package com.diwaves.news.network
 
 object Api {
     const val APP_ID = "wx5a097702a5ad39e9"
-    const val BASE_URL = "http://116.62.114.248:10019/"
+    const val BASE_URL = "http://116.62.114.248:10019//"
 
 
     //成功

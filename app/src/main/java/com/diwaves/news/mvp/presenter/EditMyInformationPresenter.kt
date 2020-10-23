@@ -80,4 +80,5 @@ constructor(model: EditMyInformationContract.Model, rootView: EditMyInformationC
                 }
             })
     }
+
 }

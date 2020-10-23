@@ -19,7 +19,7 @@ class MyCommentAdapter :
             MyGlide.loadImage(context, item.articles.avatarUrl, helper.getView(R.id.iv_detail))
         }
 
-        helper.setText(R.id.tv_article, item.articles.contenttext)
+//        helper.setText(R.id.tv_article, item.articles.contenttext)
         helper.setText(R.id.tv_name, item.articles.author)
     }
 }

@@ -2,6 +2,7 @@ package com.diwaves.news.mvp.model
 
 import android.app.Application
 import com.diwaves.news.bean.RecommendBean
+import com.diwaves.news.bean.StockBean
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
@@ -42,5 +43,9 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
     }
     override fun getData(id: String): Observable<RecommendBean> {
         return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getHomeRecommended(id)
+    }
+
+    override fun getStockData(): Observable<StockBean> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getSTOCK()
     }
 }

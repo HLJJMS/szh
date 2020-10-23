@@ -4,6 +4,7 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.diwaves.news.R
 import com.diwaves.news.bean.RecommendBean
+import com.diwaves.news.network.Api
 import com.diwaves.news.tools.MyGlide
 
 class RecommendAdapter : BaseMultiItemQuickAdapter<RecommendBean.ResultEntity, BaseViewHolder>() {
@@ -16,18 +17,17 @@ class RecommendAdapter : BaseMultiItemQuickAdapter<RecommendBean.ResultEntity, B
             helper.setText(R.id.tv_title, item.title)
             helper.setText(R.id.rb_detail, item.dirname)
             helper.setText(R.id.tv_time, item.createdate)
-            helper.setText(R.id.tv_pinglun, item.comment.toString() + "评论")
+            helper.setText(R.id.tv_look,item.view.toString() + "阅读  " + item.comment + "推送")
+            MyGlide.loadImage(context, Api.BASE_URL+item.avatarUrl,helper.getView(R.id.iv_head))
+            helper.setText(R.id.tv_name,item.website)
         } else {
             helper.setText(R.id.tv_title, item.title)
             helper.setText(R.id.rb_detail, item.dirname)
             helper.setText(R.id.tv_time, item.createdate)
-//            helper.setText(R.id.tv_pinglun, item.comment.toString() + "评论")
-
-            if(null!=item.pic){
-                MyGlide.loadImage(context,item.pic,helper.getView(R.id.iv_detail))
-            }
-            helper.setText(R.id.tv_article,item.contenttext)
-            helper.setText(R.id.tv_name,item.author)
+            helper.setText(R.id.tv_look,item.view.toString() + "阅读  " + item.comment + "推送")
+            MyGlide.loadImage(context, Api.BASE_URL+item.avatarUrl,helper.getView(R.id.iv_head))
+            helper.setText(R.id.tv_name,item.website)
+            MyGlide.loadImage(context, Api.BASE_URL+item.pic,helper.getView(R.id.iv_photo))
         }
     }
 

@@ -2,6 +2,7 @@ package com.diwaves.news.mvp.presenter
 
 import android.app.Application
 import com.diwaves.news.bean.RecommendBean
+import com.diwaves.news.bean.StockBean
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.FragmentScope
@@ -59,6 +60,20 @@ constructor(model: RecommendContract.Model, rootView: RecommendContract.View) :
                 override fun onNext(t: RecommendBean) {
                     if (t.code.equals(Api.SUCCESS)) {
                         mRootView.success(t.result)
+                    } else {
+                        MyToast().makeToast(mApplication, t.message)
+                    }
+                }
+            })
+    }
+
+    fun getStockData(){
+        mModel.getStockData().compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<StockBean>(mErrorHandler) {
+                override fun onNext(t: StockBean) {
+                    if (t.code.equals(Api.SUCCESS)) {
+                        mRootView.StockSuccess(t.result)
                     } else {
                         MyToast().makeToast(mApplication, t.message)
                     }

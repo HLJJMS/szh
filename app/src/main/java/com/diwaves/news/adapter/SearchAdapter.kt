@@ -10,6 +10,6 @@ class SearchAdapter : BaseQuickAdapter<RecommendBean.ResultEntity, BaseViewHolde
         holder.setText(R.id.tv_title, item.title)
         holder.setText(R.id.rb_detail, item.dirname)
         holder.setText(R.id.tv_time, item.createdate)
-        holder.setText(R.id.tv_pinglun, item.comment.toString() + "评论")
+//        holder.setText(R.id.tv_pinglun, item.comment.toString() + "评论")
     }
 }

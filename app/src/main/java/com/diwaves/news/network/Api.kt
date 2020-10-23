@@ -131,5 +131,10 @@ object Api {
     //    屏蔽接口
     const val PINGBI_LIST = "my/shielding/list"
 
+    //  股票、
+    const val APP_STOCK = "app/stock"
+
+    //已发布列表
+    const val INDEX_LIST = "index/releas/list"
 
 }

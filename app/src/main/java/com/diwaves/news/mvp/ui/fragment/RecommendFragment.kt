@@ -20,6 +20,7 @@ import com.diwaves.news.mvp.presenter.RecommendPresenter
 import com.diwaves.news.R
 import com.diwaves.news.adapter.RecommendAdapter
 import com.diwaves.news.bean.RecommendBean
+import com.diwaves.news.bean.StockBean
 import com.diwaves.news.mvp.ui.activity.ArticleDetailActivity
 import com.diwaves.news.mvp.ui.activity.PushTieActivity
 import kotlinx.android.synthetic.main.fragment_recommend.*
@@ -83,10 +84,16 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = recommendAdapter
         mPresenter?.getData()
+        mPresenter?.getStockData()
         recommendAdapter.setOnItemClickListener { adapter, view, position ->
-            var intent: Intent = Intent(context,ArticleDetailActivity::class.java)
+            var intent: Intent = Intent(context, ArticleDetailActivity::class.java)
             intent.putExtra("id", recommendAdapter.data.get(position).id.toString())
-            if (null == recommendAdapter.data.get(position).pushid || "null".equals(recommendAdapter.data.get(position).pushid)) {
+            if (null == recommendAdapter.data.get(position).pushid || "null".equals(
+                    recommendAdapter.data.get(
+                        position
+                    ).pushid
+                )
+            ) {
                 intent.putExtra("pushid", "")
             } else {
                 intent.putExtra("pushid", recommendAdapter.data.get(position).pushid.toString())
@@ -145,6 +152,21 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
 
     override fun success(list: MutableList<RecommendBean.ResultEntity>) {
         recommendAdapter.setList(list)
+    }
+
+    override fun StockSuccess(bean: StockBean.ResultEntity) {
+        tv_one.setText(bean.map1.name)
+        tv_two.setText(bean.map2.name)
+        tv_three.setText(bean.map3.name)
+
+        tv_one_center.setText(bean.map1.current)
+        tv_two_center.setText(bean.map2.current)
+        tv_three_center.setText(bean.map3.current)
+
+        tv_one_bottom.setText(bean.map1.change_pct.toString()+" "+bean.map1.percentage.toString())
+        tv_two_bottom.setText(bean.map2.change_pct.toString()+" "+bean.map2.percentage.toString())
+        tv_three_bottom.setText(bean.map3.change_pct.toString()+" "+bean.map3.percentage.toString())
+
     }
 
     override fun showLoading() {

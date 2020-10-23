@@ -90,7 +90,9 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
         recycler_g.layoutManager = GridLayoutManager(context, 5)
         recycler_g.adapter = bangdanAdapter
         recycler_v.adapter = caiJingAdapter
-        caiJingAdapter.setOnItemClickListener { adapter, view, position ->
+
+        caiJingAdapter.addChildClickViewIds(R.id.rb_name)
+        caiJingAdapter.setOnItemChildClickListener { adapter, view, position ->
             var intent = Intent(context,RmbMaketMainActivity::class.java)
             intent.putExtra("id",caiJingAdapter.data.get(position).id.toString())
             startActivity(intent)

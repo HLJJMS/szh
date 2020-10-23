@@ -14,6 +14,11 @@ interface HomeService {
     fun getHomeRecommended(
         @Field("userid") id: String
     ): Observable<RecommendBean>
+
+    //首页股票
+    @POST(Api.APP_STOCK)
+    fun getSTOCK(): Observable<StockBean>
+
     //榜单列表
 
     @POST(Api.SELECT_DIRECTORY)
@@ -42,6 +47,13 @@ interface HomeService {
     fun getFocusList(
         @Field("userid") id: String
     ): Observable<FocusListBean>
+
+    @FormUrlEncoded
+        @POST(Api.INDEX_LIST)
+        fun getMyList(
+            @Field("userid") id: String
+        ): Observable<FocusListBean>
+
 
     //  喜欢文章 0:喜欢，1:不喜欢
     @FormUrlEncoded
@@ -146,7 +158,7 @@ interface HomeService {
     @POST(Api.INDEX_PUSH)
     fun sorce(
         @Field("userid") id: String,
-        @Field("score") score : String,
+        @Field("score") score: String,
         @Field("articleid") articleid: String
     ): Observable<BaseBean.BaseResponse<String>>
 }

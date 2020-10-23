@@ -9,7 +9,28 @@
     android:paddingTop="22dp"
     tools:ignore="MissingConstraints">
 
+    <ImageView
+        android:id="@+id/iv_head"
+        app:layout_constraintTop_toTopOf="@id/tv_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"/>
     <TextView
+        app:layout_constraintStart_toEndOf="@id/iv_head"
+        android:id="@+id/tv_name"
+        android:text="13sp"
+        android:textSize="13sp"
+        android:textColor="@color/color_137ED0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_time"
+        android:textSize="13sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/tv_time"
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,58 +41,26 @@
         android:textSize="17sp" />
 
     <TextView
-        android:id="@+id/tv_source"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:id="@+id/tv_look"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="因特网 "
-        android:textColor="#ff37adff"
-        android:textSize="13sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
-
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="#ff989898"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/tv_source"
-        app:layout_constraintTop_toTopOf="@id/tv_source" />
-
-    <TextView
-        android:id="@+id/tv_pinglun"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16.5dp"
-        android:text=""
-        android:textColor="#ff989898"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/tv_time"
-        app:layout_constraintTop_toTopOf="@id/tv_source" />
+        android:layout_height="wrap_content"/>
 
     <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        app:layout_constraintTop_toBottomOf="@id/tv_look"
         android:id="@+id/rb_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="35dp"
         android:paddingTop="8.5dp"
         android:paddingEnd="22dp"
         android:paddingBottom="9dp"
         android:textColor="#ff5b5b5b"
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_source"
         app:qmui_backgroundColor="#FFFAFAFA"
         app:qmui_borderWidth="0dp"
         app:qmui_radius="3dp" />
 
-    <ImageView
-        android:id="@+id/iv_zu"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:src="@mipmap/ic_zu"
-        app:layout_constraintBottom_toBottomOf="@id/rb_detail"
-        app:layout_constraintStart_toStartOf="@id/rb_detail"
-        app:layout_constraintTop_toTopOf="@id/rb_detail" />
+
 
     <ImageView
         android:id="@+id/iv_go"

@@ -1,9 +1,11 @@
 package com.diwaves.news.mvp.ui.activity
 
 import android.Manifest
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.diwaves.news.R
 import com.diwaves.news.di.component.DaggerReleaseComponent
 import com.diwaves.news.di.module.ReleaseModule
@@ -252,4 +254,6 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
         }
         mPresenter?.postData(builder.build())
     }
+
+
 }

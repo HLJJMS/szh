@@ -9,7 +9,7 @@ import com.diwaves.news.tools.MyGlide
 
 class RecommendAdapter : BaseMultiItemQuickAdapter<RecommendBean.ResultEntity, BaseViewHolder>() {
    init {
-        addItemType(0, R.layout.item_recommend_text)
+        addItemType(0, R.layout.item_recommend_video)
         addItemType(1, R.layout.item_recommend_video)
     }
     override fun convert(helper: BaseViewHolder, item: RecommendBean.ResultEntity) {
@@ -19,6 +19,7 @@ class RecommendAdapter : BaseMultiItemQuickAdapter<RecommendBean.ResultEntity, B
             helper.setText(R.id.tv_time, item.createdate)
             helper.setText(R.id.tv_look,item.view.toString() + "阅读  " + item.comment + "推送")
             MyGlide.loadImage(context, Api.BASE_URL+item.avatarUrl,helper.getView(R.id.iv_head))
+            MyGlide.loadImage(context, Api.BASE_URL+item.pic,helper.getView(R.id.iv_photo))
             helper.setText(R.id.tv_name,item.website)
         } else {
             helper.setText(R.id.tv_title, item.title)

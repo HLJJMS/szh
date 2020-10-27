@@ -14,5 +14,6 @@
         <attr name="end_txt" format="string" />
         <attr name="end_txt_color" format="color"/>
         <attr name="end_img" format="reference"/>
+
     </declare-styleable>
 </resources>

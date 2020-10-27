@@ -1,17 +1,17 @@
 package com.diwaves.news.mvp.ui.activity
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.view.Gravity
 
 import android.view.KeyEvent
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -28,6 +28,7 @@ import com.diwaves.news.mvp.ui.fragment.MessageFragment
 import com.diwaves.news.mvp.ui.fragment.MyFragment
 import com.diwaves.news.mvp.ui.fragment.WalletFragment
 import com.diwaves.news.network.Api.APP_ID
+import com.diwaves.news.tools.SPToll
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
@@ -71,19 +72,25 @@ import java.util.concurrent.TimeUnit
 class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     private val mTabEntities =
         ArrayList<CustomTabEntity>()
-     val mFragments = ArrayList<Fragment>()
+    val mFragments = ArrayList<Fragment>()
 
-     var myFragment = MyFragment()
-     val homeFragment = HomeFragment()
-     val walletFragment = WalletFragment()
-     val messageFragment = MessageFragment()
+    var myFragment = MyFragment()
+    val homeFragment = HomeFragment()
+    val walletFragment = WalletFragment()
+    val messageFragment = MessageFragment()
 
-     var homePageAdapter: HomePageAdapter? = null
-     var buttonList = ArrayList<ImageView>()
-     var textList = ArrayList<TextView>()
+    var homePageAdapter: HomePageAdapter? = null
+    var buttonList = ArrayList<ImageView>()
+    var textList = ArrayList<TextView>()
     var isExit = false
-
+    var context: Context? = null
     private var api: IWXAPI? = null
+
+    var popupWindow :PopupWindow = PopupWindow();
+    var view : View ?= null
+    var ivImg:ImageView?=null
+    var ivTxt:ImageView?=null
+    var ivClose:ImageView?=null
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent //如找不到该类,请编译一下项目
             .builder()
@@ -117,6 +124,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        context = this
         mTabEntities.add(TabEntity("首页", R.mipmap.ic_home_home_on, R.mipmap.ic_home_home_off))
         mTabEntities.add(TabEntity("消息", R.mipmap.ic_home_talk_on, R.mipmap.ic_home_talk_off))
         mTabEntities.add(TabEntity("钱包", R.mipmap.ic_home_nike_on, R.mipmap.ic_home_nike_off))
@@ -150,7 +158,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             setButton(3)
         }
         iv_add.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            startActivity(Intent(this, LoginActivity::class.java))
+            if (SPToll(this).getId().equals("")) {
+                startActivity(Intent(this, LoginActivity::class.java))
+
+            } else {
+                showPopWindow()            }
         }
         tv_home.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -166,7 +178,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             setButton(3)
         }
         tv_add.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-
+            if (SPToll(this).getId().equals("")) {
+                startActivity(Intent(this, LoginActivity::class.java))
+            } else {
+               showPopWindow()
+            }
         }
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
@@ -187,6 +203,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
         })
         mPresenter?.getEveryAg()
+        setPopWindow()
     }
 
     fun setButton(i: Int) {
@@ -272,6 +289,36 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             super.handleMessage(msg)
             isExit = false
         }
+    }
+
+
+    fun setPopWindow() {
+        view = LayoutInflater.from(this).inflate(R.layout.pop_release, null);
+        popupWindow?.contentView = view
+        popupWindow?.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        popupWindow?.setHeight(LinearLayout.LayoutParams.MATCH_PARENT);
+        popupWindow?.setOutsideTouchable(true)
+        popupWindow?.setFocusable(true) //点击返回键取消
+        popupWindow?.setBackgroundDrawable(BitmapDrawable())
+        ivImg = view?.findViewById(R.id.iv_photo);
+        ivTxt = view?.findViewById(R.id.iv_txt);
+        ivClose = view?.findViewById(R.id.iv_close);
+        ivClose?.clicks()?.throttleFirst(500, TimeUnit.MILLISECONDS)
+            ?.subscribe {
+               popupWindow?.dismiss()
+            }
+        ivImg!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+
+            }
+        ivTxt!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(context, ReleaseActivity::class.java))
+            }
+    }
+    fun showPopWindow() {
+        popupWindow?.showAtLocation(getWindow().decorView, Gravity.NO_GRAVITY, 0, 0)
+
     }
 
 }

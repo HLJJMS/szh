@@ -1,11 +1,13 @@
 package com.diwaves.news.mvp.ui.fragment
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseFragment
@@ -187,5 +189,24 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
 
     override fun killMyself() {
 
+    }
+
+    private fun showListDialog() {
+        val items = arrayOf("屏蔽", "投诉/举报","删除文章","取消")
+        val listDialog: AlertDialog.Builder = AlertDialog.Builder(context.applicationContext)
+        listDialog.setTitle("")
+        listDialog.setItems(items, object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                if(which==0){
+
+                }else if(which==1){
+
+                }else if(which==2){
+
+                }
+            }
+
+        })
+        listDialog.show()
     }
 }

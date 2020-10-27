@@ -110,15 +110,6 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
     override fun initData(savedInstanceState: Bundle?) {
         mPresenter?.getData(intent.getStringExtra("id"), intent.getStringExtra("pushid"))
-        et_comment.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                g_comment.visibility = View.VISIBLE
-                g_comment_no.visibility = View.GONE
-            } else {
-                g_comment.visibility = View.GONE
-                g_comment_no.visibility = View.VISIBLE
-            }
-        }
         titleBar.setBackClick {
             finish()
         }
@@ -129,14 +120,9 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     override fun getDataSuccess(bean: ArticleDetailBean.ResultBean) {
         titleBar.setCenterText(bean.articles.dirname)
         tv_look.setText(bean.articles.view.toString() + "阅读")
-        tv_detail.text = Html.fromHtml(bean.articles.contenttext.toString(), FROM_HTML_MODE_COMPACT)
-        if (null != bean.articles.pic) {
-            MyGlide.loadImage(this, bean.articles.pic.toString(), iv_img)
-        }
         tv_title.setText(bean.articles.title)
         like = bean.like
         collection = bean.collection
-        tv_like_number.text = like.toString()
         tv_fen.text = bean.articles.score
         isLikeOrCollection()
         tv_off.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
@@ -154,34 +140,41 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             mPresenter?.cllection(intent.getStringExtra("id"), collection.toString())
             isLikeOrCollection()
         }
-        iv_add_photo.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            getPermissions();
-        }
-        iv_check.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            if (cheak.equals("0")) {
-                cheak = "1"
-                iv_check.setImageResource(R.mipmap.ic_check_on)
-            } else {
-                cheak = "0"
-                iv_check.setImageResource(R.mipmap.ic_check_off)
-            }
-        }
-        et_comment.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            var intent = Intent(this, PushTieActivity::class.java)
+//        iv_add_photo.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            getPermissions();
+//        }
+//        iv_check.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            if (cheak.equals("0")) {
+//                cheak = "1"
+//                iv_check.setImageResource(R.mipmap.ic_check_on)
+//            } else {
+//                cheak = "0"
+//                iv_check.setImageResource(R.mipmap.ic_check_off)
+//            }
+//        }
+//        et_comment.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            var intent = Intent(this, PushTieActivity::class.java)
+//            intent.putExtra("id", intent.getStringExtra("id"))
+//            intent.putExtra("img", bean.articles.pic.toString())
+//            intent.putExtra("title", bean.articles.title)
+//            startActivity(intent)
+//        }
+        iv_send.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe{
+            var intent = Intent (this, PushTieActivity::class.java)
             intent.putExtra("id", intent.getStringExtra("id"))
             intent.putExtra("img", bean.articles.pic.toString())
             intent.putExtra("title", bean.articles.title)
             startActivity(intent)
         }
 
-        tv_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            if (!et_comment.text.toString().equals("")) {
-                addComment()
-            }
-        }
+
 
         iv_close.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             showPopWindow()
+        }
+
+        tv_buy_vip.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+           startActivity(Intent(this,BuyVipActivity::class.java))
         }
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
@@ -198,24 +191,29 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             startActivity(intent)
         }
 
-        iv_message.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            sl.fullScroll(ScrollView.FOCUS_UP);
-        }
 
         rb_1.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-         mPresenter?.sorce(intent.getStringExtra("id"),"1")
+            mPresenter?.sorce(intent.getStringExtra("id"), "1")
         }
         rb_2.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            mPresenter?.sorce(intent.getStringExtra("id"),"2")
+            mPresenter?.sorce(intent.getStringExtra("id"), "2")
         }
         rb_3.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            mPresenter?.sorce(intent.getStringExtra("id"),"3")
+            mPresenter?.sorce(intent.getStringExtra("id"), "3")
         }
         rb_4.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            mPresenter?.sorce(intent.getStringExtra("id"),"4")
+            mPresenter?.sorce(intent.getStringExtra("id"), "4")
         }
         rb_5.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            mPresenter?.sorce(intent.getStringExtra("id"),"5")
+            mPresenter?.sorce(intent.getStringExtra("id"), "5")
+        }
+        tv_detail.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(
+                Intent(this, WebArticleActivity::class.java).putExtra(
+                    "url",
+                    bean.articles.link
+                ).putExtra("title", bean.articles.title.toString())
+            )
         }
 
     }
@@ -261,8 +259,6 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                     )
                 }
             } else if (view.id == R.id.tv_replay) {
-                g_comment.visibility = View.VISIBLE
-                g_comment_no.visibility = View.GONE
                 commentId = this.adapter.data.get(position).id.toString()
             }
         }
@@ -332,7 +328,6 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 //解析文件
                 changePhoto = true
                 file = File(Matisse.obtainPathResult(data)[i])
-                MyGlide.loadImageCircle(this, file, iv_add_photo)
             }
         }
     }
@@ -358,26 +353,26 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     }
 
     fun addComment() {
-        if (commentId.equals("")) {
-            val builder: MultipartBody.Builder = MultipartBody.Builder()
-            builder.setType(MultipartBody.FORM)
-            builder.addFormDataPart("userid", SPToll(this).getId())
-            builder.addFormDataPart("articleid", intent.getStringExtra("id"))
-            builder.addFormDataPart("pushid", intent.getStringExtra("pushid"))
-            builder.addFormDataPart("onlyauth", cheak)
-            builder.addFormDataPart("content", et_comment.text.toString())
-            if (changePhoto) {
-                var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
-                builder.addFormDataPart("file", file.name, requestBody)
-            }
-            mPresenter?.addComment(builder.build())
-        } else {
-            mPresenter?.commentReplay(
-                intent.getStringExtra("id"),
-                commentId,
-                et_comment.text.toString()
-            )
-        }
+//        if (commentId.equals("")) {
+//            val builder: MultipartBody.Builder = MultipartBody.Builder()
+//            builder.setType(MultipartBody.FORM)
+//            builder.addFormDataPart("userid", SPToll(this).getId())
+//            builder.addFormDataPart("articleid", intent.getStringExtra("id"))
+//            builder.addFormDataPart("pushid", intent.getStringExtra("pushid"))
+//            builder.addFormDataPart("onlyauth", cheak)
+//            builder.addFormDataPart("content", et_comment.text.toString())
+//            if (changePhoto) {
+//                var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+//                builder.addFormDataPart("file", file.name, requestBody)
+//            }
+//            mPresenter?.addComment(builder.build())
+//        } else {
+//            mPresenter?.commentReplay(
+//                intent.getStringExtra("id"),
+//                commentId,
+//                et_comment.text.toString()
+//            )
+//        }
 
 
     }
@@ -389,14 +384,10 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             this,
             object : SoftKeyBoardListener.OnSoftKeyBoardChangeListener {
                 override fun keyBoardShow(height: Int) {
-//                    g_comment.visibility = View.VISIBLE
-//                    g_comment_no.visibility = View.GONE
+
                 }
 
                 override fun keyBoardHide(height: Int) {
-                    g_comment.visibility = View.GONE
-                    g_comment_no.visibility = View.VISIBLE
-                    tv_ok_replay.visibility = View.GONE
                     commentId = ""
                 }
 

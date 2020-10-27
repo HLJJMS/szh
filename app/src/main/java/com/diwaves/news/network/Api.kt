@@ -137,4 +137,7 @@ object Api {
     //已发布列表
     const val INDEX_LIST = "index/releas/list"
 
+    //买会员
+    const val BUY_VIP = "app/buyMember"
+
 }

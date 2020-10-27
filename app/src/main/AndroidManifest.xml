@@ -21,6 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/QMUI.NoActionBar">
+        <activity android:name=".mvp.ui.activity.BuyVipActivity" />
+        <activity android:name=".mvp.ui.activity.WebArticleActivity" />
         <activity android:name=".mvp.ui.activity.PingBiActivityActivity" />
         <activity android:name=".mvp.ui.activity.TypeListActivityActivity" />
         <activity android:name=".mvp.ui.activity.MyYuCeActivity" />

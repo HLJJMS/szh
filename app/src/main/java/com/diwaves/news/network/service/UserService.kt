@@ -112,4 +112,11 @@ interface UserService {
         @Field("size") size: String
     ): Observable<PingBiListBean>
 
+    //  买会员
+    @FormUrlEncoded
+    @POST(Api.BUY_VIP)
+    fun buyVip(
+        @Field("userid") id: String, @Field("month") count: String
+    ): Observable<BaseBean.BaseResponse<String>>
+
 }

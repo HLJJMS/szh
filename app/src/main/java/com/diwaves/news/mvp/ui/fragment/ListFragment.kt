@@ -2,32 +2,24 @@ package com.diwaves.news.mvp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-
-import com.jess.arms.base.BaseFragment
-import com.jess.arms.di.component.AppComponent
-import com.jess.arms.utils.ArmsUtils
-
-import com.diwaves.news.di.component.DaggerListComponent
-import com.diwaves.news.di.module.ListModule
-import com.diwaves.news.mvp.contract.ListContract
-import com.diwaves.news.mvp.presenter.ListPresenter
-
 import com.diwaves.news.R
 import com.diwaves.news.adapter.BangdanAdapter
 import com.diwaves.news.adapter.CaiJingAdapter
 import com.diwaves.news.bean.BangdanBean
+import com.diwaves.news.di.component.DaggerListComponent
+import com.diwaves.news.di.module.ListModule
+import com.diwaves.news.mvp.contract.ListContract
+import com.diwaves.news.mvp.presenter.ListPresenter
 import com.diwaves.news.mvp.ui.activity.RmbMaketMainActivity
 import com.diwaves.news.mvp.ui.activity.TypeListActivityActivity
-import com.jakewharton.rxbinding3.view.clicks
+import com.jess.arms.base.BaseFragment
+import com.jess.arms.di.component.AppComponent
+import com.jess.arms.utils.ArmsUtils
 import kotlinx.android.synthetic.main.fragment_list.*
-import java.util.concurrent.TimeUnit
 
 
 /**
@@ -93,9 +85,11 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
 
         caiJingAdapter.addChildClickViewIds(R.id.rb_name)
         caiJingAdapter.setOnItemChildClickListener { adapter, view, position ->
-            var intent = Intent(context,RmbMaketMainActivity::class.java)
+            var intent = Intent(context, TypeListActivityActivity::class.java)
             intent.putExtra("id",caiJingAdapter.data.get(position).id.toString())
+            intent.putExtra("title","")
             startActivity(intent)
+
         }
         bangdanAdapter.addChildClickViewIds(R.id.rb_name)
         bangdanAdapter.setOnItemChildClickListener { adapter, view, position ->

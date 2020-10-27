@@ -34,10 +34,12 @@
         android:id="@+id/tv_center_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxEms="8"
+        android:singleLine="true"
         android:text=""
         android:textColor="#ff020202"
         android:textSize="16sp"
-
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

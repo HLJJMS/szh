@@ -2,13 +2,18 @@ package com.diwaves.news.mvp.ui.fragment
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.view.Gravity
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.PopupWindow
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
@@ -20,11 +25,15 @@ import com.diwaves.news.mvp.contract.RecommendContract
 import com.diwaves.news.mvp.presenter.RecommendPresenter
 
 import com.diwaves.news.R
+import com.diwaves.news.adapter.PopRadioAdapter
 import com.diwaves.news.adapter.RecommendAdapter
 import com.diwaves.news.bean.RecommendBean
 import com.diwaves.news.bean.StockBean
 import com.diwaves.news.mvp.ui.activity.ArticleDetailActivity
 import com.diwaves.news.mvp.ui.activity.PushTieActivity
+import com.diwaves.news.mvp.ui.activity.ReportActivity
+import com.diwaves.news.tools.MyToast
+import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
 import kotlinx.android.synthetic.main.fragment_recommend.*
 
 
@@ -56,7 +65,14 @@ import kotlinx.android.synthetic.main.fragment_recommend.*
 //推荐
 class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.View {
     var recommendAdapter: RecommendAdapter = RecommendAdapter()
-
+    var popupWindow: PopupWindow = PopupWindow()
+    var tagList: MutableList<String> = arrayListOf()
+    var view1: View? = null
+    var rbOk: QMUIRoundButton? = null
+    var rbNo: QMUIRoundButton? = null
+    var tage=""
+    var id = ""
+    var adapterPop: PopRadioAdapter = PopRadioAdapter()
     companion object {
         fun newInstance(): RecommendFragment {
             val fragment = RecommendFragment()
@@ -102,13 +118,18 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
             }
             startActivity(intent)
         }
-        recommendAdapter.addChildClickViewIds(R.id.iv_go, R.id.tv_tui)
+        recommendAdapter.addChildClickViewIds(R.id.iv_go, R.id.tv_tui,R.id.iv_close)
         recommendAdapter.setOnItemChildClickListener { adapters, view, position ->
-            var intent = Intent(context, PushTieActivity::class.java)
-            intent.putExtra("id", recommendAdapter.data.get(position).id.toString())
-            intent.putExtra("img", recommendAdapter.data.get(position).avatarUrl)
-            intent.putExtra("title", recommendAdapter.data.get(position).title)
-            startActivity(intent)
+//            var intent = Intent(context, PushTieActivity::class.java)
+//            intent.putExtra("id", recommendAdapter.data.get(position).id.toString())
+//            intent.putExtra("img", recommendAdapter.data.get(position).avatarUrl)
+//            intent.putExtra("title", recommendAdapter.data.get(position).title)
+//            startActivity(intent)
+            if(view.id==R.id.iv_close){
+                tagList = recommendAdapter.data.get(position).tags.split(",").toMutableList()
+                id = recommendAdapter.data.get(position).dirid.toString()
+                showListDialog()
+            }
         }
     }
 
@@ -154,6 +175,7 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
 
     override fun success(list: MutableList<RecommendBean.ResultEntity>) {
         recommendAdapter.setList(list)
+        setPopWindow()
     }
 
     override fun StockSuccess(bean: StockBean.ResultEntity) {
@@ -191,18 +213,61 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
 
     }
 
+    fun setPopWindow() {
+
+        var recyclerViewPop: RecyclerView? = null
+        view1 = LayoutInflater.from(mContext).inflate(R.layout.pop_pingbi_new, null);
+        popupWindow.contentView = view1
+        popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupWindow.setOutsideTouchable(true)
+        popupWindow.setFocusable(true) //点击返回键取消
+        popupWindow.setBackgroundDrawable(BitmapDrawable())
+        recyclerViewPop = view1?.findViewById(R.id.recycler)
+        recyclerViewPop?.layoutManager = LinearLayoutManager(mContext)
+        recyclerViewPop?.adapter = adapterPop
+
+        rbNo = view1?.findViewById(R.id.rb_off)
+        rbOk = view1?.findViewById(R.id.rb_ok)
+        rbOk?.setOnClickListener {
+            mPresenter?.pingbi(id, tage)
+        }
+        rbNo?.setOnClickListener {
+            popupWindow.dismiss()
+        }
+        adapterPop.addChildClickViewIds(R.id.radio)
+        adapterPop.setOnItemChildClickListener { adapter, view, position ->
+            tage = adapterPop.data[position]
+            adapterPop.setPositionAdapter(position)
+        }
+        popupWindow.setOnDismissListener {
+            val lp = activity?.window?.attributes
+            lp?.alpha = 1f
+            activity?.window?.attributes = lp
+        }
+    }
+
+    fun showPopWindow() {
+        adapterPop.setNewInstance(tagList)
+        val lp = activity?.window?.attributes
+        lp?.alpha = 0.5f
+        activity?.window?.attributes = lp
+        popupWindow.showAtLocation(activity?.getWindow()?.getDecorView(), Gravity.CENTER, 0, 0)
+    }
+
     private fun showListDialog() {
-        val items = arrayOf("屏蔽", "投诉/举报","删除文章","取消")
-        val listDialog: AlertDialog.Builder = AlertDialog.Builder(context.applicationContext)
+        val items = arrayOf("屏蔽", "投诉/举报", "删除文章", "取消")
+        val listDialog: AlertDialog.Builder = AlertDialog.Builder(mContext)
         listDialog.setTitle("")
         listDialog.setItems(items, object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, which: Int) {
-                if(which==0){
-
-                }else if(which==1){
-
-                }else if(which==2){
-
+                if (which == 0) {
+                    showPopWindow()
+                } else if (which == 1) {
+                    startActivity(
+                        Intent(mContext, ReportActivity::class.java).putExtra("id", id))
+                } else if (which == 2) {
+                        MyToast().makeToast(mContext,"删除成功")
                 }
             }
 

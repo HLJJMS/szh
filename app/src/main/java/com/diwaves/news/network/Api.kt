@@ -140,4 +140,7 @@ object Api {
     //买会员
     const val BUY_VIP = "app/buyMember"
 
+    //消息列表
+    const val MESSAGE_LIST = "my/message/znx"
+
 }

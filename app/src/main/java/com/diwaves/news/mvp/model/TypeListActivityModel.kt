@@ -10,6 +10,7 @@ import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
 import com.diwaves.news.mvp.contract.TypeListActivityContract
+import com.diwaves.news.network.bean.BaseBean
 import com.diwaves.news.network.service.HomeService
 import io.reactivex.Observable
 
@@ -44,6 +45,13 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         size: String
     ): Observable<TypeListBean> {
         return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getZXList(id, dirid,type,current,size)
+    }
+    override fun pingbi(
+        id: String,
+        title: String,
+        articleid: String
+    ): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).pingbi(id, title,articleid)
     }
 
     override fun onDestroy() {

@@ -11,6 +11,7 @@ import com.jess.arms.di.scope.FragmentScope
 import javax.inject.Inject
 
 import com.diwaves.news.mvp.contract.RecommendContract
+import com.diwaves.news.network.bean.BaseBean
 import com.diwaves.news.network.service.HomeService
 import io.reactivex.Observable
 
@@ -47,5 +48,12 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     override fun getStockData(): Observable<StockBean> {
         return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getSTOCK()
+    }
+    override fun pingbi(
+        id: String,
+        title: String,
+        articleid: String
+    ): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).pingbi(id, title,articleid)
     }
 }

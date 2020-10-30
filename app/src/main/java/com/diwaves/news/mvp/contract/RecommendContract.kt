@@ -2,6 +2,7 @@ package com.diwaves.news.mvp.contract
 
 import com.diwaves.news.bean.RecommendBean
 import com.diwaves.news.bean.StockBean
+import com.diwaves.news.network.bean.BaseBean
 import com.jess.arms.mvp.IView
 import com.jess.arms.mvp.IModel
 import io.reactivex.Observable
@@ -32,6 +33,9 @@ interface RecommendContract {
             id: String
         ): Observable<RecommendBean>
         fun getStockData(): Observable<StockBean>
+        fun pingbi(
+            id: String, title: String, articleid: String
+        ): Observable<BaseBean.BaseResponse<String>>
     }
 
 }

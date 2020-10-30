@@ -1,32 +1,29 @@
 package com.diwaves.news.mvp.ui.activity
 
 import android.Manifest
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.text.Html
-import android.text.Html.FROM_HTML_MODE_COMPACT
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
-import android.widget.ScrollView
-import android.widget.TextView
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.diwaves.news.R
 import com.diwaves.news.adapter.CommentAdapter
+import com.diwaves.news.adapter.PopRadioAdapter
 import com.diwaves.news.bean.ArticleDetailBean
 import com.diwaves.news.bean.CommentBean
 import com.diwaves.news.di.component.DaggerArticleDetailComponent
 import com.diwaves.news.di.module.ArticleDetailModule
 import com.diwaves.news.mvp.contract.ArticleDetailContract
 import com.diwaves.news.mvp.presenter.ArticleDetailPresenter
-import com.diwaves.news.tools.MyGlide
 import com.diwaves.news.tools.MyToast
-import com.diwaves.news.tools.SPToll
 import com.diwaves.news.tools.SoftKeyBoardListener
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
@@ -40,9 +37,6 @@ import com.zhihu.matisse.engine.impl.GlideEngine
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_article_detail.*
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -74,7 +68,6 @@ import java.util.concurrent.TimeUnit
  */
 class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDetailContract.View {
     var like: Int = 0
-    var goodComment = "0"
     var commentId = "";
     var collection: Int = 0
     var photoCode = 1001;
@@ -82,17 +75,15 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     var view: View? = null
     var rbOk: QMUIRoundButton? = null
     var rbNo: QMUIRoundButton? = null
-    var rbBead: QMUIRoundButton? = null
-    var rbLooked: QMUIRoundButton? = null
-    var rbSource: QMUIRoundButton? = null
-    private var isComment: Boolean = true
     private var changePhoto: Boolean = false
-    private var cheak: String = "0" //0:全部可见 1:仅评论作者和帖子作者可见
+    var recyclerView: RecyclerView? = null
+    var arr: MutableList<String> = arrayListOf()
     var type = "0"//0最热，1最新，2推+送
     var page = 1
+    var tage = ""
     var popupWindow: PopupWindow = PopupWindow()
     var adapter: CommentAdapter = CommentAdapter()
-    var tv_jubao: TextView? = null
+    var tagList: MutableList<String> = arrayListOf()
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerArticleDetailComponent //如找不到该类,请编译一下项目
             .builder()
@@ -125,6 +116,11 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         collection = bean.collection
         tv_fen.text = bean.articles.score
         isLikeOrCollection()
+        arr = bean.articles.tags.toString().split(",").toMutableList()
+
+        for (index in 0..arr.size) {
+
+        }
         tv_off.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             collection = Math.abs(collection - 1)
             mPresenter?.cllection(intent.getStringExtra("id"), collection.toString())
@@ -159,8 +155,8 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 //            intent.putExtra("title", bean.articles.title)
 //            startActivity(intent)
 //        }
-        iv_send.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe{
-            var intent = Intent (this, PushTieActivity::class.java)
+        iv_send.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            var intent = Intent(this, PushTieActivity::class.java)
             intent.putExtra("id", intent.getStringExtra("id"))
             intent.putExtra("img", bean.articles.pic.toString())
             intent.putExtra("title", bean.articles.title)
@@ -170,11 +166,11 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
 
         iv_close.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            showPopWindow()
+            showListDialog()
         }
 
         tv_buy_vip.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-           startActivity(Intent(this,BuyVipActivity::class.java))
+            startActivity(Intent(this, BuyVipActivity::class.java))
         }
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
@@ -395,52 +391,32 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     }
 
     fun setPopWindow() {
-        var title = ""
-        view = LayoutInflater.from(this).inflate(R.layout.pop_pingbi, null);
+        var adapterPop: PopRadioAdapter = PopRadioAdapter()
+        var recyclerViewPop: RecyclerView? = null
+
+        view = LayoutInflater.from(this).inflate(R.layout.pop_pingbi_new, null);
         popupWindow.contentView = view
         popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
         popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
         popupWindow.setOutsideTouchable(true)
         popupWindow.setFocusable(true) //点击返回键取消
         popupWindow.setBackgroundDrawable(BitmapDrawable())
-        rbBead = view?.findViewById(R.id.rb_bead);
-        rbLooked = view?.findViewById(R.id.rb_looked);
-        rbNo = view?.findViewById(R.id.rb_no);
-        rbOk = view?.findViewById(R.id.rb_ok);
-        rbSource = view?.findViewById(R.id.rb_source);
-        title = rbBead?.text.toString()
-        rbBead?.setOnClickListener {
-            rbBead?.setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
-            rbLooked?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            rbSource?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            title = rbBead?.text.toString()
-        }
-        rbSource?.setOnClickListener {
-            rbSource?.setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
-            rbLooked?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            rbBead?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            title = rbSource?.text.toString()
-        }
-        rbLooked?.setOnClickListener {
-            rbLooked?.setTextColor(ContextCompat.getColor(this, R.color.color_2BA4D9))
-            rbSource?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            rbBead?.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            title = rbLooked?.text.toString()
-        }
-        tv_jubao = view?.findViewById(R.id.tv_jubao)
-        tv_jubao?.setOnClickListener {
-            startActivity(
-                Intent(this, ReportActivity::class.java).putExtra(
-                    "id",
-                    intent.getStringExtra("id")
-                )
-            )
-        }
+        recyclerViewPop = view?.findViewById(R.id.recycler)
+        recyclerViewPop?.layoutManager = LinearLayoutManager(this)
+        recyclerViewPop?.adapter = adapterPop
+        adapterPop.setList(arr)
+        rbNo = view?.findViewById(R.id.rb_off)
+        rbOk = view?.findViewById(R.id.rb_ok)
         rbOk?.setOnClickListener {
-            mPresenter?.pingbi(intent.getStringExtra("id"), title)
+            mPresenter?.pingbi(intent.getStringExtra("id"), tage)
         }
         rbNo?.setOnClickListener {
             popupWindow.dismiss()
+        }
+        adapterPop.addChildClickViewIds(R.id.radio)
+        adapterPop.setOnItemChildClickListener { adapter, view, position ->
+            tage = adapterPop.data[position]
+            adapterPop.setPositionAdapter(position)
         }
         popupWindow.setOnDismissListener {
             val lp = window.attributes
@@ -456,5 +432,27 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0)
     }
 
+    private fun showListDialog() {
+        val items = arrayOf("屏蔽", "投诉/举报", "删除文章", "取消")
+        val listDialog: AlertDialog.Builder = AlertDialog.Builder(this)
+        listDialog.setTitle("")
+        listDialog.setItems(items, object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                if (which == 0) {
+                    showPopWindow()
+                } else if (which == 1) {
+                    startActivity(
+                        Intent(this@ArticleDetailActivity, ReportActivity::class.java).putExtra(
+                            "id",
+                            intent.getStringExtra("id")
+                        )
+                    )
+                } else if (which == 2) {
+                    MyToast().makeToast(this@ArticleDetailActivity,"删除成功")
+                }
+            }
 
+        })
+        listDialog.show()
+    }
 }

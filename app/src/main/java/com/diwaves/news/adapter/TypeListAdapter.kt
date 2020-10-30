@@ -12,6 +12,7 @@ class TypeListAdapter :BaseQuickAdapter<TypeListBean.ResultBean.RecordsBean,Base
         helper.setText(R.id.tv_title, item.title)
         helper.setText(R.id.rb_detail, item.dirname)
         helper.setText(R.id.tv_time, item.createdate)
+        helper.setText(R.id.tv_name, item.website)
 //        helper.setText(R.id.tv_pinglun, item.comment.toString() + "评论")
     }
 }

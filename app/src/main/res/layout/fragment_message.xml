@@ -17,23 +17,120 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
+        android:id="@+id/tv_friend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         android:text="朋友列表"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/iv_refresh"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="10dp"
+        android:src="@mipmap/ic_refresh"
         app:layout_constraintBottom_toBottomOf="@id/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/title"
         tools:ignore="MissingConstraints" />
 
+
+    <ImageView
+        android:id="@+id/iv_system"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:src="@mipmap/ic_system"
+        app:layout_constraintEnd_toStartOf="@id/iv_tousu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="暂无消息"
-        android:textColor="@color/color_A4A4A4"
+        android:layout_marginTop="6dp"
+        android:text="系统"
+        android:textColor="#ff444444"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/iv_system"
+        app:layout_constraintStart_toStartOf="@id/iv_system"
+        app:layout_constraintTop_toBottomOf="@id/iv_system" />
+
+    <ImageView
+        android:id="@+id/iv_tousu"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:src="@mipmap/ic_tousu"
+        app:layout_constraintEnd_toStartOf="@id/iv_shengao"
+        app:layout_constraintStart_toEndOf="@id/iv_system"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="投诉"
+        android:textColor="#ff444444"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/iv_tousu"
+        app:layout_constraintStart_toStartOf="@id/iv_tousu"
+        app:layout_constraintTop_toBottomOf="@id/iv_tousu" />
+
+    <ImageView
+        android:id="@+id/iv_shengao"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:src="@mipmap/ic_shenhe"
+        app:layout_constraintEnd_toStartOf="@id/iv_add_friend"
+        app:layout_constraintStart_toEndOf="@id/iv_tousu"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="审稿"
+        android:textColor="#ff444444"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/iv_shengao"
+        app:layout_constraintStart_toStartOf="@id/iv_shengao"
+        app:layout_constraintTop_toBottomOf="@id/iv_shengao" />
+
+    <ImageView
+        android:id="@+id/iv_add_friend"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:src="@mipmap/ic_addfriend"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_shengao"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="加好友"
+        android:textColor="#ff444444"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/iv_add_friend"
+        app:layout_constraintStart_toStartOf="@id/iv_add_friend"
+        app:layout_constraintTop_toBottomOf="@id/iv_add_friend" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_system"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

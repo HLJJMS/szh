@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
@@ -17,6 +18,13 @@ import com.diwaves.news.mvp.contract.MessageContract
 import com.diwaves.news.mvp.presenter.MessagePresenter
 
 import com.diwaves.news.R
+import com.diwaves.news.adapter.MessageAdapter
+import com.diwaves.news.bean.MessageBean
+import com.diwaves.news.mvp.ui.activity.MyFriendActivity
+import com.diwaves.news.mvp.ui.activity.SettingActivity
+import com.jakewharton.rxbinding3.view.clicks
+import kotlinx.android.synthetic.main.fragment_message.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -45,6 +53,9 @@ import com.diwaves.news.R
  * }
  */
 class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
+
+    var adapter: MessageAdapter = MessageAdapter()
+
     companion object {
         fun newInstance(): MessageFragment {
             val fragment = MessageFragment()
@@ -71,6 +82,23 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        tv_friend.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context, MyFriendActivity::class.java))
+        }
+        iv_system.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context, MyFriendActivity::class.java))
+        }
+        iv_shengao.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context, MyFriendActivity::class.java))
+        }
+        iv_add_friend.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context, MyFriendActivity::class.java))
+        }
+        iv_refresh.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            mPresenter?.getData()
+        }
+        recyclerview.layoutManager = LinearLayoutManager(context)
+        recyclerview.adapter = adapter
 
     }
 
@@ -113,6 +141,11 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
     override fun setData(data: Any?) {
 
     }
+
+    override fun getDataSuccess(bean: MutableList<MessageBean.ResultEntity>) {
+        adapter?.setList(bean)
+    }
+
 
     override fun showLoading() {
 

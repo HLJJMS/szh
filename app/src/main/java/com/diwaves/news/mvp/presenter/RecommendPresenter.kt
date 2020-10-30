@@ -14,6 +14,7 @@ import javax.inject.Inject
 import com.diwaves.news.mvp.contract.RecommendContract
 import com.diwaves.news.network.Api
 import com.diwaves.news.network.RxUtils
+import com.diwaves.news.network.bean.BaseBean
 import com.diwaves.news.tools.MyToast
 import com.diwaves.news.tools.SPToll
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
@@ -77,6 +78,20 @@ constructor(model: RecommendContract.Model, rootView: RecommendContract.View) :
                     } else {
                         MyToast().makeToast(mApplication, t.message)
                     }
+                }
+            })
+    }
+    fun pingbi(articleid: String, title: String) {
+        mModel.pingbi(SPToll(mApplication).getId(), title, articleid)
+            .compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<String>) {
+                    if (t.code.equals(Api.SUCCESS)) {
+
+                    }
+                    MyToast().makeToast(mApplication, t.message)
+
                 }
             })
     }

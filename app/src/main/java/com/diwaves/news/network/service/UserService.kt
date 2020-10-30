@@ -119,4 +119,11 @@ interface UserService {
         @Field("userid") id: String, @Field("month") count: String
     ): Observable<BaseBean.BaseResponse<String>>
 
+    //  获取消息
+    @FormUrlEncoded
+    @POST(Api.MESSAGE_LIST)
+    fun getMessage(
+        @Field("userid") id: String
+    ): Observable<MessageBean>
+
 }

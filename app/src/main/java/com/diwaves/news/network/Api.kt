@@ -143,4 +143,11 @@ object Api {
     //消息列表
     const val MESSAGE_LIST = "my/message/znx"
 
+    //新的朋友
+    const val NEW_FRIEND = "friends/request/list"
+
+    //添加朋友
+    const val OK_FRIEND = "friends/addFriends"
+
+
 }

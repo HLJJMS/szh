@@ -14,6 +14,8 @@ import com.diwaves.news.mvp.contract.NewFriendContract
 import com.diwaves.news.mvp.presenter.NewFriendPresenter
 
 import com.diwaves.news.R
+import com.diwaves.news.adapter.NewFriendAdapter
+import com.diwaves.news.bean.NewFriendBean
 import kotlinx.android.synthetic.main.activity_new_friend.*
 
 
@@ -43,7 +45,7 @@ import kotlinx.android.synthetic.main.activity_new_friend.*
  * }
  */
 class NewFriendActivity : BaseActivity<NewFriendPresenter>(), NewFriendContract.View {
-
+    var adapter: NewFriendAdapter = NewFriendAdapter()
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerNewFriendComponent //如找不到该类,请编译一下项目
             .builder()
@@ -61,6 +63,20 @@ class NewFriendActivity : BaseActivity<NewFriendPresenter>(), NewFriendContract.
 
     override fun initData(savedInstanceState: Bundle?) {
         recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.adapter = adapter
+        mPresenter?.getNewFriendDat()
+        adapter.addChildClickViewIds(R.id.ok, R.id.no)
+        adapter.setOnItemChildClickListener { adapter, view, position ->
+            if (view.id == R.id.ok) {
+                mPresenter?.okAndNo("2")
+            } else if (view.id == R.id.no) {
+                mPresenter?.okAndNo("1")
+            }
+        }
+    }
+
+    override fun getDataSuccess(list: MutableList<NewFriendBean.ResultEntity>) {
+        adapter.setList(list)
     }
 
 

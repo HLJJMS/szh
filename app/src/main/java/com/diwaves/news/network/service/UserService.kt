@@ -126,4 +126,17 @@ interface UserService {
         @Field("userid") id: String
     ): Observable<MessageBean>
 
+    //  获取心朋友
+    @FormUrlEncoded
+    @POST(Api.NEW_FRIEND)
+    fun getNewFriend(
+        @Field("userid") id: String
+    ): Observable<NewFriendBean>
+
+    //  同意做朋友
+    @FormUrlEncoded
+    @POST(Api.OK_FRIEND)
+    fun okFriend(
+        @Field("userid") id: String, @Field("state") type: String
+    ): Observable<BaseBean.BaseResponse<Any>>
 }

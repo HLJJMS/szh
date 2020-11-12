@@ -2,29 +2,26 @@ package com.diwaves.news.mvp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-
-import com.jess.arms.base.BaseFragment
-import com.jess.arms.di.component.AppComponent
-import com.jess.arms.utils.ArmsUtils
-
-import com.diwaves.news.di.component.DaggerMyComponent
-import com.diwaves.news.di.module.MyModule
-import com.diwaves.news.mvp.contract.MyContract
-import com.diwaves.news.mvp.presenter.MyPresenter
-
 import com.diwaves.news.R
 import com.diwaves.news.adapter.MyFramgentAdapter
 import com.diwaves.news.bean.MyInfoBean
 import com.diwaves.news.bean.MyItemBean
+import com.diwaves.news.di.component.DaggerMyComponent
+import com.diwaves.news.di.module.MyModule
+import com.diwaves.news.mvp.contract.MyContract
+import com.diwaves.news.mvp.presenter.MyPresenter
 import com.diwaves.news.mvp.ui.activity.*
 import com.diwaves.news.tools.MyGlide
 import com.diwaves.news.tools.SPToll
 import com.jakewharton.rxbinding3.view.clicks
+import com.jess.arms.base.BaseFragment
+import com.jess.arms.di.component.AppComponent
+import com.jess.arms.utils.ArmsUtils
+import com.yzq.zxinglibrary.android.CaptureActivity
 import kotlinx.android.synthetic.main.fragment_my.*
 import java.util.concurrent.TimeUnit
 
@@ -59,6 +56,7 @@ import java.util.concurrent.TimeUnit
 class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
     private var myFramgentAdapter: MyFramgentAdapter? = null
     private var list: ArrayList<MyItemBean> = ArrayList()
+    var REQUEST_CODE_SCAN = 1001;
 
     companion object {
         fun newInstance(): MyFragment {
@@ -96,6 +94,14 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         }
         rb_login.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, LoginActivity::class.java))
+        }
+
+        iv_scan.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            //扫描二维码
+
+            //扫描二维码
+            val intent = Intent(context, CaptureActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE_SCAN)
         }
 
     }

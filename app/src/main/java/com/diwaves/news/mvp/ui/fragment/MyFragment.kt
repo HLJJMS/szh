@@ -1,5 +1,6 @@
 package com.diwaves.news.mvp.ui.fragment
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,12 +17,15 @@ import com.diwaves.news.mvp.contract.MyContract
 import com.diwaves.news.mvp.presenter.MyPresenter
 import com.diwaves.news.mvp.ui.activity.*
 import com.diwaves.news.tools.MyGlide
+import com.diwaves.news.tools.MyToast
 import com.diwaves.news.tools.SPToll
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yzq.zxinglibrary.android.CaptureActivity
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fragment_my.*
 import java.util.concurrent.TimeUnit
 
@@ -97,11 +101,19 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         }
 
         iv_scan.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            //扫描二维码
+            val rxPermissions: RxPermissions = RxPermissions(this)
+            rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .subscribe(Consumer<Boolean>() {
+                    if (it) {
+                        //扫描二维码
+                        val intent = Intent(context, CaptureActivity::class.java)
+                        startActivityForResult(intent, REQUEST_CODE_SCAN)
+                    } else {
+                        MyToast().makeToast(context?.applicationContext!!, "暂无权限")
+                    }
+                });
 
-            //扫描二维码
-            val intent = Intent(context, CaptureActivity::class.java)
-            startActivityForResult(intent, REQUEST_CODE_SCAN)
+
         }
 
     }

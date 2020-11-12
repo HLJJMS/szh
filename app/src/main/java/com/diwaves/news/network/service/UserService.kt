@@ -139,4 +139,13 @@ interface UserService {
     fun okFriend(
         @Field("userid") id: String, @Field("state") type: String
     ): Observable<BaseBean.BaseResponse<Any>>
+
+    //  同意做朋友
+    @FormUrlEncoded
+    @POST(Api.MESSAGE_EXAMINE)
+    fun getExamineList(
+        @Field("userid") id: String
+    ): Observable<BaseBean.BaseResponse<Any>>
+
+
 }

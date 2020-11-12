@@ -21,6 +21,7 @@ import com.diwaves.news.R
 import com.diwaves.news.adapter.MessageAdapter
 import com.diwaves.news.bean.MessageBean
 import com.diwaves.news.mvp.ui.activity.MyFriendActivity
+import com.diwaves.news.mvp.ui.activity.NewFriendActivity
 import com.diwaves.news.mvp.ui.activity.SettingActivity
 import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.fragment_message.*
@@ -92,7 +93,7 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
             startActivity(Intent(context, MyFriendActivity::class.java))
         }
         iv_add_friend.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            startActivity(Intent(context, MyFriendActivity::class.java))
+            startActivity(Intent(context, NewFriendActivity::class.java))
         }
         iv_refresh.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             mPresenter?.getData()

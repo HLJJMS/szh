@@ -149,6 +149,11 @@ object Api {
     //添加朋友
     const val OK_FRIEND = "friends/addFriends"
 
-    //审稿
+    //审稿列表
     const val MESSAGE_EXAMINE = "my/message/audit"
+
+    //审稿
+    const val MESSAGE_EXAMINE_DO = "my/audit/status"
+
+
 }

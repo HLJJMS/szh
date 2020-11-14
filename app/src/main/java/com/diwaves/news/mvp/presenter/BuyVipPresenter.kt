@@ -66,4 +66,6 @@ constructor(model: BuyVipContract.Model, rootView: BuyVipContract.View) :
                 })
             }
 
+
+
     }

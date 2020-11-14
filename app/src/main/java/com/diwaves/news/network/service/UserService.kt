@@ -140,12 +140,18 @@ interface UserService {
         @Field("userid") id: String, @Field("state") type: String
     ): Observable<BaseBean.BaseResponse<Any>>
 
-    //  同意做朋友
+    //  待审核文章列表
     @FormUrlEncoded
     @POST(Api.MESSAGE_EXAMINE)
     fun getExamineList(
         @Field("userid") id: String
+    ): Observable<MessageAuditBean>
+
+
+    // 审核文章
+    @FormUrlEncoded
+    @POST(Api.MESSAGE_EXAMINE_DO)
+    fun examineDo(
+        @Field("userid") id: String, @Field("state") type: String,@Field("articlesid ") articlesid : String
     ): Observable<BaseBean.BaseResponse<Any>>
-
-
 }

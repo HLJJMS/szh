@@ -2,6 +2,7 @@ package com.diwaves.news.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -13,6 +14,9 @@ import com.diwaves.news.mvp.contract.EexamineContract
 import com.diwaves.news.mvp.presenter.EexaminePresenter
 
 import com.diwaves.news.R
+import com.diwaves.news.adapter.EexamineAdapter
+import com.diwaves.news.bean.MessageAuditBean
+import kotlinx.android.synthetic.main.activity_eexamine.*
 
 
 /**
@@ -41,7 +45,7 @@ import com.diwaves.news.R
  * }
  */
 class EexamineActivity : BaseActivity<EexaminePresenter>(), EexamineContract.View {
-
+    var adapter: EexamineAdapter = EexamineAdapter()
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerEexamineComponent //如找不到该类,请编译一下项目
             .builder()
@@ -58,7 +62,21 @@ class EexamineActivity : BaseActivity<EexaminePresenter>(), EexamineContract.Vie
 
 
     override fun initData(savedInstanceState: Bundle?) {
+        recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.adapter = adapter
+        mPresenter?.getData()
+        adapter.addChildClickViewIds(R.id.tv_ok,R.id.tv_ok)
+        adapter.setOnItemChildClickListener { adapters, view, position ->
+            if(view.id==R.id.tv_ok){
+                mPresenter?.setData(adapter.data.get(position).articlesid.toString(),"1")
+            }else if(view.id==R.id.tv_no){
+                mPresenter?.setData(adapter.data.get(position).articlesid.toString(),"2")
+            }
+        }
+    }
 
+    override fun seccuse(list: MutableList<MessageAuditBean.ResultEntity>) {
+        adapter.setList(list)
     }
 
 

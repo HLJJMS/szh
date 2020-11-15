@@ -73,6 +73,9 @@ class EexamineActivity : BaseActivity<EexaminePresenter>(), EexamineContract.Vie
                 mPresenter?.setData(adapter.data.get(position).articlesid.toString(),"2")
             }
         }
+        titleBar.setBackClick {
+            finish()
+        }
     }
 
     override fun seccuse(list: MutableList<MessageAuditBean.ResultEntity>) {

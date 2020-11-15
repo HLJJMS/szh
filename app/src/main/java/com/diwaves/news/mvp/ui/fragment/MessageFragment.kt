@@ -20,6 +20,7 @@ import com.diwaves.news.mvp.presenter.MessagePresenter
 import com.diwaves.news.R
 import com.diwaves.news.adapter.MessageAdapter
 import com.diwaves.news.bean.MessageBean
+import com.diwaves.news.mvp.ui.activity.EexamineActivity
 import com.diwaves.news.mvp.ui.activity.MyFriendActivity
 import com.diwaves.news.mvp.ui.activity.NewFriendActivity
 import com.diwaves.news.mvp.ui.activity.SettingActivity
@@ -89,8 +90,9 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
         iv_system.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, MyFriendActivity::class.java))
         }
-        iv_shengao.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            startActivity(Intent(context, MyFriendActivity::class.java))
+        iv_shengao.clicks().throttleFirst(
+            500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context, EexamineActivity::class.java))
         }
         iv_add_friend.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, NewFriendActivity::class.java))

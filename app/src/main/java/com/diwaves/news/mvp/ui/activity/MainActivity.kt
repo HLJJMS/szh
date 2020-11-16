@@ -86,11 +86,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     var context: Context? = null
     private var api: IWXAPI? = null
 
-    var popupWindow :PopupWindow = PopupWindow();
-    var view : View ?= null
-    var ivImg:ImageView?=null
-    var ivTxt:ImageView?=null
-    var ivClose:ImageView?=null
+    var popupWindow: PopupWindow = PopupWindow();
+    var view: View? = null
+    var ivImg: ImageView? = null
+    var ivTxt: ImageView? = null
+    var ivClose: ImageView? = null
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent //如找不到该类,请编译一下项目
             .builder()
@@ -162,7 +162,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
                 startActivity(Intent(this, LoginActivity::class.java))
 
             } else {
-                showPopWindow()            }
+                showPopWindow()
+            }
         }
         tv_home.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -181,7 +182,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             if (SPToll(this).getId().equals("")) {
                 startActivity(Intent(this, LoginActivity::class.java))
             } else {
-               showPopWindow()
+                showPopWindow()
             }
         }
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -305,17 +306,18 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
         ivClose = view?.findViewById(R.id.iv_close);
         ivClose?.clicks()?.throttleFirst(500, TimeUnit.MILLISECONDS)
             ?.subscribe {
-               popupWindow?.dismiss()
+                popupWindow?.dismiss()
             }
         ivImg!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-
+                startActivity(Intent(this,ResealesPhotoActivityActivity::class.java))
             }
         ivTxt!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(context, ReleaseActivity::class.java))
             }
     }
+
     fun showPopWindow() {
         popupWindow?.showAtLocation(getWindow().decorView, Gravity.NO_GRAVITY, 0, 0)
 

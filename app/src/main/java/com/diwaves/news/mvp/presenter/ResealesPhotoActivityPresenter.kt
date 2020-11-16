@@ -10,6 +10,11 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler
 import javax.inject.Inject
 
 import com.diwaves.news.mvp.contract.ResealesPhotoActivityContract
+import com.diwaves.news.network.RxUtils
+import com.diwaves.news.network.bean.BaseBean
+import com.diwaves.news.tools.MyToast
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
+import okhttp3.RequestBody
 
 
 /**
@@ -50,5 +55,18 @@ constructor(
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+
+    fun postImage(body: RequestBody) {
+        mModel.postPhoto(body).compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<String>) {
+                    if (t.code.equals("200")) {
+                        mRootView.postPhotoSuccess(t.message)
+                    }
+                    MyToast().makeToast(mApplication, t.message)
+                }
+            })
     }
 }

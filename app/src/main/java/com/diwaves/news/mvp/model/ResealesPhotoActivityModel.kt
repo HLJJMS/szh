@@ -9,6 +9,10 @@ import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
 import com.diwaves.news.mvp.contract.ResealesPhotoActivityContract
+import com.diwaves.news.network.bean.BaseBean
+import com.diwaves.news.network.service.HomeService
+import io.reactivex.Observable
+import okhttp3.RequestBody
 
 
 /**
@@ -36,5 +40,9 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+
+    override fun postPhoto(body: RequestBody): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).postPhoto(body)
     }
 }

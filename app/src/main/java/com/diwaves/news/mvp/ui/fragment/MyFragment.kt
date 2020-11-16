@@ -26,7 +26,10 @@ import com.jess.arms.utils.ArmsUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yzq.zxinglibrary.android.CaptureActivity
 import io.reactivex.functions.Consumer
+
 import kotlinx.android.synthetic.main.fragment_my.*
+import java.text.SimpleDateFormat
+
 import java.util.concurrent.TimeUnit
 
 
@@ -102,7 +105,10 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
 
         iv_scan.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             val rxPermissions: RxPermissions = RxPermissions(this)
-            rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+            rxPermissions.request(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+            )
                 .subscribe(Consumer<Boolean>() {
                     if (it) {
                         //扫描二维码
@@ -115,6 +121,10 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
 
 
         }
+        tv_vip.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context, BuyVipActivity::class.java))
+        }
+
 
     }
 
@@ -125,7 +135,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
 
             tv_position.visibility = View.VISIBLE
             tv_add_friend.visibility = View.VISIBLE
-            iv_add_friend.visibility = View.VISIBLE
+            iv_add_friend.visibility = View.GONE
             iv_admin.visibility = View.VISIBLE
             iv_vip.visibility = View.VISIBLE
 
@@ -252,6 +262,9 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         myFramgentAdapter?.setOnItemClickListener { adapter, view, position ->
             startActivity(list.get(position).intent)
         }
+        val currentTime = System.currentTimeMillis()
+        val timeNow: String = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(currentTime)
+        tv_time.setText("刷新时间："+timeNow)
     }
 
     override fun showLoading() {
@@ -279,7 +292,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
 
         tv_position.visibility = View.INVISIBLE
         tv_add_friend.visibility = View.INVISIBLE
-        iv_add_friend.visibility = View.INVISIBLE
+        iv_add_friend.visibility = View.GONE
         iv_admin.visibility = View.INVISIBLE
         iv_vip.visibility = View.INVISIBLE
 

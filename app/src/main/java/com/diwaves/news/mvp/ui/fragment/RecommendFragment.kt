@@ -5,34 +5,30 @@ import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.Gravity
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-import com.jess.arms.base.BaseFragment
-import com.jess.arms.di.component.AppComponent
-import com.jess.arms.utils.ArmsUtils
-
-import com.diwaves.news.di.component.DaggerRecommendComponent
-import com.diwaves.news.di.module.RecommendModule
-import com.diwaves.news.mvp.contract.RecommendContract
-import com.diwaves.news.mvp.presenter.RecommendPresenter
-
 import com.diwaves.news.R
 import com.diwaves.news.adapter.PopRadioAdapter
 import com.diwaves.news.adapter.RecommendAdapter
 import com.diwaves.news.bean.RecommendBean
 import com.diwaves.news.bean.StockBean
+import com.diwaves.news.di.component.DaggerRecommendComponent
+import com.diwaves.news.di.module.RecommendModule
+import com.diwaves.news.mvp.contract.RecommendContract
+import com.diwaves.news.mvp.presenter.RecommendPresenter
 import com.diwaves.news.mvp.ui.activity.ArticleDetailActivity
-import com.diwaves.news.mvp.ui.activity.PushTieActivity
 import com.diwaves.news.mvp.ui.activity.ReportActivity
 import com.diwaves.news.tools.MyToast
+import com.jess.arms.base.BaseFragment
+import com.jess.arms.di.component.AppComponent
+import com.jess.arms.utils.ArmsUtils
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
 import kotlinx.android.synthetic.main.fragment_recommend.*
 
@@ -70,9 +66,10 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
     var view1: View? = null
     var rbOk: QMUIRoundButton? = null
     var rbNo: QMUIRoundButton? = null
-    var tage=""
+    var tage = ""
     var id = ""
     var adapterPop: PopRadioAdapter = PopRadioAdapter()
+
     companion object {
         fun newInstance(): RecommendFragment {
             val fragment = RecommendFragment()
@@ -118,14 +115,14 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
             }
             startActivity(intent)
         }
-        recommendAdapter.addChildClickViewIds(R.id.iv_go, R.id.tv_tui,R.id.iv_close)
+        recommendAdapter.addChildClickViewIds(R.id.iv_go, R.id.tv_tui, R.id.iv_close)
         recommendAdapter.setOnItemChildClickListener { adapters, view, position ->
 //            var intent = Intent(context, PushTieActivity::class.java)
 //            intent.putExtra("id", recommendAdapter.data.get(position).id.toString())
 //            intent.putExtra("img", recommendAdapter.data.get(position).avatarUrl)
 //            intent.putExtra("title", recommendAdapter.data.get(position).title)
 //            startActivity(intent)
-            if(view.id==R.id.iv_close){
+            if (view.id == R.id.iv_close) {
                 tagList = recommendAdapter.data.get(position).tags.split(",").toMutableList()
                 id = recommendAdapter.data.get(position).dirid.toString()
                 showListDialog()
@@ -186,10 +183,30 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
         tv_one_center.setText(bean.map1.current)
         tv_two_center.setText(bean.map2.current)
         tv_three_center.setText(bean.map3.current)
+        if (bean.map1.change_pct > 0) {
+            tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.qmui_config_color_red))
+            tv_one_bottom.setText(bean.map1.change_pct.toString() + " " + bean.map1.percentage.toString())
+        } else {
+            tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.color_5cd65c))
+            tv_one_bottom.setText(bean.map1.change_pct.toString() + " " + bean.map1.percentage.toString())
+        }
 
-        tv_one_bottom.setText(bean.map1.change_pct.toString()+" "+bean.map1.percentage.toString())
-        tv_two_bottom.setText(bean.map2.change_pct.toString()+" "+bean.map2.percentage.toString())
-        tv_three_bottom.setText(bean.map3.change_pct.toString()+" "+bean.map3.percentage.toString())
+        if (bean.map2.change_pct > 0) {
+            tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.qmui_config_color_red))
+            tv_two_bottom.setText(bean.map2.change_pct.toString() + " " + bean.map2.percentage.toString())
+        } else {
+            tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.color_5cd65c))
+            tv_two_bottom.setText(bean.map2.change_pct.toString() + " " + bean.map2.percentage.toString())
+        }
+
+        if (bean.map3.change_pct > 0) {
+            tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.qmui_config_color_red))
+            tv_three_bottom.setText(bean.map3.change_pct.toString() + " " + bean.map3.percentage.toString())
+        } else {
+            tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.color_5cd65c))
+            tv_three_bottom.setText(bean.map3.change_pct.toString() + " " + bean.map3.percentage.toString())
+        }
+
 
     }
 
@@ -265,9 +282,10 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
                     showPopWindow()
                 } else if (which == 1) {
                     startActivity(
-                        Intent(mContext, ReportActivity::class.java).putExtra("id", id))
+                        Intent(mContext, ReportActivity::class.java).putExtra("id", id)
+                    )
                 } else if (which == 2) {
-                        MyToast().makeToast(mContext,"删除成功")
+                    MyToast().makeToast(mContext, "删除成功")
                 }
             }
 

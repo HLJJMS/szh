@@ -65,9 +65,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
         android:background="@drawable/conner5_solid_yellow_stoken_white"
-        android:paddingStart="16dp"
+        android:paddingStart="10dp"
         android:paddingTop="56dp"
-        android:paddingEnd="16dp"
+        android:paddingEnd="10dp"
         android:paddingBottom="43dp"
         android:text=" 1金币 "
         android:textColor="@color/color_F4AB2B"
@@ -106,16 +106,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
-
         android:background="@drawable/bg_conner3_white"
-        android:paddingStart="16dp"
+        android:paddingStart="10dp"
         android:paddingTop="56dp"
-        android:paddingEnd="16dp"
+        android:paddingEnd="10dp"
         android:paddingBottom="43dp"
         android:text=" 5金币 "
         android:textColor="#ff444444"
         android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@id/tv_12"
+        app:layout_constraintStart_toEndOf="@id/tv_1"
         app:layout_constraintTop_toBottomOf="@id/iv_bg" />
 
     <TextView
@@ -148,16 +148,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
-        android:layout_marginEnd="12dp"
         android:background="@drawable/bg_conner3_white"
-        android:paddingStart="16dp"
+        android:paddingStart="10dp"
         android:paddingTop="56dp"
-        android:paddingEnd="16dp"
+        android:paddingEnd="10dp"
         android:paddingBottom="43dp"
         android:text="10金币"
         android:textColor="#ff444444"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_6"
         app:layout_constraintTop_toBottomOf="@id/iv_bg" />
 
     <TextView

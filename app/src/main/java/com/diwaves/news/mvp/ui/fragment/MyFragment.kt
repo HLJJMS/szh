@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.diwaves.news.R
 import com.diwaves.news.adapter.MyFramgentAdapter
 import com.diwaves.news.bean.MyInfoBean
@@ -92,6 +93,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
 
     override fun initData(savedInstanceState: Bundle?) {
         getData()
+        MyGlide.loadImage(mContext,"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3976806040,3211395236&fm=11&gp=0.jpg",iv_head)
         iv_setting.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, SettingActivity::class.java))
         }
@@ -124,7 +126,6 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         tv_vip.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, BuyVipActivity::class.java))
         }
-
 
     }
 
@@ -188,7 +189,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
 
     override fun success(bean: MyInfoBean) {
         recycler.visibility = View.VISIBLE
-        MyGlide.loadImageCircle(mContext, bean.user.avatarUrl, iv_head)
+//        MyGlide.loadImageCircle(mContext, bean.user.avatarUrl, iv_head)
         tv_name.text = bean.user.name
 
         tv_id.text = "数字号 : " + bean.user.wxname
@@ -298,7 +299,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
 
         rb_login.visibility = View.VISIBLE
         recycler.visibility = View.GONE
-        MyGlide.loadImageCircle(mContext, "", iv_head)
+//        MyGlide.loadImageCircle(mContext, "", iv_head)
         tv_name.text = ""
 
         tv_id.text = "数字号 : "

@@ -82,7 +82,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
         }
         titleBar.setEndTextClick {
             var urlArry = ""
-            for (index in 1 until list.size - 1) {
+            for (index in 0 until list.size - 1) {
                 urlArry = list.get(index) + ","
             }
             mPresenter?.postArticle(

@@ -20,10 +20,7 @@ import com.diwaves.news.mvp.presenter.MessagePresenter
 import com.diwaves.news.R
 import com.diwaves.news.adapter.MessageAdapter
 import com.diwaves.news.bean.MessageBean
-import com.diwaves.news.mvp.ui.activity.EexamineActivity
-import com.diwaves.news.mvp.ui.activity.MyFriendActivity
-import com.diwaves.news.mvp.ui.activity.NewFriendActivity
-import com.diwaves.news.mvp.ui.activity.SettingActivity
+import com.diwaves.news.mvp.ui.activity.*
 import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.fragment_message.*
 import java.util.concurrent.TimeUnit
@@ -88,7 +85,7 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
             startActivity(Intent(context, MyFriendActivity::class.java))
         }
         iv_system.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            startActivity(Intent(context, MyFriendActivity::class.java))
+            startActivity(Intent(context, SystemActivity::class.java))
         }
         iv_shengao.clicks().throttleFirst(
             500, TimeUnit.MILLISECONDS).subscribe {
@@ -99,6 +96,9 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
         }
         iv_refresh.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             mPresenter?.getData()
+        }
+        iv_tousu.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            startActivity(Intent(context, TouSuActivityActivity::class.java))
         }
         recyclerview.layoutManager = LinearLayoutManager(context)
         recyclerview.adapter = adapter

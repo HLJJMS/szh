@@ -130,7 +130,7 @@ class BuyVipActivity : BaseActivity<BuyVipPresenter>(), BuyVipContract.View {
             tv_1_time.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
             tv_6_time.setTextColor(ContextCompat.getColor(this, R.color.color_F4AB2B))
             tv_12_time.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
-            m = "2"
+            m = "6"
         } else {
             tv_1.setBackgroundResource(R.drawable.bg_conner3_white)
             tv_6.setBackgroundResource(R.drawable.bg_conner3_white)
@@ -141,7 +141,7 @@ class BuyVipActivity : BaseActivity<BuyVipPresenter>(), BuyVipContract.View {
             tv_1_time.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
             tv_6_time.setTextColor(ContextCompat.getColor(this, R.color.color_444444))
             tv_12_time.setTextColor(ContextCompat.getColor(this, R.color.color_F4AB2B))
-            m = "3"
+            m = "12"
         }
     }
 

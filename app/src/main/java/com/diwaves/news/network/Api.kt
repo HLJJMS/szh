@@ -156,4 +156,6 @@ object Api {
     const val MESSAGE_EXAMINE_DO = "my/audit/status"
 
 
+    //发布图片
+    const val RELEASE_IMG = "app/image"
 }

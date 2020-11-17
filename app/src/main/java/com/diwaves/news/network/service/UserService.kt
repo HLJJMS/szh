@@ -93,7 +93,6 @@ interface UserService {
     ): Observable<BaseBean.BaseResponse<String>>
 
 
-
     //  绑手机
     @FormUrlEncoded
     @POST(Api.EDIT_PHONE)
@@ -152,6 +151,19 @@ interface UserService {
     @FormUrlEncoded
     @POST(Api.MESSAGE_EXAMINE_DO)
     fun examineDo(
-        @Field("userid") id: String, @Field("state") type: String,@Field("articlesid ") articlesid : String
+        @Field("userid") id: String,
+        @Field("state") type: String,
+        @Field("articlesid") articlesid: String
+    ): Observable<BaseBean.BaseResponse<Any>>
+
+    // 审核文章
+    @FormUrlEncoded
+    @POST(Api.RELEASE_IMG)
+    fun upImageArticle(
+        @Field("userid") id: String,
+        @Field("audiopath") audiopath: String,
+        @Field("contenttext") contenttext: String,
+        @Field("state") state: String,
+        @Field("title") title: String
     ): Observable<BaseBean.BaseResponse<Any>>
 }

@@ -60,6 +60,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
     ResealesPhotoActivityContract.View {
     var adapter = AddPhotoAdapter()
     val photoCode = 1001
+    var list: MutableList<String> = arrayListOf()
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerResealesPhotoActivityComponent //如找不到该类,请编译一下项目
             .builder()
@@ -80,18 +81,29 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
             finish()
         }
         titleBar.setEndTextClick {
-
+            var urlArry = ""
+            for (index in 1 until list.size - 1) {
+                urlArry = list.get(index) + ","
+            }
+            mPresenter?.postArticle(
+                urlArry.substring(0, urlArry.length - 1),
+                et_txt.text.toString(),
+                "0",
+                ""
+            );
         }
         recyclerview.layoutManager = GridLayoutManager(this, 3)
         recyclerview.adapter = adapter
-        adapter.addData("")
+        list.add("")
+        adapter.setList(list)
         adapter.setOnItemClickListener { adapter, view, position ->
             getPermissions()
         }
     }
 
     override fun postPhotoSuccess(url: String) {
-       adapter.addData(url)
+        list.add(list.size - 1, url)
+        adapter.setList(list)
     }
 
 
@@ -153,7 +165,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
         if (requestCode == photoCode && resultCode == RESULT_OK) {
             for (i in Matisse.obtainPathResult(data).indices) {
                 //解析文件
-               var file = File(Matisse.obtainPathResult(data)[i])
+                var file = File(Matisse.obtainPathResult(data)[i])
 
                 val builder: MultipartBody.Builder = MultipartBody.Builder()
                 builder.setType(MultipartBody.FORM)
@@ -163,4 +175,6 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
             }
         }
     }
+
+
 }

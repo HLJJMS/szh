@@ -186,23 +186,29 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
         if (bean.map1.change_pct > 0) {
             tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.qmui_config_color_red))
             tv_one_bottom.setText(bean.map1.change_pct.toString() + " " + bean.map1.percentage.toString())
+            tv_one_center.setTextColor(ContextCompat.getColor(mContext, R.color.qmui_config_color_red))
         } else {
             tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.color_5cd65c))
-            tv_one_bottom.setText(bean.map1.change_pct.toString() + " " + bean.map1.percentage.toString())
+            tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.color_5cd65c))
+            tv_one_center.setText(bean.map1.change_pct.toString() + " " + bean.map1.percentage.toString())
         }
 
         if (bean.map2.change_pct > 0) {
+            tv_two_center.setTextColor(ContextCompat.getColor(mContext, R.color.qmui_config_color_red))
             tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.qmui_config_color_red))
             tv_two_bottom.setText(bean.map2.change_pct.toString() + " " + bean.map2.percentage.toString())
         } else {
+            tv_two_center.setTextColor(ContextCompat.getColor(mContext, R.color.color_5cd65c))
             tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.color_5cd65c))
             tv_two_bottom.setText(bean.map2.change_pct.toString() + " " + bean.map2.percentage.toString())
         }
 
         if (bean.map3.change_pct > 0) {
+            tv_three_center.setTextColor(ContextCompat.getColor(mContext, R.color.qmui_config_color_red))
             tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.qmui_config_color_red))
             tv_three_bottom.setText(bean.map3.change_pct.toString() + " " + bean.map3.percentage.toString())
         } else {
+            tv_three_center.setTextColor(ContextCompat.getColor(mContext, R.color.color_5cd65c))
             tv_one_bottom.setTextColor(ContextCompat.getColor(mContext, R.color.color_5cd65c))
             tv_three_bottom.setText(bean.map3.change_pct.toString() + " " + bean.map3.percentage.toString())
         }

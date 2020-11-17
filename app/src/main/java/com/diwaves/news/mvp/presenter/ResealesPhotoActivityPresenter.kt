@@ -13,6 +13,7 @@ import com.diwaves.news.mvp.contract.ResealesPhotoActivityContract
 import com.diwaves.news.network.RxUtils
 import com.diwaves.news.network.bean.BaseBean
 import com.diwaves.news.tools.MyToast
+import com.diwaves.news.tools.SPToll
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
 import okhttp3.RequestBody
 
@@ -64,6 +65,24 @@ constructor(
                 override fun onNext(t: BaseBean.BaseResponse<String>) {
                     if (t.code.equals("200")) {
                         mRootView.postPhotoSuccess(t.message)
+                    }
+                    MyToast().makeToast(mApplication, t.message)
+                }
+            })
+    }
+
+    fun postArticle(
+        audiopath: String,
+        contenttext: String,
+        state: String,
+        title: String
+    ) {
+        mModel.postArticle(SPToll(mApplication).getId(),audiopath,contenttext,state,title).compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<Any>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<Any>) {
+                    if (t.code.equals("200")) {
+                        mRootView.killMyself()
                     }
                     MyToast().makeToast(mApplication, t.message)
                 }

@@ -11,6 +11,7 @@ import javax.inject.Inject
 import com.diwaves.news.mvp.contract.ResealesPhotoActivityContract
 import com.diwaves.news.network.bean.BaseBean
 import com.diwaves.news.network.service.HomeService
+import com.diwaves.news.network.service.UserService
 import io.reactivex.Observable
 import okhttp3.RequestBody
 
@@ -44,5 +45,16 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     override fun postPhoto(body: RequestBody): Observable<BaseBean.BaseResponse<String>> {
         return mRepositoryManager.obtainRetrofitService(HomeService::class.java).postPhoto(body)
+    }
+
+    override fun postArticle(
+        id: String,
+        audiopath: String,
+        contenttext: String,
+        state: String,
+        title: String
+    ): Observable<BaseBean.BaseResponse<Any>> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java)
+            .upImageArticle(id, audiopath, contenttext, state, title)
     }
 }

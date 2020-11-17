@@ -13,6 +13,7 @@ import com.diwaves.news.mvp.contract.TouSuActivityContract
 import com.diwaves.news.mvp.presenter.TouSuActivityPresenter
 
 import com.diwaves.news.R
+import kotlinx.android.synthetic.main.activity_tou_su.*
 
 
 /**
@@ -58,7 +59,9 @@ class TouSuActivityActivity : BaseActivity<TouSuActivityPresenter>(), TouSuActiv
 
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        titlebar.setBackClick {
+            finish()
+        }
     }
 
 

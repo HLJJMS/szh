@@ -96,8 +96,6 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
             caiJingAdapter.setList(bangdanAdapter.data.get(position).dirsList)
             bangdanAdapter.setClickPosition(position)
         }
-
-
         mPresenter?.getData()
     }
 

@@ -13,6 +13,7 @@ import com.diwaves.news.mvp.contract.SystemContract
 import com.diwaves.news.mvp.presenter.SystemPresenter
 
 import com.diwaves.news.R
+import kotlinx.android.synthetic.main.activity_system.*
 
 
 /**
@@ -58,7 +59,9 @@ class SystemActivity : BaseActivity<SystemPresenter>(), SystemContract.View {
 
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        titlebar.setBackClick {
+            finish()
+        }
     }
 
 

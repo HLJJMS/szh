@@ -116,7 +116,10 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         collection = bean.collection
         tv_fen.text = bean.articles.score
         isLikeOrCollection()
-        arr = bean.articles.tags.toString().split(",").toMutableList()
+
+        if(null!=bean.articles.tags){
+            arr = bean?.articles?.tags?.toString()?.split(",")!!.toMutableList()
+        }
 
         for (index in 0..arr.size) {
 

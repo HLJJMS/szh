@@ -42,7 +42,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="这是标题！"
         android:textColor="#ff020202"
         android:textSize="16sp"
@@ -58,55 +58,34 @@
         app:layout_constraintTop_toTopOf="@id/tv_title"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/tv_detail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="22.5dp"
-        android:text=""
-        android:textColor="#ff5b5b5b"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@id/iv_detail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        tools:ignore="MissingConstraints" />
+
 
     <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
         android:id="@+id/rb_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:paddingStart="35dp"
-        android:paddingTop="8.5dp"
+        android:paddingTop="5dp"
         android:paddingEnd="22dp"
-        android:paddingBottom="9dp"
+        android:paddingBottom="5dp"
         android:textColor="#ff5b5b5b"
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail"
+        app:layout_constraintTop_toBottomOf="@id/tv_read"
         app:qmui_backgroundColor="#FFFAFAFA"
         app:qmui_borderWidth="0dp"
         app:qmui_radius="3dp"
         tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/iv_zu"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:src="@mipmap/ic_zu"
-        app:layout_constraintBottom_toBottomOf="@id/rb_detail"
-        app:layout_constraintStart_toStartOf="@id/rb_detail"
-        app:layout_constraintTop_toTopOf="@id/rb_detail" />
-
     <TextView
         android:id="@+id/tv_read"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="2阅读"
         android:textColor="#ff989898"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/rb_detail" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <TextView
         android:id="@+id/tv_comment"
@@ -126,9 +105,9 @@
         android:layout_height="18dp"
         android:layout_marginEnd="4dp"
         android:src="@mipmap/ic_fabu"
-        app:layout_constraintBottom_toBottomOf="@id/tv_read"
+        app:layout_constraintBottom_toBottomOf="@id/rb_detail"
         app:layout_constraintEnd_toStartOf="@+id/tv_tui"
-        app:layout_constraintTop_toTopOf="@id/tv_read" />
+        app:layout_constraintTop_toTopOf="@id/rb_detail" />
 
     <ImageView
         android:id="@+id/iv_close"
@@ -141,9 +120,9 @@
         android:paddingEnd="7dp"
         android:paddingBottom="3dp"
         android:src="@mipmap/ic_close_x"
-        app:layout_constraintBottom_toBottomOf="@id/tv_read"
+        app:layout_constraintBottom_toBottomOf="@id/rb_detail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_read" />
+        app:layout_constraintTop_toTopOf="@id/rb_detail" />
 
     <TextView
         android:id="@+id/tv_tui"
@@ -153,14 +132,14 @@
         android:text="推"
         android:textColor="#ff5b5b5b"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_read"
+        app:layout_constraintBottom_toBottomOf="@id/rb_detail"
         app:layout_constraintEnd_toStartOf="@+id/iv_close"
-        app:layout_constraintTop_toTopOf="@id/tv_read" />
+        app:layout_constraintTop_toTopOf="@id/rb_detail" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        android:background="@color/color_A4A4A4"
+        android:background="@color/color_77DFDFDF"
         app:layout_constraintTop_toBottomOf="@id/tv_tui" />
 </androidx.constraintlayout.widget.ConstraintLayout>

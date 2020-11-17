@@ -25,6 +25,7 @@ import com.diwaves.news.mvp.contract.RecommendContract
 import com.diwaves.news.mvp.presenter.RecommendPresenter
 import com.diwaves.news.mvp.ui.activity.ArticleDetailActivity
 import com.diwaves.news.mvp.ui.activity.ReportActivity
+import com.diwaves.news.mvp.ui.activity.TypeListActivityActivity
 import com.diwaves.news.tools.MyToast
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
@@ -115,17 +116,17 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
             }
             startActivity(intent)
         }
-        recommendAdapter.addChildClickViewIds(R.id.iv_go, R.id.tv_tui, R.id.iv_close)
+        recommendAdapter.addChildClickViewIds(R.id.iv_go, R.id.tv_tui, R.id.iv_close,R.id.rb_detail)
         recommendAdapter.setOnItemChildClickListener { adapters, view, position ->
-//            var intent = Intent(context, PushTieActivity::class.java)
-//            intent.putExtra("id", recommendAdapter.data.get(position).id.toString())
-//            intent.putExtra("img", recommendAdapter.data.get(position).avatarUrl)
-//            intent.putExtra("title", recommendAdapter.data.get(position).title)
-//            startActivity(intent)
             if (view.id == R.id.iv_close) {
                 tagList = recommendAdapter.data.get(position).tags.split(",").toMutableList()
                 id = recommendAdapter.data.get(position).dirid.toString()
                 showListDialog()
+            }else if(view.id==R.id.rb_detail){
+                var intent = Intent(context, TypeListActivityActivity::class.java)
+                intent.putExtra("id",recommendAdapter.data.get(position).dirid.toString())
+                intent.putExtra("title","")
+                startActivity(intent)
             }
         }
     }

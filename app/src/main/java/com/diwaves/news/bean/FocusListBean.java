@@ -4,19 +4,35 @@ import java.util.List;
 
 public class FocusListBean {
 
+
     /**
      * success : true
      * message : 操作成功！
      * code : 200
-     * result : [{"id":109,"title":"测试帖子","content":"测试推送","grandpadirid":null,"dirid":28,"dirname":"财经/沪深/创业板指","userid":30,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-05-31","remark":"","reward":0,"pic":"","category":1,"audiolength":0,"audiopath":"","contenttext":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","view":21,"website":"","author":"","issuetime":"","link":"","parentdirid":18,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"","top":0,"articlecontent":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":1,"pushid":1},{"id":21713,"title":"辛苦辛苦","content":"22380","grandpadirid":-1,"dirid":4,"dirname":"资讯/国内1","userid":35,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-06-17 12:04:58","remark":null,"reward":null,"pic":"http://myzhu.zicp.vip:43280/image/article/20200617/f9611a68ae264271a1d4c8e0ff494b70.png","category":1,"audiolength":0,"audiopath":"","contenttext":null,"view":0,"website":"","author":"","issuetime":"","link":"","parentdirid":1,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":null,"top":0,"articlecontent":null,"name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":null,"pushid":null},{"id":1345,"title":"如何看待美股熔断？","content":"1349","grandpadirid":null,"dirid":21,"dirname":"财经/沪深/上证指数","userid":35,"up":1,"push":0,"comment":0,"state":0,"createdate":"2020-05-24 09:53:11","remark":null,"reward":0,"pic":null,"category":1,"audiolength":0,"audiopath":"","contenttext":"躺着看","view":6,"website":null,"author":null,"issuetime":null,"link":null,"parentdirid":18,"like":1,"dislike":1,"good":1,"bad":1,"tofans":1,"tofriend":1,"tags":null,"top":0,"articlecontent":null,"name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":null,"pushid":null},{"id":109,"title":"测试帖子","content":"测试推送","grandpadirid":null,"dirid":28,"dirname":"财经/沪深/创业板指","userid":30,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-05-31","remark":"","reward":0,"pic":"","category":1,"audiolength":0,"audiopath":"","contenttext":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","view":21,"website":"","author":"","issuetime":"","link":"","parentdirid":18,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"","top":0,"articlecontent":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":1,"pushid":3},{"id":109,"title":"测试帖子","content":"测试推送","grandpadirid":null,"dirid":28,"dirname":"财经/沪深/创业板指","userid":30,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-05-31","remark":"","reward":0,"pic":"","category":1,"audiolength":0,"audiopath":"","contenttext":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","view":21,"website":"","author":"","issuetime":"","link":"","parentdirid":18,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"","top":0,"articlecontent":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":1,"pushid":2},{"id":109,"title":"测试帖子","content":"这是第4条推荐内容","grandpadirid":null,"dirid":28,"dirname":"财经/沪深/创业板指","userid":30,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-05-31","remark":"","reward":0,"pic":"","category":1,"audiolength":0,"audiopath":"","contenttext":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","view":21,"website":"","author":"","issuetime":"","link":"","parentdirid":18,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":"","top":0,"articlecontent":"<h2><u><i>我的第一个帖子<\/i><\/u><\/h2>","name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":1,"pushid":4},{"id":120,"title":"我的第二篇文章","content":"121","grandpadirid":null,"dirid":6,"dirname":"资讯/财经","userid":35,"up":0,"push":0,"comment":0,"state":0,"createdate":"2020-06-11 22:16:21","remark":null,"reward":null,"pic":null,"category":1,"audiolength":0,"audiopath":"","contenttext":"哈哈哈哈哈哈，我媳妇是丁丁","view":7,"website":"","author":"","issuetime":"","link":"","parentdirid":1,"like":0,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":null,"top":0,"articlecontent":null,"name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":null,"pushid":null},{"id":1358,"title":"美股熔断深度分析与思考","content":"1362","grandpadirid":null,"dirid":28,"dirname":"财经/沪深/创业板指","userid":35,"up":1,"push":0,"comment":0,"state":0,"createdate":"2020-05-24 15:01:44","remark":null,"reward":0,"pic":null,"category":1,"audiolength":0,"audiopath":"","contenttext":"美股熔断疫情影响是怎么回事呢？美股熔断相信大家都很熟悉，但是美股熔断疫情影响是怎么回事呢，下面就让小编带大家一起了解吧。　　美股熔断疫情影响，其实就是美股市场下行，大家可能会很惊讶美股熔断怎么会疫情影响呢？但事实就是这样，小编也感到非常惊讶。　　这就是关于美股熔断疫情影响的事情了，大家有什么想法呢，欢迎在评论区告诉小编一起讨论哦！","view":4,"website":null,"author":null,"issuetime":null,"link":null,"parentdirid":18,"like":1,"dislike":0,"good":0,"bad":0,"tofans":1,"tofriend":1,"tags":null,"top":0,"articlecontent":null,"name":"郑泽辉","avatarUrl":"http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png","commentCount":null,"type":null,"pushid":null}]
-     * timestamp : 1593421335480
+     * result : {"records":[{"id":183351,"dirid":"25","audiopath":null,"title":"拒绝","website":"1","createdate":"20-11-17 16:09","dirname":"财经/原创","pushid":null,"content":null,"reward":"0","push":0,"pushPojo":null,"user":{"id":40,"name":"1","phone":"15663439994","unionId":null,"szhnum":"szh_4297902661","wxname":"szh_4297902661","openId":"","avatarUrl":"http://116.62.114.248:10019/image/avatar/20200607/ffd368ecb6884cd881f7b1fa336a9a43.jpg","country":"","province":"","city":"","gender":"","birthday":"","level":2,"fans":0,"focus":0,"friends":0,"password":"1","gold":0,"silver":424,"createscore":11,"predictscore":0,"predictcount":0,"state":0,"qrcode":null,"logintime":"2020-11-17T08:06:06.000+00:00","expire_ttl":0,"createlevel":0,"predictlevel":0,"verificaCode":null,"age":null,"memberEndTime":null,"isMember":0},"view":0,"alreadyPushcount":null},{"id":183302,"dirid":"32","audiopath":"http://116.62.114.248:10019/image/article/20201117/f1733f1df9ca4d6988d86037a43a3cf1.jpg","title":"","website":"1","createdate":"20-11-17 15:35","dirname":"图片/原创","pushid":null,"content":null,"reward":"0","push":0,"pushPojo":null,"user":{"id":40,"name":"1","phone":"15663439994","unionId":null,"szhnum":"szh_4297902661","wxname":"szh_4297902661","openId":"","avatarUrl":"http://116.62.114.248:10019/image/avatar/20200607/ffd368ecb6884cd881f7b1fa336a9a43.jpg","country":"","province":"","city":"","gender":"","birthday":"","level":2,"fans":0,"focus":0,"friends":0,"password":"1","gold":0,"silver":424,"createscore":11,"predictscore":0,"predictcount":0,"state":0,"qrcode":null,"logintime":"2020-11-17T08:06:06.000+00:00","expire_ttl":0,"createlevel":0,"predictlevel":0,"verificaCode":null,"age":null,"memberEndTime":null,"isMember":0},"view":0,"alreadyPushcount":null},{"id":10012,"dirid":"21","audiopath":"","title":"杨宜勇","website":"1","createdate":"20-06-01 09:06","dirname":"财经/沪深/上证指数","pushid":null,"content":null,"reward":"0","push":0,"pushPojo":null,"user":{"id":40,"name":"1","phone":"15663439994","unionId":null,"szhnum":"szh_4297902661","wxname":"szh_4297902661","openId":"","avatarUrl":"http://116.62.114.248:10019/image/avatar/20200607/ffd368ecb6884cd881f7b1fa336a9a43.jpg","country":"","province":"","city":"","gender":"","birthday":"","level":2,"fans":0,"focus":0,"friends":0,"password":"1","gold":0,"silver":424,"createscore":11,"predictscore":0,"predictcount":0,"state":0,"qrcode":null,"logintime":"2020-11-17T08:06:06.000+00:00","expire_ttl":0,"createlevel":0,"predictlevel":0,"verificaCode":null,"age":null,"memberEndTime":null,"isMember":0},"view":9,"alreadyPushcount":null}],"total":3,"size":100,"current":1,"orders":[],"searchCount":true,"pages":1}
+     * timestamp : 1605601467420
      */
 
+
     private boolean success;
+
     private String message;
-    private int code;
+
+    private String code;
+    /**
+     * records : [{"id":183351,"dirid":"25","audiopath":null,"title":"拒绝","website":"1","createdate":"20-11-17 16:09","dirname":"财经/原创","pushid":null,"content":null,"reward":"0","push":0,"pushPojo":null,"user":{"id":40,"name":"1","phone":"15663439994","unionId":null,"szhnum":"szh_4297902661","wxname":"szh_4297902661","openId":"","avatarUrl":"http://116.62.114.248:10019/image/avatar/20200607/ffd368ecb6884cd881f7b1fa336a9a43.jpg","country":"","province":"","city":"","gender":"","birthday":"","level":2,"fans":0,"focus":0,"friends":0,"password":"1","gold":0,"silver":424,"createscore":11,"predictscore":0,"predictcount":0,"state":0,"qrcode":null,"logintime":"2020-11-17T08:06:06.000+00:00","expire_ttl":0,"createlevel":0,"predictlevel":0,"verificaCode":null,"age":null,"memberEndTime":null,"isMember":0},"view":0,"alreadyPushcount":null},{"id":183302,"dirid":"32","audiopath":"http://116.62.114.248:10019/image/article/20201117/f1733f1df9ca4d6988d86037a43a3cf1.jpg","title":"","website":"1","createdate":"20-11-17 15:35","dirname":"图片/原创","pushid":null,"content":null,"reward":"0","push":0,"pushPojo":null,"user":{"id":40,"name":"1","phone":"15663439994","unionId":null,"szhnum":"szh_4297902661","wxname":"szh_4297902661","openId":"","avatarUrl":"http://116.62.114.248:10019/image/avatar/20200607/ffd368ecb6884cd881f7b1fa336a9a43.jpg","country":"","province":"","city":"","gender":"","birthday":"","level":2,"fans":0,"focus":0,"friends":0,"password":"1","gold":0,"silver":424,"createscore":11,"predictscore":0,"predictcount":0,"state":0,"qrcode":null,"logintime":"2020-11-17T08:06:06.000+00:00","expire_ttl":0,"createlevel":0,"predictlevel":0,"verificaCode":null,"age":null,"memberEndTime":null,"isMember":0},"view":0,"alreadyPushcount":null},{"id":10012,"dirid":"21","audiopath":"","title":"杨宜勇","website":"1","createdate":"20-06-01 09:06","dirname":"财经/沪深/上证指数","pushid":null,"content":null,"reward":"0","push":0,"pushPojo":null,"user":{"id":40,"name":"1","phone":"15663439994","unionId":null,"szhnum":"szh_4297902661","wxname":"szh_4297902661","openId":"","avatarUrl":"http://116.62.114.248:10019/image/avatar/20200607/ffd368ecb6884cd881f7b1fa336a9a43.jpg","country":"","province":"","city":"","gender":"","birthday":"","level":2,"fans":0,"focus":0,"friends":0,"password":"1","gold":0,"silver":424,"createscore":11,"predictscore":0,"predictcount":0,"state":0,"qrcode":null,"logintime":"2020-11-17T08:06:06.000+00:00","expire_ttl":0,"createlevel":0,"predictlevel":0,"verificaCode":null,"age":null,"memberEndTime":null,"isMember":0},"view":9,"alreadyPushcount":null}]
+     * total : 3
+     * size : 100
+     * current : 1
+     * orders : []
+     * searchCount : true
+     * pages : 1
+     */
+
+
+    private ResultDTO result;
+
     private long timestamp;
-    private List<ResultBean> result;
 
     public boolean isSuccess() {
         return success;
@@ -34,12 +50,20 @@ public class FocusListBean {
         this.message = message;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
+    }
+
+    public ResultDTO getResult() {
+        return result;
+    }
+
+    public void setResult(ResultDTO result) {
+        this.result = result;
     }
 
     public long getTimestamp() {
@@ -50,407 +74,561 @@ public class FocusListBean {
         this.timestamp = timestamp;
     }
 
-    public List<ResultBean> getResult() {
-        return result;
-    }
-
-    public void setResult(List<ResultBean> result) {
-        this.result = result;
-    }
-
-    public static class ResultBean {
+    public static class ResultDTO {
+        private int total;
+        private int size;
+        private int current;
+        private boolean searchCount;
+        private int pages;
         /**
-         * id : 109
-         * title : 测试帖子
-         * content : 测试推送
-         * grandpadirid : null
-         * dirid : 28
-         * dirname : 财经/沪深/创业板指
-         * userid : 30
-         * up : 0
-         * push : 0
-         * comment : 0
-         * state : 0
-         * createdate : 2020-05-31
-         * remark :
+         * id : 183351
+         * dirid : 25
+         * audiopath : null
+         * title : 拒绝
+         * website : 1
+         * createdate : 20-11-17 16:09
+         * dirname : 财经/原创
+         * pushid : null
+         * content : null
          * reward : 0
-         * pic :
-         * category : 1
-         * audiolength : 0
-         * audiopath :
-         * contenttext : <h2><u><i>我的第一个帖子</i></u></h2>
-         * view : 21
-         * website :
-         * author :
-         * issuetime :
-         * link :
-         * parentdirid : 18
-         * like : 0
-         * dislike : 0
-         * good : 0
-         * bad : 0
-         * tofans : 1
-         * tofriend : 1
-         * tags :
-         * top : 0
-         * articlecontent : <h2><u><i>我的第一个帖子</i></u></h2>
-         * name : 郑泽辉
-         * avatarUrl : http://myzhu.zicp.vip:43280/image/avatar/20200616/97463940515e4016a5c894d26f886647.png
-         * commentCount : null
-         * type : 1
-         * pushid : 1
+         * push : 0
+         * pushPojo : null
+         * user : {"id":40,"name":"1","phone":"15663439994","unionId":null,"szhnum":"szh_4297902661","wxname":"szh_4297902661","openId":"","avatarUrl":"http://116.62.114.248:10019/image/avatar/20200607/ffd368ecb6884cd881f7b1fa336a9a43.jpg","country":"","province":"","city":"","gender":"","birthday":"","level":2,"fans":0,"focus":0,"friends":0,"password":"1","gold":0,"silver":424,"createscore":11,"predictscore":0,"predictcount":0,"state":0,"qrcode":null,"logintime":"2020-11-17T08:06:06.000+00:00","expire_ttl":0,"createlevel":0,"predictlevel":0,"verificaCode":null,"age":null,"memberEndTime":null,"isMember":0}
+         * view : 0
+         * alreadyPushcount : null
          */
 
-        private int id;
-        private String title;
-        private String content;
-        private Object grandpadirid;
-        private int dirid;
-        private String dirname;
-        private int userid;
-        private int up;
-        private int push;
-        private int comment;
-        private int state;
-        private String createdate;
-        private String remark;
-        private int reward;
-        private String pic;
-        private int category;
-        private int audiolength;
-        private String audiopath;
-        private String contenttext;
-        private int view;
-        private String website;
-        private String author;
-        private String issuetime;
-        private String link;
-        private int parentdirid;
-        private int like;
-        private int dislike;
-        private int good;
-        private int bad;
-        private int tofans;
-        private int tofriend;
-        private String tags;
-        private int top;
-        private String articlecontent;
-        private String name;
-        private String avatarUrl;
-        private Object commentCount;
-        private int type;
-        private int pushid;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
-
-        public Object getGrandpadirid() {
-            return grandpadirid;
-        }
-
-        public void setGrandpadirid(Object grandpadirid) {
-            this.grandpadirid = grandpadirid;
-        }
-
-        public int getDirid() {
-            return dirid;
-        }
-
-        public void setDirid(int dirid) {
-            this.dirid = dirid;
-        }
-
-        public String getDirname() {
-            return dirname;
-        }
-
-        public void setDirname(String dirname) {
-            this.dirname = dirname;
-        }
-
-        public int getUserid() {
-            return userid;
-        }
-
-        public void setUserid(int userid) {
-            this.userid = userid;
-        }
-
-        public int getUp() {
-            return up;
-        }
-
-        public void setUp(int up) {
-            this.up = up;
-        }
-
-        public int getPush() {
-            return push;
-        }
-
-        public void setPush(int push) {
-            this.push = push;
-        }
-
-        public int getComment() {
-            return comment;
-        }
-
-        public void setComment(int comment) {
-            this.comment = comment;
-        }
-
-        public int getState() {
-            return state;
-        }
-
-        public void setState(int state) {
-            this.state = state;
-        }
-
-        public String getCreatedate() {
-            return createdate;
-        }
-
-        public void setCreatedate(String createdate) {
-            this.createdate = createdate;
-        }
-
-        public String getRemark() {
-            return remark;
-        }
-
-        public void setRemark(String remark) {
-            this.remark = remark;
-        }
-
-        public int getReward() {
-            return reward;
-        }
-
-        public void setReward(int reward) {
-            this.reward = reward;
-        }
-
-        public String getPic() {
-            return pic;
-        }
-
-        public void setPic(String pic) {
-            this.pic = pic;
-        }
-
-        public int getCategory() {
-            return category;
-        }
-
-        public void setCategory(int category) {
-            this.category = category;
-        }
-
-        public int getAudiolength() {
-            return audiolength;
-        }
-
-        public void setAudiolength(int audiolength) {
-            this.audiolength = audiolength;
-        }
-
-        public String getAudiopath() {
-            return audiopath;
-        }
-
-        public void setAudiopath(String audiopath) {
-            this.audiopath = audiopath;
-        }
-
-        public String getContenttext() {
-            return contenttext;
-        }
-
-        public void setContenttext(String contenttext) {
-            this.contenttext = contenttext;
-        }
-
-        public int getView() {
-            return view;
-        }
-
-        public void setView(int view) {
-            this.view = view;
-        }
-
-        public String getWebsite() {
-            return website;
-        }
-
-        public void setWebsite(String website) {
-            this.website = website;
-        }
-
-        public String getAuthor() {
-            return author;
-        }
-
-        public void setAuthor(String author) {
-            this.author = author;
-        }
-
-        public String getIssuetime() {
-            return issuetime;
-        }
-
-        public void setIssuetime(String issuetime) {
-            this.issuetime = issuetime;
-        }
-
-        public String getLink() {
-            return link;
-        }
-
-        public void setLink(String link) {
-            this.link = link;
-        }
-
-        public int getParentdirid() {
-            return parentdirid;
-        }
-
-        public void setParentdirid(int parentdirid) {
-            this.parentdirid = parentdirid;
-        }
-
-        public int getLike() {
-            return like;
-        }
-
-        public void setLike(int like) {
-            this.like = like;
-        }
-
-        public int getDislike() {
-            return dislike;
-        }
-
-        public void setDislike(int dislike) {
-            this.dislike = dislike;
-        }
-
-        public int getGood() {
-            return good;
-        }
-
-        public void setGood(int good) {
-            this.good = good;
-        }
-
-        public int getBad() {
-            return bad;
-        }
-
-        public void setBad(int bad) {
-            this.bad = bad;
-        }
-
-        public int getTofans() {
-            return tofans;
-        }
-
-        public void setTofans(int tofans) {
-            this.tofans = tofans;
-        }
-
-        public int getTofriend() {
-            return tofriend;
-        }
-
-        public void setTofriend(int tofriend) {
-            this.tofriend = tofriend;
-        }
-
-        public String getTags() {
-            return tags;
-        }
+        private List<RecordsDTO> records;
+        private List<?> orders;
 
-        public void setTags(String tags) {
-            this.tags = tags;
+        public int getTotal() {
+            return total;
         }
 
-        public int getTop() {
-            return top;
+        public void setTotal(int total) {
+            this.total = total;
         }
 
-        public void setTop(int top) {
-            this.top = top;
+        public int getSize() {
+            return size;
         }
 
-        public String getArticlecontent() {
-            return articlecontent;
+        public void setSize(int size) {
+            this.size = size;
         }
 
-        public void setArticlecontent(String articlecontent) {
-            this.articlecontent = articlecontent;
+        public int getCurrent() {
+            return current;
         }
 
-        public String getName() {
-            return name;
+        public void setCurrent(int current) {
+            this.current = current;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public boolean isSearchCount() {
+            return searchCount;
         }
 
-        public String getAvatarUrl() {
-            return avatarUrl;
+        public void setSearchCount(boolean searchCount) {
+            this.searchCount = searchCount;
         }
 
-        public void setAvatarUrl(String avatarUrl) {
-            this.avatarUrl = avatarUrl;
+        public int getPages() {
+            return pages;
         }
 
-        public Object getCommentCount() {
-            return commentCount;
+        public void setPages(int pages) {
+            this.pages = pages;
         }
 
-        public void setCommentCount(Object commentCount) {
-            this.commentCount = commentCount;
+        public List<RecordsDTO> getRecords() {
+            return records;
         }
 
-        public int getType() {
-            return type;
+        public void setRecords(List<RecordsDTO> records) {
+            this.records = records;
         }
 
-        public void setType(int type) {
-            this.type = type;
+        public List<?> getOrders() {
+            return orders;
         }
 
-        public int getPushid() {
-            return pushid;
+        public void setOrders(List<?> orders) {
+            this.orders = orders;
         }
 
-        public void setPushid(int pushid) {
-            this.pushid = pushid;
+        public static class RecordsDTO {
+            private int id;
+            private String dirid;
+            private Object audiopath;
+            private String title;
+            private String website;
+            private String createdate;
+            private String dirname;
+            private Object pushid;
+            private Object content;
+            private String reward;
+            private int push;
+            private Object pushPojo;
+            /**
+             * id : 40
+             * name : 1
+             * phone : 15663439994
+             * unionId : null
+             * szhnum : szh_4297902661
+             * wxname : szh_4297902661
+             * openId :
+             * avatarUrl : http://116.62.114.248:10019/image/avatar/20200607/ffd368ecb6884cd881f7b1fa336a9a43.jpg
+             * country :
+             * province :
+             * city :
+             * gender :
+             * birthday :
+             * level : 2
+             * fans : 0
+             * focus : 0
+             * friends : 0
+             * password : 1
+             * gold : 0
+             * silver : 424
+             * createscore : 11
+             * predictscore : 0
+             * predictcount : 0
+             * state : 0
+             * qrcode : null
+             * logintime : 2020-11-17T08:06:06.000+00:00
+             * expire_ttl : 0
+             * createlevel : 0
+             * predictlevel : 0
+             * verificaCode : null
+             * age : null
+             * memberEndTime : null
+             * isMember : 0
+             */
+
+            private UserDTO user;
+            private int view;
+            private Object alreadyPushcount;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getDirid() {
+                return dirid;
+            }
+
+            public void setDirid(String dirid) {
+                this.dirid = dirid;
+            }
+
+            public Object getAudiopath() {
+                return audiopath;
+            }
+
+            public void setAudiopath(Object audiopath) {
+                this.audiopath = audiopath;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public String getWebsite() {
+                return website;
+            }
+
+            public void setWebsite(String website) {
+                this.website = website;
+            }
+
+            public String getCreatedate() {
+                return createdate;
+            }
+
+            public void setCreatedate(String createdate) {
+                this.createdate = createdate;
+            }
+
+            public String getDirname() {
+                return dirname;
+            }
+
+            public void setDirname(String dirname) {
+                this.dirname = dirname;
+            }
+
+            public Object getPushid() {
+                return pushid;
+            }
+
+            public void setPushid(Object pushid) {
+                this.pushid = pushid;
+            }
+
+            public Object getContent() {
+                return content;
+            }
+
+            public void setContent(Object content) {
+                this.content = content;
+            }
+
+            public String getReward() {
+                return reward;
+            }
+
+            public void setReward(String reward) {
+                this.reward = reward;
+            }
+
+            public int getPush() {
+                return push;
+            }
+
+            public void setPush(int push) {
+                this.push = push;
+            }
+
+            public Object getPushPojo() {
+                return pushPojo;
+            }
+
+            public void setPushPojo(Object pushPojo) {
+                this.pushPojo = pushPojo;
+            }
+
+            public UserDTO getUser() {
+                return user;
+            }
+
+            public void setUser(UserDTO user) {
+                this.user = user;
+            }
+
+            public int getView() {
+                return view;
+            }
+
+            public void setView(int view) {
+                this.view = view;
+            }
+
+            public Object getAlreadyPushcount() {
+                return alreadyPushcount;
+            }
+
+            public void setAlreadyPushcount(Object alreadyPushcount) {
+                this.alreadyPushcount = alreadyPushcount;
+            }
+
+            public static class UserDTO {
+                private int id;
+                private String name;
+                private String phone;
+                private Object unionId;
+                private String szhnum;
+                private String wxname;
+                private String openId;
+                private String avatarUrl;
+                private String country;
+                private String province;
+                private String city;
+                private String gender;
+                private String birthday;
+                private int level;
+                private int fans;
+                private int focus;
+                private int friends;
+                private String password;
+                private int gold;
+                private int silver;
+                private int createscore;
+                private int predictscore;
+                private int predictcount;
+                private int state;
+                private Object qrcode;
+                private String logintime;
+                private int expireTtl;
+                private int createlevel;
+                private int predictlevel;
+                private Object verificaCode;
+                private Object age;
+                private Object memberEndTime;
+                private int isMember;
+
+                public int getId() {
+                    return id;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public String getName() {
+                    return name;
+                }
+
+                public void setName(String name) {
+                    this.name = name;
+                }
+
+                public String getPhone() {
+                    return phone;
+                }
+
+                public void setPhone(String phone) {
+                    this.phone = phone;
+                }
+
+                public Object getUnionId() {
+                    return unionId;
+                }
+
+                public void setUnionId(Object unionId) {
+                    this.unionId = unionId;
+                }
+
+                public String getSzhnum() {
+                    return szhnum;
+                }
+
+                public void setSzhnum(String szhnum) {
+                    this.szhnum = szhnum;
+                }
+
+                public String getWxname() {
+                    return wxname;
+                }
+
+                public void setWxname(String wxname) {
+                    this.wxname = wxname;
+                }
+
+                public String getOpenId() {
+                    return openId;
+                }
+
+                public void setOpenId(String openId) {
+                    this.openId = openId;
+                }
+
+                public String getAvatarUrl() {
+                    return avatarUrl;
+                }
+
+                public void setAvatarUrl(String avatarUrl) {
+                    this.avatarUrl = avatarUrl;
+                }
+
+                public String getCountry() {
+                    return country;
+                }
+
+                public void setCountry(String country) {
+                    this.country = country;
+                }
+
+                public String getProvince() {
+                    return province;
+                }
+
+                public void setProvince(String province) {
+                    this.province = province;
+                }
+
+                public String getCity() {
+                    return city;
+                }
+
+                public void setCity(String city) {
+                    this.city = city;
+                }
+
+                public String getGender() {
+                    return gender;
+                }
+
+                public void setGender(String gender) {
+                    this.gender = gender;
+                }
+
+                public String getBirthday() {
+                    return birthday;
+                }
+
+                public void setBirthday(String birthday) {
+                    this.birthday = birthday;
+                }
+
+                public int getLevel() {
+                    return level;
+                }
+
+                public void setLevel(int level) {
+                    this.level = level;
+                }
+
+                public int getFans() {
+                    return fans;
+                }
+
+                public void setFans(int fans) {
+                    this.fans = fans;
+                }
+
+                public int getFocus() {
+                    return focus;
+                }
+
+                public void setFocus(int focus) {
+                    this.focus = focus;
+                }
+
+                public int getFriends() {
+                    return friends;
+                }
+
+                public void setFriends(int friends) {
+                    this.friends = friends;
+                }
+
+                public String getPassword() {
+                    return password;
+                }
+
+                public void setPassword(String password) {
+                    this.password = password;
+                }
+
+                public int getGold() {
+                    return gold;
+                }
+
+                public void setGold(int gold) {
+                    this.gold = gold;
+                }
+
+                public int getSilver() {
+                    return silver;
+                }
+
+                public void setSilver(int silver) {
+                    this.silver = silver;
+                }
+
+                public int getCreatescore() {
+                    return createscore;
+                }
+
+                public void setCreatescore(int createscore) {
+                    this.createscore = createscore;
+                }
+
+                public int getPredictscore() {
+                    return predictscore;
+                }
+
+                public void setPredictscore(int predictscore) {
+                    this.predictscore = predictscore;
+                }
+
+                public int getPredictcount() {
+                    return predictcount;
+                }
+
+                public void setPredictcount(int predictcount) {
+                    this.predictcount = predictcount;
+                }
+
+                public int getState() {
+                    return state;
+                }
+
+                public void setState(int state) {
+                    this.state = state;
+                }
+
+                public Object getQrcode() {
+                    return qrcode;
+                }
+
+                public void setQrcode(Object qrcode) {
+                    this.qrcode = qrcode;
+                }
+
+                public String getLogintime() {
+                    return logintime;
+                }
+
+                public void setLogintime(String logintime) {
+                    this.logintime = logintime;
+                }
+
+                public int getExpireTtl() {
+                    return expireTtl;
+                }
+
+                public void setExpireTtl(int expireTtl) {
+                    this.expireTtl = expireTtl;
+                }
+
+                public int getCreatelevel() {
+                    return createlevel;
+                }
+
+                public void setCreatelevel(int createlevel) {
+                    this.createlevel = createlevel;
+                }
+
+                public int getPredictlevel() {
+                    return predictlevel;
+                }
+
+                public void setPredictlevel(int predictlevel) {
+                    this.predictlevel = predictlevel;
+                }
+
+                public Object getVerificaCode() {
+                    return verificaCode;
+                }
+
+                public void setVerificaCode(Object verificaCode) {
+                    this.verificaCode = verificaCode;
+                }
+
+                public Object getAge() {
+                    return age;
+                }
+
+                public void setAge(Object age) {
+                    this.age = age;
+                }
+
+                public Object getMemberEndTime() {
+                    return memberEndTime;
+                }
+
+                public void setMemberEndTime(Object memberEndTime) {
+                    this.memberEndTime = memberEndTime;
+                }
+
+                public int getIsMember() {
+                    return isMember;
+                }
+
+                public void setIsMember(int isMember) {
+                    this.isMember = isMember;
+                }
+            }
         }
     }
 }

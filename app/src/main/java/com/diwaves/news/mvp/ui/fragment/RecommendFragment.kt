@@ -304,4 +304,9 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
         })
         listDialog.show()
     }
+
+    fun getData(){
+        mPresenter?.getData()
+        mPresenter?.getStockData()
+    }
 }

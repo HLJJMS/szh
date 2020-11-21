@@ -254,6 +254,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
         if (event!!.isLogin) {
             walletFragment.getData()
             myFragment.getData()
+            homeFragment.shuaixnData()
         } else {
             myFragment.clearData()
             walletFragment.getData()

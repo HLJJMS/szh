@@ -6,6 +6,7 @@ import com.diwaves.news.R
 import com.diwaves.news.bean.RecommendBean
 import com.diwaves.news.network.Api
 import com.diwaves.news.tools.MyGlide
+import kotlinx.android.synthetic.main.fragment_my.*
 
 class RecommendAdapter : BaseMultiItemQuickAdapter<RecommendBean.ResultEntity, BaseViewHolder>() {
    init {
@@ -13,6 +14,8 @@ class RecommendAdapter : BaseMultiItemQuickAdapter<RecommendBean.ResultEntity, B
         addItemType(1, R.layout.item_recommend_video)
     }
     override fun convert(helper: BaseViewHolder, item: RecommendBean.ResultEntity) {
+        MyGlide.loadImage(context,"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3976806040,3211395236&fm=11&gp=0.jpg",helper.getView(R.id.iv_head))
+
         if (helper.itemViewType == 0) {
             helper.setText(R.id.tv_title, item.title)
             helper.setText(R.id.rb_detail, item.dirname)

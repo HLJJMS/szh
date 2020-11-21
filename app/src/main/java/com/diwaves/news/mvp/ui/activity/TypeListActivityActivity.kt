@@ -66,7 +66,7 @@ class TypeListActivityActivity : BaseActivity<TypeListActivityPresenter>(),
     var adapter: TypeListAdapter = TypeListAdapter()
     var type = "0"
     var page = 1
-    var articleId=""
+    var articleId = ""
     var view: View? = null
     var rbOk: QMUIRoundButton? = null
     var rbNo: QMUIRoundButton? = null
@@ -75,7 +75,7 @@ class TypeListActivityActivity : BaseActivity<TypeListActivityPresenter>(),
     var tagList: MutableList<String> = arrayListOf()
     var adapterPop: PopRadioAdapter = PopRadioAdapter()
     var recyclerViewPop: RecyclerView? = null
-    var context: Context ?=null
+    var context: Context? = null
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerTypeListActivityComponent //如找不到该类,请编译一下项目
             .builder()
@@ -142,10 +142,14 @@ class TypeListActivityActivity : BaseActivity<TypeListActivityPresenter>(),
             articleId = adapter.data.get(position).id.toString()
         }
         setPopWindow()
+        swipeLayout.setOnRefreshListener {
+            page = 1
+            mPresenter?.getData(intent.getStringExtra("id"), type, page)
+        }
     }
 
     override fun sunccess(bean: MutableList<TypeListBean.ResultBean.RecordsBean>) {
-
+        swipeLayout.isRefreshing = false
         if (page == 1) {
             adapter.setList(bean)
         } else {
@@ -241,7 +245,7 @@ class TypeListActivityActivity : BaseActivity<TypeListActivityPresenter>(),
                         )
                     )
                 } else if (which == 2) {
-                    MyToast().makeToast(this@TypeListActivityActivity,"删除成功")
+                    MyToast().makeToast(this@TypeListActivityActivity, "删除成功")
                 }
             }
 

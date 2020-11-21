@@ -1,5 +1,6 @@
 package com.diwaves.news.mvp.contract
 
+import com.diwaves.news.bean.BangdanBean
 import com.diwaves.news.network.bean.BaseBean
 import com.jess.arms.mvp.IView
 import com.jess.arms.mvp.IModel
@@ -24,6 +25,8 @@ interface ReleaseContract {
     interface View : IView {
         fun postPhotoSuccess(url: String)
         fun postDataSuccess()
+        fun success(bean: MutableList<BangdanBean.ResultEntity>)
+
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
@@ -35,6 +38,7 @@ interface ReleaseContract {
         fun postData(
             body: RequestBody
         ): Observable<BaseBean.BaseResponse<String>>
+        fun getData(): Observable<BangdanBean>
     }
 
 }

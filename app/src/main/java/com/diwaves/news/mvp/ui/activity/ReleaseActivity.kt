@@ -5,8 +5,15 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.diwaves.news.R
+import com.diwaves.news.adapter.BangdanAdapter
+import com.diwaves.news.adapter.CaiJingAdapter
+import com.diwaves.news.adapter.SpnnerAdapter1
+import com.diwaves.news.adapter.SpnnerAdapter2
+import com.diwaves.news.bean.BangdanBean
 import com.diwaves.news.di.component.DaggerReleaseComponent
 import com.diwaves.news.di.module.ReleaseModule
 import com.diwaves.news.mvp.contract.ReleaseContract
@@ -58,12 +65,17 @@ import java.util.concurrent.TimeUnit
  * }
  */
 class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
+    var adapter1: SpnnerAdapter1 = SpnnerAdapter1()
+    var bean: MutableList<BangdanBean.ResultEntity>? = null
+    var adapter2: SpnnerAdapter2 = SpnnerAdapter2()
     var fans = true
     var friend = false
     var bold = false
     var italic = false
     var underline = false
     var photoCode = 1001;
+    var dirname = "";
+    var dirId = "";
     lateinit var file: File
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerReleaseComponent //如找不到该类,请编译一下项目
@@ -81,48 +93,61 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 
 
     override fun initData(savedInstanceState: Bundle?) {
-        iv_b.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                if (bold) {
-                    bold = false
-                    iv_b.setBackgroundResource(R.color.qmui_s_link_color)
-                } else {
-                    bold = true
-                    iv_b.setBackgroundResource(R.color.qmui_config_color_10_white)
-                }
-                richEditText.setBold(bold)
-
-            }
-        iv_i.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                if (italic) {
-                    iv_i.setBackgroundResource(R.color.qmui_s_link_color)
-                    italic = false
-                } else {
-                    italic = true
-                    iv_i.setBackgroundResource(R.color.qmui_config_color_10_white)
-                }
-                richEditText.setItalic(italic)
-            }
-        iv_u.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                if (underline) {
-                    underline = false
-                    iv_u.setBackgroundResource(R.color.qmui_s_link_color)
-                } else {
-                    underline = true
-                    iv_u.setBackgroundResource(R.color.qmui_config_color_10_white)
-                }
-                richEditText.setUnderline(true)
-            }
-        iv_h.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-
-            }
+//        iv_b.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+//            .subscribe {
+//                if (bold) {
+//                    bold = false
+//                    iv_b.setBackgroundResource(R.color.qmui_s_link_color)
+//                } else {
+//                    bold = true
+//                    iv_b.setBackgroundResource(R.color.qmui_config_color_10_white)
+//                }
+//                richEditText.setBold(bold)
+//
+//            }
+//        iv_i.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+//            .subscribe {
+//                if (italic) {
+//                    iv_i.setBackgroundResource(R.color.qmui_s_link_color)
+//                    italic = false
+//                } else {
+//                    italic = true
+//                    iv_i.setBackgroundResource(R.color.qmui_config_color_10_white)
+//                }
+//                richEditText.setItalic(italic)
+//            }
+//        iv_u.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+//            .subscribe {
+//                if (underline) {
+//                    underline = false
+//                    iv_u.setBackgroundResource(R.color.qmui_s_link_color)
+//                } else {
+//                    underline = true
+//                    iv_u.setBackgroundResource(R.color.qmui_config_color_10_white)
+//                }
+//                richEditText.setUnderline(true)
+//            }
+//        iv_h.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+//            .subscribe {
+//
+//            }
+        rv_1.layoutManager = LinearLayoutManager(this)
+        rv_1.adapter = adapter1
+        adapter1.addChildClickViewIds(R.id.tv_txt)
+        rv_2.layoutManager = LinearLayoutManager(this)
+        adapter2.addChildClickViewIds(R.id.tv_txt)
+        rv_2.adapter = adapter2
+        tv_spnner.setOnClickListener {
+            rv_1.visibility = View.VISIBLE
+            rv_2.visibility = View.VISIBLE
+        }
         iv_img.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 getPermissions()
             }
+        titlebar.setBackClick {
+            finish()
+        }
         iv_send_fans.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 if (fans) {
@@ -143,6 +168,17 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
                     iv_send_friend.setImageResource(R.mipmap.ic_check_on)
                 }
             }
+        adapter1.setOnItemClickListener { adapter, view, position ->
+            adapter2.setList(adapter1.data.get(position).dirsList)
+        }
+        adapter2.setOnItemClickListener { adapter, view, position ->
+            tv_spnner.setText(adapter2.data.get(position).title)
+            dirId = adapter2.data.get(position).id.toString()
+            dirname = adapter2.data.get(position).title
+            rv_1.visibility = View.GONE
+            rv_2.visibility = View.GONE
+        }
+        mPresenter?.getData()
     }
 
     override fun postPhotoSuccess(url: String) {
@@ -151,6 +187,10 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 
     override fun postDataSuccess() {
         finish()
+    }
+
+    override fun success(bean: MutableList<BangdanBean.ResultEntity>) {
+        adapter1.setList(bean)
     }
 
 
@@ -232,11 +272,11 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
                 CustomHtml.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE
             )
         )
-        builder.addFormDataPart("dirid", "1")
-        builder.addFormDataPart("dirname", "资讯")
+        builder.addFormDataPart("dirid", dirId)
+        builder.addFormDataPart("dirname", dirname)
         builder.addFormDataPart("state", type)
 
-        builder.addFormDataPart("title", tv_title.text.toString())
+        builder.addFormDataPart("title", et_title.text.toString())
         builder.addFormDataPart("state", type)
 
 

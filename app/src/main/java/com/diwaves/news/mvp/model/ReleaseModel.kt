@@ -1,6 +1,7 @@
 package com.diwaves.news.mvp.model
 
 import android.app.Application
+import com.diwaves.news.bean.BangdanBean
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
@@ -46,5 +47,8 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+    override fun getData(): Observable<BangdanBean> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getBangdan()
     }
 }

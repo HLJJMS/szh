@@ -218,7 +218,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         )
         list?.add(
             MyItemBean(
-                "预测", R.mipmap.ic_my_clock, bean.yuce, Intent(
+                "预测", R.mipmap.ic_my_clock, "0", Intent(
                     context,
                     MyYuCeActivity::class.java
                 )
@@ -226,7 +226,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         )
         list?.add(
             MyItemBean(
-                "屏蔽", R.mipmap.ic_pingbi, bean.pingbi, Intent(
+                "屏蔽", R.mipmap.ic_pingbi, "0", Intent(
                     context,
                     PingBiActivityActivity::class.java
                 )
@@ -234,7 +234,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         )
         list?.add(
             MyItemBean(
-                "处罚", R.mipmap.ic_chufa, bean.chufa, Intent(
+                "处罚", R.mipmap.ic_chufa, "0", Intent(
                     context,
                     MyCollectActivity::class.java
                 )
@@ -242,7 +242,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         )
         list?.add(
             MyItemBean(
-                "收藏", R.mipmap.ic_start, bean.shoucang, Intent(
+                "收藏", R.mipmap.ic_start, "0", Intent(
                     context,
                     MyCollectActivity::class.java
                 )
@@ -250,7 +250,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         )
         list?.add(
             MyItemBean(
-                "草稿箱", R.mipmap.ic_test, bean.caogaoxiang, Intent(
+                "草稿箱", R.mipmap.ic_test, "0", Intent(
                     context,
                     MyArticleActivity::class.java
                 ).putExtra("type", "0")

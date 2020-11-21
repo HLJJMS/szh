@@ -8,7 +8,7 @@
     tools:ignore="MissingConstraints">
 
     <com.diwaves.news.tools.MyTitleBar
-        android:id="@+id/title"
+        android:id="@+id/titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:center_txt="写帖子"
@@ -26,7 +26,8 @@
         android:text="选择发布目录"
         android:textColor="#ff020202"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/titlebar" />
+
 
     <ImageView
         android:id="@+id/iv_send_fans"
@@ -34,6 +35,7 @@
         android:layout_height="18dp"
         android:layout_marginEnd="7dp"
         android:src="@mipmap/ic_check_on"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/tv_send_friend"
         app:layout_constraintEnd_toStartOf="@id/tv_send_fans"
         app:layout_constraintTop_toTopOf="@id/tv_send_friend" />
@@ -49,6 +51,7 @@
         android:text="发给粉丝"
         android:textColor="#ff5b5b5b"
         android:textSize="15sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/iv_recall_no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@id/iv_send_friend" />
@@ -60,6 +63,7 @@
         android:layout_height="18dp"
         android:layout_marginEnd="7dp"
         android:src="@mipmap/ic_check_off"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/tv_send_friend"
         app:layout_constraintEnd_toStartOf="@id/tv_send_friend"
         app:layout_constraintTop_toTopOf="@id/tv_send_friend" />
@@ -73,6 +77,7 @@
         android:text="推给好友"
         android:textColor="#ff5b5b5b"
         android:textSize="15sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/iv_recall_no"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -85,103 +90,92 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_spnner" />
 
+
     <EditText
-        android:id="@+id/tv_title"
-        android:background="@color/qmui_config_color_white"
-        app:layout_constraintTop_toBottomOf="@id/tv_spnner"
+        android:id="@+id/et_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <ScrollView
-        android:id="@+id/sl"
+        android:layout_height="wrap_content"
+        android:hint="请输入标题"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_spnner" />
+
+    <com.diwaves.news.tools.RichEditText
+        android:id="@+id/richEditText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@id/tv_send_fans"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@null"
+        android:gravity="top|left"
+        android:hint="编辑内容"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/iv_img"
+        app:layout_constraintTop_toBottomOf="@id/et_title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title">
+        app:layout_constraintTop_toBottomOf="@id/tv_spnner" />
 
-        <com.diwaves.news.tools.RichEditText
-            android:id="@+id/richEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:gravity="top|left"
-            android:hint="编辑内容"
-            android:textSize="16sp" />
-    </ScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/rv_1"
+        app:layout_constraintTop_toBottomOf="@id/tv_spnner" />
 
-    <ImageView
-        android:id="@+id/iv_b"
-        android:layout_width="12dp"
-        android:layout_height="16dp"
-        android:layout_marginBottom="15dp"
-        android:src="@mipmap/ic_b"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/iv_i"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/iv_i"
-        android:layout_width="13.5dp"
-        android:layout_height="16dp"
-        android:src="@mipmap/ic_i"
-        app:layout_constraintBottom_toBottomOf="@id/iv_b"
-        app:layout_constraintEnd_toStartOf="@id/iv_u"
-        app:layout_constraintStart_toEndOf="@id/iv_b" />
-
-    <ImageView
-        android:id="@+id/iv_u"
-        android:layout_width="13.5dp"
-        android:layout_height="16dp"
-        android:src="@mipmap/ic_u"
-        app:layout_constraintBottom_toBottomOf="@id/iv_b"
-        app:layout_constraintEnd_toStartOf="@id/iv_h"
-        app:layout_constraintStart_toEndOf="@id/iv_i" />
-
-    <ImageView
-        android:id="@+id/iv_h"
-        android:layout_width="19.5dp"
-        android:layout_height="16dp"
-        android:src="@mipmap/ic_h"
-        app:layout_constraintBottom_toBottomOf="@id/iv_b"
-        app:layout_constraintEnd_toStartOf="@id/iv_double"
-        app:layout_constraintStart_toEndOf="@id/iv_u" />
-
-    <ImageView
-        android:id="@+id/iv_double"
-        android:layout_width="17.5dp"
-        android:layout_height="14dp"
-        android:src="@mipmap/ic_double_yinhao"
-        app:layout_constraintBottom_toBottomOf="@id/iv_b"
-        app:layout_constraintEnd_toStartOf="@id/iv_img"
-        app:layout_constraintStart_toEndOf="@id/iv_h" />
+    <TextView
+        android:id="@+id/tv_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:text="保存"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
         android:id="@+id/iv_img"
         android:layout_width="19dp"
         android:layout_height="19dp"
+        android:layout_marginStart="30dp"
         android:src="@mipmap/ic_img"
-        app:layout_constraintBottom_toBottomOf="@id/iv_b"
-        app:layout_constraintEnd_toStartOf="@id/iv_recall"
-        app:layout_constraintStart_toEndOf="@id/iv_double" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toEndOf="@id/tv_save" />
 
     <ImageView
         android:id="@+id/iv_recall"
         android:layout_width="19dp"
         android:layout_height="19dp"
+        android:layout_marginStart="30dp"    android:layout_marginBottom="10dp"
         android:src="@mipmap/ic_recall"
-        app:layout_constraintBottom_toBottomOf="@id/iv_b"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/iv_recall_no"
-        app:layout_constraintStart_toEndOf="@id/iv_img" />
+        app:layout_constraintStart_toEndOf="@id/tv_a" />
 
     <ImageView
         android:id="@+id/iv_recall_no"
         android:layout_width="19dp"
         android:layout_height="19dp"
+        android:layout_marginStart="30dp"    android:layout_marginBottom="10dp"
         android:src="@mipmap/ic_recall_no"
-        app:layout_constraintBottom_toBottomOf="@id/iv_b"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_recall" />
+
+    <TextView
+        android:id="@+id/tv_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="A"
+        app:layout_constraintBottom_toBottomOf="@id/iv_img"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/iv_img"
+        app:layout_constraintTop_toTopOf="@id/iv_img" />
 </androidx.constraintlayout.widget.ConstraintLayout>

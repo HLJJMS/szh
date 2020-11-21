@@ -1,6 +1,7 @@
 package com.diwaves.news.mvp.presenter
 
 import android.app.Application
+import com.diwaves.news.bean.BangdanBean
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.ActivityScope
@@ -10,6 +11,7 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler
 import javax.inject.Inject
 
 import com.diwaves.news.mvp.contract.ReleaseContract
+import com.diwaves.news.network.Api
 import com.diwaves.news.network.RxUtils
 import com.diwaves.news.network.bean.BaseBean
 import com.diwaves.news.tools.MyToast
@@ -76,5 +78,21 @@ constructor(model: ReleaseContract.Model, rootView: ReleaseContract.View) :
                     MyToast().makeToast(mApplication, t.message)
                 }
             })
+    }
+    fun getData() {
+        mRootView.showLoading()
+        mModel.getData().compose(RxUtils.applySchedulers(mRootView)).subscribe(object :
+            ErrorHandleSubscriber<BangdanBean>(mErrorHandler) {
+            override fun onNext(t: BangdanBean) {
+                if (t.code.equals(Api.SUCCESS)) {
+                    mRootView.success(t.result)
+                } else {
+                    MyToast().makeToast(mApplication, t.message)
+                }
+
+                mRootView.hideLoading()
+            }
+
+        })
     }
 }

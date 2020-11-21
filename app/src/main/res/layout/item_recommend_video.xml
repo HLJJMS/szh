@@ -12,6 +12,7 @@
     <ImageView
         android:id="@+id/iv_head"
         android:layout_width="wrap_content"
+        android:src="@drawable/ic_photo"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@id/tv_name"
         app:layout_constraintTop_toTopOf="@id/tv_name" />
@@ -65,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="0dp"
-        android:paddingTop="8.5dp"
+        android:paddingTop="4dp"
         android:paddingEnd="22dp"
         android:paddingBottom="9dp"
         android:text="12312312"

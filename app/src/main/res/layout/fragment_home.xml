@@ -48,18 +48,10 @@
         android:text="已发布"
         android:textColor="#ff959595"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toEndOf="@id/tv_bangdan" />
 
-    <ImageView
-        android:id="@+id/iv_add"
-        android:layout_width="19dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@mipmap/ic_add_circle"
-        app:layout_constraintBottom_toBottomOf="@id/tv_guanzhu"
-        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <ImageView
         android:id="@+id/iv_search"
@@ -69,7 +61,7 @@
         android:layout_marginBottom="16dp"
         android:src="@mipmap/ic_search"
         app:layout_constraintBottom_toBottomOf="@id/tv_guanzhu"
-        app:layout_constraintEnd_toStartOf="@id/iv_add" />
+       app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"

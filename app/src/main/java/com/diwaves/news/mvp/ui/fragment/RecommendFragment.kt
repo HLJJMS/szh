@@ -129,6 +129,10 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
                 startActivity(intent)
             }
         }
+        swipeLayout.setOnRefreshListener {
+            mPresenter?.getData()
+            mPresenter?.getStockData()
+        }
     }
 
     /**
@@ -177,6 +181,7 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
     }
 
     override fun StockSuccess(bean: StockBean.ResultEntity) {
+        swipeLayout.isRefreshing=false
         tv_one.setText(bean.map1.name)
         tv_two.setText(bean.map2.name)
         tv_three.setText(bean.map3.name)

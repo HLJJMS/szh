@@ -136,7 +136,9 @@ class LookFragment : BaseFragment<LookPresenter>(), LookContract.View {
 
         }
         setPopWindow()
-
+        swipeLayout.setOnRefreshListener {
+            mPresenter?.getData()
+        }
     }
 
     /**
@@ -180,6 +182,7 @@ class LookFragment : BaseFragment<LookPresenter>(), LookContract.View {
     }
 
     override fun success(bean: MutableList<FocusListBean.ResultDTO.RecordsDTO>) {
+        swipeLayout.isRefreshing = false
         adapter.setList(bean)
     }
 

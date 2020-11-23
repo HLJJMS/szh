@@ -17,7 +17,7 @@
     <EditText
         android:id="@+id/et_txt"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:layout_margin="5dp"
         android:gravity="start"
         android:hint="这一刻想法..."

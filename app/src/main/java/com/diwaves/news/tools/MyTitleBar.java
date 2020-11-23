@@ -32,6 +32,7 @@ public class MyTitleBar extends LinearLayout {
         iv_end = findViewById(R.id.iv_end);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MyTitleBar);
         leftText.setText(typedArray.getString(R.styleable.MyTitleBar_star_txt));
+        leftText.setTextColor(typedArray.getColor(R.styleable.MyTitleBar_start_txt_color, Color.BLACK));
         centerText.setText(typedArray.getString(R.styleable.MyTitleBar_center_txt));
         endText.setText(typedArray.getString(R.styleable.MyTitleBar_end_txt));
         endText.setTextColor(typedArray.getColor(R.styleable.MyTitleBar_end_txt_color, Color.BLACK));

@@ -68,10 +68,10 @@
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
         <TextView
-            android:layout_width="72dp"
-            android:layout_height="13dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="1银币推1人"
+            android:text="1银币推1次"
             android:textColor="#ff5b5b5b"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_title_ag"
@@ -101,10 +101,10 @@
             app:layout_constraintTop_toBottomOf="@id/rv_ag" />
 
         <TextView
-            android:layout_width="72dp"
-            android:layout_height="13dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="1金币推10人"
+            android:text="1金币推10次"
             android:textColor="#ff5b5b5b"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_title_au"

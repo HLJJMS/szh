@@ -99,6 +99,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
         adapter.setOnItemClickListener { adapter, view, position ->
             getPermissions()
         }
+        getPermissions()
     }
 
     override fun postPhotoSuccess(url: String) {
@@ -173,6 +174,8 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
                 builder.addFormDataPart("file", file.name, requestBody)
                 mPresenter?.postImage(builder.build())
             }
+        }else{
+            finish()
         }
     }
 

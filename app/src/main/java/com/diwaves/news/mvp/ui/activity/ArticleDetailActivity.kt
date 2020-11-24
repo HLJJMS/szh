@@ -23,6 +23,7 @@ import com.diwaves.news.di.component.DaggerArticleDetailComponent
 import com.diwaves.news.di.module.ArticleDetailModule
 import com.diwaves.news.mvp.contract.ArticleDetailContract
 import com.diwaves.news.mvp.presenter.ArticleDetailPresenter
+import com.diwaves.news.tools.MyGlide
 import com.diwaves.news.tools.MyToast
 import com.diwaves.news.tools.SoftKeyBoardListener
 import com.jakewharton.rxbinding3.view.clicks
@@ -109,18 +110,24 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     }
 
     override fun getDataSuccess(bean: ArticleDetailBean.ResultBean) {
-        titleBar.setCenterText(bean.articles.dirname)
+        titleBar.setCenterText(bean.articles.dirname + ">")
         tv_look.setText(bean.articles.view.toString() + "阅读")
         tv_title.setText(bean.articles.title)
         like = bean.like
         collection = bean.collection
-        tv_fen.text = bean.articles.score
+        tv_fen.text = bean.articles.score + "次推荐"
         isLikeOrCollection()
-
-        if(null!=bean.articles.tags){
+        tv_name.setText(bean.articles.author)
+        tv_time.setText(bean.articles.createdate)
+        tv_introduction.setText(bean.articles.contenttext)
+        if (null != bean.articles.tags) {
             arr = bean?.articles?.tags?.toString()?.split(",")!!.toMutableList()
         }
-
+        MyGlide.loadImage(
+            this,
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3976806040,3211395236&fm=11&gp=0.jpg",
+            iv_head
+        )
         for (index in 0..arr.size) {
 
         }
@@ -185,7 +192,11 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         iv_send.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             var intent = Intent(this, PushTieActivity::class.java)
             intent.putExtra("id", intent.getStringExtra("id"))
-            intent.putExtra("img", bean.articles.pic.toString())
+            if (null != bean?.articles?.pic) {
+                intent.putExtra("img", bean?.articles?.pic?.toString())
+            }else{
+                intent.putExtra("img","")
+            }
             intent.putExtra("title", bean.articles.title)
             startActivity(intent)
         }
@@ -451,7 +462,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                         )
                     )
                 } else if (which == 2) {
-                    MyToast().makeToast(this@ArticleDetailActivity,"删除成功")
+                    MyToast().makeToast(this@ArticleDetailActivity, "删除成功")
                 }
             }
 

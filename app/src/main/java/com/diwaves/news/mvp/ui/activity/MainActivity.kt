@@ -88,6 +88,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
     var popupWindow: PopupWindow = PopupWindow();
     var view: View? = null
+    var popupWindowSelectPhoto: PopupWindow = PopupWindow();
+    var viewSelectPhoto: View? = null
+    var textPhotoSelectPhoto: TextView? = null
+    var textCrameSelectPhoto: TextView? = null
+    var textNoSelectPhoto: TextView? = null
     var ivImg: ImageView? = null
     var ivTxt: ImageView? = null
     var ivClose: ImageView? = null
@@ -205,6 +210,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
         })
         mPresenter?.getEveryAg()
         setPopWindow()
+        setPopWindowSelectPhoto()
     }
 
     fun setButton(i: Int) {
@@ -311,9 +317,34 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             }
         ivImg!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,ResealesPhotoActivityActivity::class.java))
+                showPopWindowSelectPhoto()
             }
         ivTxt!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                showPopWindowSelectPhoto()
+            }
+    }
+
+    fun setPopWindowSelectPhoto() {
+        viewSelectPhoto = LayoutInflater.from(this).inflate(R.layout.pop_select_photo, null);
+        popupWindowSelectPhoto?.contentView = viewSelectPhoto
+        popupWindowSelectPhoto?.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        popupWindowSelectPhoto?.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupWindowSelectPhoto?.setOutsideTouchable(true)
+        popupWindowSelectPhoto?.setFocusable(true) //点击返回键取消
+        popupWindowSelectPhoto?.setBackgroundDrawable(BitmapDrawable())
+        textPhotoSelectPhoto = viewSelectPhoto?.findViewById(R.id.tv_photo);
+        textCrameSelectPhoto = viewSelectPhoto?.findViewById(R.id.tv_camear);
+        textNoSelectPhoto = viewSelectPhoto?.findViewById(R.id.tv_no);
+        textNoSelectPhoto?.clicks()?.throttleFirst(500, TimeUnit.MILLISECONDS)
+            ?.subscribe {
+                popupWindowSelectPhoto?.dismiss()
+            }
+        textCrameSelectPhoto!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this, ResealesPhotoActivityActivity::class.java))
+            }
+        textPhotoSelectPhoto!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(context, ReleaseActivity::class.java))
             }
@@ -321,7 +352,10 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
     fun showPopWindow() {
         popupWindow?.showAtLocation(getWindow().decorView, Gravity.NO_GRAVITY, 0, 0)
+    }
 
+    fun showPopWindowSelectPhoto() {
+        popupWindowSelectPhoto?.showAtLocation(getWindow().decorView, Gravity.NO_GRAVITY, 0, 0)
     }
 
 }

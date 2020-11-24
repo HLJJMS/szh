@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.diwaves.news.R
 import com.diwaves.news.adapter.BangdanAdapter
@@ -131,10 +132,10 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 //            .subscribe {
 //
 //            }
-        rv_1.layoutManager = LinearLayoutManager(this)
+        rv_1.layoutManager = GridLayoutManager(this, 5)
         rv_1.adapter = adapter1
         adapter1.addChildClickViewIds(R.id.tv_txt)
-        rv_2.layoutManager = LinearLayoutManager(this)
+        rv_2.layoutManager = GridLayoutManager(this, 5)
         adapter2.addChildClickViewIds(R.id.tv_txt)
         rv_2.adapter = adapter2
         tv_spnner.setOnClickListener {

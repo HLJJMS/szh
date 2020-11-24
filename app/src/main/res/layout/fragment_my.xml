@@ -124,7 +124,7 @@
             android:paddingEnd="10dp"
             android:textColor="@color/btn_ghost_blue_text_normal"
             android:textSize="12sp"
-
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_name"
             app:layout_constraintBottom_toBottomOf="@id/tv_name"

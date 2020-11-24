@@ -40,7 +40,7 @@
         android:singleLine="true"
         android:text=""
         android:textColor="#ff020202"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

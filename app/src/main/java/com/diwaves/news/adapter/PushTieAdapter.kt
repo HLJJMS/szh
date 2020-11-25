@@ -20,7 +20,7 @@ class PushTieAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_rm
                 ContextCompat.getColor(context, R.color.qmui_config_color_white)
             )
         } else {
-            holder.setBackgroundResource(R.id.cl_bg, R.drawable.conner5_solid_white_stoken_gray)
+            holder.setBackgroundResource(R.id.cl_bg, R.drawable.conner5_solid_white_stoken1_gray)
             holder.setTextColor(
                 R.id.tv_number,
                 ContextCompat.getColor(context, R.color.color_020202)

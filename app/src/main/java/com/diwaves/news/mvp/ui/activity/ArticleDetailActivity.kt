@@ -5,12 +5,17 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -109,6 +114,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun getDataSuccess(bean: ArticleDetailBean.ResultBean) {
         titleBar.setCenterText(bean.articles.dirname + ">")
         tv_look.setText(bean.articles.view.toString() + "阅读")
@@ -117,9 +123,15 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         collection = bean.collection
         tv_fen.text = bean.articles.score + "次推荐"
         isLikeOrCollection()
-        tv_name.setText(bean.articles.author)
+        tv_name.setText(bean.articles.website)
         tv_time.setText(bean.articles.createdate)
-        tv_introduction.setText(bean.articles.contenttext)
+        titleBar.setCenterTextClick {
+          var intent =  Intent(this,TypeListActivityActivity::class.java)
+            intent.putExtra("id",bean.articles.dirid.toString())
+            intent.putExtra("title",bean.articles.dirname)
+            startActivity(intent)
+        }
+
         if (null != bean.articles.tags) {
             arr = bean?.articles?.tags?.toString()?.split(",")!!.toMutableList()
         }
@@ -172,20 +184,14 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             intent.putExtra("title", bean.articles.title)
             startActivity(intent)
         }
-
-
-
         iv_close.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             showListDialog()
         }
-
         tv_buy_vip.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(this, BuyVipActivity::class.java))
         }
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
-
-
         mPresenter?.getComment(intent.getStringExtra("id"), page, type)
         initLoadMore()
         setPopWindow()
@@ -194,14 +200,12 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             intent.putExtra("id", intent.getStringExtra("id"))
             if (null != bean?.articles?.pic) {
                 intent.putExtra("img", bean?.articles?.pic?.toString())
-            }else{
-                intent.putExtra("img","")
+            } else {
+                intent.putExtra("img", "")
             }
             intent.putExtra("title", bean.articles.title)
             startActivity(intent)
         }
-
-
         rb_1.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             mPresenter?.sorce(intent.getStringExtra("id"), "1")
         }
@@ -225,7 +229,28 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 ).putExtra("title", bean.articles.title.toString())
             )
         }
+        tv_down.setOnClickListener {
+            sl.fullScroll(View.FOCUS_DOWN);
+        }
+        tv_up.setOnClickListener {
+            sl.fullScroll(0);
+        }
+        val webSettings: WebSettings = wb_introduction.getSettings()
+        webSettings.setDisplayZoomControls(false) //隐藏webview缩放按钮
 
+        webSettings.setJavaScriptEnabled(true) //支持js
+        wb_introduction.setWebViewClient(object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                return true
+            }
+        })
+        wb_introduction.loadDataWithBaseURL(
+            null,
+            bean.articles.contenttext,
+            "text/html",
+            "UTF-8",
+            null
+        );
     }
 
     override fun commentSuccess() {

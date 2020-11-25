@@ -56,6 +56,10 @@ public class MyTitleBar extends LinearLayout {
         endText.setOnClickListener(onClickListener);
     }
 
+    public void setCenterTextClick(OnClickListener onClickListener){
+        centerText.setOnClickListener(onClickListener);
+    }
+
     public void setLeftText(String txt) {
         leftText.setText(txt);
     }

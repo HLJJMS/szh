@@ -158,11 +158,11 @@
 
         <TextView
             android:id="@+id/button_image"
-            android:visibility="gone"
             style="@style/EditorIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/photo" />
+            android:background="@mipmap/photo"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/button_bold"
@@ -272,10 +272,12 @@
 
     <ImageView
         android:id="@+id/iv_recall"
-        android:layout_width="19dp"
+        android:layout_width="49dp"
         android:layout_height="19dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:src="@mipmap/ic_recall"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/iv_recall_no"
@@ -283,10 +285,11 @@
 
     <ImageView
         android:id="@+id/iv_recall_no"
-        android:layout_width="19dp"
+        android:layout_width="49dp"
         android:layout_height="19dp"
-        android:layout_marginStart="30dp"
         android:layout_marginBottom="10dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:src="@mipmap/ic_recall_no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_recall" />

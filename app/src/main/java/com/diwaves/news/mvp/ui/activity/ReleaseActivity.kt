@@ -155,18 +155,18 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 //        }
         mPresenter?.getData()
         tv_a.setOnClickListener {
-            if(ll_setting.visibility==View.GONE){
+            if (ll_setting.visibility == View.GONE) {
                 ll_setting.visibility = View.VISIBLE
-            }else{
-                ll_setting.visibility=View.GONE
+            } else {
+                ll_setting.visibility = View.GONE
                 ll_main_color.visibility = View.GONE
             }
         }
         button_text_color.setOnClickListener {
-            if(ll_main_color.visibility==View.GONE){
+            if (ll_main_color.visibility == View.GONE) {
                 ll_main_color.visibility = View.VISIBLE
-            }else{
-                ll_main_color.visibility=View.GONE
+            } else {
+                ll_main_color.visibility = View.GONE
             }
         }
         button_bold.setOnClickListener {
@@ -234,7 +234,16 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
             richEditText.setAlignRight()
         }
 
-        cpv_main_color.setOnColorPickerChangeListener(object :ColorPickerView.OnColorPickerChangeListener{
+        iv_recall_no.setOnClickListener {
+            richEditText.undo()
+        }
+        iv_recall.setOnClickListener {
+            richEditText.redo()
+            richEditText.setUrl()
+        }
+
+        cpv_main_color.setOnColorPickerChangeListener(object :
+            ColorPickerView.OnColorPickerChangeListener {
             override fun onStartTrackingTouch(picker: ColorPickerView?) {
 
             }

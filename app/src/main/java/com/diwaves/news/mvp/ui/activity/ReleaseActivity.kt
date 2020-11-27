@@ -1,27 +1,21 @@
 package com.diwaves.news.mvp.ui.activity
 
 import android.Manifest
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.diwaves.news.R
-import com.diwaves.news.adapter.BangdanAdapter
-import com.diwaves.news.adapter.CaiJingAdapter
 import com.diwaves.news.adapter.SpnnerAdapter1
-import com.diwaves.news.adapter.SpnnerAdapter2
 import com.diwaves.news.bean.BangdanBean
 import com.diwaves.news.di.component.DaggerReleaseComponent
 import com.diwaves.news.di.module.ReleaseModule
 import com.diwaves.news.mvp.contract.ReleaseContract
 import com.diwaves.news.mvp.presenter.ReleasePresenter
-import com.diwaves.news.tools.CustomHtml
+import com.diwaves.news.tools.ColorPickerView
 import com.diwaves.news.tools.MyToast
-import com.diwaves.news.tools.SPToll
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -32,7 +26,6 @@ import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import io.reactivex.functions.Consumer
-import kotlinx.android.synthetic.main.activity_article_detail.*
 import kotlinx.android.synthetic.main.activity_release.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -69,16 +62,22 @@ import java.util.concurrent.TimeUnit
 class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
     var adapter1: SpnnerAdapter1 = SpnnerAdapter1()
     var bean: MutableList<BangdanBean.ResultEntity>? = null
-//    var adapter2: SpnnerAdapter2 = SpnnerAdapter2()
+
+    //    var adapter2: SpnnerAdapter2 = SpnnerAdapter2()
     var fans = true
     var friend = false
     var bold = false
-    var italic = false
-    var underline = false
+
     var photoCode = 1001;
     var dirname = "";
     var dirId = "";
     lateinit var file: File
+    var isListOl = false
+    var isAlignRight = false
+    var isAlignLeft = false
+    var isItalic = false
+    var isTextLean = false
+    var isListUL = false
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerReleaseComponent //如找不到该类,请编译一下项目
             .builder()
@@ -101,6 +100,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 //        rv_2.layoutManager = GridLayoutManager(this, 5)
 //        adapter2.addChildClickViewIds(R.id.tv_txt)
 //        rv_2.adapter = adapter2
+        richEditText.setEditorBackgroundColor(Color.WHITE);
         tv_spnner.setOnClickListener {
             rv_1.visibility = View.VISIBLE
 //            rv_2.visibility = View.VISIBLE
@@ -154,10 +154,106 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 //            rv_2.visibility = View.GONE
 //        }
         mPresenter?.getData()
+        tv_a.setOnClickListener {
+            if(ll_setting.visibility==View.GONE){
+                ll_setting.visibility = View.VISIBLE
+            }else{
+                ll_setting.visibility=View.GONE
+                ll_main_color.visibility = View.GONE
+            }
+        }
+        button_text_color.setOnClickListener {
+            if(ll_main_color.visibility==View.GONE){
+                ll_main_color.visibility = View.VISIBLE
+            }else{
+                ll_main_color.visibility=View.GONE
+            }
+        }
+        button_bold.setOnClickListener {
+            //字体加粗
+            if (bold) {
+                button_bold.setImageResource(R.mipmap.bold)
+            } else {  //加粗
+                button_bold.setImageResource(R.mipmap.bold_)
+            }
+            bold = !bold
+            richEditText.setBold()
+        }
+        button_list_ol.setOnClickListener {
+            if (isListOl) {
+                button_list_ol.setImageResource(R.mipmap.list_ol)
+            } else {
+                button_list_ol.setImageResource(R.mipmap.list_ol_)
+            }
+            isListOl = !isListOl
+            richEditText.setNumbers()
+        }
+        button_list_ul.setOnClickListener {
+            if (isListUL) {
+                button_list_ul.setImageResource(R.mipmap.list_ul)
+            } else {
+                button_list_ul.setImageResource(R.mipmap.list_ul_)
+            }
+            isListUL = !isListUL
+            richEditText.setBullets()
+        }
+        button_underline.setOnClickListener {
+            if (isTextLean) {
+                button_underline.setImageResource(R.mipmap.underline)
+            } else {
+                button_underline.setImageResource(R.mipmap.underline_)
+            }
+            isTextLean = !isTextLean
+            richEditText.setUnderline()
+        }
+        button_italic.setOnClickListener {
+            if (isItalic) {
+                button_italic.setImageResource(R.mipmap.lean)
+            } else {
+                button_italic.setImageResource(R.mipmap.lean_)
+            }
+            isItalic = !isItalic
+            richEditText.setItalic()
+        }
+        button_align_left.setOnClickListener {
+            if (isAlignLeft) {
+                button_align_left.setImageResource(R.mipmap.align_left)
+            } else {
+                button_align_left.setImageResource(R.mipmap.align_left_)
+            }
+            isAlignLeft = !isAlignLeft
+            richEditText.setAlignLeft()
+        }
+        button_align_right.setOnClickListener {
+            if (isAlignRight) {
+                button_align_right.setImageResource(R.mipmap.align_right)
+            } else {
+                button_align_right.setImageResource(R.mipmap.align_right_)
+            }
+            isAlignRight = !isAlignRight
+            richEditText.setAlignRight()
+        }
+
+        cpv_main_color.setOnColorPickerChangeListener(object :ColorPickerView.OnColorPickerChangeListener{
+            override fun onStartTrackingTouch(picker: ColorPickerView?) {
+
+            }
+
+            override fun onColorChanged(picker: ColorPickerView?, color: Int) {
+                button_text_color.setBackgroundColor(color)
+                richEditText.setTextColor(color)
+            }
+
+            override fun onStopTrackingTouch(picker: ColorPickerView?) {
+
+            }
+
+        })
     }
 
+
     override fun postPhotoSuccess(url: String) {
-        richEditText.setImg(url)
+
     }
 
     override fun postDataSuccess() {
@@ -165,7 +261,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
     }
 
     override fun success(bean: MutableList<BangdanBean.ResultEntity>) {
-        bean.removeAt(bean.size-1)
+        bean.removeAt(bean.size - 1)
         adapter1.setList(bean)
     }
 
@@ -239,36 +335,9 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
     }
 
     fun postdata(type: String) {
-        val builder: MultipartBody.Builder = MultipartBody.Builder()
-        builder.setType(MultipartBody.FORM)
-        builder.addFormDataPart(
-            "contenttext",
-            CustomHtml.toHtml(
-                richEditText.editableText,
-                CustomHtml.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE
-            )
+        mPresenter?.postData(
+            et_title.text.toString(), richEditText.html, dirId, dirname, type
         )
-        builder.addFormDataPart("dirid", dirId)
-        builder.addFormDataPart("dirname", dirname)
-        builder.addFormDataPart("state", type)
-
-        builder.addFormDataPart("title", et_title.text.toString())
-        builder.addFormDataPart("state", type)
-
-
-        builder.addFormDataPart("userid ", SPToll(this).getId())
-
-        if (fans) {
-            builder.addFormDataPart("tofans", "1")
-        } else {
-            builder.addFormDataPart("tofans", "0")
-        }
-        if (friend) {
-            builder.addFormDataPart("tofriend", "1")
-        } else {
-            builder.addFormDataPart("tofriend", "0")
-        }
-        mPresenter?.postData(builder.build())
     }
 
 

@@ -42,8 +42,18 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         return mRepositoryManager.obtainRetrofitService(HomeService::class.java).postPhoto(body)
     }
 
-    override fun postData(body: RequestBody): Observable<BaseBean.BaseResponse<String>> {
-        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).addArticle(body)    }
+    override fun postData(
+        id: String,
+        title: String,
+
+        contenttext: String,
+        dirid: String,
+        dirname: String,
+        state: String
+    ): Observable<BaseBean.BaseResponse<String>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).addArticle(id, title, contenttext, dirid, dirname, state)
+    }
+
 
     override fun onDestroy() {
         super.onDestroy();

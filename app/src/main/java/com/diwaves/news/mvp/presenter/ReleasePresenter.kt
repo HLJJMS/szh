@@ -15,6 +15,7 @@ import com.diwaves.news.network.Api
 import com.diwaves.news.network.RxUtils
 import com.diwaves.news.network.bean.BaseBean
 import com.diwaves.news.tools.MyToast
+import com.diwaves.news.tools.SPToll
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
 import okhttp3.RequestBody
 
@@ -67,18 +68,32 @@ constructor(model: ReleaseContract.Model, rootView: ReleaseContract.View) :
     }
 
 
-    fun postData(body: RequestBody) {
-        mModel.postData(body).compose(RxUtils.applySchedulers(mRootView))
+    fun postData(
+        title: String,
+        contenttext: String,
+        dirid: String,
+        dirname: String,
+        state: String
+    ) {
+        mModel.postData(
+            SPToll(mApplication).getId(),
+            title,
+            contenttext,
+            dirid,
+            dirname,
+            state
+        ).compose(RxUtils.applySchedulers(mRootView))
             .subscribe(object :
                 ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
                 override fun onNext(t: BaseBean.BaseResponse<String>) {
                     if (t.code.equals("200")) {
-
+                        mRootView.killMyself()
                     }
                     MyToast().makeToast(mApplication, t.message)
                 }
             })
     }
+
     fun getData() {
         mRootView.showLoading()
         mModel.getData().compose(RxUtils.applySchedulers(mRootView)).subscribe(object :

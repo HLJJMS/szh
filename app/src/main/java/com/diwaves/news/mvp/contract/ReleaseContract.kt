@@ -6,6 +6,7 @@ import com.jess.arms.mvp.IView
 import com.jess.arms.mvp.IModel
 import io.reactivex.Observable
 import okhttp3.RequestBody
+import retrofit2.http.Field
 
 
 /**
@@ -36,8 +37,15 @@ interface ReleaseContract {
         ): Observable<BaseBean.BaseResponse<String>>
 
         fun postData(
-            body: RequestBody
+            id: String,
+            title: String,
+
+            contenttext: String,
+            dirid: String,
+            dirname: String,
+            state: String
         ): Observable<BaseBean.BaseResponse<String>>
+
         fun getData(): Observable<BangdanBean>
     }
 

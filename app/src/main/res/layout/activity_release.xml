@@ -100,11 +100,10 @@
         android:textSize="30sp"
         app:layout_constraintTop_toBottomOf="@id/tv_spnner" />
 
-    <com.diwaves.news.tools.RichEditText
+    <com.diwaves.news.tools.RichEditor
         android:id="@+id/richEditText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@null"
         android:gravity="top|left"
         android:hint="编辑内容"
         android:textSize="18sp"
@@ -128,6 +127,127 @@
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/rv_1" />
 
+    <LinearLayout
+        android:id="@+id/ll_main_color"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#f2f1f6"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/ll_setting">
+
+        <com.diwaves.news.tools.ColorPickerView
+            android:id="@+id/cpv_main_color"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_gravity="center"
+            android:background="#f2f1f6"
+            app:indicatorColor="#fff"
+            app:indicatorEnable="true"
+            app:orientation="horizontal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/tv_save">
+
+        <TextView
+            android:id="@+id/button_image"
+            android:visibility="gone"
+            style="@style/EditorIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/photo" />
+
+        <ImageView
+            android:id="@+id/button_bold"
+            style="@style/EditorIcon"
+            android:src="@mipmap/bold" />
+
+        <TextView
+            android:id="@+id/button_text_color"
+            style="@style/EditorIcon"
+            android:layout_width="32dp"
+            android:layout_height="20dp"
+            android:background="@color/colorPrimary" />
+
+
+        <ImageView
+            android:id="@+id/button_list_ol"
+            style="@style/EditorIcon"
+            android:src="@mipmap/list_ol" />
+
+        <ImageView
+            android:id="@+id/button_list_ul"
+            style="@style/EditorIcon"
+            android:src="@mipmap/list_ul" />
+
+        <ImageView
+            android:id="@+id/button_underline"
+            style="@style/EditorIcon"
+            android:src="@mipmap/underline" />
+
+        <ImageView
+            android:id="@+id/button_italic"
+            style="@style/EditorIcon"
+            android:src="@mipmap/lean" />
+
+        <ImageView
+            android:id="@+id/button_align_left"
+            style="@style/EditorIcon"
+            android:src="@mipmap/align_left" />
+
+        <ImageView
+            android:id="@+id/button_align_center"
+            style="@style/EditorIcon"
+            android:src="@mipmap/align_center" />
+
+        <ImageView
+            android:id="@+id/button_align_right"
+            style="@style/EditorIcon"
+            android:src="@mipmap/align_right" />
+
+        <ImageView
+            android:id="@+id/button_indent"
+            style="@style/EditorIcon"
+            android:src="@mipmap/indent"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/button_outdent"
+            style="@style/EditorIcon"
+            android:src="@mipmap/outdent"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/action_blockquote"
+            style="@style/EditorIcon"
+            android:src="@mipmap/blockquote"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/action_strikethrough"
+            style="@style/EditorIcon"
+            android:src="@mipmap/strikethrough"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/action_superscript"
+            style="@style/EditorIcon"
+            android:src="@mipmap/superscript"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/action_subscript"
+            style="@style/EditorIcon"
+            android:src="@mipmap/subscript"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_save"

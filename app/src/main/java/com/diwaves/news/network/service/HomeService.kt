@@ -49,10 +49,10 @@ interface HomeService {
     ): Observable<FocusListBean>
 
     @FormUrlEncoded
-        @POST(Api.INDEX_LIST)
-        fun getMyList(
-            @Field("userid") id: String
-        ): Observable<FocusListBean>
+    @POST(Api.INDEX_LIST)
+    fun getMyList(
+        @Field("userid") id: String
+    ): Observable<FocusListBean>
 
 
     //  喜欢文章 0:喜欢，1:不喜欢
@@ -111,9 +111,15 @@ interface HomeService {
 
 
     //发布帖子
+    @FormUrlEncoded
     @POST(Api.ARTICLE_RELEASE)
     fun addArticle(
-        @Body body: RequestBody
+        @Field("userid") id: String,
+        @Field("title") title: String,
+        @Field("contenttext") contenttext: String,
+        @Field("dirid") dirid: String,
+        @Field("dirname") dirname: String,
+        @Field("state") state: String
     ): Observable<BaseBean.BaseResponse<String>>
 
 

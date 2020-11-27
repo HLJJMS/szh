@@ -321,7 +321,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             }
         ivTxt!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                showPopWindowSelectPhoto()
+                startActivity(Intent(this,ReleaseActivity::class.java))
             }
     }
 
@@ -346,7 +346,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             }
         textPhotoSelectPhoto!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(context, ReleaseActivity::class.java))
+                startActivity(Intent(this, ResealesPhotoActivityActivity::class.java))
             }
     }
 
@@ -355,7 +355,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     }
 
     fun showPopWindowSelectPhoto() {
-        popupWindowSelectPhoto?.showAtLocation(getWindow().decorView, Gravity.NO_GRAVITY, 0, 0)
+        popupWindowSelectPhoto?.showAtLocation(getWindow().decorView, Gravity.BOTTOM, 0, 0)
     }
 
 }

@@ -155,7 +155,7 @@ interface HomeService {
 
     //评分
     @FormUrlEncoded
-    @POST(Api.INDEX_PUSH)
+    @POST(Api.SCORE)
     fun sorce(
         @Field("userid") id: String,
         @Field("score") score: String,

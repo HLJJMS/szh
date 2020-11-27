@@ -15,6 +15,7 @@ import com.diwaves.news.mvp.presenter.PushTiePresenter
 
 import com.diwaves.news.R
 import com.diwaves.news.adapter.PushTieAdapter
+import com.diwaves.news.network.Api
 import com.diwaves.news.tools.MyGlide
 import kotlinx.android.synthetic.main.activity_push_tie.*
 
@@ -99,7 +100,7 @@ class PushTieActivity : BaseActivity<PushTiePresenter>(), PushTieContract.View {
         agAdapter.setClickPosition(0)
         auAdapter.setClickPosition(100)
         tv_title.text = intent.getStringExtra("title")
-        MyGlide.loadImage(this, intent.getStringExtra("img"), iv_img)
+        MyGlide.loadImage(this, Api.BASE_URL+intent.getStringExtra("img"), iv_img)
 
     }
 

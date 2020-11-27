@@ -156,7 +156,7 @@ interface UserService {
         @Field("articlesid") articlesid: String
     ): Observable<BaseBean.BaseResponse<Any>>
 
-    // 审核文章
+    // 发布文章
     @FormUrlEncoded
     @POST(Api.RELEASE_IMG)
     fun upImageArticle(

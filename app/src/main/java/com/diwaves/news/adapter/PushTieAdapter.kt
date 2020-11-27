@@ -31,7 +31,7 @@ class PushTieAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_rm
             )
         }
         holder.setText(R.id.tv_number, item)
-        holder.setText(R.id.tv_danwei, "人")
+        holder.setText(R.id.tv_danwei, "次")
     }
 
     fun setClickPosition(i: Int) {

@@ -96,7 +96,7 @@
         android:id="@+id/tv_rmb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="预测20币"
+        android:text="推荐10次"
         android:textColor="#ff989898"
         android:textSize="12sp"
         android:layout_marginTop="20dp"

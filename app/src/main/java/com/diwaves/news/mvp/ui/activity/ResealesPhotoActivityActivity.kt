@@ -5,19 +5,16 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
-
-import com.jess.arms.base.BaseActivity
-import com.jess.arms.di.component.AppComponent
-import com.jess.arms.utils.ArmsUtils
-
+import com.diwaves.news.R
+import com.diwaves.news.adapter.AddPhotoAdapter
 import com.diwaves.news.di.component.DaggerResealesPhotoActivityComponent
 import com.diwaves.news.di.module.ResealesPhotoActivityModule
 import com.diwaves.news.mvp.contract.ResealesPhotoActivityContract
 import com.diwaves.news.mvp.presenter.ResealesPhotoActivityPresenter
-
-import com.diwaves.news.R
-import com.diwaves.news.adapter.AddPhotoAdapter
 import com.diwaves.news.tools.MyToast
+import com.jess.arms.base.BaseActivity
+import com.jess.arms.di.component.AppComponent
+import com.jess.arms.utils.ArmsUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
@@ -130,7 +127,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
 
     fun getPermissions() {
         val rxPermissions: RxPermissions = RxPermissions(this)
-        rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+        rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
             .subscribe(Consumer<Boolean>() {
                 if (it) {
                     getPhoto()
@@ -149,7 +146,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
             .captureStrategy(
                 CaptureStrategy(
                     true,
-                    "com.example.szh.photo"
+                    "com.diwaves.news.photo"
                 )
             ) //有序选择图片 123456...
             .countable(false) //最大选择数量为6
@@ -167,15 +164,12 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
             for (i in Matisse.obtainPathResult(data).indices) {
                 //解析文件
                 var file = File(Matisse.obtainPathResult(data)[i])
-
                 val builder: MultipartBody.Builder = MultipartBody.Builder()
                 builder.setType(MultipartBody.FORM)
                 var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
                 builder.addFormDataPart("file", file.name, requestBody)
                 mPresenter?.postImage(builder.build())
             }
-        }else{
-            finish()
         }
     }
 

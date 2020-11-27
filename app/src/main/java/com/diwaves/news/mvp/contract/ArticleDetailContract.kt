@@ -7,6 +7,7 @@ import com.jess.arms.mvp.IView
 import com.jess.arms.mvp.IModel
 import io.reactivex.Observable
 import okhttp3.MultipartBody
+import java.text.FieldPosition
 
 
 /**
@@ -30,6 +31,7 @@ interface ArticleDetailContract {
         fun getCommentListFail()
         fun getCommentListSuccess(bean: MutableList<CommentBean.ResultBean.RecordsBean>)
         fun pingbiSuccess()
+        fun getSorce(fen: String,position: String)
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存

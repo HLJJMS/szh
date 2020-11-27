@@ -187,10 +187,10 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
                 ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
                 override fun onNext(t: BaseBean.BaseResponse<String>) {
                     if (t.code.equals(Api.SUCCESS)) {
-                        mRootView.commentSuccess()
+                        mRootView.getSorce(t.message,sorce)
+                    }else{
+                        MyToast().makeToast(mApplication, t.message)
                     }
-                    MyToast().makeToast(mApplication, t.message)
-
                 }
             })
     }

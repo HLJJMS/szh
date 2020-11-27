@@ -68,7 +68,7 @@ constructor(model: ReleaseContract.Model, rootView: ReleaseContract.View) :
 
 
     fun postData(body: RequestBody) {
-        mModel.postPhoto(body).compose(RxUtils.applySchedulers(mRootView))
+        mModel.postData(body).compose(RxUtils.applySchedulers(mRootView))
             .subscribe(object :
                 ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
                 override fun onNext(t: BaseBean.BaseResponse<String>) {

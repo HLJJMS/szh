@@ -126,9 +126,9 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         tv_name.setText(bean.articles.website)
         tv_time.setText(bean.articles.createdate)
         titleBar.setCenterTextClick {
-          var intent =  Intent(this,TypeListActivityActivity::class.java)
-            intent.putExtra("id",bean.articles.dirid.toString())
-            intent.putExtra("title",bean.articles.dirname)
+            var intent = Intent(this, TypeListActivityActivity::class.java)
+            intent.putExtra("id", bean.articles.dirid.toString())
+            intent.putExtra("title", bean.articles.dirname)
             startActivity(intent)
         }
 
@@ -195,6 +195,11 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         mPresenter?.getComment(intent.getStringExtra("id"), page, type)
         initLoadMore()
         setPopWindow()
+        if (bean.articles.dirname.contains("原创")) {
+            tv_detail.visibility = View.GONE
+        } else {
+            tv_detail.visibility = View.VISIBLE
+        }
         iv_send.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             var intent = Intent(this, PushTieActivity::class.java)
             intent.putExtra("id", intent.getStringExtra("id"))
@@ -307,6 +312,19 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
     override fun pingbiSuccess() {
         popupWindow.dismiss()
+    }
+
+    override fun getSorce(fen: String, position: String) {
+        tv_sorce.setText(fen)
+        when (position) {
+            "1" -> rb_1.setBackgroundResource(R.drawable.bg_conner16_yellow)
+            "2" -> rb_2.setBackgroundResource(R.drawable.bg_conner16_yellow)
+            "3" -> rb_3.setBackgroundResource(R.drawable.bg_conner16_yellow)
+            "4" -> rb_4.setBackgroundResource(R.drawable.bg_conner16_yellow)
+            "5" -> rb_5.setBackgroundResource(R.drawable.bg_conner16_yellow)
+        }
+
+
     }
 
 

@@ -10,7 +10,7 @@
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:center_txt="图片贴"
+        app:center_txt=""
         app:end_txt="发布"
         app:end_txt_color="@color/qmui_config_color_blue" />
 

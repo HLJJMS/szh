@@ -32,6 +32,7 @@ import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import io.reactivex.functions.Consumer
+import kotlinx.android.synthetic.main.activity_article_detail.*
 import kotlinx.android.synthetic.main.activity_release.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -68,7 +69,7 @@ import java.util.concurrent.TimeUnit
 class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
     var adapter1: SpnnerAdapter1 = SpnnerAdapter1()
     var bean: MutableList<BangdanBean.ResultEntity>? = null
-    var adapter2: SpnnerAdapter2 = SpnnerAdapter2()
+//    var adapter2: SpnnerAdapter2 = SpnnerAdapter2()
     var fans = true
     var friend = false
     var bold = false
@@ -94,53 +95,15 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 
 
     override fun initData(savedInstanceState: Bundle?) {
-//        iv_b.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
-//            .subscribe {
-//                if (bold) {
-//                    bold = false
-//                    iv_b.setBackgroundResource(R.color.qmui_s_link_color)
-//                } else {
-//                    bold = true
-//                    iv_b.setBackgroundResource(R.color.qmui_config_color_10_white)
-//                }
-//                richEditText.setBold(bold)
-//
-//            }
-//        iv_i.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
-//            .subscribe {
-//                if (italic) {
-//                    iv_i.setBackgroundResource(R.color.qmui_s_link_color)
-//                    italic = false
-//                } else {
-//                    italic = true
-//                    iv_i.setBackgroundResource(R.color.qmui_config_color_10_white)
-//                }
-//                richEditText.setItalic(italic)
-//            }
-//        iv_u.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
-//            .subscribe {
-//                if (underline) {
-//                    underline = false
-//                    iv_u.setBackgroundResource(R.color.qmui_s_link_color)
-//                } else {
-//                    underline = true
-//                    iv_u.setBackgroundResource(R.color.qmui_config_color_10_white)
-//                }
-//                richEditText.setUnderline(true)
-//            }
-//        iv_h.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
-//            .subscribe {
-//
-//            }
         rv_1.layoutManager = GridLayoutManager(this, 5)
         rv_1.adapter = adapter1
         adapter1.addChildClickViewIds(R.id.tv_txt)
-        rv_2.layoutManager = GridLayoutManager(this, 5)
-        adapter2.addChildClickViewIds(R.id.tv_txt)
-        rv_2.adapter = adapter2
+//        rv_2.layoutManager = GridLayoutManager(this, 5)
+//        adapter2.addChildClickViewIds(R.id.tv_txt)
+//        rv_2.adapter = adapter2
         tv_spnner.setOnClickListener {
             rv_1.visibility = View.VISIBLE
-            rv_2.visibility = View.VISIBLE
+//            rv_2.visibility = View.VISIBLE
         }
         iv_img.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -149,6 +112,13 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
         titlebar.setBackClick {
             finish()
         }
+        titlebar.setEndTextClick {
+            postdata("0")
+        }
+        titlebar.setStartTextClick {
+            postdata("-1")
+        }
+
         iv_send_fans.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 if (fans) {
@@ -170,15 +140,19 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
                 }
             }
         adapter1.setOnItemClickListener { adapter, view, position ->
-            adapter2.setList(adapter1.data.get(position).dirsList)
-        }
-        adapter2.setOnItemClickListener { adapter, view, position ->
-            tv_spnner.setText(adapter2.data.get(position).title)
-            dirId = adapter2.data.get(position).id.toString()
-            dirname = adapter2.data.get(position).title
+//            adapter2.setList(adapter1.data.get(position).dirsList)
+            tv_spnner.setText(adapter1.data.get(position).title)
+            dirId = adapter1.data.get(position).id.toString()
+            dirname = adapter1.data.get(position).title
             rv_1.visibility = View.GONE
-            rv_2.visibility = View.GONE
         }
+//        adapter2.setOnItemClickListener { adapter, view, position ->
+//            tv_spnner.setText(adapter2.data.get(position).title)
+//            dirId = adapter2.data.get(position).id.toString()
+//            dirname = adapter2.data.get(position).title
+//            rv_1.visibility = View.GONE
+//            rv_2.visibility = View.GONE
+//        }
         mPresenter?.getData()
     }
 
@@ -191,6 +165,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
     }
 
     override fun success(bean: MutableList<BangdanBean.ResultEntity>) {
+        bean.removeAt(bean.size-1)
         adapter1.setList(bean)
     }
 

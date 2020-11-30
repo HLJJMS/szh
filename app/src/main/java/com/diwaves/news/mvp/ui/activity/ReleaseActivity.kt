@@ -15,6 +15,7 @@ import com.diwaves.news.di.module.ReleaseModule
 import com.diwaves.news.mvp.contract.ReleaseContract
 import com.diwaves.news.mvp.presenter.ReleasePresenter
 import com.diwaves.news.tools.ColorPickerView
+import com.diwaves.news.tools.LoaddingView
 import com.diwaves.news.tools.MyToast
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
@@ -62,12 +63,10 @@ import java.util.concurrent.TimeUnit
 class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
     var adapter1: SpnnerAdapter1 = SpnnerAdapter1()
     var bean: MutableList<BangdanBean.ResultEntity>? = null
-
-    //    var adapter2: SpnnerAdapter2 = SpnnerAdapter2()
+    var loaddingView: LoaddingView? = null
     var fans = true
     var friend = false
     var bold = false
-
     var photoCode = 1001;
     var dirname = "";
     var dirId = "";
@@ -105,6 +104,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
             rv_1.visibility = View.VISIBLE
 //            rv_2.visibility = View.VISIBLE
         }
+
         iv_img.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 getPermissions()
@@ -142,7 +142,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
         adapter1.setOnItemClickListener { adapter, view, position ->
 //            adapter2.setList(adapter1.data.get(position).dirsList)
             tv_spnner.setText(adapter1.data.get(position).title)
-            dirId = adapter1.data.get(position).id.toString()
+            dirId = adapter1.data.get(position).dirsList.get(adapter1.data.get(position).dirsList.size-1).id.toString()
             dirname = adapter1.data.get(position).title
             rv_1.visibility = View.GONE
         }
@@ -154,6 +154,9 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 //            rv_2.visibility = View.GONE
 //        }
         mPresenter?.getData()
+        button_image.setOnClickListener {
+            getPermissions()
+        }
         tv_a.setOnClickListener {
             if (ll_setting.visibility == View.GONE) {
                 ll_setting.visibility = View.VISIBLE
@@ -262,7 +265,15 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 
 
     override fun postPhotoSuccess(url: String) {
-
+        //插入图片
+        //这里的功能需要根据需求实现，通过insertImage传入一个URL或者本地图片路径都可以，这里用户可以自己调用本地相
+        //或者拍照获取图片，传图本地图片路径，也可以将本地图片路径上传到服务器（自己的服务器或者免费的七牛服务器），
+        //返回在服务端的URL地址，将地址传如即可（我这里传了一张写死的图片URL，如果你插入的图片不现实，请检查你是否添加
+        // 网络请求权限<uses-permission android:name="android.permission.INTERNET" />）
+        richEditText.insertImage(
+            url,
+            "dachshund"
+        )
     }
 
     override fun postDataSuccess() {
@@ -276,11 +287,11 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 
 
     override fun showLoading() {
-
+        loaddingView?.show()
     }
 
     override fun hideLoading() {
-
+        loaddingView?.dismiss()
     }
 
     override fun showMessage(message: String) {
@@ -333,11 +344,13 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
             for (i in Matisse.obtainPathResult(data).indices) {
                 //解析文件
                 file = File(Matisse.obtainPathResult(data)[i])
-
                 val builder: MultipartBody.Builder = MultipartBody.Builder()
                 builder.setType(MultipartBody.FORM)
                 var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
                 builder.addFormDataPart("file", file.name, requestBody)
+                if (null == loaddingView) {
+                    loaddingView = LoaddingView(this)
+                }
                 mPresenter?.postImage(builder.build())
             }
         }

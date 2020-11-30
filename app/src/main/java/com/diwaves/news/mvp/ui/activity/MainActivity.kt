@@ -321,7 +321,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             }
         ivTxt!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,ReleaseActivity::class.java))
+                startActivity(Intent(this, ReleaseActivity::class.java))
             }
     }
 
@@ -342,11 +342,21 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             }
         textCrameSelectPhoto!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this, ResealesPhotoActivityActivity::class.java))
+                startActivity(
+                    Intent(
+                        this,
+                        ResealesPhotoActivityActivity::class.java
+                    ).putExtra("CAMERA", true)
+                )
             }
         textPhotoSelectPhoto!!.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this, ResealesPhotoActivityActivity::class.java))
+                startActivity(
+                    Intent(
+                        this,
+                        ResealesPhotoActivityActivity::class.java
+                    ).putExtra("CAMERA", false)
+                )
             }
     }
 

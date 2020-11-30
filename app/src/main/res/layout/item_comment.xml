@@ -111,6 +111,7 @@
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@id/tv_rmb"
         android:text="涨"
+        android:visibility="gone"
         android:textColor="#ff137ed0"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/tv_rmb"

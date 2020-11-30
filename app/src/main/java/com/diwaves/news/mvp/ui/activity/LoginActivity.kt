@@ -2,9 +2,7 @@ package com.diwaves.news.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.diwaves.news.R
 import com.diwaves.news.di.component.DaggerLoginComponent

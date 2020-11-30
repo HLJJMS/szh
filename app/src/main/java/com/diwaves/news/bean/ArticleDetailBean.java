@@ -70,6 +70,15 @@ public class ArticleDetailBean {
         private int collection;
         private ArticlesBean articles;
         private int good;
+        private String sorce;
+
+        public String getSorce() {
+            return sorce;
+        }
+
+        public void setSorce(String sorce) {
+            this.sorce = sorce;
+        }
 
         public int getLike() {
             return like;
@@ -193,6 +202,15 @@ public class ArticleDetailBean {
             private Object commentCount;
             private Object type;
             private Object pushid;
+            private String pushcount;
+
+            public String getPushcount() {
+                return pushcount;
+            }
+
+            public void setPushcount(String pushcount) {
+                this.pushcount = pushcount;
+            }
 
             public String getScore() {
                 return score;

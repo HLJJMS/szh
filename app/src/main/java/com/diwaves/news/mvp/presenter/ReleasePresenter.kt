@@ -55,6 +55,7 @@ constructor(model: ReleaseContract.Model, rootView: ReleaseContract.View) :
     }
 
     fun postImage(body: RequestBody) {
+        mRootView.showLoading()
         mModel.postPhoto(body).compose(RxUtils.applySchedulers(mRootView))
             .subscribe(object :
                 ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
@@ -63,6 +64,7 @@ constructor(model: ReleaseContract.Model, rootView: ReleaseContract.View) :
                         mRootView.postPhotoSuccess(t.message)
                     }
                     MyToast().makeToast(mApplication, t.message)
+                    mRootView.hideLoading()
                 }
             })
     }

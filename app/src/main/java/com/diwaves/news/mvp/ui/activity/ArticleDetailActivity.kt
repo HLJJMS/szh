@@ -121,10 +121,11 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         tv_title.setText(bean.articles.title)
         like = bean.like
         collection = bean.collection
-        tv_fen.text = bean.articles.score + "次推荐"
+        tv_fen.text = bean.articles.pushcount + "次推荐"
         isLikeOrCollection()
         tv_name.setText(bean.articles.website)
         tv_time.setText(bean.articles.createdate)
+        tv_sorce.setText(bean.sorce)
         titleBar.setCenterTextClick {
             var intent = Intent(this, TypeListActivityActivity::class.java)
             intent.putExtra("id", bean.articles.dirid.toString())

@@ -70,14 +70,14 @@ public class ArticleDetailBean {
         private int collection;
         private ArticlesBean articles;
         private int good;
-        private String sorce;
+        private String score;
 
-        public String getSorce() {
-            return sorce;
+        public String getScore() {
+            return score;
         }
 
-        public void setSorce(String sorce) {
-            this.sorce = sorce;
+        public void setScore(String score) {
+            this.score = score;
         }
 
         public int getLike() {

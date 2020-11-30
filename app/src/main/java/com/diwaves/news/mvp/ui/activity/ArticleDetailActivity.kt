@@ -125,7 +125,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         isLikeOrCollection()
         tv_name.setText(bean.articles.website)
         tv_time.setText(bean.articles.createdate)
-        tv_sorce.setText(bean.sorce)
+        tv_sorce.setText(bean.score)
         titleBar.setCenterTextClick {
             var intent = Intent(this, TypeListActivityActivity::class.java)
             intent.putExtra("id", bean.articles.dirid.toString())
@@ -283,7 +283,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         adapter.loadMoreModule.isAutoLoadMore = true
         //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
         adapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
-        adapter.addChildClickViewIds(R.id.iv_good, R.id.tv_replay)
+        adapter.addChildClickViewIds(R.id.iv_good, R.id.tv_replay, R.id.iv_close1)
         adapter.setOnItemChildClickListener { adapter, view, position ->
             if (view.id == R.id.iv_good) {
                 if (this.adapter.data.get(position).isUp) {
@@ -301,6 +301,8 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 }
             } else if (view.id == R.id.tv_replay) {
                 commentId = this.adapter.data.get(position).id.toString()
+            } else if (view.id == R.id.iv_close1) {
+                showCommentDialog(this.adapter.data.get(position).id.toString())
             }
         }
     }
@@ -508,6 +510,31 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 } else if (which == 2) {
                     MyToast().makeToast(this@ArticleDetailActivity, "删除成功")
                 }
+            }
+
+        })
+        listDialog.show()
+    }
+
+    private fun showCommentDialog(id: String) {
+        val items = arrayOf("屏蔽", "投诉/举报", "取消")
+        val listDialog: AlertDialog.Builder = AlertDialog.Builder(this)
+        listDialog.setTitle("")
+        listDialog.setItems(items, object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                if (which == 0) {
+                    showPopWindow()
+                } else if (which == 1) {
+                    startActivity(
+                        Intent(this@ArticleDetailActivity, ReportActivity::class.java).putExtra(
+                            "id",
+                            id
+                        )
+                    )
+                }
+//                else if (which == 2) {
+//                    MyToast().makeToast(this@ArticleDetailActivity, "删除成功")
+//                }
             }
 
         })

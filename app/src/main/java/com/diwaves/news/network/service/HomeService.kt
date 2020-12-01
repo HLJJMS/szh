@@ -145,7 +145,9 @@ interface HomeService {
         @Field("userid") id: String,
         @Field("peoplecount") peoplecount: String,
         @Field("type") type: String,
-        @Field("articleid") articleid: String
+        @Field("articleid") articleid: String,
+        @Field("content") content: String
+
     ): Observable<BaseBean.BaseResponse<Any>>
 
     //分类查询文章列表

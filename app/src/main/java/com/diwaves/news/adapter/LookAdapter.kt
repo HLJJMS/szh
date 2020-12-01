@@ -15,7 +15,7 @@ class LookAdapter : BaseQuickAdapter<FocusListBean.ResultDTO.RecordsDTO, BaseVie
         holder.setText(R.id.tv_time,item.createdate)
         holder.setText(R.id.tv_read,item.view.toString() + "阅读")
         holder.setText(R.id.tv_comment,item.view.toString() + "推荐")
-        MyGlide.loadImage(context,item.user.avatarUrl,holder.getView(R.id.iv_head))
+//        MyGlide.loadImage(context,item.user.avatarUrl,holder.getView(R.id.iv_head))
         if(null!=item?.audiopath?.toString()){
             MyGlide.loadImage(context,item.audiopath.toString(),holder.getView(R.id.iv_detail))
         }else{

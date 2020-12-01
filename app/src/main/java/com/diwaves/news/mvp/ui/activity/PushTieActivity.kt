@@ -71,7 +71,7 @@ class PushTieActivity : BaseActivity<PushTiePresenter>(), PushTieContract.View {
             finish()
         }
         titleBar.setEndTextClick {
-            mPresenter?.postData(person,type,intent.getStringExtra("id"))
+            mPresenter?.postData(person,type,intent.getStringExtra("id"),et_txt.text.toString())
         }
         listPerson?.add("10")
         listPerson?.add("20")

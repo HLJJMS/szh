@@ -52,8 +52,8 @@ constructor(model: PushTieContract.Model, rootView: PushTieContract.View) :
         super.onDestroy();
     }
 
-    fun postData(peoplecount: String, type: String, articleid: String) {
-        mModel.postData(SPToll(mApplication).getId(), peoplecount, type, articleid)
+    fun postData(peoplecount: String, type: String, articleid: String,content:String) {
+        mModel.postData(SPToll(mApplication).getId(), peoplecount, type, articleid,content)
             .compose(RxUtils.applySchedulers(mRootView)).safeSubscribe(object :
             ErrorHandleSubscriber<BaseBean.BaseResponse<Any>>(mErrorHandler) {
             override fun onNext(t: BaseBean.BaseResponse<Any>) {

@@ -79,6 +79,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     var photoCode = 1001;
     lateinit var file: File
     var view: View? = null
+    var viewShenhe: View? = null
     var rbOk: QMUIRoundButton? = null
     var rbNo: QMUIRoundButton? = null
     private var changePhoto: Boolean = false
@@ -88,6 +89,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     var page = 1
     var tage = ""
     var popupWindow: PopupWindow = PopupWindow()
+    var popupShenheWindow: PopupWindow = PopupWindow()
     var adapter: CommentAdapter = CommentAdapter()
     var tagList: MutableList<String> = arrayListOf()
     override fun setupActivityComponent(appComponent: AppComponent) {
@@ -106,12 +108,16 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
 
     override fun initData(savedInstanceState: Bundle?) {
-        mPresenter?.getData(intent.getStringExtra("id"), intent.getStringExtra("pushid"))
         titleBar.setBackClick {
             finish()
         }
         onKeyBoardListener()
 
+    }
+
+    override fun onResume() {
+        mPresenter?.getData(intent.getStringExtra("id"), intent.getStringExtra("pushid"))
+        super.onResume()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -132,6 +138,28 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             intent.putExtra("title", bean.articles.dirname)
             startActivity(intent)
         }
+        if (bean.articles.state == 1) {
+            iv_send.visibility = View.INVISIBLE
+            tv_tui.setText("审核新发帖")
+            tv_tui.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+                showshenhePopWindow()
+            }
+        } else {
+            iv_send.visibility = View.VISIBLE
+            tv_tui.setText("推上热搜")
+            iv_send.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+                var intent = Intent(this, PushTieActivity::class.java)
+                intent.putExtra("id", bean.articles.id.toString())
+                if (null != bean?.articles?.pic) {
+                    intent.putExtra("img", bean?.articles?.pic?.toString())
+                } else {
+                    intent.putExtra("img", "")
+                }
+                intent.putExtra("title", bean.articles.title)
+                startActivity(intent)
+            }
+        }
+
 
         if (null != bean.articles.tags) {
             arr = bean?.articles?.tags?.toString()?.split(",")!!.toMutableList()
@@ -178,13 +206,13 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 //            intent.putExtra("title", bean.articles.title)
 //            startActivity(intent)
 //        }
-        iv_send.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            var intent = Intent(this, PushTieActivity::class.java)
-            intent.putExtra("id", intent.getStringExtra("id"))
-            intent.putExtra("img", bean.articles.pic.toString())
-            intent.putExtra("title", bean.articles.title)
-            startActivity(intent)
-        }
+//        iv_send.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            var intent = Intent(this, PushTieActivity::class.java)
+//            intent.putExtra("id", intent.getStringExtra("id"))
+//            intent.putExtra("img", bean.articles.pic.toString())
+//            intent.putExtra("title", bean.articles.title)
+//            startActivity(intent)
+//        }
         iv_close.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             showListDialog()
         }
@@ -196,22 +224,13 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         mPresenter?.getComment(intent.getStringExtra("id"), page, type)
         initLoadMore()
         setPopWindow()
-        if (bean.articles.dirname.contains("原创")) {
+        setShenHePopWindow()
+        if (null == bean.articles.link || bean.articles.link.equals("")) {
             tv_detail.visibility = View.GONE
         } else {
             tv_detail.visibility = View.VISIBLE
         }
-        iv_send.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            var intent = Intent(this, PushTieActivity::class.java)
-            intent.putExtra("id", intent.getStringExtra("id"))
-            if (null != bean?.articles?.pic) {
-                intent.putExtra("img", bean?.articles?.pic?.toString())
-            } else {
-                intent.putExtra("img", "")
-            }
-            intent.putExtra("title", bean.articles.title)
-            startActivity(intent)
-        }
+
         rb_1.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             mPresenter?.sorce(intent.getStringExtra("id"), "1")
         }
@@ -539,5 +558,57 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
         })
         listDialog.show()
+    }
+
+    fun setShenHePopWindow() {
+        var list: MutableList<String> = arrayListOf()
+        list.add("有无黄色内容")
+        list.add("有无暴力内容")
+        list.add("有无政治内容")
+        list.add("有无广告内容")
+        list.add("有无违法反动内容")
+        list.add("有无侮辱谩骂内容")
+        list.add("有无令人不适内容")
+        var adapterPop: PopRadioAdapter = PopRadioAdapter()
+        var recyclerViewPop: RecyclerView? = null
+
+        viewShenhe = LayoutInflater.from(this).inflate(R.layout.pop_bohui, null);
+        popupShenheWindow.contentView = viewShenhe
+        popupShenheWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupShenheWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupShenheWindow.setOutsideTouchable(true)
+        popupShenheWindow.setFocusable(true) //点击返回键取消
+        popupShenheWindow.setBackgroundDrawable(BitmapDrawable())
+        recyclerViewPop = viewShenhe?.findViewById(R.id.recycler)
+        recyclerViewPop?.layoutManager = LinearLayoutManager(this)
+        recyclerViewPop?.adapter = adapterPop
+        adapterPop.setList(list)
+        rbNo = viewShenhe?.findViewById(R.id.rb_off)
+        rbOk = viewShenhe?.findViewById(R.id.rb_ok)
+        rbOk?.setOnClickListener {
+//            mPresenter?.pingbi(intent.getStringExtra("id"), tage)
+            MyToast().makeToast(this, "成功")
+            finish()
+        }
+        rbNo?.setOnClickListener {
+            popupShenheWindow.dismiss()
+        }
+        adapterPop.addChildClickViewIds(R.id.radio)
+        adapterPop.setOnItemChildClickListener { adapter, view, position ->
+            tage = adapterPop.data[position]
+            adapterPop.setPositionAdapter(position)
+        }
+        popupShenheWindow.setOnDismissListener {
+            val lp = window.attributes
+            lp.alpha = 1f
+            window.attributes = lp
+        }
+    }
+
+    fun showshenhePopWindow() {
+        val lp = window.attributes
+        lp.alpha = 0.5f
+        window.attributes = lp
+        popupShenheWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0)
     }
 }

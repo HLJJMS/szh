@@ -40,9 +40,10 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         id: String,
         peoplecount: String,
         type: String,
-        articleid: String
+        articleid: String,
+        content:String
     ): Observable<BaseBean.BaseResponse<Any>> {
-        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).pushTie(id, peoplecount, type, articleid)
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).pushTie(id, peoplecount, type, articleid,content)
     }
 
     override fun onDestroy() {

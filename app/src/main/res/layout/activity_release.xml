@@ -104,10 +104,13 @@
         android:id="@+id/richEditText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:gravity="top|left"
         android:hint="编辑内容"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/ll_main_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_title" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -154,27 +157,14 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/tv_save">
+        app:layout_constraintBottom_toTopOf="@id/iv_img">
 
         <TextView
             android:id="@+id/button_image"
             style="@style/EditorIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/photo"
-             />
-
-        <ImageView
-            android:id="@+id/button_bold"
-            style="@style/EditorIcon"
-            android:src="@mipmap/bold" />
-
-        <TextView
-            android:id="@+id/button_text_color"
-            style="@style/EditorIcon"
-            android:layout_width="32dp"
-            android:layout_height="20dp"
-            android:background="@color/colorPrimary" />
+            android:background="@mipmap/photo" />
 
 
         <ImageView
@@ -249,15 +239,6 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:paddingStart="10dp"
-        android:text="完成"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
         android:id="@+id/iv_img"
@@ -266,9 +247,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginBottom="10dp"
         android:src="@mipmap/ic_img"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_save" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/iv_recall"
@@ -293,6 +273,26 @@
         android:src="@mipmap/ic_recall_no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_recall" />
+
+    <TextView
+        android:id="@+id/button_text_color"
+        style="@style/EditorIcon"
+        android:layout_width="32dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_recall_no" />
+
+    <ImageView
+        android:id="@+id/button_bold"
+        style="@style/EditorIcon"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="10dp"
+
+        android:src="@mipmap/bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_text_color" />
 
     <TextView
         android:id="@+id/tv_a"

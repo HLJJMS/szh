@@ -17,6 +17,7 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diwaves.news.R
@@ -43,6 +44,10 @@ import com.zhihu.matisse.engine.impl.GlideEngine
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_article_detail.*
+import kotlinx.android.synthetic.main.activity_article_detail.tv_hot
+import kotlinx.android.synthetic.main.activity_article_detail.tv_new
+import kotlinx.android.synthetic.main.activity_article_detail.tv_title
+import kotlinx.android.synthetic.main.activity_rmb_maket_main.*
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -276,6 +281,17 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             "UTF-8",
             null
         );
+        tv_hot.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            tv_hot.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
+            tv_new.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
+            mPresenter?.getComment(intent.getStringExtra("id"), page, "0")
+
+        }
+        tv_new.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            tv_hot.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
+            tv_new.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
+            mPresenter?.getComment(intent.getStringExtra("id"), page, "1")
+        }
     }
 
     override fun commentSuccess() {

@@ -27,7 +27,6 @@ import com.diwaves.news.mvp.presenter.LookPresenter
 import com.diwaves.news.R
 import com.diwaves.news.adapter.LookAdapter
 import com.diwaves.news.adapter.PopRadioAdapter
-import com.diwaves.news.adapter.RecommendAdapter
 import com.diwaves.news.bean.FocusListBean
 import com.diwaves.news.mvp.ui.activity.ArticleDetailActivity
 import com.diwaves.news.mvp.ui.activity.PushTieActivity
@@ -72,7 +71,6 @@ class LookFragment : BaseFragment<LookPresenter>(), LookContract.View {
     }
 
     var adapter: LookAdapter = LookAdapter()
-    var recommendAdapter: RecommendAdapter = RecommendAdapter()
     var popupWindow: PopupWindow = PopupWindow()
     var tagList: MutableList<String> = arrayListOf()
     var view1: View? = null

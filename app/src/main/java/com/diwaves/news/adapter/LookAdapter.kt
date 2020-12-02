@@ -18,6 +18,7 @@ class LookAdapter : BaseQuickAdapter<FocusListBean.ResultDTO.RecordsDTO, BaseVie
 //        MyGlide.loadImage(context,item.user.avatarUrl,holder.getView(R.id.iv_head))
         if(null!=item?.audiopath?.toString()){
             MyGlide.loadImage(context,item.audiopath.toString(),holder.getView(R.id.iv_detail))
+
         }else{
             holder.setText(R.id.tv_title,item.title)
         }

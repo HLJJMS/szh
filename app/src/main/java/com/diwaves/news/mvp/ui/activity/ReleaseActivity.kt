@@ -282,6 +282,10 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 
     override fun success(bean: MutableList<BangdanBean.ResultEntity>) {
         bean.removeAt(bean.size - 1)
+        bean.removeAt(bean.size - 1)
+        bean.removeAt(bean.size - 1)
+        bean.removeAt(bean.size - 1)
+        bean.removeAt(0)
         adapter1.setList(bean)
     }
 

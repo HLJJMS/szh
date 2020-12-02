@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.TextUtils
 import androidx.core.content.FileProvider
 import androidx.core.os.EnvironmentCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,6 +33,9 @@ import kotlinx.android.synthetic.main.activity_reseales_photo.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import top.zibin.luban.CompressionPredicate
+import top.zibin.luban.Luban
+import top.zibin.luban.OnCompressListener
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -119,7 +123,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
             getPermissions(false)
         }
 
-        getPermissions(intent.getBooleanExtra("CAMERA",false))
+        getPermissions(intent.getBooleanExtra("CAMERA", false))
     }
 
     override fun postPhotoSuccess(url: String) {
@@ -148,14 +152,18 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
         finish()
     }
 
-    fun getPermissions(camear : Boolean) {
+    fun getPermissions(camear: Boolean) {
         val rxPermissions: RxPermissions = RxPermissions(this)
-        rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        rxPermissions.request(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
             .subscribe(Consumer<Boolean>() {
                 if (it) {
-                    if(camear){
+                    if (camear) {
                         openCamera()
-                    }else{
+                    } else {
                         getPhoto()
                     }
 
@@ -192,28 +200,16 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
             for (i in Matisse.obtainPathResult(data).indices) {
                 //解析文件
                 var file = File(Matisse.obtainPathResult(data)[i])
-                val builder: MultipartBody.Builder = MultipartBody.Builder()
-                builder.setType(MultipartBody.FORM)
-                var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
-                builder.addFormDataPart("file", file.name, requestBody)
-                mPresenter?.postImage(builder.build())
+                compress(Matisse.obtainPathResult(data)[i])
             }
-        }else if(requestCode == takePhotoCode && resultCode == RESULT_OK){
+        } else if (requestCode == takePhotoCode && resultCode == RESULT_OK) {
             if (isAndroidQ) {
                 // Android 10 使用图片uri加载
                 var file = File(mCameraUri.toString())
-                val builder: MultipartBody.Builder = MultipartBody.Builder()
-                builder.setType(MultipartBody.FORM)
-                var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
-                builder.addFormDataPart("file", file.name, requestBody)
-                mPresenter?.postImage(builder.build())
+                compress(mCameraUri.toString())
             } else {
                 var file = File(mCameraImagePath)
-                val builder: MultipartBody.Builder = MultipartBody.Builder()
-                builder.setType(MultipartBody.FORM)
-                var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
-                builder.addFormDataPart("file", file.name, requestBody)
-                mPresenter?.postImage(builder.build())
+                compress(mCameraImagePath.toString())
             }
         }
     }
@@ -296,4 +292,36 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
         } else tempFile
     }
 
+    fun compress(url: String) {
+        Luban.with(this)
+            .load(url)
+            .ignoreBy(100)
+            .setTargetDir(
+                getPackageCodePath()
+            )
+            .filter(object : OnCompressListener, CompressionPredicate {
+                override fun onSuccess(file: File?) {
+                    val builder: MultipartBody.Builder = MultipartBody.Builder()
+                    builder.setType(MultipartBody.FORM)
+                    var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+                    builder.addFormDataPart("file", file?.name, requestBody)
+                    mPresenter?.postImage(builder.build())
+                }
+
+                override fun onError(e: Throwable?) {
+
+                }
+
+                override fun onStart() {
+
+                }
+
+                override fun apply(path: String?): Boolean {
+                    return !(TextUtils.isEmpty(path) || path?.toLowerCase()!!.endsWith(".gif"));
+                }
+
+            })
+    }
 }
+
+

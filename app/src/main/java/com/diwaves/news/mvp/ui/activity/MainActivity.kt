@@ -21,6 +21,7 @@ import com.diwaves.news.bean.TabEntity
 import com.diwaves.news.di.component.DaggerMainComponent
 import com.diwaves.news.di.module.MainModule
 import com.diwaves.news.eventbus.MainEvent
+import com.diwaves.news.eventbus.ResealesEvent
 import com.diwaves.news.mvp.contract.MainContract
 import com.diwaves.news.mvp.presenter.MainPresenter
 import com.diwaves.news.mvp.ui.fragment.HomeFragment
@@ -267,6 +268,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
         }
 
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public fun onMessageEvent(event: ResealesEvent?) {/* Do something */
+        homeFragment.showPage2()
+    }
+
 
     override fun onStart() {
         super.onStart()

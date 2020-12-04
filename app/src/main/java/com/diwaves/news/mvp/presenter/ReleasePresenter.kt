@@ -2,6 +2,7 @@ package com.diwaves.news.mvp.presenter
 
 import android.app.Application
 import com.diwaves.news.bean.BangdanBean
+import com.diwaves.news.eventbus.MainEvent
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.ActivityScope
@@ -18,6 +19,7 @@ import com.diwaves.news.tools.MyToast
 import com.diwaves.news.tools.SPToll
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
 import okhttp3.RequestBody
+import org.greenrobot.eventbus.EventBus
 
 
 /**
@@ -89,6 +91,7 @@ constructor(model: ReleaseContract.Model, rootView: ReleaseContract.View) :
                 ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
                 override fun onNext(t: BaseBean.BaseResponse<String>) {
                     if (t.code.equals("200")) {
+                        EventBus.getDefault().post(MainEvent(true));
                         mRootView.killMyself()
                     }
                     MyToast().makeToast(mApplication, t.message)

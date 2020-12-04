@@ -142,6 +142,10 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         }
     }
 
+    fun showPage2(){
+        viewpager.currentItem = 2
+    }
+
 
      fun shuaixnData(){
         recommendFragment.getData()

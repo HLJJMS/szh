@@ -627,4 +627,5 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         window.attributes = lp
         popupShenheWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0)
     }
+
 }

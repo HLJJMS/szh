@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
-import androidx.core.content.FileProvider
 import androidx.core.os.EnvironmentCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.diwaves.news.R
@@ -33,6 +32,7 @@ import kotlinx.android.synthetic.main.activity_reseales_photo.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import pl.aprilapps.easyphotopicker.*
 import top.zibin.luban.CompressionPredicate
 import top.zibin.luban.Luban
 import top.zibin.luban.OnCompressListener
@@ -73,7 +73,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
     val photoCode = 1001
     val takePhotoCode = 1002
     var list: MutableList<String> = arrayListOf()
-
+    var easyImage: EasyImage?=null
     //用于保存拍照图片的uri
     private var mCameraUri: Uri? = null
 
@@ -123,6 +123,13 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
             getPermissions(false)
         }
 
+        easyImage = EasyImage.Builder(this)
+            .setChooserTitle("Pick media")
+            .setCopyImagesToPublicGalleryFolder(false) //                .setChooserType(ChooserType.CAMERA_AND_DOCUMENTS)
+            .setChooserType(ChooserType.CAMERA_AND_GALLERY)
+            .setFolderName("EasyImage sample")
+            .allowMultiple(true)
+            .build()
         getPermissions(intent.getBooleanExtra("CAMERA", false))
     }
 
@@ -200,59 +207,93 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
             for (i in Matisse.obtainPathResult(data).indices) {
                 //解析文件
                 var file = File(Matisse.obtainPathResult(data)[i])
-                compress(Matisse.obtainPathResult(data)[i])
+                compress(file)
             }
-        } else if (requestCode == takePhotoCode && resultCode == RESULT_OK) {
-            if (isAndroidQ) {
-                // Android 10 使用图片uri加载
-                var file = File(mCameraUri.toString())
-                compress(mCameraUri.toString())
-            } else {
-                var file = File(mCameraImagePath)
-                compress(mCameraImagePath.toString())
-            }
+        }else{
+            easyImage?.handleActivityResult(
+                requestCode,
+                resultCode,
+                data,
+                this,
+                object : DefaultCallback() {
+                    override fun onMediaFilesPicked(
+                        imageFiles: Array<MediaFile>,
+                        source: MediaSource
+                    ) {
+
+                        compress(imageFiles.get(0).file)
+                    }
+
+                    override fun onImagePickerError(
+                        error: Throwable,
+                        source: MediaSource
+                    ) {
+                        //Some error handling
+                        error.printStackTrace()
+                    }
+
+                    override fun onCanceled(source: MediaSource) {
+                        //Not necessary to remove any files manually anymore
+                    }
+                })
         }
+
+
+
+
+
+//        else if (requestCode == takePhotoCode && resultCode == RESULT_OK) {
+//            if (isAndroidQ) {
+//                // Android 10 使用图片uri加载
+//                var file = File(mCameraUri.toString())
+//                compress(mCameraUri.toString())
+//            } else {
+//                var file = File(mCameraImagePath)
+//                compress(mCameraImagePath.toString())
+//            }
+//        }
     }
 
     /**
      * 调起相机拍照
      */
     private fun openCamera() {
-        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        // 判断是否有相机
-        if (captureIntent.resolveActivity(packageManager) != null) {
-            var photoFile: File? = null
-            var photoUri: Uri? = null
-            if (isAndroidQ) {
-                // 适配android 10
-                photoUri = createImageUri()
-            } else {
-                try {
-                    photoFile = createImageFile()
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-                if (photoFile != null) {
-                    mCameraImagePath = photoFile.absolutePath
-                    photoUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        //适配Android 7.0文件权限，通过FileProvider创建一个content类型的Uri
-                        FileProvider.getUriForFile(
-                            this,
-                            "com.diwaves.news.photo",
-                            photoFile
-                        )
-                    } else {
-                        Uri.fromFile(photoFile)
-                    }
-                }
-            }
-            mCameraUri = photoUri
-            if (photoUri != null) {
-                captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
-                captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-                startActivityForResult(captureIntent, takePhotoCode)
-            }
-        }
+//        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//        // 判断是否有相机
+//        if (captureIntent.resolveActivity(packageManager) != null) {
+//            var photoFile: File? = null
+//            var photoUri: Uri? = null
+//            if (isAndroidQ) {
+//                // 适配android 10
+//                photoUri = createImageUri()
+//            } else {
+//                try {
+//                    photoFile = createImageFile()
+//                } catch (e: IOException) {
+//                    e.printStackTrace()
+//                }
+//                if (photoFile != null) {
+//                    mCameraImagePath = photoFile.absolutePath
+//                    photoUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                        //适配Android 7.0文件权限，通过FileProvider创建一个content类型的Uri
+//                        FileProvider.getUriForFile(
+//                            this,
+//                            "com.diwaves.news.photo",
+//                            photoFile
+//                        )
+//                    } else {
+//                        Uri.fromFile(photoFile)
+//                    }
+//                }
+//            }
+//            mCameraUri = photoUri
+//            if (photoUri != null) {
+//                captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+//                captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+//                startActivityForResult(captureIntent, takePhotoCode)
+//            }
+//        }
+        easyImage?.openCameraForImage(this)
     }
 
     /**
@@ -292,14 +333,13 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
         } else tempFile
     }
 
-    fun compress(url: String) {
+    fun compress(file1:File) {
         Luban.with(this)
-            .load(url)
+            .load(file1)
             .ignoreBy(100)
-            .setTargetDir(
-                getPackageCodePath()
-            )
-            .filter(object : OnCompressListener, CompressionPredicate {
+            .setTargetDir(Environment.getExternalStorageDirectory().absolutePath)
+            .setFocusAlpha(false)
+            .setCompressListener(object : OnCompressListener, CompressionPredicate {
                 override fun onSuccess(file: File?) {
                     val builder: MultipartBody.Builder = MultipartBody.Builder()
                     builder.setType(MultipartBody.FORM)
@@ -322,6 +362,10 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
 
             })
     }
+
+
+
+
 }
 
 

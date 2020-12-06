@@ -456,27 +456,25 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_send"
         app:layout_constraintTop_toTopOf="@id/iv_send" />
 
-    <TextView
+    <ImageView
         android:id="@+id/tv_up"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="↑"
-        android:textSize="20dp"
+        android:src="@mipmap/ic_article_up"
         app:layout_constraintBottom_toBottomOf="@id/tv_tui"
         app:layout_constraintEnd_toStartOf="@id/tv_down"
         app:layout_constraintTop_toTopOf="@id/tv_tui" />
 
-    <TextView
+    <ImageView
         android:id="@+id/tv_down"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginEnd="30dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="↓"
-        android:textSize="20dp"
+        android:src="@mipmap/ic_article_down"
         app:layout_constraintBottom_toBottomOf="@id/tv_tui"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_tui" />

@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Log
 import androidx.core.os.EnvironmentCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.diwaves.news.R
@@ -33,7 +34,7 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import pl.aprilapps.easyphotopicker.*
-import top.zibin.luban.CompressionPredicate
+
 import top.zibin.luban.Luban
 import top.zibin.luban.OnCompressListener
 import java.io.File
@@ -338,8 +339,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
             .load(file1)
             .ignoreBy(100)
             .setTargetDir(Environment.getExternalStorageDirectory().absolutePath)
-            .setFocusAlpha(false)
-            .setCompressListener(object : OnCompressListener, CompressionPredicate {
+            .setCompressListener(object : OnCompressListener {
                 override fun onSuccess(file: File?) {
                     val builder: MultipartBody.Builder = MultipartBody.Builder()
                     builder.setType(MultipartBody.FORM)
@@ -349,18 +349,14 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
                 }
 
                 override fun onError(e: Throwable?) {
-
+                    Log.e("异常",e.toString())
                 }
 
                 override fun onStart() {
-
+                    Log.e("开始","开始")
                 }
 
-                override fun apply(path: String?): Boolean {
-                    return !(TextUtils.isEmpty(path) || path?.toLowerCase()!!.endsWith(".gif"));
-                }
-
-            })
+            }).launch();
     }
 
 

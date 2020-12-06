@@ -12,7 +12,7 @@
         android:gravity="center"
         android:paddingTop="10dp"
         android:paddingBottom="30dp"
-        android:text="发送图片贴"
+        android:text="发布图片贴"
         android:textColor="@color/color_5b5b5b"
         tools:ignore="MissingConstraints" />
 

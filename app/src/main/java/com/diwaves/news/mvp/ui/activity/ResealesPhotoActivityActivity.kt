@@ -356,7 +356,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
                     Log.e("开始","开始")
                 }
 
-            }).launch();k
+            }).launch();
     }
 
 

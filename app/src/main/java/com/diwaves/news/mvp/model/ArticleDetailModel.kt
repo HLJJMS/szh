@@ -3,6 +3,7 @@ package com.diwaves.news.mvp.model
 import android.app.Application
 import com.diwaves.news.bean.ArticleDetailBean
 import com.diwaves.news.bean.CommentBean
+import com.diwaves.news.bean.ShareBean
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
@@ -114,6 +115,10 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         articleid: String
     ): Observable<BaseBean.BaseResponse<String>> {
         return mRepositoryManager.obtainRetrofitService(HomeService::class.java).sorce(id, sorce,articleid)
+    }
+
+    override fun getShare(id: String): Observable<BaseBean.BaseResponse<ShareBean>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getShare(id)
     }
 
 

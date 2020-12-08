@@ -122,7 +122,7 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
             viewpager.currentItem = 2
         }
         iv_search.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            startActivity(Intent(context,SearchActivityActivity::class.java))
+            startActivity(Intent(context, SearchActivityActivity::class.java))
         }
     }
 
@@ -142,14 +142,15 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         }
     }
 
-    fun showPage2(){
+    fun showPage2() {
         viewpager.currentItem = 2
     }
 
 
-     fun shuaixnData(){
+    fun shuaixnData() {
         recommendFragment.getData()
     }
+
     /**
      * 通过此方法可以使 Fragment 能够与外界做一些交互和通信, 比如说外部的 Activity 想让自己持有的某个 Fragment 对象执行一些方法,
      * 建议在有多个需要与外界交互的方法时, 统一传 {@link Message}, 通过 what 字段来区分不同的方法, 在 {@link #setData(Object)}

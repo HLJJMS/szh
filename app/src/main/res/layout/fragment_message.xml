@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/color_white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_white">
 
     <TextView
         android:id="@+id/title"
@@ -124,15 +124,21 @@
         app:layout_constraintStart_toStartOf="@id/iv_add_friend"
         app:layout_constraintTop_toBottomOf="@id/iv_add_friend" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="40dp"
-        android:background="#77e9e9e9"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_system"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@id/iv_system">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#77e9e9e9"
+            tools:ignore="MissingConstraints" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,19 +1,35 @@
 package com.diwaves.news.wxapi;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-//我是做软件的   可能因为工作的原因吧   和人接触的少  有点直男   但是形象可没有网上说的那么邋遢憔悴
+import static com.diwaves.news.network.Api.APP_ID;
+
 
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        IWXAPI api = WXAPIFactory.createWXAPI(this,APP_ID);
+        api.handleIntent(getIntent(), this);
+    }
+
     @Override
     public void onReq(BaseReq baseReq) {
+
 
     }
 

@@ -72,7 +72,7 @@ class SettingActivity : BaseActivity<SettingPresenter>(), SettingContract.View {
             SPToll(this).setId("")
 
             startActivity(Intent(this, MainActivity::class.java))
-            EventBus.getDefault().post(MainEvent(false));
+            EventBus.getDefault().post(MainEvent(1));
         }
     }
 

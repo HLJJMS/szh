@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.diwaves.news.R
@@ -31,6 +33,8 @@ import kotlinx.android.synthetic.main.activity_release.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import top.zibin.luban.Luban
+import top.zibin.luban.OnCompressListener
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -142,7 +146,8 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
         adapter1.setOnItemClickListener { adapter, view, position ->
 //            adapter2.setList(adapter1.data.get(position).dirsList)
             tv_spnner.setText(adapter1.data.get(position).title)
-            dirId = adapter1.data.get(position).dirsList.get(adapter1.data.get(position).dirsList.size-1).id.toString()
+            dirId =
+                adapter1.data.get(position).dirsList.get(adapter1.data.get(position).dirsList.size - 1).id.toString()
             dirname = adapter1.data.get(position).title
             rv_1.visibility = View.GONE
         }
@@ -282,12 +287,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 
     override fun success(bean: MutableList<BangdanBean.ResultEntity>) {
 
-        bean.removeAt(0)
-        bean.removeAt(1)
-        bean.removeAt(bean.size - 1)
-        bean.removeAt(bean.size - 1)
-        bean.removeAt(bean.size - 1)
-        bean.removeAt(bean.size - 1)
+
         bean.removeAt(bean.size - 1)
         bean.removeAt(bean.size - 1)
         bean.removeAt(bean.size - 1)
@@ -355,14 +355,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
             for (i in Matisse.obtainPathResult(data).indices) {
                 //解析文件
                 file = File(Matisse.obtainPathResult(data)[i])
-                val builder: MultipartBody.Builder = MultipartBody.Builder()
-                builder.setType(MultipartBody.FORM)
-                var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
-                builder.addFormDataPart("file", file.name, requestBody)
-                if (null == loaddingView) {
-                    loaddingView = LoaddingView(this)
-                }
-                mPresenter?.postImage(builder.build())
+                compress(file)
             }
         }
     }
@@ -371,6 +364,33 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
         mPresenter?.postData(
             et_title.text.toString(), richEditText.html, dirId, dirname, type
         )
+    }
+
+
+    fun compress(file1: File) {
+        Luban.with(this)
+            .load(file1)
+            .ignoreBy(100)
+            .setTargetDir(Environment.getExternalStorageDirectory().absolutePath)
+            .setCompressListener(object : OnCompressListener {
+                override fun onSuccess(file: File?) {
+                    val builder: MultipartBody.Builder = MultipartBody.Builder()
+                    builder.setType(MultipartBody.FORM)
+                    var requestBody: RequestBody =
+                        RequestBody.create(MediaType.parse("image/*"), file)
+                    builder.addFormDataPart("file", file?.name, requestBody)
+                    mPresenter?.postImage(builder.build())
+                }
+
+                override fun onError(e: Throwable?) {
+                    Log.e("异常", e.toString())
+                }
+
+                override fun onStart() {
+                    Log.e("开始", "开始")
+                }
+
+            }).launch();
     }
 
 

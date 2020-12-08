@@ -205,10 +205,18 @@ public class FocusListBean {
              * memberEndTime : null
              * isMember : 0
              */
-
+            private String pushcount;
             private UserDTO user;
             private int view;
             private Object alreadyPushcount;
+
+            public String getPushcount() {
+                return pushcount;
+            }
+
+            public void setPushcount(String pushcount) {
+                this.pushcount = pushcount;
+            }
 
             public int getId() {
                 return id;

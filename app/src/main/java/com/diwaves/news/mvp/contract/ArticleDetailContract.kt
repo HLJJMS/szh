@@ -2,6 +2,7 @@ package com.diwaves.news.mvp.contract
 
 import com.diwaves.news.bean.ArticleDetailBean
 import com.diwaves.news.bean.CommentBean
+import com.diwaves.news.bean.ShareBean
 import com.diwaves.news.network.bean.BaseBean
 import com.jess.arms.mvp.IView
 import com.jess.arms.mvp.IModel
@@ -31,7 +32,8 @@ interface ArticleDetailContract {
         fun getCommentListFail()
         fun getCommentListSuccess(bean: MutableList<CommentBean.ResultBean.RecordsBean>)
         fun pingbiSuccess()
-        fun getSorce(fen: String,position: String)
+        fun getSorce(fen: String, position: String)
+        fun shareSuccess(bean: ShareBean, firend: Boolean)
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
@@ -74,5 +76,9 @@ interface ArticleDetailContract {
             sorce: String,
             articleid: String
         ): Observable<BaseBean.BaseResponse<String>>
+
+        fun getShare(
+            id: String
+        ): Observable<BaseBean.BaseResponse<ShareBean>>
     }
 }

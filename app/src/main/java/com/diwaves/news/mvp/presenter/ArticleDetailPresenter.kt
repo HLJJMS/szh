@@ -3,6 +3,7 @@ package com.diwaves.news.mvp.presenter
 import android.app.Application
 import com.diwaves.news.bean.ArticleDetailBean
 import com.diwaves.news.bean.CommentBean
+import com.diwaves.news.bean.ShareBean
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.ActivityScope
@@ -187,8 +188,23 @@ constructor(model: ArticleDetailContract.Model, rootView: ArticleDetailContract.
                 ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
                 override fun onNext(t: BaseBean.BaseResponse<String>) {
                     if (t.code.equals(Api.SUCCESS)) {
-                        mRootView.getSorce(t.message,sorce)
-                    }else{
+                        mRootView.getSorce(t.message, sorce)
+                    } else {
+                        MyToast().makeToast(mApplication, t.message)
+                    }
+                }
+            })
+    }
+
+    fun getShare(articleid: String, firend : Boolean) {
+        mModel.getShare(articleid)
+            .compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<ShareBean>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<ShareBean>) {
+                    if (t.code.equals(Api.SUCCESS)) {
+                        t.result?.let { mRootView.shareSuccess(it,firend) }
+                    } else {
                         MyToast().makeToast(mApplication, t.message)
                     }
                 }

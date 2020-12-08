@@ -117,7 +117,7 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
     }
 
     override fun loginSuccess() {
-        EventBus.getDefault().post(MainEvent(true));
+        EventBus.getDefault().post(MainEvent(0));
         startActivity(Intent(this, MainActivity::class.java))
     }
 

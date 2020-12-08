@@ -67,8 +67,10 @@ constructor(
                 override fun onNext(t: BaseBean.BaseResponse<String>) {
                     if (t.code.equals("200")) {
                         mRootView.postPhotoSuccess(t.message)
+                    }else{
+                        MyToast().makeToast(mApplication, t.message)
                     }
-                    MyToast().makeToast(mApplication, t.message)
+
                 }
             })
     }
@@ -84,7 +86,7 @@ constructor(
                 ErrorHandleSubscriber<BaseBean.BaseResponse<Any>>(mErrorHandler) {
                 override fun onNext(t: BaseBean.BaseResponse<Any>) {
                     if (t.code.equals("200")) {
-                        EventBus.getDefault().post(MainEvent(true));
+                        EventBus.getDefault().post(MainEvent(2));
                         mRootView.killMyself()
                     }
                     MyToast().makeToast(mApplication, t.message)

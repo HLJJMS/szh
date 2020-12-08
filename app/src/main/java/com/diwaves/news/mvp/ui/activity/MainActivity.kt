@@ -11,7 +11,6 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -21,7 +20,6 @@ import com.diwaves.news.bean.TabEntity
 import com.diwaves.news.di.component.DaggerMainComponent
 import com.diwaves.news.di.module.MainModule
 import com.diwaves.news.eventbus.MainEvent
-import com.diwaves.news.eventbus.ResealesEvent
 import com.diwaves.news.mvp.contract.MainContract
 import com.diwaves.news.mvp.presenter.MainPresenter
 import com.diwaves.news.mvp.ui.fragment.HomeFragment
@@ -258,21 +256,19 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public fun onMessageEvent(event: MainEvent?) {/* Do something */
-        if (event!!.isLogin) {
+        if (event!!.type==0) {
             walletFragment.getData()
             myFragment.getData()
             homeFragment.shuaixnData()
-        } else {
+        } else if(event!!.type==1){
             myFragment.clearData()
             walletFragment.getData()
+        }else if(event!!.type==2){
+            homeFragment.showPage2()
         }
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public fun onMessageEvent(event: ResealesEvent?) {/* Do something */
-        homeFragment.showPage2()
-    }
 
 
     override fun onStart() {

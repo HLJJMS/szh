@@ -1,5 +1,7 @@
 package com.diwaves.news.adapter
 
+import android.view.View
+import android.widget.ImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.diwaves.news.R
@@ -14,12 +16,14 @@ class LookAdapter : BaseQuickAdapter<FocusListBean.ResultDTO.RecordsDTO, BaseVie
         holder.setText(R.id.tv_name,item.user.name)
         holder.setText(R.id.tv_time,item.createdate)
         holder.setText(R.id.tv_read,item.view.toString() + "阅读")
-        holder.setText(R.id.tv_comment,item.view.toString() + "推荐")
+        holder.setText(R.id.tv_comment,item.push.toString() + "推荐")
+        var img = holder.getView(R.id.iv_detail) as ImageView
 //        MyGlide.loadImage(context,item.user.avatarUrl,holder.getView(R.id.iv_head))
         if(null!=item?.audiopath?.toString()){
             MyGlide.loadImage(context,item.audiopath.toString(),holder.getView(R.id.iv_detail))
-
+            img.visibility = View.VISIBLE
         }else{
+            img.visibility  = View.GONE
             holder.setText(R.id.tv_title,item.title)
         }
         holder.setText(R.id.rb_detail,item.dirname)

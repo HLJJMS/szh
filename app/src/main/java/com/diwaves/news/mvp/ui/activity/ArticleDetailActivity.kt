@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.Toast.makeText
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -25,10 +27,12 @@ import com.diwaves.news.adapter.CommentAdapter
 import com.diwaves.news.adapter.PopRadioAdapter
 import com.diwaves.news.bean.ArticleDetailBean
 import com.diwaves.news.bean.CommentBean
+import com.diwaves.news.bean.ShareBean
 import com.diwaves.news.di.component.DaggerArticleDetailComponent
 import com.diwaves.news.di.module.ArticleDetailModule
 import com.diwaves.news.mvp.contract.ArticleDetailContract
 import com.diwaves.news.mvp.presenter.ArticleDetailPresenter
+import com.diwaves.news.network.Api.APP_ID
 import com.diwaves.news.tools.MyGlide
 import com.diwaves.news.tools.MyToast
 import com.diwaves.news.tools.SoftKeyBoardListener
@@ -36,18 +40,20 @@ import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
+import com.jess.arms.utils.ArmsUtils.makeText
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
 import com.tbruyelle.rxpermissions2.RxPermissions
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage
+import com.tencent.mm.opensdk.modelmsg.WXWebpageObject
+import com.tencent.mm.opensdk.openapi.IWXAPI
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_article_detail.*
-import kotlinx.android.synthetic.main.activity_article_detail.tv_hot
-import kotlinx.android.synthetic.main.activity_article_detail.tv_new
-import kotlinx.android.synthetic.main.activity_article_detail.tv_title
-import kotlinx.android.synthetic.main.activity_rmb_maket_main.*
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -174,9 +180,6 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3976806040,3211395236&fm=11&gp=0.jpg",
             iv_head
         )
-        for (index in 0..arr.size) {
-
-        }
         tv_off.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             collection = Math.abs(collection - 1)
             mPresenter?.cllection(intent.getStringExtra("id"), collection.toString())
@@ -218,6 +221,12 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 //            intent.putExtra("title", bean.articles.title)
 //            startActivity(intent)
 //        }
+        tv_wx.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            mPresenter?.getShare(bean.articles.id.toString(),true)
+        }
+        tv_pyq.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            mPresenter?.getShare(bean.articles.id.toString(),false)
+        }
         iv_close.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             showListDialog()
         }
@@ -232,6 +241,10 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         setShenHePopWindow()
         if (null == bean.articles.link || bean.articles.link.equals("")) {
             tv_detail.visibility = View.GONE
+            if(null!=bean.articles.audiopath&&!bean.articles.audiopath.equals("")){
+                MyGlide.loadImage(this,bean.articles.audiopath,iv_img_detail)
+                wb_introduction.visibility=View.GONE
+            }
         } else {
             tv_detail.visibility = View.VISIBLE
         }
@@ -363,6 +376,43 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         }
 
 
+    }
+
+    override fun shareSuccess(bean: ShareBean , firend : Boolean) {
+        // 通过appId得到IWXAPI这个对象
+        val wxapi: IWXAPI = WXAPIFactory.createWXAPI(this, APP_ID)
+        // 检查手机或者模拟器是否安装了微信
+        if (!wxapi.isWXAppInstalled()) {
+            MyToast().makeToast(this,"您还没有安装微信")
+            return
+        }
+        // 初始化一个WXWebpageObject对象
+        val webpageObject = WXWebpageObject()
+        // 填写网页的url
+        webpageObject.webpageUrl = bean.url
+        // 用WXWebpageObject对象初始化一个WXMediaMessage对象
+        val msg = WXMediaMessage(webpageObject)
+        // 填写网页标题、描述、位图
+        msg.title = bean.title
+        msg.description = bean.detail
+        // 如果没有位图，可以传null，会显示默认的图片
+        var bitmap= BitmapFactory.decodeFile(bean.pic);
+        msg.setThumbImage(bitmap)
+        // 构造一个Req
+        val req = SendMessageToWX.Req()
+        // transaction用于唯一标识一个请求（可自定义）
+        req.transaction = "webpage"
+        // 上文的WXMediaMessage对象
+        req.message = msg
+        // SendMessageToWX.Req.WXSceneSession是分享到好友会话
+        // SendMessageToWX.Req.WXSceneTimeline是分享到朋友圈
+        if(firend){
+            req.scene = SendMessageToWX.Req.WXSceneSession
+        }else{
+            req.scene = SendMessageToWX.Req.WXSceneTimeline
+        }
+        // 向微信发送请求
+        wxapi.sendReq(req)
     }
 
 

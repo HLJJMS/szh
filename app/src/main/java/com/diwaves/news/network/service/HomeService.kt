@@ -169,4 +169,11 @@ interface HomeService {
         @Field("score") score: String,
         @Field("articleid") articleid: String
     ): Observable<BaseBean.BaseResponse<String>>
+
+    //分享
+    @FormUrlEncoded
+    @POST(Api.SHARE_MESSAGE)
+    fun getShare(
+        @Field("articleid") id: String
+    ): Observable<BaseBean.BaseResponse<ShareBean>>
 }

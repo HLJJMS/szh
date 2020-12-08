@@ -23,6 +23,8 @@ import com.diwaves.news.bean.MessageBean
 import com.diwaves.news.mvp.ui.activity.*
 import com.jakewharton.rxbinding3.view.clicks
 import kotlinx.android.synthetic.main.fragment_message.*
+import kotlinx.android.synthetic.main.fragment_message.swipeLayout
+import kotlinx.android.synthetic.main.fragment_recommend.*
 import java.util.concurrent.TimeUnit
 
 
@@ -102,7 +104,10 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
         }
         recyclerview.layoutManager = LinearLayoutManager(context)
         recyclerview.adapter = adapter
+        swipeLayout.setOnRefreshListener {
+            mPresenter?.getData()
 
+        }
     }
 
     /**
@@ -146,6 +151,7 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
     }
 
     override fun getDataSuccess(bean: MutableList<MessageBean.ResultEntity>) {
+        swipeLayout.isRefreshing=false
         adapter?.setList(bean)
     }
 

@@ -159,5 +159,7 @@ object Api {
     //发布图片
     const val RELEASE_IMG = "app/image"
 
+    //分享
+    const val SHARE_MESSAGE = "share/article"
 
 }

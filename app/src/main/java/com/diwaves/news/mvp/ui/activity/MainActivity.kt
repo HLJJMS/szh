@@ -265,6 +265,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             walletFragment.getData()
         }else if(event!!.type==2){
             homeFragment.showPage2()
+            popupWindowSelectPhoto?.dismiss()
+            popupWindow?.dismiss()
+
         }
 
     }

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         app:center_txt="写帖子"
         app:end_img="@mipmap/ic_send"
-        app:end_txt="发布"
+        app:end_txt="发 布"
         app:star_txt="存草稿"
         app:start_txt_color="#017BD0" />
 

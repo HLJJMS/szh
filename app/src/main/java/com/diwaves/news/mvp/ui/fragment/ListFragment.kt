@@ -78,7 +78,7 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        recycler_v.layoutManager = GridLayoutManager(context, 5)
+        recycler_v.layoutManager = GridLayoutManager(context, 3)
         recycler_g.layoutManager = GridLayoutManager(context, 5)
         recycler_g.adapter = bangdanAdapter
         recycler_v.adapter = caiJingAdapter

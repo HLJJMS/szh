@@ -114,12 +114,21 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         })
         tv_tuijian.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             viewpager.currentItem = 0
+            v_tuijian.visibility = View.VISIBLE
+            v_bangdan.visibility = View.GONE
+            v_guanzhu.visibility = View.GONE
         }
         tv_bangdan.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             viewpager.currentItem = 1
+            v_tuijian.visibility = View.GONE
+            v_bangdan.visibility = View.VISIBLE
+            v_guanzhu.visibility = View.GONE
         }
         tv_guanzhu.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             viewpager.currentItem = 2
+            v_tuijian.visibility = View.GONE
+            v_bangdan.visibility = View.GONE
+            v_guanzhu.visibility = View.VISIBLE
         }
         iv_search.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             startActivity(Intent(context, SearchActivityActivity::class.java))
@@ -131,19 +140,31 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
             tv_tuijian.setTextColor(ContextCompat.getColor(mContext, R.color.black))
             tv_bangdan.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
             tv_guanzhu.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
+            v_tuijian.visibility = View.VISIBLE
+            v_bangdan.visibility = View.GONE
+            v_guanzhu.visibility = View.GONE
         } else if (number == 1) {
             tv_tuijian.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
             tv_bangdan.setTextColor(ContextCompat.getColor(mContext, R.color.black))
             tv_guanzhu.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
+            v_tuijian.visibility = View.GONE
+            v_bangdan.visibility = View.VISIBLE
+            v_guanzhu.visibility = View.GONE
         } else {
             tv_tuijian.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
             tv_bangdan.setTextColor(ContextCompat.getColor(mContext, R.color.color_959595))
             tv_guanzhu.setTextColor(ContextCompat.getColor(mContext, R.color.black))
+            v_tuijian.visibility = View.GONE
+            v_bangdan.visibility = View.GONE
+            v_guanzhu.visibility = View.VISIBLE
         }
     }
 
     fun showPage2() {
         viewpager.currentItem = 2
+        v_tuijian.visibility = View.GONE
+        v_bangdan.visibility = View.VISIBLE
+        v_guanzhu.visibility = View.GONE
     }
 
 

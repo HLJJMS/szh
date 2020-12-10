@@ -145,7 +145,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
             }
         adapter1.setOnItemClickListener { adapter, view, position ->
 //            adapter2.setList(adapter1.data.get(position).dirsList)
-            tv_spnner.setText(adapter1.data.get(position).title)
+            tv_spnner.setText(adapter1.data.get(position).title+"/原创")
             dirId =
                 adapter1.data.get(position).dirsList.get(adapter1.data.get(position).dirsList.size - 1).id.toString()
             dirname = adapter1.data.get(position).title
@@ -362,7 +362,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 
     fun postdata(type: String) {
         mPresenter?.postData(
-            et_title.text.toString(), richEditText.html, dirId, dirname, type
+            et_title.text.toString(), richEditText.html, dirId, dirname+"/原创", type
         )
     }
 

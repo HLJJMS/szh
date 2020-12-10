@@ -135,7 +135,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     override fun getDataSuccess(bean: ArticleDetailBean.ResultBean) {
         titleBar.setCenterText(bean.articles.dirname + ">")
         tv_look.setText(bean.articles.view.toString() + "阅读")
-        tv_title.setText(bean.articles.title)
+
         like = bean.like
         collection = bean.collection
         tv_fen.text = bean.articles.pushcount + "次推荐"
@@ -163,8 +163,10 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 intent.putExtra("id", bean.articles.id.toString())
                 if (null != bean?.articles?.pic) {
                     intent.putExtra("img", bean?.articles?.pic?.toString())
+                    tv_title.setText(bean.articles.contenttext)
                 } else {
                     intent.putExtra("img", "")
+                    tv_title.setText(bean.articles.title)
                 }
                 intent.putExtra("title", bean.articles.title)
                 startActivity(intent)

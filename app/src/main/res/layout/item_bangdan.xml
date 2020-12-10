@@ -15,7 +15,7 @@
         android:paddingBottom="11dp"
         android:text=""
         android:textColor="#ff5b5b5b"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:qmui_backgroundColor="#FAFAFA"
         app:qmui_borderWidth="0dp"
         app:qmui_radius="3dp" />

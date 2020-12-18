@@ -98,7 +98,7 @@ public class FocusListBean {
          * alreadyPushcount : null
          */
 
-        private List<RecordsDTO> records;
+        private List<RecordsDTO> list;
         private List<?> orders;
 
         public int getTotal() {
@@ -142,11 +142,11 @@ public class FocusListBean {
         }
 
         public List<RecordsDTO> getRecords() {
-            return records;
+            return list;
         }
 
-        public void setRecords(List<RecordsDTO> records) {
-            this.records = records;
+        public void setRecords(List<RecordsDTO> list) {
+            this.list = list;
         }
 
         public List<?> getOrders() {
@@ -166,7 +166,7 @@ public class FocusListBean {
             private String createdate;
             private String dirname;
             private Object pushid;
-            private Object content;
+            private String content;
             private String reward;
             private int push;
             private Object pushPojo;
@@ -282,11 +282,11 @@ public class FocusListBean {
                 this.pushid = pushid;
             }
 
-            public Object getContent() {
+            public String getContent() {
                 return content;
             }
 
-            public void setContent(Object content) {
+            public void setContent(String content) {
                 this.content = content;
             }
 

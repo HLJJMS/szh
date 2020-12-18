@@ -38,7 +38,7 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
     @Inject
     lateinit var mApplication: Application;
     override fun getData(id: String): Observable<FocusListBean> {
-        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getMyList(id)
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getMyList(id,"1","100")
     }
 
     override fun onDestroy() {

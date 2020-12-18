@@ -99,6 +99,7 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
     override fun initData(savedInstanceState: Bundle?) {
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = recommendAdapter
+        swipeLayout.isRefreshing=true
         mPresenter?.getData()
         mPresenter?.getStockData()
         recommendAdapter.setOnItemClickListener { adapter, view, position ->
@@ -176,12 +177,13 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
     }
 
     override fun success(list: MutableList<RecommendBean.ResultEntity>) {
+        swipeLayout.isRefreshing=false
         recommendAdapter.setList(list)
         setPopWindow()
     }
 
     override fun StockSuccess(bean: StockBean.ResultEntity) {
-        swipeLayout.isRefreshing=false
+
         tv_one.setText(bean.map1.name)
         tv_two.setText(bean.map2.name)
         tv_three.setText(bean.map3.name)

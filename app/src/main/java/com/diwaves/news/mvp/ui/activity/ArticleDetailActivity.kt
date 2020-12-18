@@ -11,18 +11,21 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.PopupWindow
-import android.widget.Toast.makeText
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diwaves.news.R
+import com.diwaves.news.adapter.ArticleDetailPhotoAdapter
 import com.diwaves.news.adapter.CommentAdapter
 import com.diwaves.news.adapter.PopRadioAdapter
 import com.diwaves.news.bean.ArticleDetailBean
@@ -40,7 +43,6 @@ import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
-import com.jess.arms.utils.ArmsUtils.makeText
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
@@ -103,6 +105,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     var popupShenheWindow: PopupWindow = PopupWindow()
     var adapter: CommentAdapter = CommentAdapter()
     var tagList: MutableList<String> = arrayListOf()
+    var imgAdapter: ArticleDetailPhotoAdapter = ArticleDetailPhotoAdapter()
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerArticleDetailComponent //如找不到该类,请编译一下项目
             .builder()
@@ -135,7 +138,6 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     override fun getDataSuccess(bean: ArticleDetailBean.ResultBean) {
         titleBar.setCenterText(bean.articles.dirname + ">")
         tv_look.setText(bean.articles.view.toString() + "阅读")
-
         like = bean.like
         collection = bean.collection
         tv_fen.text = bean.articles.pushcount + "次推荐"
@@ -163,10 +165,10 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
                 intent.putExtra("id", bean.articles.id.toString())
                 if (null != bean?.articles?.pic) {
                     intent.putExtra("img", bean?.articles?.pic?.toString())
-                    tv_title.setText(bean.articles.contenttext)
+//                    tv_title.setText(bean.articles.contenttext)
                 } else {
                     intent.putExtra("img", "")
-                    tv_title.setText(bean.articles.title)
+//                    tv_title.setText(bean.articles.title)
                 }
                 intent.putExtra("title", bean.articles.title)
                 startActivity(intent)
@@ -224,10 +226,10 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 //            startActivity(intent)
 //        }
         tv_wx.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            mPresenter?.getShare(bean.articles.id.toString(),true)
+            mPresenter?.getShare(bean.articles.id.toString(), true)
         }
         tv_pyq.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            mPresenter?.getShare(bean.articles.id.toString(),false)
+            mPresenter?.getShare(bean.articles.id.toString(), false)
         }
         iv_close.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             showListDialog()
@@ -243,9 +245,13 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         setShenHePopWindow()
         if (null == bean.articles.link || bean.articles.link.equals("")) {
             tv_detail.visibility = View.GONE
-            if(null!=bean.articles.audiopath&&!bean.articles.audiopath.equals("")){
-                MyGlide.loadImage(this,bean.articles.audiopath,iv_img_detail)
-                wb_introduction.visibility=View.GONE
+            if (null != bean.articles.audiopath && !bean.articles.audiopath.equals("")) {
+                val parts: MutableList<String> = bean.articles.audiopath.split(",").toMutableList()
+                rv_img.layoutManager= GridLayoutManager(this, 3)
+                rv_img.adapter = imgAdapter
+                imgAdapter.setList(parts)
+                tv_detailtitle.setText(bean.articles.contenttext)
+                wb_introduction.visibility = View.GONE
             }
         } else {
             tv_detail.visibility = View.VISIBLE
@@ -280,6 +286,15 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         tv_up.setOnClickListener {
             sl.fullScroll(0);
         }
+        if (bean.articles.dirname.contains("原创")) {
+
+            val params: LinearLayout.LayoutParams =
+                LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            wb_introduction.layoutParams = params
+        }
+
         val webSettings: WebSettings = wb_introduction.getSettings()
         webSettings.setDisplayZoomControls(false) //隐藏webview缩放按钮
 
@@ -296,6 +311,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             "UTF-8",
             null
         );
+        wb_introduction.setHorizontalScrollBarEnabled(false);
         tv_hot.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             tv_hot.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
             tv_new.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
@@ -380,12 +396,12 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
 
     }
 
-    override fun shareSuccess(bean: ShareBean , firend : Boolean) {
+    override fun shareSuccess(bean: ShareBean, firend: Boolean) {
         // 通过appId得到IWXAPI这个对象
         val wxapi: IWXAPI = WXAPIFactory.createWXAPI(this, APP_ID)
         // 检查手机或者模拟器是否安装了微信
         if (!wxapi.isWXAppInstalled()) {
-            MyToast().makeToast(this,"您还没有安装微信")
+            MyToast().makeToast(this, "您还没有安装微信")
             return
         }
         // 初始化一个WXWebpageObject对象
@@ -398,7 +414,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         msg.title = bean.title
         msg.description = bean.detail
         // 如果没有位图，可以传null，会显示默认的图片
-        var bitmap= BitmapFactory.decodeFile(bean.pic);
+        var bitmap = BitmapFactory.decodeFile(bean.pic);
         msg.setThumbImage(bitmap)
         // 构造一个Req
         val req = SendMessageToWX.Req()
@@ -408,9 +424,9 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         req.message = msg
         // SendMessageToWX.Req.WXSceneSession是分享到好友会话
         // SendMessageToWX.Req.WXSceneTimeline是分享到朋友圈
-        if(firend){
+        if (firend) {
             req.scene = SendMessageToWX.Req.WXSceneSession
-        }else{
+        } else {
             req.scene = SendMessageToWX.Req.WXSceneTimeline
         }
         // 向微信发送请求

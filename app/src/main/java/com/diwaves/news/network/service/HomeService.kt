@@ -51,7 +51,9 @@ interface HomeService {
     @FormUrlEncoded
     @POST(Api.INDEX_LIST)
     fun getMyList(
-        @Field("userid") id: String
+        @Field("userid") id: String,
+        @Field("page") page: String,
+        @Field("size") size: String
     ): Observable<FocusListBean>
 
 

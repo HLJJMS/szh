@@ -15,15 +15,16 @@ import android.view.ViewGroup
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.diwaves.news.R
 import com.diwaves.news.adapter.ArticleDetailPhotoAdapter
 import com.diwaves.news.adapter.CommentAdapter
@@ -106,6 +107,9 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
     var adapter: CommentAdapter = CommentAdapter()
     var tagList: MutableList<String> = arrayListOf()
     var imgAdapter: ArticleDetailPhotoAdapter = ArticleDetailPhotoAdapter()
+    var popwindow: PopupWindow? = null
+    var viewimg: View? = null
+    var imgview : ImageView ? =null
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerArticleDetailComponent //如找不到该类,请编译一下项目
             .builder()
@@ -242,6 +246,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         mPresenter?.getComment(intent.getStringExtra("id"), page, type)
         initLoadMore()
         setPopWindow()
+        setImgPopwindow()
         setShenHePopWindow()
         if (null == bean.articles.link || bean.articles.link.equals("")) {
             tv_detail.visibility = View.GONE
@@ -255,6 +260,9 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
             }
         } else {
             tv_detail.visibility = View.VISIBLE
+        }
+        imgAdapter.setOnItemClickListener { adapter, view, position ->
+            showImgPopWindow(imgAdapter.data.get(position))
         }
 
         rb_1.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
@@ -694,6 +702,39 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailPresenter>(), ArticleDet
         lp.alpha = 0.5f
         window.attributes = lp
         popupShenheWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0)
+    }
+
+
+
+    private fun setImgPopwindow() {
+
+        popwindow = PopupWindow()
+        viewimg = LayoutInflater.from(this).inflate(R.layout.dialog_img, null)
+        popwindow!!.setContentView(viewimg)
+        popwindow!!.setWidth(LinearLayout.LayoutParams.MATCH_PARENT)
+        popwindow!!.setHeight(LinearLayout.LayoutParams.MATCH_PARENT)
+        popwindow!!.setOutsideTouchable(true)
+        popwindow!!.setFocusable(true) //点击返回键取消
+        popwindow!!.setBackgroundDrawable(BitmapDrawable())
+        imgview = viewimg!!.findViewById<ImageView>(R.id.img)
+
+        imgview!!.setOnClickListener(View.OnClickListener {
+            popwindow!!.dismiss()
+        })
+        popwindow!!.setOnDismissListener(PopupWindow.OnDismissListener {
+            val lp = window.attributes
+            lp.alpha = 1f
+            window.attributes = lp
+        })
+    }
+
+
+    private fun showImgPopWindow(url: String) {
+        imgview?.let { Glide.with(this).load(url).into(it) }
+        val lp = window.attributes
+        lp.alpha = 0.5f
+        window.attributes = lp
+        popwindow!!.showAtLocation(window.decorView, Gravity.CENTER, 0, 0)
     }
 
 }

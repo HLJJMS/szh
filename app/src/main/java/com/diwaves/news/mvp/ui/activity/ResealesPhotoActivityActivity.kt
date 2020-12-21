@@ -74,7 +74,8 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
     val photoCode = 1001
     val takePhotoCode = 1002
     var list: MutableList<String> = arrayListOf()
-    var easyImage: EasyImage?=null
+    var easyImage: EasyImage? = null
+
     //用于保存拍照图片的uri
     private var mCameraUri: Uri? = null
 
@@ -107,7 +108,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
         titleBar.setEndTextClick {
             var urlArry = ""
             for (index in 0 until list.size - 1) {
-                urlArry = list.get(index) + ","
+                urlArry = urlArry + list.get(index) + ","
             }
             mPresenter?.postArticle(
                 urlArry.substring(0, urlArry.length - 1),
@@ -210,7 +211,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
                 var file = File(Matisse.obtainPathResult(data)[i])
                 compress(file)
             }
-        }else{
+        } else {
             easyImage?.handleActivityResult(
                 requestCode,
                 resultCode,
@@ -238,9 +239,6 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
                     }
                 })
         }
-
-
-
 
 
 //        else if (requestCode == takePhotoCode && resultCode == RESULT_OK) {
@@ -334,7 +332,7 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
         } else tempFile
     }
 
-    fun compress(file1:File) {
+    fun compress(file1: File) {
         Luban.with(this)
             .load(file1)
             .ignoreBy(100)
@@ -343,23 +341,22 @@ class ResealesPhotoActivityActivity : BaseActivity<ResealesPhotoActivityPresente
                 override fun onSuccess(file: File?) {
                     val builder: MultipartBody.Builder = MultipartBody.Builder()
                     builder.setType(MultipartBody.FORM)
-                    var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+                    var requestBody: RequestBody =
+                        RequestBody.create(MediaType.parse("image/*"), file)
                     builder.addFormDataPart("file", file?.name, requestBody)
                     mPresenter?.postImage(builder.build())
                 }
 
                 override fun onError(e: Throwable?) {
-                    Log.e("异常",e.toString())
+                    Log.e("异常", e.toString())
                 }
 
                 override fun onStart() {
-                    Log.e("开始","开始")
+                    Log.e("开始", "开始")
                 }
 
             }).launch();
     }
-
-
 
 
 }

@@ -33,14 +33,13 @@ class LookAdapter :
         holder.setText(R.id.rb_detail, item.dirname)
         if (item.pushid.equals("")) {
             if (null != item?.audiopath?.toString()) {
-                val parts: MutableList<String> = item.audiopath.toString().split(",").toMutableList()
-                    MyGlide.loadImage(
-                        context,
-                        parts.get(0),
-                        holder.getView(R.id.iv_detail)
-                    )
-
-
+                val parts: MutableList<String> =
+                    item.audiopath.toString().split(",").toMutableList()
+                MyGlide.loadImage(
+                    context,
+                    parts.get(0),
+                    holder.getView(R.id.iv_detail)
+                )
                 img.visibility = View.VISIBLE
                 holder.setText(R.id.tv_title, item.content)
             } else {
@@ -53,6 +52,8 @@ class LookAdapter :
             holder.getView<ImageView>(R.id.iv_go).visibility = View.VISIBLE
             holder.getView<TextView>(R.id.tv_tui).visibility = View.VISIBLE
             holder.getView<QMUIRoundButton>(R.id.rb_detail).visibility = View.VISIBLE
+            holder.getView<ImageView>(R.id.iv_close2).visibility = View.GONE
+            holder.getView<ImageView>(R.id.iv_close).visibility = View.VISIBLE
         } else {
             img.visibility = View.GONE
             txt.visibility = View.VISIBLE
@@ -60,9 +61,11 @@ class LookAdapter :
             txt.setText(item.content)
             holder.setText(R.id.tv_read, "推送" + item.view.toString() + "银币")
             holder.getView<ImageView>(R.id.iv_go).visibility = View.INVISIBLE
-            holder.getView<TextView>(R.id.tv_tui).visibility = View.INVISIBLE
-            holder.getView<QMUIRoundButton>(R.id.rb_detail).visibility = View.INVISIBLE
-            holder.getView<TextView>(R.id.tv_comment).visibility = View.INVISIBLE
+            holder.getView<TextView>(R.id.tv_tui).visibility = View.GONE
+            holder.getView<QMUIRoundButton>(R.id.rb_detail).visibility = View.GONE
+            holder.getView<TextView>(R.id.tv_comment).visibility = View.GONE
+            holder.getView<ImageView>(R.id.iv_close2).visibility = View.VISIBLE
+            holder.getView<ImageView>(R.id.iv_close).visibility = View.GONE
         }
     }
 }

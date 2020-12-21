@@ -115,9 +115,9 @@ class LookFragment : BaseFragment<LookPresenter>(), LookContract.View {
             }
             startActivity(intent)
         }
-        adapter.addChildClickViewIds(R.id.iv_go, R.id.tv_tui, R.id.iv_close, R.id.rb_detail)
+        adapter.addChildClickViewIds(R.id.iv_go, R.id.tv_tui,R.id.iv_close2, R.id.iv_close, R.id.rb_detail)
         adapter.setOnItemChildClickListener { adapters, view, position ->
-            if (view.id == R.id.iv_close) {
+            if (view.id == R.id.iv_close||view.id == R.id.iv_close2) {
                 showListDialog()
             } else if (view.id == R.id.rb_detail) {
                 var intent = Intent(context, TypeListActivityActivity::class.java)

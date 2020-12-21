@@ -14,7 +14,6 @@ import com.diwaves.news.di.component.DaggerListComponent
 import com.diwaves.news.di.module.ListModule
 import com.diwaves.news.mvp.contract.ListContract
 import com.diwaves.news.mvp.presenter.ListPresenter
-import com.diwaves.news.mvp.ui.activity.RmbMaketMainActivity
 import com.diwaves.news.mvp.ui.activity.TypeListActivityActivity
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent

@@ -108,6 +108,7 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
             mPresenter?.getData()
 
         }
+        mPresenter?.getData()
     }
 
     /**

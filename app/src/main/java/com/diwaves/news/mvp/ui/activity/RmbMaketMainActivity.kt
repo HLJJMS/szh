@@ -48,6 +48,7 @@ import java.util.concurrent.TimeUnit
  * }
  * }
  */
+//预测界面
 class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMainContract.View {
     var type: String = "日线"
     var popupWindow: PopupWindow = PopupWindow()

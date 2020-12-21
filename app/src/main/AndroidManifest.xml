@@ -27,11 +27,15 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
-        android:requestLegacyExternalStorage="true"
         android:networkSecurityConfig="@xml/network_config"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/QMUI.NoActionBar">
+        <activity android:name=".mvp.ui.activity.MessageDetailActivity" />
+        <activity android:name=".mvp.ui.activity.YuCeActivity" />
+        <activity android:name=".mvp.ui.activity.KLineActivity" />
+        <activity android:name=".mvp.ui.activity.CaijingListActivity" />
         <activity android:name=".mvp.ui.activity.SystemActivity" />
         <activity android:name=".mvp.ui.activity.TouSuActivityActivity" />
         <activity android:name=".mvp.ui.activity.ResealesPhotoActivityActivity" />
@@ -55,9 +59,9 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".mvp.ui.activity.WalletRecordActivity" />
         <activity android:name=".mvp.ui.activity.AddRmbActivity" />
-        <activity android:name=".mvp.ui.activity.ReleaseActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            />
+        <activity
+            android:name=".mvp.ui.activity.ReleaseActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".mvp.ui.activity.PushTieActivity" />
         <activity android:name=".mvp.ui.activity.ReportActivity" />
         <activity android:name=".mvp.ui.activity.FriendDetailActivity" />
@@ -75,9 +79,6 @@
             android:launchMode="singleTop"
             android:taskAffinity="com.diwaves.news"
             android:theme="@style/QMUI.NoActionBar" />
-
-
-
         <activity
             android:name=".mvp.ui.activity.MainActivity"
             android:launchMode="singleTask">
@@ -98,6 +99,7 @@
         <meta-data
             android:name="com.diwaves.news.network.GlobalConfiguration"
             android:value="ConfigModule" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.diwaves.news.photo"

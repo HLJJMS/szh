@@ -113,21 +113,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_title" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_spnner" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_white"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/rv_1" />
 
     <LinearLayout
         android:id="@+id/ll_main_color"

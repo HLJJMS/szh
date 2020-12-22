@@ -150,11 +150,7 @@ class TypeListActivityActivity : BaseActivity<TypeListActivityPresenter>(),
 
     override fun sunccess(bean: MutableList<TypeListBean.ResultBean.RecordsBean>) {
         swipeLayout.isRefreshing = false
-        if (page == 1) {
-            adapter.setList(bean)
-        } else {
-            adapter.addData(bean)
-        }
+
         if (bean.size == 0) {
             adapter.loadMoreModule.loadMoreEnd(true)
         } else {
@@ -162,6 +158,16 @@ class TypeListActivityActivity : BaseActivity<TypeListActivityPresenter>(),
         }
         if (bean.size != 0) {
             titleBar.setCenterText(bean.get(0).dirname)
+            if(bean.get(0).dirname.contains("深沪")){
+                //判断是否为财经K先list
+
+            }else{
+                if (page == 1) {
+                    adapter.setList(bean)
+                } else {
+                    adapter.addData(bean)
+                }
+            }
         }
     }
 
@@ -188,8 +194,6 @@ class TypeListActivityActivity : BaseActivity<TypeListActivityPresenter>(),
 
 
     fun setPopWindow() {
-
-
         view = LayoutInflater.from(this).inflate(R.layout.pop_pingbi_new, null);
         popupWindow.contentView = view
         popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);

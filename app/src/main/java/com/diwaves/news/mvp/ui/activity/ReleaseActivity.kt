@@ -4,12 +4,21 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.PopupWindow
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.diwaves.news.R
+import com.diwaves.news.adapter.BangdanAdapter
 import com.diwaves.news.adapter.SpnnerAdapter1
 import com.diwaves.news.bean.BangdanBean
 import com.diwaves.news.di.component.DaggerReleaseComponent
@@ -65,7 +74,7 @@ import java.util.concurrent.TimeUnit
  * }
  */
 class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
-    var adapter1: SpnnerAdapter1 = SpnnerAdapter1()
+    var adapter1: BangdanAdapter = BangdanAdapter()
     var bean: MutableList<BangdanBean.ResultEntity>? = null
     var loaddingView: LoaddingView? = null
     var fans = true
@@ -81,6 +90,11 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
     var isItalic = false
     var isTextLean = false
     var isListUL = false
+    var popupWindow: PopupWindow = PopupWindow()
+    var view: View? = null
+    var recyclerViewPop: RecyclerView? = null
+    var popNo: TextView? = null
+    var popYes: TextView? = null
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerReleaseComponent //如找不到该类,请编译一下项目
             .builder()
@@ -97,16 +111,9 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 
 
     override fun initData(savedInstanceState: Bundle?) {
-        rv_1.layoutManager = GridLayoutManager(this, 5)
-        rv_1.adapter = adapter1
-        adapter1.addChildClickViewIds(R.id.tv_txt)
-//        rv_2.layoutManager = GridLayoutManager(this, 5)
-//        adapter2.addChildClickViewIds(R.id.tv_txt)
-//        rv_2.adapter = adapter2
         richEditText.setEditorBackgroundColor(Color.WHITE);
         tv_spnner.setOnClickListener {
-            rv_1.visibility = View.VISIBLE
-//            rv_2.visibility = View.VISIBLE
+            showPopWindow()
         }
 
         iv_img.clicks().throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -143,21 +150,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
                     iv_send_friend.setImageResource(R.mipmap.ic_check_on)
                 }
             }
-        adapter1.setOnItemClickListener { adapter, view, position ->
-//            adapter2.setList(adapter1.data.get(position).dirsList)
-            tv_spnner.setText(adapter1.data.get(position).title+"/原创")
-            dirId =
-                adapter1.data.get(position).dirsList.get(adapter1.data.get(position).dirsList.size - 1).id.toString()
-            dirname = adapter1.data.get(position).title
-            rv_1.visibility = View.GONE
-        }
-//        adapter2.setOnItemClickListener { adapter, view, position ->
-//            tv_spnner.setText(adapter2.data.get(position).title)
-//            dirId = adapter2.data.get(position).id.toString()
-//            dirname = adapter2.data.get(position).title
-//            rv_1.visibility = View.GONE
-//            rv_2.visibility = View.GONE
-//        }
+
         mPresenter?.getData()
         button_image.setOnClickListener {
             getPermissions()
@@ -286,14 +279,12 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
     }
 
     override fun success(bean: MutableList<BangdanBean.ResultEntity>) {
-
-
         bean.removeAt(bean.size - 1)
         bean.removeAt(bean.size - 1)
         bean.removeAt(bean.size - 1)
         bean.removeAt(bean.size - 1)
         bean.removeAt(0)
-        adapter1.setList(bean)
+        setPopWindow(bean)
     }
 
 
@@ -362,7 +353,7 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
 
     fun postdata(type: String) {
         mPresenter?.postData(
-            et_title.text.toString(), richEditText.html, dirId, dirname+"/原创", type
+            et_title.text.toString(), richEditText.html, dirId, dirname + "/原创", type
         )
     }
 
@@ -394,4 +385,45 @@ class ReleaseActivity : BaseActivity<ReleasePresenter>(), ReleaseContract.View {
     }
 
 
+    fun setPopWindow(bean: MutableList<BangdanBean.ResultEntity>) {
+        view = LayoutInflater.from(this).inflate(R.layout.pop_recycler, null);
+        popupWindow.contentView = view
+        popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        popupWindow.setHeight(800);
+        popupWindow.setOutsideTouchable(true)
+        popupWindow.setFocusable(true) //点击返回键取消
+        popupWindow.setBackgroundDrawable(BitmapDrawable())
+        recyclerViewPop = view?.findViewById(R.id.recycler)
+        recyclerViewPop?.layoutManager = GridLayoutManager(this, 5)
+        recyclerViewPop?.adapter = adapter1
+        adapter1.setList(bean)
+        popNo = view?.findViewById(R.id.tv_no)
+        popYes = view?.findViewById(R.id.tv_yes)
+        popYes?.setOnClickListener {
+            dirId = adapter1.data.get(adapter1.position).dirsList.get(adapter1.data.get(adapter1.position).dirsList.size - 1).id.toString()
+            dirname = adapter1.data.get(adapter1.position).title
+            tv_spnner.setText(dirname)
+            popupWindow.dismiss()
+        }
+        popNo?.setOnClickListener {
+            popupWindow.dismiss()
+        }
+        adapter1.addChildClickViewIds(R.id.rb_name)
+        adapter1.setOnItemChildClickListener { adapter, view, position ->
+            tv_spnner.setText(adapter1.data.get(position).title + "/原创")
+            adapter1.setClickPosition(position)
+        }
+        popupWindow.setOnDismissListener {
+            val lp = window?.attributes
+            lp?.alpha = 1f
+           window?.attributes = lp
+        }
+    }
+
+    fun showPopWindow() {
+        val lp =window?.attributes
+        lp?.alpha = 0.5f
+        window?.attributes = lp
+        popupWindow.showAtLocation(getWindow()?.getDecorView(), Gravity.BOTTOM, 0, 0)
+    }
 }

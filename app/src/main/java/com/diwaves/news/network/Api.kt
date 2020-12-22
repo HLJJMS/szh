@@ -4,7 +4,6 @@ object Api {
     const val APP_ID = "wx5a097702a5ad39e9"
     const val BASE_URL = "http://116.62.114.248:10019//"
 
-
     //成功
     const val SUCCESS = "200"
 
@@ -154,7 +153,6 @@ object Api {
 
     //审稿
     const val MESSAGE_EXAMINE_DO = "my/audit/status"
-
 
     //发布图片
     const val RELEASE_IMG = "app/image"

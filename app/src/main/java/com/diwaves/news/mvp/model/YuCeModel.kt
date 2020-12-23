@@ -1,14 +1,16 @@
 package com.diwaves.news.mvp.model
 
 import android.app.Application
+import com.diwaves.news.bean.KListBean
+import com.diwaves.news.mvp.contract.YuCeContract
+import com.diwaves.news.network.bean.BaseBean
+import com.diwaves.news.network.service.HomeService
 import com.google.gson.Gson
+import com.jess.arms.di.scope.ActivityScope
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
-
-import com.jess.arms.di.scope.ActivityScope
+import io.reactivex.Observable
 import javax.inject.Inject
-
-import com.diwaves.news.mvp.contract.YuCeContract
 
 
 /**
@@ -36,5 +38,11 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+    override fun getData(
+        id: String,
+        type: String
+    ): Observable<BaseBean.BaseResponse<KListBean>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getPredict(id, "1")
     }
 }

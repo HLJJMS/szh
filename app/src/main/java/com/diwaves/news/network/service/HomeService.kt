@@ -90,8 +90,8 @@ interface HomeService {
     @FormUrlEncoded
     @POST(Api.PREDICT_SELECT)
     fun getPredict(
-        @Field("userid") id: String, @Field("dirid") dirid: String, @Field("type") type: String
-    ): Observable<RmbMaketBean>
+        @Field("userid") id: String, @Field("zstype") type: String
+    ): Observable<BaseBean.BaseResponse<KListBean>>
 
 
     //  预测add
@@ -178,4 +178,11 @@ interface HomeService {
     fun getShare(
         @Field("articleid") id: String
     ): Observable<BaseBean.BaseResponse<ShareBean>>
+
+    //K先图
+    @FormUrlEncoded
+    @POST(Api.K_LINE)
+    fun getK(
+        @Field("type") type: String
+    ): Observable<BaseBean.BaseResponse<MyKLineBean>>
 }

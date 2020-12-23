@@ -15,6 +15,7 @@ import com.diwaves.news.di.module.ListModule
 import com.diwaves.news.mvp.contract.ListContract
 import com.diwaves.news.mvp.presenter.ListPresenter
 import com.diwaves.news.mvp.ui.activity.TypeListActivityActivity
+import com.diwaves.news.mvp.ui.activity.YuCeActivity
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
@@ -84,10 +85,17 @@ class ListFragment : BaseFragment<ListPresenter>(), ListContract.View {
 
         caiJingAdapter.addChildClickViewIds(R.id.rb_name)
         caiJingAdapter.setOnItemChildClickListener { adapter, view, position ->
-            var intent = Intent(context, TypeListActivityActivity::class.java)
-            intent.putExtra("id",caiJingAdapter.data.get(position).id.toString())
-            intent.putExtra("title","")
-            startActivity(intent)
+            if(caiJingAdapter.data.get(position).title.contains("沪深")){
+                var intent = Intent(context, YuCeActivity::class.java)
+                intent.putExtra("title",caiJingAdapter.data.get(position).title)
+                startActivity(intent)
+            }else{
+                var intent = Intent(context, TypeListActivityActivity::class.java)
+                intent.putExtra("id",caiJingAdapter.data.get(position).id.toString())
+                intent.putExtra("title","")
+                startActivity(intent)
+            }
+
 
         }
         bangdanAdapter.addChildClickViewIds(R.id.rb_name)

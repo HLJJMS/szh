@@ -160,4 +160,6 @@ object Api {
     //分享
     const val SHARE_MESSAGE = "share/article"
 
+    //K线图
+    const val K_LINE = "index/k/list"
 }

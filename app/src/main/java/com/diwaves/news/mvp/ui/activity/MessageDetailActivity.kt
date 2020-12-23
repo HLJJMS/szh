@@ -13,6 +13,7 @@ import com.diwaves.news.mvp.contract.MessageDetailContract
 import com.diwaves.news.mvp.presenter.MessageDetailPresenter
 
 import com.diwaves.news.R
+import kotlinx.android.synthetic.main.activity_message_detail.*
 
 
 /**
@@ -58,7 +59,7 @@ class MessageDetailActivity : BaseActivity<MessageDetailPresenter>(), MessageDet
 
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        titleBar.setBackClick { finish() }
     }
 
 

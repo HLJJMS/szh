@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseFragment
@@ -109,6 +110,14 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
 
         }
         mPresenter?.getData()
+
+        adapter.setOnItemClickListener { adapter, view, position ->
+
+        }
+        adapter.addChildClickViewIds(R.id.tv_pingbi)
+        adapter.setOnItemChildClickListener { adapter, view, position ->
+            showDialog()
+        }
     }
 
     /**
@@ -176,4 +185,23 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
     override fun killMyself() {
 
     }
+    fun showDialog() {
+        val normalDialog: AlertDialog.Builder = AlertDialog.Builder(mContext)
+        normalDialog.setTitle("提示")
+        normalDialog.setMessage("是否不接受该用户消息？");
+        normalDialog.setPositiveButton(
+            "确定"
+        ) { dialog, which ->
+
+        }
+        normalDialog.setNegativeButton(
+            "取消"
+        ) { dialog, which ->
+
+        }
+        // 显示
+        normalDialog.show()
+    }
+
+
 }

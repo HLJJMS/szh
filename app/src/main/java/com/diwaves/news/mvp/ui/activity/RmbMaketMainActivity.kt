@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.diwaves.news.R
-import com.diwaves.news.bean.RmbMaketBean
+import com.diwaves.news.bean.KListBean
 import com.diwaves.news.di.component.DaggerRmbMaketMainComponent
 import com.diwaves.news.di.module.RmbMaketMainModule
 import com.diwaves.news.mvp.contract.RmbMaketMainContract
@@ -19,7 +19,6 @@ import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
 import kotlinx.android.synthetic.main.activity_rmb_maket_main.*
-import kotlinx.android.synthetic.main.activity_rmb_maket_main.tv_title
 import java.util.concurrent.TimeUnit
 
 
@@ -192,79 +191,79 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
             tv_moon.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
             tv_day.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
             type = "日线"
-            mPresenter?.getData(intent.getStringExtra("id"), type)
+//            mPresenter?.getData(intent.getStringExtra("id"), type)
         }
         tv_moon.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             tv_week.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
             tv_moon.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
             tv_day.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
             type = "月线"
-            mPresenter?.getData(intent.getStringExtra("id"), type)
+//            mPresenter?.getData(intent.getStringExtra("id"), type)
         }
         tv_week.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             tv_day.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
             tv_moon.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
             tv_week.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
             type = "周线"
-            mPresenter?.getData(intent.getStringExtra("id"), type)
+//            mPresenter?.getData(intent.getStringExtra("id"), type)
         }
         rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
             showPopWindow()
         }
 
-        mPresenter?.getData(intent.getStringExtra("id"), type)
+//        mPresenter?.getData(intent.getStringExtra("id"), type)
         setPopWindow()
     }
 
-    override fun success(bean: RmbMaketBean.ResultBean) {
-        tv_title.setText(bean.predict.title)
-        tv_title2.setText("您还未预测哦，截止" + bean.predict.enddatetime)
-        tv_detail1.setText(bean.predict.option1)
-        tv_detail2.setText(bean.predict.option2)
-        tv_detail3.setText(bean.predict.option3)
-        tv_detail4.setText(bean.predict.option4)
-        tv_detail5.setText(bean.predict.option5)
-        predictid = bean.predict.id.toString()
-        iv_check1.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            iv_check1.setImageResource(R.mipmap.ic_check_on)
-            iv_check2.setImageResource(R.mipmap.ic_check_off)
-            iv_check3.setImageResource(R.mipmap.ic_check_off)
-            iv_check4.setImageResource(R.mipmap.ic_check_off)
-            iv_check5.setImageResource(R.mipmap.ic_check_off)
-            tv_ag.setText(bean.predict.option1value.toString())
-        }
-        iv_check2.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            iv_check1.setImageResource(R.mipmap.ic_check_off)
-            iv_check2.setImageResource(R.mipmap.ic_check_on)
-            iv_check3.setImageResource(R.mipmap.ic_check_off)
-            iv_check4.setImageResource(R.mipmap.ic_check_off)
-            iv_check5.setImageResource(R.mipmap.ic_check_off)
-            tv_ag.setText(bean.predict.option2value.toString())
-        }
-        iv_check3.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            iv_check1.setImageResource(R.mipmap.ic_check_off)
-            iv_check2.setImageResource(R.mipmap.ic_check_off)
-            iv_check3.setImageResource(R.mipmap.ic_check_on)
-            iv_check4.setImageResource(R.mipmap.ic_check_off)
-            iv_check5.setImageResource(R.mipmap.ic_check_off)
-            tv_ag.setText(bean.predict.option3value.toString())
-        }
-        iv_check4.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            iv_check1.setImageResource(R.mipmap.ic_check_off)
-            iv_check2.setImageResource(R.mipmap.ic_check_off)
-            iv_check3.setImageResource(R.mipmap.ic_check_off)
-            iv_check4.setImageResource(R.mipmap.ic_check_on)
-            iv_check5.setImageResource(R.mipmap.ic_check_off)
-            tv_ag.setText(bean.predict.option4value.toString())
-        }
-        iv_check5.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            iv_check1.setImageResource(R.mipmap.ic_check_off)
-            iv_check2.setImageResource(R.mipmap.ic_check_off)
-            iv_check3.setImageResource(R.mipmap.ic_check_off)
-            iv_check4.setImageResource(R.mipmap.ic_check_off)
-            iv_check5.setImageResource(R.mipmap.ic_check_on)
-            tv_ag.setText(bean.predict.option5value.toString())
-        }
+    override fun success(bean: KListBean) {
+//        tv_title.setText(bean.predict.title)
+//        tv_title2.setText("您还未预测哦，截止" + bean.predict.enddatetime)
+//        tv_detail1.setText(bean.predict.option1)
+//        tv_detail2.setText(bean.predict.option2)
+//        tv_detail3.setText(bean.predict.option3)
+//        tv_detail4.setText(bean.predict.option4)
+//        tv_detail5.setText(bean.predict.option5)
+//        predictid = bean.predict.id.toString()
+//        iv_check1.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            iv_check1.setImageResource(R.mipmap.ic_check_on)
+//            iv_check2.setImageResource(R.mipmap.ic_check_off)
+//            iv_check3.setImageResource(R.mipmap.ic_check_off)
+//            iv_check4.setImageResource(R.mipmap.ic_check_off)
+//            iv_check5.setImageResource(R.mipmap.ic_check_off)
+//            tv_ag.setText(bean.predict.option1value.toString())
+//        }
+//        iv_check2.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            iv_check1.setImageResource(R.mipmap.ic_check_off)
+//            iv_check2.setImageResource(R.mipmap.ic_check_on)
+//            iv_check3.setImageResource(R.mipmap.ic_check_off)
+//            iv_check4.setImageResource(R.mipmap.ic_check_off)
+//            iv_check5.setImageResource(R.mipmap.ic_check_off)
+//            tv_ag.setText(bean.predict.option2value.toString())
+//        }
+//        iv_check3.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            iv_check1.setImageResource(R.mipmap.ic_check_off)
+//            iv_check2.setImageResource(R.mipmap.ic_check_off)
+//            iv_check3.setImageResource(R.mipmap.ic_check_on)
+//            iv_check4.setImageResource(R.mipmap.ic_check_off)
+//            iv_check5.setImageResource(R.mipmap.ic_check_off)
+//            tv_ag.setText(bean.predict.option3value.toString())
+//        }
+//        iv_check4.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            iv_check1.setImageResource(R.mipmap.ic_check_off)
+//            iv_check2.setImageResource(R.mipmap.ic_check_off)
+//            iv_check3.setImageResource(R.mipmap.ic_check_off)
+//            iv_check4.setImageResource(R.mipmap.ic_check_on)
+//            iv_check5.setImageResource(R.mipmap.ic_check_off)
+//            tv_ag.setText(bean.predict.option4value.toString())
+//        }
+//        iv_check5.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            iv_check1.setImageResource(R.mipmap.ic_check_off)
+//            iv_check2.setImageResource(R.mipmap.ic_check_off)
+//            iv_check3.setImageResource(R.mipmap.ic_check_off)
+//            iv_check4.setImageResource(R.mipmap.ic_check_off)
+//            iv_check5.setImageResource(R.mipmap.ic_check_on)
+//            tv_ag.setText(bean.predict.option5value.toString())
+//        }
     }
 
     override fun addSuccess() {

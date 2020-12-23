@@ -1,7 +1,8 @@
 package com.diwaves.news.mvp.presenter
 
 import android.app.Application
-import com.diwaves.news.bean.RmbMaketBean
+import com.diwaves.news.bean.KListBean
+
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.ActivityScope
@@ -53,15 +54,15 @@ constructor(model: RmbMaketMainContract.Model, rootView: RmbMaketMainContract.Vi
         super.onDestroy();
     }
 
-    fun getData(dirid: String, type: String) {
-        mModel.getData(SPToll(mApplication).getId(), dirid, type).compose(
+    fun getData(type: String) {
+        mModel.getData(SPToll(mApplication).getId(), type).compose(
             RxUtils.applySchedulers(mRootView)
         )
             .subscribe(object :
-                ErrorHandleSubscriber<RmbMaketBean>(mErrorHandler) {
-                override fun onNext(t: RmbMaketBean) {
+                ErrorHandleSubscriber<BaseBean.BaseResponse<KListBean>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<KListBean>) {
                     if (t.code.equals(Api.SUCCESS)) {
-                        mRootView.success(t.result)
+                        t.result?.let { mRootView.success(it) }
                     } else {
                         MyToast().makeToast(mApplication, t.message)
                     }

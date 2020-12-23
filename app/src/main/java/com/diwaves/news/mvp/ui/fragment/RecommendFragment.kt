@@ -26,6 +26,7 @@ import com.diwaves.news.mvp.presenter.RecommendPresenter
 import com.diwaves.news.mvp.ui.activity.ArticleDetailActivity
 import com.diwaves.news.mvp.ui.activity.ReportActivity
 import com.diwaves.news.mvp.ui.activity.TypeListActivityActivity
+import com.diwaves.news.mvp.ui.activity.YuCeActivity
 import com.diwaves.news.tools.MyToast
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
@@ -187,6 +188,15 @@ class RecommendFragment : BaseFragment<RecommendPresenter>(), RecommendContract.
         tv_one.setText(bean.map1.name)
         tv_two.setText(bean.map2.name)
         tv_three.setText(bean.map3.name)
+        tv_one.setOnClickListener {
+            startActivity(Intent(activity, YuCeActivity::class.java))
+        }
+        tv_two.setOnClickListener {
+            startActivity(Intent(activity, YuCeActivity::class.java))
+        }
+        tv_three.setOnClickListener {
+            startActivity(Intent(activity, YuCeActivity::class.java))
+        }
 
         tv_one_center.setText(bean.map1.current)
         tv_two_center.setText(bean.map2.current)

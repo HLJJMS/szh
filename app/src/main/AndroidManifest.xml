@@ -32,6 +32,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/QMUI.NoActionBar">
+        <activity android:name=".mvp.ui.activity.YuCeCommentActivity" />
         <activity android:name=".mvp.ui.activity.MessageDetailActivity" />
         <activity android:name=".mvp.ui.activity.YuCeActivity" />
         <activity android:name=".mvp.ui.activity.KLineActivity" />

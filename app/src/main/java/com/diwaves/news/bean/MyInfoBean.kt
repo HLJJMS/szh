@@ -46,3 +46,58 @@ data class MyInfoBean(
     var user: MyInfoUserBean
 )
 
+data class MyInfoBeanNew(
+    var caogaoxiang: Int,
+    var chufa: Int,
+    var friendscount: Int,
+    var fscount: Int,
+    var gzcount: Int,
+    var pengyou: Int,
+    var pingbi: Int,
+    var shoucang: Int,
+    var user: User,
+    var viewdaycount: Int,
+    var viewmonthcount: Int,
+    var viewweekcount: Int,
+    var yuce: Int
+)
+
+data class User(
+    var age: Any,
+    var avatarUrl: String,
+    var birthday: String,
+    var city: String,
+    var country: String,
+    var createlevel: Int,
+    var createscore: Int,
+    var expire_ttl: Int,
+    var fans: Int,
+    var focus: Int,
+    var friends: Int,
+    var gender: String,
+    var gold: Int,
+    var id: Int,
+    var isMember: Int,
+    var level: Int,
+    var logintime: String,
+    var memberEndTime: Any,
+    var name: String,
+    var openId: String,
+    var password: String,
+    var phone: String,
+    var predictcount: Int,
+    var predictlevel: Int,
+    var predictscore: Int,
+    var province: String,
+    var qrcode: Any,
+    var silver: Int,
+    var state: Int,
+    var szhnum: String,
+    var unionId: Any,
+    var verificaCode: Any,
+    var wxname: String
+)
+
+
+
+

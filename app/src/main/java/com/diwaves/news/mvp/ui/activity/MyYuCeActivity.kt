@@ -45,7 +45,7 @@ import kotlinx.android.synthetic.main.activity_my_yu_ce.*
  * }
  */
 class MyYuCeActivity : BaseActivity<MyYuCePresenter>(), MyYuCeContract.View {
-    var adapter: MyYuCeAdapter? = null
+    var adapter: MyYuCeAdapter = MyYuCeAdapter()
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMyYuCeComponent //如找不到该类,请编译一下项目
             .builder()
@@ -71,7 +71,7 @@ class MyYuCeActivity : BaseActivity<MyYuCePresenter>(), MyYuCeContract.View {
     }
 
     override fun success(bean: MutableList<YuCeBean.ResultBean.ListBean.RecordsBean>) {
-        adapter?.setList(bean)
+        adapter.setList(bean)
     }
 
 

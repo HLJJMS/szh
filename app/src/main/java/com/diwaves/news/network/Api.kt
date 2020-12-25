@@ -31,6 +31,9 @@ object Api {
     //查询用户
     const val USER_INFO = "setting/user/detail"
 
+    //获取个人信息
+    const val MY_INFO = "setting/user/select"
+
     //编辑信息
     const val USER_EDIT = "setting/user/edit"
 
@@ -162,4 +165,16 @@ object Api {
 
     //K线图
     const val K_LINE = "index/k/list"
+
+    //预测评论
+    const val YUCE_COMMENT_DWON = "index/predict/list"
+
+    //预测评论
+    const val YUCE_COMMENT_UP = "index/forecast/select"
+
+    //预测评论
+    const val YUCE_COMMENT_GOOD = "app/userpredict/up"
+
+
+
 }

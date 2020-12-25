@@ -18,6 +18,13 @@ interface UserService {
         @Field("myuserid") myuserid: String, @Field("userid") userid: String
     ): Observable<BaseBean.BaseResponse<MyInfoBean>>
 
+    //用户信息(新)
+    @FormUrlEncoded
+    @POST(Api.MY_INFO)
+    fun getUserInfoNew(
+        @Field("userid") userid: String
+    ): Observable<BaseBean.BaseResponse<MyInfoBeanNew>>
+
     //用户信息(编辑)
     @POST(Api.USER_EDIT)
     fun postUserInfo(
@@ -73,7 +80,7 @@ interface UserService {
     @FormUrlEncoded
     @POST(Api.MY_YUCE)
     fun getMyYuCe(
-        @Field("userid") id: String
+        @Field("userid") id: String, @Field("current") current: String, @Field("size") size: String
     ): Observable<YuCeBean>
 
     //  支付

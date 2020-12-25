@@ -185,4 +185,36 @@ interface HomeService {
     fun getK(
         @Field("type") type: String
     ): Observable<BaseBean.BaseResponse<MyKLineBean>>
+
+    //预测下
+    @FormUrlEncoded
+    @POST(Api.YUCE_COMMENT_DWON)
+    fun getYuCeCommentDown(
+        @Field("userid") userid : String, @Field("zstype") zstype: String, @Field("type") type: String
+    ): Observable<BaseBean.BaseResponse<MutableList<YuCeCommentBean>>>
+
+
+    @FormUrlEncoded
+    @POST(Api.PREDICT_SELECT)
+    fun getYuCeDetail(
+        @Field("userid") userid : String, @Field("zstype") zstype: String
+    ): Observable<BaseBean.BaseResponse<YuCeCommentUpBean>>
+
+
+
+    @FormUrlEncoded
+    @POST(Api.YUCE_COMMENT_UP)
+    fun getYuCeCommentUp(
+        @Field("userid") userid : String, @Field("zstype") zstype: String
+    ): Observable<BaseBean.BaseResponse<YuCeDetail>>
+
+
+    //yuece赞
+    @FormUrlEncoded
+    @POST(Api.YUCE_COMMENT_GOOD)
+    fun goodComment(
+        @Field("userid") id: String,
+        @Field("userpredictid") current: String,
+        @Field("type") type: String//0：点赞，1取消
+    ): Observable<BaseBean.BaseResponse<Any>>
 }

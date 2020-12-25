@@ -2,6 +2,8 @@ package com.diwaves.news.mvp.presenter
 
 import android.app.Application
 import com.diwaves.news.bean.KListBean
+import com.diwaves.news.bean.YuCeCommentUpBean
+import com.diwaves.news.bean.YuCeDetail
 
 
 import com.jess.arms.integration.AppManager
@@ -59,8 +61,8 @@ constructor(model: RmbMaketMainContract.Model, rootView: RmbMaketMainContract.Vi
             RxUtils.applySchedulers(mRootView)
         )
             .subscribe(object :
-                ErrorHandleSubscriber<BaseBean.BaseResponse<KListBean>>(mErrorHandler) {
-                override fun onNext(t: BaseBean.BaseResponse<KListBean>) {
+                ErrorHandleSubscriber<BaseBean.BaseResponse<YuCeDetail>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<YuCeDetail>) {
                     if (t.code.equals(Api.SUCCESS)) {
                         t.result?.let { mRootView.success(it) }
                     } else {

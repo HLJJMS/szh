@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingConstraints">
+
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="韩江雪"
+        android:textColor="#ff137ed0"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/iv_head"
+        app:layout_constraintTop_toTopOf="@id/iv_head" />
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="05-14 16:22"
+        android:textColor="#ff989898"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_head"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/tv_good"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:text="2"
+        android:textColor="#ff111111"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_head"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_head" />
+
+    <ImageView
+        android:id="@+id/iv_good"
+        android:layout_width="17dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="5dp"
+        android:src="@mipmap/ic_good"
+        app:layout_constraintBottom_toBottomOf="@id/iv_head"
+        app:layout_constraintEnd_toStartOf="@id/tv_good"
+        app:layout_constraintTop_toTopOf="@id/iv_head" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Haha"
+        android:textColor="#ff111111"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@id/iv_good"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/iv_head" />
+
+    <ImageView
+        android:id="@+id/iv_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13.5dp"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+
+
+    <TextView
+        android:id="@+id/tv_replay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="回复"
+        android:visibility="gone"
+        android:textColor="#ff989898"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_time"
+        app:layout_constraintStart_toEndOf="@id/tv_time"
+        />
+
+    <TextView
+        android:id="@+id/tv_rmb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="推荐10次"
+        android:textColor="#ff989898"
+        android:textSize="12sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintStart_toStartOf="@id/tv_time"
+        />
+
+    <TextView
+        android:id="@+id/tv_zhang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/tv_rmb"
+        android:text="涨"
+
+        android:textColor="#ff137ed0"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_rmb"
+        />
+
+
+    <ImageView
+        android:id="@+id/iv_close1"
+        android:layout_width="21dp"
+        android:layout_height="12dp"
+        android:layout_marginEnd="24.5dp"
+        android:background="#FFF2F2F2"
+        android:paddingStart="7dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="7dp"
+        android:paddingBottom="3dp"
+
+        android:src="@mipmap/ic_close_x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_rmb" />
+</androidx.constraintlayout.widget.ConstraintLayout>

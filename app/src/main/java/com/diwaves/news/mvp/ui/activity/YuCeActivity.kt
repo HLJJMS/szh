@@ -91,19 +91,44 @@ class YuCeActivity : BaseActivity<YuCePresenter>(), YuCeContract.View {
         tv_k1.setOnClickListener {
             startActivity(
                 Intent(this, KLineActivity::class.java).putExtra("type", "3")
-                    .putExtra("title", tv_title1.text.toString()).putExtra("number",tv_number1.text.toString())
+                    .putExtra("title", tv_title1.text.toString())
+                    .putExtra("number", tv_number1.text.toString())
             )
         }
         tv_k2.setOnClickListener {
             startActivity(
                 Intent(this, KLineActivity::class.java).putExtra("type", "1")
-                    .putExtra("title", tv_title2.text.toString()).putExtra("number",tv_number2.text.toString())
+                    .putExtra("title", tv_title2.text.toString())
+                    .putExtra("number", tv_number2.text.toString())
             )
         }
         tv_k.setOnClickListener {
             startActivity(
                 Intent(this, KLineActivity::class.java).putExtra("type", "2")
-                    .putExtra("title", tv_title.text.toString()).putExtra("number",tv_number.text.toString())
+                    .putExtra("title", tv_title.text.toString())
+                    .putExtra("number", tv_number.text.toString())
+            )
+        }
+
+        tv_go1.setOnClickListener {
+            startActivity(
+                Intent(this, YuCeCommentActivity::class.java).putExtra("zstype", "3")
+                    .putExtra("title", tv_title1.text.toString())
+                    .putExtra("number", tv_number1.text.toString())
+            )
+        }
+        tv_go2.setOnClickListener {
+            startActivity(
+                Intent(this, YuCeCommentActivity::class.java).putExtra("zstype", "1")
+                    .putExtra("title", tv_title2.text.toString())
+                    .putExtra("number", tv_number2.text.toString())
+            )
+        }
+        tv_go.setOnClickListener {
+            startActivity(
+                Intent(this, YuCeCommentActivity::class.java).putExtra("zstype", "2")
+                    .putExtra("title", tv_title.text.toString())
+                    .putExtra("number", tv_number.text.toString())
             )
         }
     }

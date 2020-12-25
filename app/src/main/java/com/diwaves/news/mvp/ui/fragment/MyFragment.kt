@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.diwaves.news.R
 import com.diwaves.news.adapter.MyFramgentAdapter
 import com.diwaves.news.bean.MyInfoBean
+import com.diwaves.news.bean.MyInfoBeanNew
 import com.diwaves.news.bean.MyItemBean
 import com.diwaves.news.di.component.DaggerMyComponent
 import com.diwaves.news.di.module.MyModule
@@ -187,22 +188,22 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
 
     }
 
-    override fun success(bean: MyInfoBean) {
+    override fun success(bean: MyInfoBeanNew) {
         recycler.visibility = View.VISIBLE
 //        MyGlide.loadImageCircle(mContext, bean.user.avatarUrl, iv_head)
         tv_name.text = bean.user.name
 
         tv_id.text = "数字号 : " + bean.user.wxname
 
-        tv_day.text = bean.viewdaycount
-        tv_week.text = bean.viewweekcount
-        tv_month.text = bean.viewmonthcount
-        tv_create_level.text = bean.user.createlevel
-        tv_test_level.text = bean.user.predictlevel
+        tv_day.text = bean.viewdaycount.toString()
+        tv_week.text = bean.viewweekcount.toString()
+        tv_month.text = bean.viewmonthcount.toString()
+        tv_create_level.text = bean.user.createlevel.toString()
+        tv_test_level.text = bean.user.predictlevel.toString()
         list?.clear()
         list?.add(
             MyItemBean(
-                "关注", R.mipmap.ic_my_tieba, bean.user.focus, Intent(
+                "关注", R.mipmap.ic_my_tieba, bean.user.focus.toString(), Intent(
                     context,
                     MyFansAndLookActivity::class.java
                 ).putExtra("fans", false)
@@ -210,7 +211,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         )
         list?.add(
             MyItemBean(
-                "朋友", R.mipmap.ic_my_message, bean.user.friends, Intent(
+                "朋友", R.mipmap.ic_my_message, bean.user.friends.toString(), Intent(
                     context,
                     MyFriendActivity::class.java
                 )
@@ -218,7 +219,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         )
         list?.add(
             MyItemBean(
-                "预测", R.mipmap.ic_my_clock, "0", Intent(
+                "预测", R.mipmap.ic_my_clock, bean.yuce.toString(), Intent(
                     context,
                     MyYuCeActivity::class.java
                 )
@@ -226,7 +227,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         )
         list?.add(
             MyItemBean(
-                "屏蔽", R.mipmap.ic_pingbi, "0", Intent(
+                "屏蔽", R.mipmap.ic_pingbi, bean.pingbi.toString(), Intent(
                     context,
                     PingBiActivityActivity::class.java
                 )
@@ -234,7 +235,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         )
         list?.add(
             MyItemBean(
-                "处罚", R.mipmap.ic_chufa, "0", Intent(
+                "处罚", R.mipmap.ic_chufa, bean.chufa.toString(), Intent(
                     context,
                     MyCollectActivity::class.java
                 )
@@ -242,7 +243,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         )
         list?.add(
             MyItemBean(
-                "收藏", R.mipmap.ic_start, "0", Intent(
+                "收藏", R.mipmap.ic_start, bean.shoucang.toString(), Intent(
                     context,
                     MyCollectActivity::class.java
                 )
@@ -250,7 +251,7 @@ class MyFragment : BaseFragment<MyPresenter>(), MyContract.View {
         )
         list?.add(
             MyItemBean(
-                "草稿箱", R.mipmap.ic_test, "0", Intent(
+                "草稿箱", R.mipmap.ic_test, bean.caogaoxiang.toString(), Intent(
                     context,
                     MyArticleActivity::class.java
                 ).putExtra("type", "0")

@@ -2,6 +2,7 @@ package com.diwaves.news.mvp.model
 
 import android.app.Application
 import com.diwaves.news.bean.MyInfoBean
+import com.diwaves.news.bean.MyInfoBeanNew
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
@@ -42,7 +43,7 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
         super.onDestroy();
     }
 
-    override fun getData(id: String): Observable<BaseBean.BaseResponse<MyInfoBean>> {
-        return mRepositoryManager.obtainRetrofitService(UserService::class.java).getUserInfo(id,id)
+    override fun getData(id: String): Observable<BaseBean.BaseResponse<MyInfoBeanNew>> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java).getUserInfoNew(id)
     }
 }

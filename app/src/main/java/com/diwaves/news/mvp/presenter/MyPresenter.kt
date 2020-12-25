@@ -2,6 +2,7 @@ package com.diwaves.news.mvp.presenter
 
 import android.app.Application
 import com.diwaves.news.bean.MyInfoBean
+import com.diwaves.news.bean.MyInfoBeanNew
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.FragmentScope
@@ -57,8 +58,8 @@ constructor(model: MyContract.Model, rootView: MyContract.View) :
     fun getData() {
         mModel.getData(SPToll(mApplication).getId()).compose(RxUtils.applySchedulers(mRootView))
             .subscribe(object :
-                ErrorHandleSubscriber<BaseBean.BaseResponse<MyInfoBean>>(mErrorHandler) {
-                override fun onNext(t: BaseBean.BaseResponse<MyInfoBean>) {
+                ErrorHandleSubscriber<BaseBean.BaseResponse<MyInfoBeanNew>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<MyInfoBeanNew>) {
                     if (t.code.equals(Api.SUCCESS)) {
                         t.result?.let { mRootView.success(it) }
                     } else {

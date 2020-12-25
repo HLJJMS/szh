@@ -37,7 +37,7 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
     @Inject
     lateinit var mApplication: Application;
     override fun getData(id: String): Observable<YuCeBean> {
-        return mRepositoryManager.obtainRetrofitService(UserService::class.java).getMyYuCe(id)
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java).getMyYuCe(id,"1","100")
     }
 
     override fun onDestroy() {

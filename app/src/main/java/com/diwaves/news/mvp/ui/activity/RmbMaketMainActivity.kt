@@ -10,10 +10,13 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import com.diwaves.news.R
 import com.diwaves.news.bean.KListBean
+import com.diwaves.news.bean.YuCeCommentUpBean
+import com.diwaves.news.bean.YuCeDetail
 import com.diwaves.news.di.component.DaggerRmbMaketMainComponent
 import com.diwaves.news.di.module.RmbMaketMainModule
 import com.diwaves.news.mvp.contract.RmbMaketMainContract
 import com.diwaves.news.mvp.presenter.RmbMaketMainPresenter
+import com.diwaves.news.tools.MyToast
 import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -68,6 +71,7 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
     var option = 1
     var ag = "20"
     var predictid = ""
+    var floatState = ""
     var et_text: EditText? = null
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerRmbMaketMainComponent //如找不到该类,请编译一下项目
@@ -136,6 +140,7 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
             lp.alpha = 1f
             window.attributes = lp
         }
+        tv_title_type?.text = floatState
         tv_dazhang?.clicks()?.throttleFirst(500, TimeUnit.MILLISECONDS)?.subscribe {
             option = 1
             tv_title_type?.text = tv_dazhang?.text
@@ -166,7 +171,7 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
             }
         }
         tv_ok?.clicks()?.throttleFirst(500, TimeUnit.MILLISECONDS)?.subscribe {
-            mPresenter?.postData(ag,predictid,option.toString(),hide.toString())
+            mPresenter?.postData(ag, predictid, option.toString(), hide.toString())
         }
     }
 
@@ -186,84 +191,94 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
             tv_hot.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
             tv_new.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
         }
-        tv_day.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            tv_week.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
-            tv_moon.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
-            tv_day.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
-            type = "日线"
-//            mPresenter?.getData(intent.getStringExtra("id"), type)
-        }
-        tv_moon.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            tv_week.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
-            tv_moon.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
-            tv_day.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
-            type = "月线"
-//            mPresenter?.getData(intent.getStringExtra("id"), type)
-        }
-        tv_week.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            tv_day.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
-            tv_moon.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
-            tv_week.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
-            type = "周线"
-//            mPresenter?.getData(intent.getStringExtra("id"), type)
-        }
+//        tv_day.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            tv_week.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
+//            tv_moon.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
+//            tv_day.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
+//            type = "日线"
+////            mPresenter?.getData(intent.getStringExtra("id"), type)
+//        }
+//        tv_moon.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            tv_week.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
+//            tv_moon.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
+//            tv_day.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
+//            type = "月线"
+////            mPresenter?.getData(intent.getStringExtra("id"), type)
+//        }
+//        tv_week.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+//            tv_day.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
+//            tv_moon.setTextColor(ContextCompat.getColor(this, R.color.color_020202))
+//            tv_week.setTextColor(ContextCompat.getColor(this, R.color.color_137ED0))
+//            type = "周线"
+////            mPresenter?.getData(intent.getStringExtra("id"), type)
+//        }
         rb_ok.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-            showPopWindow()
+            if (!floatState.equals("")) {
+                showPopWindow()
+            } else {
+                MyToast().makeToast(this, "=请选择选项")
+            }
+
         }
 
-//        mPresenter?.getData(intent.getStringExtra("id"), type)
+        mPresenter?.getData(intent.getStringExtra("type"))
         setPopWindow()
     }
 
-    override fun success(bean: KListBean) {
-//        tv_title.setText(bean.predict.title)
-//        tv_title2.setText("您还未预测哦，截止" + bean.predict.enddatetime)
-//        tv_detail1.setText(bean.predict.option1)
-//        tv_detail2.setText(bean.predict.option2)
-//        tv_detail3.setText(bean.predict.option3)
-//        tv_detail4.setText(bean.predict.option4)
-//        tv_detail5.setText(bean.predict.option5)
-//        predictid = bean.predict.id.toString()
-//        iv_check1.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-//            iv_check1.setImageResource(R.mipmap.ic_check_on)
-//            iv_check2.setImageResource(R.mipmap.ic_check_off)
-//            iv_check3.setImageResource(R.mipmap.ic_check_off)
-//            iv_check4.setImageResource(R.mipmap.ic_check_off)
-//            iv_check5.setImageResource(R.mipmap.ic_check_off)
-//            tv_ag.setText(bean.predict.option1value.toString())
-//        }
-//        iv_check2.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-//            iv_check1.setImageResource(R.mipmap.ic_check_off)
-//            iv_check2.setImageResource(R.mipmap.ic_check_on)
-//            iv_check3.setImageResource(R.mipmap.ic_check_off)
-//            iv_check4.setImageResource(R.mipmap.ic_check_off)
-//            iv_check5.setImageResource(R.mipmap.ic_check_off)
-//            tv_ag.setText(bean.predict.option2value.toString())
-//        }
-//        iv_check3.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-//            iv_check1.setImageResource(R.mipmap.ic_check_off)
-//            iv_check2.setImageResource(R.mipmap.ic_check_off)
-//            iv_check3.setImageResource(R.mipmap.ic_check_on)
-//            iv_check4.setImageResource(R.mipmap.ic_check_off)
-//            iv_check5.setImageResource(R.mipmap.ic_check_off)
-//            tv_ag.setText(bean.predict.option3value.toString())
-//        }
-//        iv_check4.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-//            iv_check1.setImageResource(R.mipmap.ic_check_off)
-//            iv_check2.setImageResource(R.mipmap.ic_check_off)
-//            iv_check3.setImageResource(R.mipmap.ic_check_off)
-//            iv_check4.setImageResource(R.mipmap.ic_check_on)
-//            iv_check5.setImageResource(R.mipmap.ic_check_off)
-//            tv_ag.setText(bean.predict.option4value.toString())
-//        }
-//        iv_check5.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
-//            iv_check1.setImageResource(R.mipmap.ic_check_off)
-//            iv_check2.setImageResource(R.mipmap.ic_check_off)
-//            iv_check3.setImageResource(R.mipmap.ic_check_off)
-//            iv_check4.setImageResource(R.mipmap.ic_check_off)
-//            iv_check5.setImageResource(R.mipmap.ic_check_on)
-//            tv_ag.setText(bean.predict.option5value.toString())
-//        }
+    override fun success(bean: YuCeDetail) {
+        tv_title.setText(bean.d.predict.title)
+        tv_detail1.setText(bean.d.predict.option1)
+        tv_detail2.setText(bean.d.predict.option2)
+        tv_detail3.setText(bean.d.predict.option3)
+        tv_detail4.setText(bean.d.predict.option4)
+        tv_detail5.setText(bean.d.predict.option5)
+        predictid = bean.d.predict.id.toString()
+        iv_check1.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            iv_check1.setImageResource(R.mipmap.ic_check_on)
+            iv_check2.setImageResource(R.mipmap.ic_check_off)
+            iv_check3.setImageResource(R.mipmap.ic_check_off)
+            iv_check4.setImageResource(R.mipmap.ic_check_off)
+            iv_check5.setImageResource(R.mipmap.ic_check_off)
+            tv_ag.setText(bean.d.predict.option1value.toString())
+            floatState = "大涨"
+        }
+        iv_check2.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            iv_check1.setImageResource(R.mipmap.ic_check_off)
+            iv_check2.setImageResource(R.mipmap.ic_check_on)
+            iv_check3.setImageResource(R.mipmap.ic_check_off)
+            iv_check4.setImageResource(R.mipmap.ic_check_off)
+            iv_check5.setImageResource(R.mipmap.ic_check_off)
+            tv_ag.setText(bean.d.predict.option2value.toString())
+            floatState = "涨"
+        }
+        iv_check3.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            iv_check1.setImageResource(R.mipmap.ic_check_off)
+            iv_check2.setImageResource(R.mipmap.ic_check_off)
+            iv_check3.setImageResource(R.mipmap.ic_check_on)
+            iv_check4.setImageResource(R.mipmap.ic_check_off)
+            iv_check5.setImageResource(R.mipmap.ic_check_off)
+            tv_ag.setText(bean.d.predict.option3value.toString())
+            floatState = "平"
+        }
+        iv_check4.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            iv_check1.setImageResource(R.mipmap.ic_check_off)
+            iv_check2.setImageResource(R.mipmap.ic_check_off)
+            iv_check3.setImageResource(R.mipmap.ic_check_off)
+            iv_check4.setImageResource(R.mipmap.ic_check_on)
+            iv_check5.setImageResource(R.mipmap.ic_check_off)
+            tv_ag.setText(bean.d.predict.option4value.toString())
+            floatState = "跌"
+        }
+        iv_check5.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
+            iv_check1.setImageResource(R.mipmap.ic_check_off)
+            iv_check2.setImageResource(R.mipmap.ic_check_off)
+            iv_check3.setImageResource(R.mipmap.ic_check_off)
+            iv_check4.setImageResource(R.mipmap.ic_check_off)
+            iv_check5.setImageResource(R.mipmap.ic_check_on)
+            tv_ag.setText(bean.d.predict.option5value.toString())
+            floatState = "大跌"
+        }
+
     }
 
     override fun addSuccess() {

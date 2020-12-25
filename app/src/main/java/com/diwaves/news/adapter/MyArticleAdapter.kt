@@ -19,8 +19,8 @@ class MyArticleAdapter :
             MyGlide.loadImage(context, item.avatarUrl.toString(), holder.getView(R.id.iv_head))
         }
 
-        if (null != item.pic) {
-            MyGlide.loadImage(context, item.pic.toString(), holder.getView(R.id.iv_detail))
-        }
+//        if (null != item.pic) {
+//            MyGlide.loadImage(context, item.pic.toString(), holder.getView(R.id.iv_detail))
+//        }
     }
 }

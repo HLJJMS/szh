@@ -2,6 +2,8 @@ package com.diwaves.news.mvp.model
 
 import android.app.Application
 import com.diwaves.news.bean.KListBean
+import com.diwaves.news.bean.YuCeCommentUpBean
+import com.diwaves.news.bean.YuCeDetail
 
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
@@ -13,6 +15,7 @@ import javax.inject.Inject
 import com.diwaves.news.mvp.contract.RmbMaketMainContract
 import com.diwaves.news.network.bean.BaseBean
 import com.diwaves.news.network.service.HomeService
+import com.diwaves.news.tools.SPToll
 import io.reactivex.Observable
 
 
@@ -41,8 +44,9 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
     override fun getData(
         id: String,
         type: String
-    ): Observable<BaseBean.BaseResponse<KListBean>> {
-        return mRepositoryManager.obtainRetrofitService(HomeService::class.java).getPredict(id, "1")
+    ): Observable<BaseBean.BaseResponse<YuCeDetail>> {
+        return mRepositoryManager.obtainRetrofitService(HomeService::class.java)
+            .getYuCeCommentUp(SPToll(mApplication).getId(), type)
     }
 
     override fun postData(

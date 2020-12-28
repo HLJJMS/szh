@@ -173,4 +173,25 @@ interface UserService {
         @Field("state") state: String,
         @Field("title") title: String
     ): Observable<BaseBean.BaseResponse<Any>>
+
+
+    // 聊天记录
+    @FormUrlEncoded
+    @POST(Api.MY_CHATLIST)
+    fun myChatList(
+        @Field("otherid") otherid : String,
+        @Field("userid") id: String
+    ): Observable<BaseBean.BaseResponse<MutableList<ChartBean>>>
+
+
+    // 聊天记录
+    @FormUrlEncoded
+    @POST(Api.SEND_MESSAGE)
+    fun sendMessage(
+        @Field("touserid") otherid : String,
+        @Field("userid") id: String,
+        @Field("content") content: String
+    ): Observable<BaseBean.BaseResponse<Any>>
+
+
 }

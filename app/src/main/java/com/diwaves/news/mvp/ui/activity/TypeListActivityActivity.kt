@@ -160,7 +160,6 @@ class TypeListActivityActivity : BaseActivity<TypeListActivityPresenter>(),
             titleBar.setCenterText(bean.get(0).dirname)
             if(bean.get(0).dirname.contains("深沪")){
                 //判断是否为财经K先list
-
             }else{
                 if (page == 1) {
                     adapter.setList(bean)

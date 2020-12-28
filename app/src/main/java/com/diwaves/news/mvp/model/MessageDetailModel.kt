@@ -1,6 +1,7 @@
 package com.diwaves.news.mvp.model
 
 import android.app.Application
+import com.diwaves.news.bean.ChartBean
 import com.google.gson.Gson
 import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
@@ -9,6 +10,11 @@ import com.jess.arms.di.scope.ActivityScope
 import javax.inject.Inject
 
 import com.diwaves.news.mvp.contract.MessageDetailContract
+import com.diwaves.news.network.bean.BaseBean
+import com.diwaves.news.network.service.HomeService
+import com.diwaves.news.network.service.UserService
+import com.diwaves.news.tools.SPToll
+import io.reactivex.Observable
 
 
 /**
@@ -33,6 +39,16 @@ constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager
 
     @Inject
     lateinit var mApplication: Application;
+    override fun getData(id: String): Observable<BaseBean.BaseResponse<MutableList<ChartBean>>> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java)
+            .myChatList(id, SPToll(mApplication).getId())
+    }
+
+
+    override fun sendMessage(id: String, message: String): Observable<BaseBean.BaseResponse<Any>> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java)
+            .sendMessage(id, SPToll(mApplication).getId(),message)
+    }
 
     override fun onDestroy() {
         super.onDestroy();

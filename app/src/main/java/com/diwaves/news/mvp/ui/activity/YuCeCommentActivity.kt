@@ -129,7 +129,7 @@ class YuCeCommentActivity : BaseActivity<YuCeCommentPresenter>(), YuCeCommentCon
 
     override fun getUpSuccess(bean: YuCeDetail) {
         tv_date.setText(bean.d.predict.title)
-        tv_time.setText(bean.d.predict.enddatetime)
+        tv_time.setText(bean.d.predict.settlebegintime)
         tv_number.setText(intent.getStringExtra("number"))
         tv_type.setText(bean.d.predictStatus)
         tv_bet.setText("共注入" + bean.d.silver + "银币")

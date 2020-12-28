@@ -114,11 +114,11 @@ class KLineActivity : BaseActivity<KLinePresenter>(), KLineContract.View {
         tv_title.setText(intent.getStringExtra("title"))
         tv_number.setText(intent.getStringExtra("number"))
         tv_time.setText(beanMy.info.date)
-        tv_open.setText("开盘：" + beanMy.info.open)
+        tv_open.setText("开盘：" + beanMy.info.open.subSequence(0, beanMy.info.money.length - 2))
         tv_height.setText("最高：" + beanMy.info.high)
-        tv_rmb.setText("成交额：" + beanMy.info.money)
+        tv_rmb.setText("成交额：" + beanMy.info.money.subSequence(0, beanMy.info.money.length - 14))
         tv_low.setText("最低：" + beanMy.info.low)
-        tv_yesterday.setText("昨日：" + beanMy.info.close)
+        tv_yesterday.setText("昨日：" + beanMy.info.close.subSequence(0, beanMy.info.money.length - 2))
         setData(mData)
 
     }

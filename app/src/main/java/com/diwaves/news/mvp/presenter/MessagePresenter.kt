@@ -13,6 +13,7 @@ import javax.inject.Inject
 import com.diwaves.news.mvp.contract.MessageContract
 import com.diwaves.news.network.Api
 import com.diwaves.news.network.RxUtils
+import com.diwaves.news.network.bean.BaseBean
 import com.diwaves.news.tools.MyToast
 import com.diwaves.news.tools.SPToll
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
@@ -59,6 +60,21 @@ constructor(model: MessageContract.Model, rootView: MessageContract.View) :
                 override fun onNext(t: MessageBean) {
                     if (t.code.toString().equals(Api.SUCCESS)) {
                         mRootView.getDataSuccess(t.result)
+                    } else {
+                        MyToast().makeToast(mApplication, t.message)
+                    }
+                }
+            })
+    }
+
+
+    fun pingbi(id:String) {
+        mModel.pingbi(id).compose(RxUtils.applySchedulers(mRootView))
+            .subscribe(object :
+                ErrorHandleSubscriber<BaseBean.BaseResponse<String>>(mErrorHandler) {
+                override fun onNext(t: BaseBean.BaseResponse<String>) {
+                    if (t.code.toString().equals(Api.SUCCESS)) {
+                        mRootView.pingbiSuccess()
                     } else {
                         MyToast().makeToast(mApplication, t.message)
                     }

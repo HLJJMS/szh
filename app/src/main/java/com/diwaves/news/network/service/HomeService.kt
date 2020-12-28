@@ -134,6 +134,15 @@ interface HomeService {
         @Field("articleid") articleid: String
     ): Observable<BaseBean.BaseResponse<String>>
 
+    //pingbi
+    @FormUrlEncoded
+    @POST(Api.REPORT_PINGBI)
+    fun pingbiUser(
+        @Field("userid") id: String,
+        @Field("objectuserid") objectuserid: String,
+        @Field("type") type: String
+    ): Observable<BaseBean.BaseResponse<String>>
+
     //发布帖子
     @POST(Api.REPORT_ADD)
     fun jvbao(
@@ -190,22 +199,23 @@ interface HomeService {
     @FormUrlEncoded
     @POST(Api.YUCE_COMMENT_DWON)
     fun getYuCeCommentDown(
-        @Field("userid") userid : String, @Field("zstype") zstype: String, @Field("type") type: String
+        @Field("userid") userid: String,
+        @Field("zstype") zstype: String,
+        @Field("type") type: String
     ): Observable<BaseBean.BaseResponse<MutableList<YuCeCommentBean>>>
 
 
     @FormUrlEncoded
     @POST(Api.PREDICT_SELECT)
     fun getYuCeDetail(
-        @Field("userid") userid : String, @Field("zstype") zstype: String
+        @Field("userid") userid: String, @Field("zstype") zstype: String
     ): Observable<BaseBean.BaseResponse<YuCeCommentUpBean>>
-
 
 
     @FormUrlEncoded
     @POST(Api.YUCE_COMMENT_UP)
     fun getYuCeCommentUp(
-        @Field("userid") userid : String, @Field("zstype") zstype: String
+        @Field("userid") userid: String, @Field("zstype") zstype: String
     ): Observable<BaseBean.BaseResponse<YuCeDetail>>
 
 

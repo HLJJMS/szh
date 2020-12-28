@@ -91,7 +91,8 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
             startActivity(Intent(context, SystemActivity::class.java))
         }
         iv_shengao.clicks().throttleFirst(
-            500, TimeUnit.MILLISECONDS).subscribe {
+            500, TimeUnit.MILLISECONDS
+        ).subscribe {
             startActivity(Intent(context, EexamineActivity::class.java))
         }
         iv_add_friend.clicks().throttleFirst(500, TimeUnit.MILLISECONDS).subscribe {
@@ -112,11 +113,16 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
         mPresenter?.getData()
 
         adapter.setOnItemClickListener { adapter, view, position ->
-
+            startActivity(
+                Intent(activity, MessageDetailActivity::class.java).putExtra(
+                    "id",
+                    this.adapter.data.get(position).id
+                ).putExtra("title" , this.adapter.data.get(position).name)
+            )
         }
         adapter.addChildClickViewIds(R.id.tv_pingbi)
         adapter.setOnItemChildClickListener { adapter, view, position ->
-            showDialog()
+            showDialog(this.adapter.data.get(position).id)
         }
     }
 
@@ -161,8 +167,13 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
     }
 
     override fun getDataSuccess(bean: MutableList<MessageBean.ResultEntity>) {
-        swipeLayout.isRefreshing=false
+        swipeLayout.isRefreshing = false
         adapter?.setList(bean)
+    }
+
+    override fun pingbiSuccess() {
+        swipeLayout.isRefreshing = true
+        mPresenter?.getData()
     }
 
 
@@ -185,14 +196,15 @@ class MessageFragment : BaseFragment<MessagePresenter>(), MessageContract.View {
     override fun killMyself() {
 
     }
-    fun showDialog() {
+
+    fun showDialog(id:String) {
         val normalDialog: AlertDialog.Builder = AlertDialog.Builder(mContext)
         normalDialog.setTitle("提示")
         normalDialog.setMessage("是否不接受该用户消息？");
         normalDialog.setPositiveButton(
             "确定"
         ) { dialog, which ->
-
+            mPresenter?.pingbi(id)
         }
         normalDialog.setNegativeButton(
             "取消"

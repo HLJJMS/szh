@@ -72,13 +72,28 @@ class YuCeActivity : BaseActivity<YuCePresenter>(), YuCeContract.View {
         swipeLayout.isRefreshing = false
         tv_title1.setText(bean.chuang.name)
         tv_time1.setText(bean.chuang.date)
-        tv_number1.setText(bean.chuang.current + " " + bean.chuang.changePct + " " + bean.chuang.percentage)
+        tv_number1.setText(
+            bean.chuang.current.substring(
+                0,
+                bean.chuang.current.length - 2
+            ) + " " + bean.chuang.changePct + " " + bean.chuang.percentage
+        )
         tv_title2.setText(bean.shang.name)
         tv_time2.setText(bean.shang.date)
-        tv_number2.setText(bean.shang.current + " " + bean.shang.changePct + " " + bean.shang.percentage)
+        tv_number2.setText(
+            bean.shang.current.substring(
+                0,
+                bean.shang.current.length - 2
+            ) + " " + bean.shang.changePct + " " + bean.shang.percentage
+        )
         tv_title.setText(bean.sheng.name)
         tv_time.setText(bean.sheng.date)
-        tv_number.setText(bean.sheng.current + " " + bean.sheng.changePct + " " + bean.sheng.percentage)
+        tv_number.setText(
+            bean.sheng.current.substring(
+                0,
+                bean.sheng.current.length - 2
+            ) + " " + bean.sheng.changePct + " " + bean.sheng.percentage
+        )
         titleBar.setBackClick {
             finish()
         }
@@ -131,6 +146,29 @@ class YuCeActivity : BaseActivity<YuCePresenter>(), YuCeContract.View {
                     .putExtra("number", tv_number.text.toString())
             )
         }
+
+        tv_number1.setOnClickListener {
+            startActivity(
+                Intent(this, YuCeCommentActivity::class.java).putExtra("zstype", "3")
+                    .putExtra("title", tv_title1.text.toString())
+                    .putExtra("number", tv_number1.text.toString())
+            )
+        }
+        tv_number2.setOnClickListener {
+            startActivity(
+                Intent(this, YuCeCommentActivity::class.java).putExtra("zstype", "1")
+                    .putExtra("title", tv_title2.text.toString())
+                    .putExtra("number", tv_number2.text.toString())
+            )
+        }
+        tv_number.setOnClickListener {
+            startActivity(
+                Intent(this, YuCeCommentActivity::class.java).putExtra("zstype", "2")
+                    .putExtra("title", tv_title.text.toString())
+                    .putExtra("number", tv_number.text.toString())
+            )
+        }
+
     }
 
     override fun showLoading() {

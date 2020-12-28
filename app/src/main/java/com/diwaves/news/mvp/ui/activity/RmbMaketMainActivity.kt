@@ -112,6 +112,10 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
             tv_50?.setBackgroundResource(R.drawable.bg_conner3_solid_blue)
             tv_100?.setBackgroundResource(R.drawable.bg_conner3_solid_blue)
             tv_200?.setBackgroundResource(R.drawable.bg_conner3_solid_blue)
+            tv_20?.setTextColor(R.drawable.bg_conner3_solid_blue)
+            tv_50?.setTextColor(R.drawable.bg_conner3_white)
+            tv_100?.setTextColor(R.drawable.bg_conner3_white)
+            tv_200?.setTextColor(R.drawable.bg_conner3_white)
             ag = "20"
         }
         tv_50?.clicks()?.throttleFirst(500, TimeUnit.MILLISECONDS)?.subscribe {
@@ -119,6 +123,10 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
             tv_50?.setBackgroundResource(R.drawable.bg_conner3_white)
             tv_100?.setBackgroundResource(R.drawable.bg_conner3_solid_blue)
             tv_200?.setBackgroundResource(R.drawable.bg_conner3_solid_blue)
+            tv_20?.setTextColor(R.drawable.bg_conner3_white)
+            tv_50?.setTextColor(R.drawable.bg_conner3_solid_blue)
+            tv_100?.setTextColor(R.drawable.bg_conner3_white)
+            tv_200?.setTextColor(R.drawable.bg_conner3_white)
             ag = "50"
         }
         tv_100?.clicks()?.throttleFirst(500, TimeUnit.MILLISECONDS)?.subscribe {
@@ -126,6 +134,10 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
             tv_50?.setBackgroundResource(R.drawable.bg_conner3_solid_blue)
             tv_100?.setBackgroundResource(R.drawable.bg_conner3_white)
             tv_200?.setBackgroundResource(R.drawable.bg_conner3_solid_blue)
+            tv_20?.setTextColor(R.drawable.bg_conner3_white)
+            tv_50?.setTextColor(R.drawable.bg_conner3_white)
+            tv_100?.setTextColor(R.drawable.bg_conner3_solid_blue)
+            tv_200?.setTextColor(R.drawable.bg_conner3_white)
             ag = "100"
         }
         tv_200?.clicks()?.throttleFirst(500, TimeUnit.MILLISECONDS)?.subscribe {
@@ -133,6 +145,10 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
             tv_50?.setBackgroundResource(R.drawable.bg_conner3_solid_blue)
             tv_100?.setBackgroundResource(R.drawable.bg_conner3_solid_blue)
             tv_200?.setBackgroundResource(R.drawable.bg_conner3_white)
+            tv_20?.setTextColor(R.drawable.bg_conner3_white)
+            tv_50?.setTextColor(R.drawable.bg_conner3_white)
+            tv_100?.setTextColor(R.drawable.bg_conner3_white)
+            tv_200?.setTextColor(R.drawable.bg_conner3_solid_blue)
             ag = "200"
         }
         popupWindow.setOnDismissListener {
@@ -140,7 +156,7 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
             lp.alpha = 1f
             window.attributes = lp
         }
-        tv_title_type?.text = floatState
+
         tv_dazhang?.clicks()?.throttleFirst(500, TimeUnit.MILLISECONDS)?.subscribe {
             option = 1
             tv_title_type?.text = tv_dazhang?.text
@@ -176,6 +192,7 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
     }
 
     fun showPopWindow() {
+        tv_title_type?.text = floatState
         val lp = window.attributes
         lp.alpha = 0.5f
         window.attributes = lp
@@ -216,10 +233,11 @@ class RmbMaketMainActivity : BaseActivity<RmbMaketMainPresenter>(), RmbMaketMain
             if (!floatState.equals("")) {
                 showPopWindow()
             } else {
-                MyToast().makeToast(this, "=请选择选项")
+                MyToast().makeToast(this, "请选择选项")
             }
 
         }
+        titleBar.setBackClick { finish() }
 
         mPresenter?.getData(intent.getStringExtra("type"))
         setPopWindow()

@@ -175,6 +175,10 @@ object Api {
     //预测评论
     const val YUCE_COMMENT_GOOD = "app/userpredict/up"
 
+    //预测评论
+    const val MY_CHATLIST = "my/chatList"
 
+    //发消息
+    const val SEND_MESSAGE = "my/sendMessage"
 
 }

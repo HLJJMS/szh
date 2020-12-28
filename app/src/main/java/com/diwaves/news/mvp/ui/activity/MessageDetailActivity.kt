@@ -2,6 +2,7 @@ package com.diwaves.news.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
@@ -13,6 +14,8 @@ import com.diwaves.news.mvp.contract.MessageDetailContract
 import com.diwaves.news.mvp.presenter.MessageDetailPresenter
 
 import com.diwaves.news.R
+import com.diwaves.news.adapter.MessageDetailAdapter
+import com.diwaves.news.bean.ChartBean
 import kotlinx.android.synthetic.main.activity_message_detail.*
 
 
@@ -42,7 +45,7 @@ import kotlinx.android.synthetic.main.activity_message_detail.*
  * }
  */
 class MessageDetailActivity : BaseActivity<MessageDetailPresenter>(), MessageDetailContract.View {
-
+    var adapter: MessageDetailAdapter = MessageDetailAdapter()
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMessageDetailComponent //如找不到该类,请编译一下项目
             .builder()
@@ -60,15 +63,30 @@ class MessageDetailActivity : BaseActivity<MessageDetailPresenter>(), MessageDet
 
     override fun initData(savedInstanceState: Bundle?) {
         titleBar.setBackClick { finish() }
+        recycler?.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
+        mPresenter?.getData(intent.getStringExtra("id"))
+        rb_ok.setOnClickListener {
+            mPresenter?.sendMessage(intent.getStringExtra("id"),et_message.text.toString())
+            et_message.setText("")
+        }
+        titleBar.setCenterText(intent.getStringExtra("title"))
+        titleBar.setEndTextClick {
+            mPresenter?.getData(intent.getStringExtra("id"))
+        }
+    }
+
+    override fun getDataSuccess(list: MutableList<ChartBean>) {
+        adapter.setList(list)
     }
 
 
     override fun showLoading() {
-
+        swipeLayout.isRefreshing = true
     }
 
     override fun hideLoading() {
-
+        swipeLayout.isRefreshing = false
     }
 
     override fun showMessage(message: String) {
